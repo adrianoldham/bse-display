@@ -1,0 +1,125 @@
+<:wrap shopbase.tmpl title=>"Shop Checkout" :>
+<p>The <:siteName |h:> store is run on a secure encrypted server, your details are securely processed.</p>
+<table class="items">
+  <caption>Selected Order Items</caption>
+  <thead>
+    <tr> 
+      <th class="col1">Item:</th>
+      <th class="col2">Qty:</th>
+      <th class="col3">Price:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <:iterator begin items:><tr class="item"> 
+      <td class="col1">
+        <a href="<:item link:>"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
+        <div class="i_description"><:item description:></div><:or And:><:eif And:>
+      </td>
+      <td class="col2"><:item units:> &times;</td>
+      <td class="col3"><:cfg shop currency "$":><:money item retailPrice:></td>
+    </tr>
+    <:iterator end items:>
+  </tbody>
+</table>
+<div class="totals"><:if Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
+  <p class="freight"><span>Freight:</span> <:ifOverseas:>To be quoted<:or:><:if Freight:><:cfg shop currency "$":><:money freight:><:or Freight:><:cfg freight zero_value "None":><:eif Freight:><:eif:></p><:or Or:><:eif Or:>  
+  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:money total:></p></div>
+<:if Cfg tryandbyte aufreight:><:if Overseas:>
+  <p><b>We will contact you with a quote for shipping cost</b></p><:or Overseas:><:ifFreeShippingCart:>
+  <p><b>This order qualifies for free shipping within Australia</b></p>
+<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:>
+<:if Cfg "site users" nopassword:><:or Cfg:><p class="alert">
+  <:if User:>This purchase will be added to the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;_t=orders&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1"><b>order history</b></a> in your account. You can maintain the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>shipping</b></a> and <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;_t=billing&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>billing</b></a> details in your user <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>account manager</b></a>.
+  <:or User:>If you wish to track the status of your order you must <:if Or [cfg "site users" user_register]:>either <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_register=1&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>Register</b></a> or <:or Or:><:eif Or:><a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_logon=1&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>Logon</b></a> before you continue with this purchase.<:eif User:>
+</p><:eif Cfg:>
+<form action="<:cfg site secureurl:>/cgi-bin/shop.pl" method="post">
+  <h2>Payment Details:</h2>
+  <fieldset>
+  <dl>
+    <:if CCPayments :>
+    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType0" value="0" <:checkedIfFirstCC:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="0" /><:eif MultPaymentTypes:> <label for="paymentType0">Credit Card</label></dt>
+    <dd>
+      <table>
+        <caption>Credit Card Details</caption>
+        <tr>
+          <th><label for="cardHolder">Name on Card:</label></th>
+          <td><input type="text" name="cardHolder" id="cardHolder" size="30" value="<:old cardHolder:>" /></td>
+          <td><:error_img cardHolder:></td>
+        </tr>
+        <tr>
+          <th><label for="cardNumber">Card Number:</label></th>
+          <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" />
+            <label for="cardVerify">CVV:</label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" />
+          </td>
+          <td><:error_img cardNumber:><:error_img cardVerify:></td>
+        </tr>
+        <tr>
+          <th><label for="cardExpiry">Expiry Date:</label></th>
+          <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" /> <span class="small">(mm/yy)</span></td>
+          <td><:error_img cardExpiry:></td>
+        </tr>
+        <tr>
+          <th><label for="cardType">Card Type:</label></th>
+          <td>
+            <select name="cardType" id="cardType">
+              <option value="" selected="selected">Select card type</option>
+              <:if Cfgsection "payment cardType":>
+              <:iterator begin cfgsection "payment cardType" sort=key:>
+              <option value="<:cfgentry value:>"<:if Eq [old cardType] [cfgentry value]:> selected="selected"<:or Eq:><:eif Eq:>><:cfgentry value:></option>
+              <:iterator end cfgsection:>
+              <:or Cfgsection:> 
+              <option value="Visa"<:ifEq [cgi cardType] "Visa":> selected="selected"<:or:><:eif:>>Visa</option>
+              <option value="Mastercard"<:ifEq [cgi cardType] "Mastercard":> selected="selected"<:or:><:eif:>>Mastercard</option>
+              <option value="American Express"<:ifEq [cgi cardType] "American Express":> selected="selected"<:or:><:eif:>>American Express</option>
+              <:eif Cfgsection:>
+            </select>
+          </td>
+          <td><:error_img cardType:></td>
+        </tr>
+      </table>
+    </dd>
+    <:or CCPayments:><:eif CCPayments:>
+    <:if ChequePayments:>
+    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType1" value="1" <:checkedIfFirstCheque:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="1" /><:eif MultPaymentTypes:> <label for="paymentType1">Cheque</label></dt>
+    <dd>
+      <p>Please send a cheque to:</p> 
+      <address><b><:cfg shop address1 |h:></b><br />
+      <:cfg shop address2 |h:><br />
+      <:cfg shop address3 |h:><br />
+      <:cfg shop address4 |h:></address>
+    </dd>
+    <:or ChequePayments:><:eif ChequePayments:>
+    <:if Payments DirectDeposit:>
+    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType10" value="10" <:checkedPayment DirectDeposit:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="10" /><:eif MultPaymentTypes:> <label for="paymentType10">Electronic Fund Transfer</label></dt>
+    <dd>
+      <p>Please transfer the funds to:</p>
+      <table>
+        <caption>Electronic Fund Transfer Details</caption>
+        <tr>
+          <th>BSB:</th><td><:cfg shop bsb:></td>
+        </tr>
+        <tr>
+          <th>Account:</th><td><:cfg shop accountno:></td>
+        </tr>
+        <tr>
+          <th>Reference:</th><td>&lt;Your order number&gt;</td>
+        </tr>
+      </table>
+    </dd>
+    <:or Payments:><:eif Payments:>
+    <:if CallMePayments:>
+    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="2" <:checkedIfFirstCallMe:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="2" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact me for billing details</label></dt>
+    <:or CallMePayments:><:eif CallMePayments:>
+    <:include include/custom/payment_type_checkout.tmpl optional:><:include include/payment_type_checkout.tmpl optional:>
+  </dl>
+  </fieldset>
+  <:if MultPaymentTypes:><p class="small">* Select an appropriate payment method</p><:or MultPaymentTypes:><:eif MultPaymentTypes:>
+  <p class="buttons">
+    <input type="submit" value="Purchase now" name="payment" accesskey="p" title="AccessKey = p" />
+    <input type="submit" value="Go back" name="checkout" accesskey="b" title="AccessKey = b" />
+  </p>
+</form>

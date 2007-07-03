@@ -1,0 +1,30 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<:include include/usernav.tmpl:>
+<h2>Add custom course</h2>
+<div id="user">
+<:include include/usermessage.tmpl:>
+<p><a href="<:script:>?a_cmelist=1">Back to list</a></p>
+<form method="post" action="<:script:>">
+<table>
+  <tr>
+   <th align="left">Date:</th>
+   <td><input type="text" name="date_at" value="<:old date_at:>" size="10" /> (dd/mm/yyyy)</td>
+   <td><:error_img date_at:></td>
+  </tr>
+  <tr>
+    <th align="left">Description:</th>
+    <td><input type="text" name="description" value="<:old description:>" size="40" /></td>
+    <td><:error_img description:></td>
+  </tr>
+  <tr>
+    <th align="left">Points:</th>
+    <td><input type="text" name="points" value="<:old points:>" size="5" /></td>
+    <td><:error_img points:></td>
+  </tr>
+</table>
+<p><input type="submit" name="a_cmeadd" value="Add course" /></p>
+</form>
+<form method="get" action="<:script:>" name="cancel">
+<p><input type="submit" name="a_cmelist" value="Cancel" /></p>
+</form>
+</div>

@@ -1,0 +1,21 @@
+<:wrap formmail/formbase.tmpl:>
+<:bodytext formcfg done_body "Thank you. This information was successfully sent.":>
+<table>
+  <:iterator begin fields:><:if Eq [field htmltype] "header":><tr>
+    <td colspan="3"><h2><:field description:></h2></td>
+  </tr><:or Eq:>
+  <:if Match [field htmltype] "hidden":><:or Match:><tr>
+    <th align="left" valign="top"><:field description:>:</th>
+    <td>
+      <:switch:>
+      <:case Eq [field htmltype] "textarea":><:dynreplace [field value] "
+" "<br />" g :>
+      <:case Eq [field htmltype] "password":>****************
+      <:case Field values:><:iterator begin values:><!--<:value id:>: --><:value name:><:iterator separator values:><br />
+      <:iterator end values:>
+      <:case default:>
+      <:field value:>
+      <:endswitch:>
+    </td>
+  </tr><:eif Match:><:eif Eq:><:iterator separator fields:>
+<:iterator end fields:></table>

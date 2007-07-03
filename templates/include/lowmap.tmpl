@@ -1,0 +1,6 @@
+This template is used for generating the sitemap.
+<:embed start:><li><a href="<:url article:>"><:article title:></a><:if CanEmbed:><:if Children:>
+  <ul><:iterator begin children:>
+    <:embed child include/lowmap.tmpl:><:iterator separator children:><:iterator end children:>
+  </ul><:or Children:><:eif Children:><:or CanEmbed:>
+<:eif CanEmbed:></li><:embed end:>

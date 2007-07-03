@@ -1,0 +1,6 @@
+<:wrap base.tmpl title=>"FORMTITLE":>
+<div id="formmail" class="article formmail">
+<h1 class="pagetitle"><:formcfg title |h:></h1>
+<:ifMsg:><p id="message" class="error"><:msg:></p><:or:><:eif:>
+<:wrap here:>
+</div>

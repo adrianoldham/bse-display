@@ -1,0 +1,29 @@
+<:wrap base.tmpl:>
+<form method="post" action="/cgi-bin/interest.pl">
+<:ifCgi product:><input type="hidden" name="product" value="<:cgi product |h:>"><:or:><:eif:>
+<:ifCgi product_id:><input type="hidden" name="product_id" value="<:cgi product_id |h:>"><:or:><:eif:>
+<div align="center">
+<table width="350">
+  <tr> 
+    <th colspan="2" align="center"> 
+      <h3>Error</h3>
+    </th>
+  </tr>
+  <tr>
+    <td colspan="2"><:msg:></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <th>Email:</th>
+    <td><input type="text" name="email" size="40" value="<:cgi email |h:>" /></td>
+  </tr>
+  <tr> 
+    <td colspan="2" align="right"> 
+      <input type="submit" value="Register interest" />
+    </td>
+  </tr>
+</table>
+</div>
+</form>

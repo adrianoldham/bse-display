@@ -1,0 +1,86 @@
+<:wrap shopbase.tmpl title=>"Checkout Complete" :>
+<p><b>Thank you <:ifOrder billFirstName:><:order billFirstName:><:or:><:order delivFirstName:><:eif:>, your order number is: <:order id |%06d:></b></p>
+<p>Please refer to your order number when making enquiries regarding this purchase.</p>
+<p>Confirmation of this order has been emailed to: <a href="mailto:<:order emailAddress:>"><:order emailAddress:></a></p>
+<:if CCPayment:>
+<dl>
+  <dt><:if Order ccOnline:>Your credit card payment was processed online<:or Order:>Your credit card will be debited at time of shipping<:eif Order:>:</dt>
+  <dd>
+    <table>
+      <caption>Credit Card Details</caption>
+      <:if Order ccOnline:><tr>
+        <th>Receipt No.:</th><td><:order ccReceipt:></td>
+      </tr>
+      <:or Order:><:eif Order:><tr>
+        <th>Name on Card:</th><td><:order ccName:></td>
+      </tr>
+      <tr>
+        <th>Card Type:</th><td><:order ccType:></td>
+      </tr>
+    </table>
+  </dd>
+</dl>
+<:or CCPayment:><:eif CCPayment:>
+<:if ChequePayment:>
+<dl>
+  <dt>Please send a cheque to:</dt>
+  <dd>
+    <address>
+      <b><:cfg shop address1 |h:></b><br />
+      <:cfg shop address2 |h:><br />
+      <:cfg shop address3 |h:><br />
+      <:cfg shop address4 |h:>
+    </address>
+  </dd>
+</dl>
+<:or ChequePayment:><:eif ChequePayment:>
+<:if Payment DirectDeposit:>
+<dl>
+  <dt>Please transfer the funds to:</dt>
+  <dd>
+    <table>
+      <caption>Electronic Fund Transfer Details</caption>
+      <tr>
+        <th>BSB:</th><td><:cfg shop bsb:></td>
+      </tr>
+      <tr>
+        <th>Account:</th><td><:cfg shop accountno:></td>
+      </tr>
+      <tr>
+        <th>Reference:</th><td><:order id |%06d:></td>
+      </tr>
+    </table>
+  </dd>
+</dl>
+<:or Payment:><:eif Payment:>
+<:if CallMePayment:>
+<p>We will contact you to make arrangements for payment.</p>
+<:or CallMePayment:><:eif CallMePayment:>
+<:include include/custom/payment_type_checkoutfinal.tmpl optional:>
+<table class="items">
+  <caption>Selected Order Items</caption>
+  <thead>
+    <tr> 
+      <th class="col1">Item:</th>
+      <th class="col2">Qty:</th>
+      <th class="col3">Price:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <:iterator begin items:><tr class="item"> 
+      <td class="col1">
+        <a href="<:item link:>"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
+        <div class="i_description"><:item description:></div><:or And:><:eif And:>
+      </td>
+      <td class="col2"><:item units:> &times;</td>
+      <td class="col3"><:cfg shop currency "$":><:money item retailPrice:></td>
+    </tr>
+    <:iterator end items:>
+  </tbody>
+</table>
+<div class="totals"><:if Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
+  <p class="freight"><span>Freight:</span> <:if Order shipping_cost:><:cfg shop currency "$":><:money order shipping_cost:><:or Order:><:ifOverseas:>To be quoted<:or:><:cfg freight zero_value "None":><:eif:><:eif Order:></p><:or Or:><:eif Or:>  
+  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:money order total:></p>
+</div><:if Cfg tryandbyte aufreight:><:if Overseas:>
+<p><b>We will contact you with a quote for shipping cost</b></p><:or Overseas:><:ifFreeShippingCart:>
+<p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:>

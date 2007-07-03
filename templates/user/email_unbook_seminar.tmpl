@@ -1,0 +1,29 @@
+<:uc [cfg site name]:> BOOKING OFFICE
+
+Dear <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
+
+This email is sent to confirm your seminar booking cancellation as follows:
+
+BOOKING DETAILS:
+
+  Seminar  : <:seminar title:>
+  Location : <:location description:>
+  Date     : <:date session when_at:>
+  Time     : <:date "%I:%M %p" session when_at:>
+<:ifOptions:>
+OPTIONS:
+
+<:iterator begin options:>  <:option desc:> : <:option value:>
+<:iterator end options:><:or:><:eif:><:ifBooking customer_instructions:>
+SPECIAL INSTRUCTIONS:
+
+  <:booking customer_instructions:>
+<:or:><:eif:><:ifBooking support_notes:>
+BOOKING NOTES:
+
+  <:booking support_notes:>
+<:or:><:eif:>
+
+Regards
+The team at <:cfg site name:>
+(<:cfg site url:>)

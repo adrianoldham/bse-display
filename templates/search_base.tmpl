@@ -1,0 +1,75 @@
+<:wrap base.tmpl title=>"Search" :>
+<div id="search" class="article search">
+<h1 class="pagetitle"><:param title |h:></h1>
+<form id="search_form" method="post" action="/cgi-bin/search.pl">
+  <input type="hidden" name="admin" value="<:admin_search:>" />
+  <table>
+    <tr>
+      <th><label for="q">Keywords:</label></th>
+      <td colspan="3"> 
+        <input type="text" id="search_query" name="q" size="40" title="Enter search terms" value="<:ifTerms:><:terms:><:or:>Enter search terms<:eif:>" />
+        <input type="submit" id="search_submit" name="submit" accesskey="s" title="AccessKey = s" value="Search" />
+      </td>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+      <td colspan="3">
+        <input type="checkbox" id="m" name="match_all" value="1" <:ifCgi match_all:>checked="checked" <:or:><:eif:>/> <label for="m">Match <em>all</em> search terms</label>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="s">Search:</label></th>
+      <td><:list:></td>
+      <th><label for="d">Date:</label></th>
+      <td>
+        <select name="d" id="d">
+          <option value="ar" <:dateSelected ar:>>All Current</option>
+          <option value="m7" <:dateSelected m7:>>Modified within last 7 days</option>
+          <option value="m30" <:dateSelected m30:>>Modified within last 30 days</option>
+          <option value="r1" <:dateSelected r1:>>Released Today</option>
+          <option value="r7" <:dateSelected r7:>>Released within last 7 days</option>
+          <option value="e7" <:dateSelected e7:>>Archived within last 7 days</option>
+          <option value="e30" <:dateSelected e30:>>Archived within last 30 days</option>
+          <option value="ae" <:dateSelected ae:>>Archives</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+</form>
+<div id="search_results">
+<:include include/search_results.tmpl:>
+</div>
+</div><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+function do_search() {
+  var query = $('search_query').value;
+  if (query != 'Enter search terms' && query != '') {
+    $('search_form').request({
+      parameters: { embed: '1'},
+      onComplete: function(transport) { 
+        $('search_results').innerHTML = transport.responseText;
+      }
+    });
+  }
+  return false;
+}
+
+new Form.Observer($('search_form'), 1.5, do_search);
+
+$('search_submit').onclick = do_search;
+
+$('search_query').onfocus =
+  function() {
+    if ($('search_query').value == 'Enter search terms') {
+      $('search_query').value = '';
+    }
+  }
+$('search_query').onblur =
+  function() {
+    if ($('search_query').value == '') {
+      $('search_query').value = 'Enter search terms';
+    }
+  }
+//]]>
+</script><:or Ajax:><:eif Ajax:>

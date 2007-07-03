@@ -1,0 +1,80 @@
+<:wrap base.tmpl:><:embed start:>
+<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
+<div id="article_<:article id:>" class="article seminar"><:if Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Admin:><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  new Ajax.InPlaceEditor($('title_<:article id:>'), '/cgi-bin/admin/add.pl',
+    {
+    rows: 1,
+    okText: 'Save',
+    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=title',
+    callback: function(form, value) { return 'a_ajax_set=1&id=<:article id:>&field=title&value=' + encodeURIComponent(value) }
+    });
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:if Or [article body] [ifImages]:>
+<div id="body_<:article id:>" class="body">
+<:body:>
+</div><:if Admin:><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
+    {
+    rows: 15,
+    okText: 'Save',
+    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
+    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
+    });
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:>
+<form name="ff" method="post" action="<:ifSeminar retailPrice:>/cgi-bin/shop.pl<:or:>/cgi-bin/nuser.pl<:if Cfg seminars no_confirm :>/user/book<:or Cfg:>/user/bookconfirm<:eif Cfg:><:eif:>">
+<p class="duration"><span>Duration:</span> <:seminar duration:> minutes</p><:ifSeminar customInt1:>
+<p class="points"><span>CME Points:</span> <:seminar customInt1:></p><:or:><:eif:>
+<p class="price"><:ifSeminar retailPrice:><span>Price:</span> <strong><:cfg shop currency "$":><:money product retailPrice:></strong> (inc GST)<:or:><strong>FREE Seminar</strong><:eif:></p>
+<div class="sessions">
+<h2>Sessions</h2>              
+<:if Cfg seminar locations:><:iterator begin locations:><p><b><a href="/cgi-bin/shop.pl?a_location=1&amp;location_id=<:location id:>" onclick="return show_location(<:location id:>)"><:location description:></a></b></p>
+<:iterator begin location_sessions:><p><input type="radio" name="session_id" id="session_id<:location_session id:>" value="<:location_session id:>" /><label for="session_id<:location_session id:>"><:date "%I:%M %p %d/%m/%Y" location_session when_at:></label></p>
+<:iterator end location_sessions:><:iterator end locations:>
+<:or Cfg:><:iterator begin sessions:><p><input type="radio" name="session_id" id="session_id<:session id:>" value="<:session id:>" /><label for="session_id<:session id:>"><:date "%I:%M %p %d/%m/%Y" session when_at:></label> - <a href="/cgi-bin/shop.pl?a_location=1&amp;location_id=<:session location_id:>" onclick="return show_location(<:session location_id:>)"><:session description:></a></p>
+<:iterator end sessions:><:eif Cfg:>
+</div>
+<input type="hidden" name="id" value="<:seminar id:>" />
+<input type="hidden" name="quantity" value="1" /><:if Options:>
+<div class="options">
+  <table>
+    <caption>Options</caption><:iterator begin options:>
+    <tr>
+      <th><:option desc:>:</th>
+	  <td><:option popup:></td>
+    </tr><:iterator end options:>
+  </table>
+</div><:or Options:><:eif Options:>
+<div class="instructions">
+  <h2>Special Instructions</h2>
+  <textarea name="customer_instructions" cols="60" rows="10"></textarea>
+</div>
+<p class="buy"><:ifSeminar retailPrice:><input type="submit" name="add" value="Add to cart" /> <input type="submit" name="cart" value="View cart" /><:or:><input type="submit" name="book" value="Book now" /><:eif:></p>
+</form><:if Or [ifStepparents] [ifStepkids]:> 
+<div class="relatedsections"><p><b>Related categories:</b></p>
+  <ul>
+    <:iterator begin stepparents:><li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator separator stepparents:>
+    <:iterator end stepparents:><:iterator begin stepkids:><li><a href="<:url stepkid:>"><:stepkid title:></a></li><:iterator separator stepkids:>
+    <:iterator end stepkids:>
+  </ul>
+</div><:or Or:><:eif Or:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
+<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+function show_location(locationid) {
+  window.open('/cgi-bin/shop.pl?a_location=1&amp;location_id='+locationid, 
+              'location', 
+              'width=600,height=300,location=no,status=no,menubar=no,scrollbars=yes');
+  return false;
+}
+//]]>
+</script>
+</div>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
+<:embed end:>

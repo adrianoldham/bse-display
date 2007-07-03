@@ -1,0 +1,16 @@
+<:uc [cfg site name]:> - <:uc [formcfg subject]:>
+<:if User:>
+Submitted by: <:user userId:> (<:user email:>)
+<:or User:><:eif User:><:iterator begin fields:><:ifField value:>
+<:switch:>
+<:case Or [ifEq [field htmltype] "select"] [ifEq [field htmltype] "radio"]:><:field description:>: <:iterator begin values:><:value name:> <:iterator end values:>
+<:case Field values:><:field description:>:
+<:iterator begin values:>  <:value id:>: <:value name:><:iterator separator values:>
+<:iterator end values:>
+<:case default:><:field description:>: <:field value:><:if Eq [field htmltype] "file":> (attached file)<:or Eq:><:eif Eq:>
+<:endswitch:><:or:><:eif:><:iterator end fields:>
+
+Regards
+The team at <:cfg site name:>
+(<:cfg site url:>)
+

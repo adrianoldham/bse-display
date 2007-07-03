@@ -1,0 +1,38 @@
+WELCOME TO <:uc [cfg site name]:>.
+
+Hello <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
+
+You have registered to receive newsletters from our web site.
+
+
+CONFIRM REGISTRATION:
+  <:cfg site secureurl:>/cgi-bin/user.pl?confirm=<:user confirmSecret:>&u=<:user id:>
+
+To confirm your registration we send this confirmation request to your 
+registered email address. If you do indeed want to receive our newsletters,
+just open the above link in your web browser.
+
+
+EDIT ACCOUNT DETAILS:
+  <:cfg site secureurl:>/cgi-bin/user.pl?userpage=<:user password:>&u=<:user id:>
+
+To modify your account details, such as password, email address, etc, simply 
+open the above link in your web browser.
+
+<:ifCfg "site users" blacklist_on 0:>
+ADD TO BLACKLIST:
+  <:cfg site secureurl:>/cgi-bin/user.pl?blacklist=<:user email |u:>
+
+If you never want to receive any newsletters from our web site you can add 
+your email address to our email blacklist by opening the above link in 
+your web browser. This operation is irreversible.
+<:or:><:eif:>
+<:ifCfg subscriptions from:>Any questions should be directed to: <:cfg subscriptions from:>
+
+<:or:><:eif:>Regards
+The team at <:cfg site name:>
+(<:cfg site url:>)
+
+Remember that you can choose to unsubscribe from any of our newsletters at any 
+time by either editing your account details or following the unsubscribe link 
+in the footer of each newsletter.

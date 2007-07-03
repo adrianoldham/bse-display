@@ -1,0 +1,96 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<:include include/usernav.tmpl:>
+<table border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <td><img src="/images/<:cfg theme name:>user/dollar.gif" width="32" height="32" border="0" alt="Your Orders" /></td>
+    <td width="100%">
+      <h2>Your orders</h2>
+    </td>
+  </tr>
+</table>
+<:include include/usermessage.tmpl:>
+<div class="shop">
+<:if Cfg shop enabled:><:if Orders:>
+<table class="items orders">
+  <caption>Your Order History</caption>
+  <thead>
+    <tr>
+      <th class="col1">Order No.:</th>
+      <th class="col2">Order Date:</th>
+      <th class="col3">Order Status:</th>
+      <th class="col4">Order Total:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <:iterator begin orders:><tr class="item">
+      <td class="col1">
+        <a href="<:script:>?a_orderdetail=1&amp;id=<:order id:>" onclick="return show_orderdetail(<:order id:>);" target="_blank"><:order id |%06d:></a>
+      </td>
+      <td class="col2"><:date order orderDate:></td>
+      <td class="col3"><:ifOrder filled:>Completed<:or:>Processing<:eif:></td>
+      <td class="col4"><:cfg shop currency "$":><:money order total:></td>
+    </tr>
+    <:iterator end orders:>
+  </tbody>
+</table>
+<:iterator begin orders:>
+<table class="items">
+  <caption><a href="<:script:>?a_orderdetail=1&amp;id=<:order id:>" onclick="return show_orderdetail(<:order id:>);" target="_blank">Selected Order Items</a></caption>
+  <thead>
+    <tr> 
+      <th class="col1">Item:</th>
+      <th class="col2">Qty:</th>
+      <th class="col3">Price:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <:iterator begin items:><tr class="item"> 
+      <td class="col1">
+        <a href="<:product link:>"><:item title:></a> <!--#UNSUPPORTED HERE :options:--><:if And [item description] [cfg shop product_description 1]:>
+        <div class="i_description"><:item description:></div><:or And:><:eif And:>
+      </td>
+      <td class="col2"><:item units:> &times;</td>
+      <td class="col3"><:cfg shop currency "$":><:money item price:></td>
+    </tr>
+    <:iterator end items:>
+  </tbody>
+</table>
+<div class="totals"><:if Or [cfg freight enabled] [cfg tryandbyte aufreight]:><:if Order shipping_cost:><p class="freight"><span>Freight:</span> <:ifOrder customInt1:>To be quoted<:or:><:cfg shop currency "$":><:money order shipping_cost:><:eif:></p><:or Order:><:eif Order:><:or Or:><:eif Or:>
+<p class="total"><span>Total:</span> <:cfg shop currency "$":><:money order total:></p></div>
+<:if Orderfiles:>
+<table class="items">
+  <tr> 
+    <th colspan="4"><:if Order filled:>Files available<:or Order:><:ifCfg downloads must_be_filled:>Files available when order status is &quot;Complete&quot;<:or:>Files<:eif:><:eif Order:></th>
+  </tr>
+  <tr> 
+    <th>Description:</th>
+    <th>File:</th>
+    <th>Size:</th>
+  </tr>
+<:iterator begin orderfiles:> 
+  <tr> 
+    <td><:orderfile description:></td>
+    <td><:if FileAvail:><a href="/cgi-bin/user.pl?download=1&amp;file=<:orderfile id:>&amp;order=<:order id:>&amp;item=<:orderfile item_id:>"><:orderfile displayName:></a><:or FileAvail:><:orderfile displayName:><:eif FileAvail:></td>
+    <td><:if FileAvail:><a href="/cgi-bin/user.pl?download=1&amp;file=<:orderfile id:>&amp;order=<:order id:>&amp;item=<:orderfile item_id:>"><:ifOrderfile download:><img src="/images/<:cfg theme name:>filestatus/download.gif" width="15" height="15" alt="Download now" title="Download now" border="0" /><:or:><img src="/images/<:cfg theme name:>filestatus/load.gif" width="15" height="15" alt="Load in browser" title="Load in browser" border="0" /><:eif:></a><:or FileAvail:><img src="/images/filestatus/locked.gif" width="15" height="15" alt="Locked" title="Locked" /><:eif FileAvail:></td>
+    <td><:kb orderfile sizeInBytes:></td>
+  </tr>
+<:iterator end orderfiles:> 
+</table>
+<:or Orderfiles:><:eif Orderfiles:>
+<:iterator separator orders:>
+<:iterator end orders:><:or Orders:>
+<p class="noitems">You haven't made any orders yet.</p>
+<:eif Orders:>
+<:or Cfg:>
+<:eif Cfg:>
+</div>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+function show_orderdetail(orderid,template) {
+  window.open('<:script:>?a_orderdetail=1&amp;id='+orderid+'&amp;_t='+template, 
+              'orderdetail', 
+              'width=500,height=600,location=no,status=no,menubar=no,scrollbars=yes');
+  return false;
+}
+//]]>
+</script>

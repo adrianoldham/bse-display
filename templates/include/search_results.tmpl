@@ -1,0 +1,40 @@
+<:if Search:><:if Results:>
+<p><:count:> <:if Multiple:>documents<:or Multiple:>document<:eif Multiple:> matched your search terms:</p>
+
+<dl><:iterator begin results:>
+  <dt><strong><:resultSeq:> .</strong> <:if UserCanSee result:><a href="<:articleurl |h:>"><:highlight_result title:></a><:or UserCanSee:><span><:highlight_result title:></span><:eif UserCanSee:></dt>
+  <dd>
+    <div>
+      <p class="s_excerpt"><:excerpt:></p>
+      <div>
+        <p class="s_scoreC"><span class="s_scoreB" style="width: <:arithmetic i:([result score]):>%;"></span></p>
+        <p class="s_score"><span>Score:</span> <:result score:>%</p>
+        <p class="s_modified"><span>Last modified:</span> <:date result lastModified:></p><:if Keywords:>
+        <p class="s_keywords"><span>Keywords:</span> <:keywords:></p><:or Keywords:><:eif Keywords:><:if Author:>
+        <p class="s_author"><span>Author:</span> <:author:></p><:or Author:><:eif Author:><:if PageTitle:>
+        <p class="s_pagetitle"><span>Page title:</span> <:pageTitle:></p><:or PageTitle:><:eif PageTitle:><:if Product_code:>
+        <p class="s_pcode"><span>Product code:</span> <:product_code:></p><:or Product_code:><:eif Product_code:><:if Matchfiles:>
+        <:iterator begin matchfiles:><div class="s_file">
+          <p class="s_description"><span>File description:</span> <:if Or [ifUser] [ifEq [matchfile requireUser] "0"]:><a href="/cgi-bin/user.pl?download_file=1&amp;file=<:matchfile id:>" title="Uploaded: <:date matchfile whenUploaded:>"><:matchfile description:></a><:or Or:><:matchfile description:><:eif Or:> <span class="s_size">[<:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB]</span></p>
+          <:if Matchfile displayName_matched:><p class="s_filename"><span>File name:</span> <:matchfile displayName:></p>
+          <:or Matchfile:><:eif Matchfile:><:if Matchfile notes_matched:><p class="s_notes"><span>File notes:</span> <:matchfile notes_excerpt:></p><:or Matchfile:><:eif Matchfile:>
+        </div><:iterator end matchfiles:><:or Matchfiles:><:eif Matchfiles:>
+      </div>
+    </div>
+  </dd><:iterator separator results:><:iterator end results:>
+</dl> 
+<p class="pages"><span>Result Pages:</span> |<:iterator begin pages:><:if CurrentSearchPage:> <strong><:page:></strong> | <:or CurrentSearchPage:> <a href="<:pageurl:>"><:page:></a> |<:eif CurrentSearchPage:><:iterator separator pages:><:iterator end pages:></p>
+<:or Results:> 
+<p>No documents were found that matched your search terms.</p>
+<:eif Results:><:or Search:> 
+<:eif Search:>
+<:if Results:><:or Results:><div class="help">
+  <p>By default results are returned if any one of your keywords is found in the document.</p>
+  <p>All lower case keywords will search case insensitively. If an upper case character is included in a word then that word will be searched case sensitively.</p>
+  <p>Use quotation marks around phrases, put + (plus) in front of any word or phrase that is required, and &minus; (minus) in front of a word or phrase to exclude it.</p>
+  <p><strong>Examples:</strong></p>
+  <ul>
+    <li>sydney "opera house"</li>
+    <li>&quot;opera house&quot; &minus;sydney +vienna</li>
+  </ul>
+</div><:eif Results:>

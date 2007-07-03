@@ -1,0 +1,31 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+  <table width="350" align="center">
+    <tr>
+      <td>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td nowrap="nowrap"><img src="/images/basic/user/subs.gif" width="32" height="32" border="0" alt="Lost Password" />&nbsp;&nbsp;</td>
+            <td width="100%"><h2><:ifCfg "site users" nopassword:>Lost Options Link<:or:>Lost Password<:eif:></h2></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+<:if Cfg "site users" nopassword:>
+    <tr> 
+      <td>
+        Your options link has been emailed to <b><:user email:></b>.
+      </td>
+    </tr>
+<:or Cfg:>
+    <tr> 
+      <td>
+        Your password has been emailed to <b><:user email:></b>.
+      </td>
+    </tr>
+    <tr> 
+      <td> <br />
+        <a href="<:script:>?userpage=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>">User account manager</a>
+      </td>
+    </tr>
+<:eif Cfg:>
+  </table>

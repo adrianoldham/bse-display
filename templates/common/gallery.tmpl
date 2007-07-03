@@ -1,0 +1,70 @@
+<:wrap base.tmpl:><:embed start:>
+<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
+<div id="article_<:article id:>" class="article"><:if Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Admin:><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  new Ajax.InPlaceEditor($('title_<:article id:>'), '/cgi-bin/admin/add.pl',
+    {
+    rows: 1,
+    okText: 'Save',
+    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=title',
+    callback: function(form, value) { return 'a_ajax_set=1&id=<:article id:>&field=title&value=' + encodeURIComponent(value) }
+    });
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:if Or [article body] [ifImages]:>
+<div id="body_<:article id:>" class="body">
+<:body:>
+</div><:if Admin:><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
+    {
+    rows: 15,
+    okText: 'Save',
+    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
+    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
+    });
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:>
+<div class="gallery"><:switch:><:case Cfg popimage table:>
+  <table>
+    <tr><:iterator begin images named /(?<!_lrg)$/ :><:if Arithmetic [image_index] && [image_index] % [cfg popimage cols 3] == 0:>
+    </tr>
+    <tr><:or Arithmetic:><:eif Arithmetic:>
+      <td><:if Imagen [concatenate [image - name] _lrg]:>
+        <a href="/cgi-bin/image.pl?id=<:article id:>&amp;imid=<:imagen [concatenate [image - name] _lrg] id:>" onclick="return bse_popup_image(<:article id:>, <:imagen [concatenate [image - name] _lrg] id:>, <:imagen [concatenate [image - name] _lrg] width:>, <:imagen [concatenate [image - name] _lrg] height:>, '')" target="bse_image"><:image:></a><:or Imagen:>
+        <:image:><:eif Imagen:><:if And [cfg popimage caption 1] [image - alt]:>
+        <div><:image - alt:></div><:or And:><:eif And:>
+      </td><:iterator separator images:><:iterator end images:><:if Cfg popimage colspan 1:><:if Arithmetic [ifImages named /(?<!_lrg)$/ ] % [cfg popimage cols 3]:>
+      <td colspan="<:arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_lrg)$/ ] % [cfg popimage cols 3]) :>">&nbsp;</td><:or Arithmetic:><:eif Arithmetic:><:or Cfg:><:if Arithmetic [ifImages named /(?<!_lrg)$/ ] % [cfg popimage cols 3]:><:iterator begin strepeats [arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_lrg)$/ ] % [cfg popimage cols 3] )]:>
+      <td>&nbsp;</td><:iterator end strepeats:><:or Arithmetic:><:eif Arithmetic:><:eif Cfg:>
+    </tr>
+  </table><:case default:><:iterator begin images named /(?<!_lrg)$/ :>
+  <div><:if Imagen [concatenate [image - name] _lrg]:>
+    <a href="/cgi-bin/image.pl?id=<:article id:>&amp;imid=<:imagen [concatenate [image - name] _lrg] id:>" onclick="return bse_popup_image(<:article id:>, <:imagen [concatenate [image - name] _lrg] id:>, <:imagen [concatenate [image - name] _lrg] width:>, <:imagen [concatenate [image - name] _lrg] height:>, '')" title="<:imagen [concatenate [image - name] _lrg] alt:>" target="bse_image"><:image:></a><:or Imagen:>
+    <:image:><:eif Imagen:><:if And [cfg popimage caption 1] [image - alt]:>
+    <p><:image - alt:></p><:or And:><:eif And:>
+  </div><:iterator separator images:><:iterator end images:><:endswitch:>
+</div><:or Or:><:eif Or:><:switch:><:case Allkids:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allkids:>
+<:movestepkid:><:embed allkid:><:iterator separator allkids:><:iterator end allkids:><:or UnderThreshold:>
+<div id="children-<:article id:>" class="children">
+  <ul><:iterator begin allkids:>
+    <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>>
+      <div class="child"><:if Admin:><div class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></div><:or Admin:><:eif Admin:><:ifAllkid thumbImage:><div class="thumbnail"><a href="<:url allkid:>"><:thumbnail allkid:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url allkid:>"><:allkid title:></a></div><:switch:>
+        <:case Allkid summary:><div class="summary"><:allkid summary:></div><:case Allkid summaryLength:><div class="summary"><:summary allkid:></div><:endswitch:>
+      </div>
+    </li><:iterator separator allkids:><:iterator end allkids:>
+  </ul>
+</div><:eif UnderThreshold:><:endswitch:><:if And [ifEmbedded] [cfg basic relatedsections 1]:><:or And:><:if Stepparents:>
+<div class="relatedsections">
+  <p><strong>Related sections:</strong></p>
+  <ul><:iterator begin stepparents:>
+    <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator end stepparents:>
+  </ul>
+</div><:or Stepparents:><:eif Stepparents:><:eif And:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
+<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
+</div>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
+<:embed end:>

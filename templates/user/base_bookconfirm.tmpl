@@ -1,0 +1,28 @@
+<:wrap user/userbase.tmpl title=>"Confirm Booking":>
+<:include include/usermessage.tmpl:>
+<h2><:seminar title:></h2>
+<form action="<:script:>/user/book" method="post" name="book">
+<input type="hidden" name="id" value="<:seminar id:>" />
+<input type="hidden" name="session_id" value="<:session id:>" /><:iterator begin options:>
+<input type="hidden" name="<:option id:>" value="<:option value:>" /><:iterator end options:>
+<div class="sessions">
+  <h2>Session</h2>              
+  <p><:date "%I:%M %p %d/%m/%Y" session when_at:> - <:location description:></p>
+</div>
+<div class="buynow">
+  <:if Options:><div class="options">
+    <table>
+      <caption>Options</caption>
+      <:iterator begin options:><tr>
+        <th><:option desc:>:</th>
+	    <td><:option display:></td>
+      </tr><:iterator end options:>
+    </table>
+  </div><:or Options:><:eif Options:>
+  <:ifOld customer_instructions:><div class="instructions">
+    <h2>Special Instructions</h2>
+    <textarea name="customer_instructions" cols="60" rows="10" readonly="readonly"><:old customer_instructions:></textarea>
+  </div><:or:><:eif:>
+  <p class="buy"><input type="submit" value="Book now" /></p>
+</div>
+</form>

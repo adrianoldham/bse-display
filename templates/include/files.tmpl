@@ -1,0 +1,12 @@
+<!-- START FILES ID: <:article id:> -->
+<div class="files">
+  <dl><:iterator begin files:>
+    <dt<:switch:><:case Eq [file_index] "0":> class="first"<:case Match [file_index] "[13579]$":> class="alt"<:case default:><:endswitch:>><strong><:arithmetic ( [file_index] +1):>.</strong> <span>File description:</span> <:switch:><:case File forSale:><:file description:><:case default:><a href="/cgi-bin/user.pl?download_file=1&amp;file=<:file id:><:if File requireUser:>&amp;r=<:if Embedded:><:url parent:><:or Embedded:><:url article:><:eif Embedded:><:or File:><:eif File:>" title="Uploaded: <:date file whenUploaded:>"><:file description:></a><:endswitch:> <span class="s_size">[<:arithmetic d1:( [file sizeInBytes] / 1024):>KB]</span></dt>
+    <dd<:switch:><:case Eq [file_index] "0":> class="first"<:case Match [file_index] "[13579]$":> class="alt"<:case default:><:endswitch:>>
+      <p id="filename_<:article id:>_<:file_index:>" class="s_filename"><span>File name:</span> <:file displayName:></p>
+      <:if File notes:><:if Ajax:><p class="s_toggle"><a onclick="new Effect.toggle($('file_<:article id:>_<:file_index:>'),'blind')">+ Notes</a></p><:or Ajax:><:eif Ajax:>
+      <div id="file_<:article id:>_<:file_index:>" class="s_notes"<:if Ajax:> style="display: none;"<:or Ajax:><:eif Ajax:>><span>File notes:</span> <:bodytext file notes:></div><:or File:><:eif File:>
+    </dd><:iterator separator files:><:iterator end files:>
+  </dl>
+</div>
+<!-- END FILES ID: <:article id:> -->

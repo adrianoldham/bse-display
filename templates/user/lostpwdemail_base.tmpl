@@ -1,0 +1,35 @@
+<:uc [cfg site name]:> ACCOUNT SERVICES.
+
+Hello <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
+
+<:if Cfg "site users" nopassword
+:>We have received a request to send you a reminder of the link used to 
+access your <:cfg site name:> account details.
+
+If you did not make this request, please rest assured that your link is 
+only forwarded to your registered email address for security reasons.  
+No-one else can ever access it.
+
+ACCOUNT ACCESS LINK:
+  <:cfg site secureurl:>/cgi-bin/user.pl?userpage=<:user password:>&u=<:user id:>
+
+<:or Cfg:>We have received a request to send you a reminder of your password.
+
+If you did not make this request, please rest assured that your password is 
+only forwarded to your registered email address for security reasons.  
+No-one else can ever access it.
+
+YOUR ACCOUNT PASSWORD:
+
+  <:user password:>
+
+ACCOUNT LOGON LINK:
+  <:cfg site secureurl:>/cgi-bin/user.pl<:ifCfg "site users" password_link 0:>?logon=1&userid=<:user userId:>&password=<:user password:><:or:><:eif:>
+
+<:eif Cfg:><:ifCfg "extra tags" adminEmail:>Any questions should be directed to: <:cfg "extra tags" adminEmail:>
+
+<:or:><:eif:>Regards
+The team at <:cfg site name:>
+(<:cfg site url:>)
+
+Request initiated from this IP: <:host:>

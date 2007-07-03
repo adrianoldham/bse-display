@@ -1,0 +1,200 @@
+<:wrap shopbase.tmpl title=>"Shop Checkout" :>
+<p>The <:siteName |h:> store is run on a secure encrypted server, your details are securely processed.</p>
+<table class="items">
+  <caption>Selected Order Items</caption>
+  <thead>
+    <tr> 
+      <th class="col1">Item:</th>
+      <th class="col2">Qty:</th>
+      <th class="col3">Price:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <:iterator begin items:><tr class="item"> 
+      <td class="col1">
+        <a href="<:item link:>"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
+        <div class="i_description"><:item description:></div><:or And:><:eif And:>
+      </td>
+      <td class="col2"><:item units:> &times;</td>
+      <td class="col3"><:cfg shop currency "$":><:money item retailPrice:></td>
+    </tr>
+    <:iterator end items:>
+  </tbody>
+</table>
+<div class="totals">
+  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p>
+</div>
+<:if Cfg "site users" nopassword:><:or Cfg:><p class="alert">
+  <:if User:>This purchase will be added to the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;_t=orders&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1"><b>order history</b></a> in your account. You can maintain the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>shipping</b></a> and <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;_t=billing&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>billing</b></a> details in your user <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>account manager</b></a>.
+  <:or User:>If you wish to track the status of your order you must <:if Or [cfg "site users" user_register]:>either <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_register=1&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>Register</b></a> or <:or Or:><:eif Or:><a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_logon=1&amp;r=<:cfg site secureurl:>/cgi-bin/shop.pl%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>Logon</b></a> before you continue with this purchase.<:eif User:>
+</p><:eif Cfg:>
+<form action="<:cfg site secureurl:>/cgi-bin/shop.pl" method="post">
+  <h2>Shipping Details:</h2>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th><label for="delivFirstName">First Name:</label></th>
+      <td><input type="text" name="delivFirstName" id="delivFirstName" size="34" value="<:old delivFirstName:>" /> *</td>
+      <td><:error_img delivFirstName:></td>
+    </tr>
+    <tr>
+      <th><label for="delivLastName">Last Name:</label></th>
+      <td><input type="text" name="delivLastName" id="delivLastName" size="34" value="<:old delivLastName:>" /> *</td>
+      <td><:error_img delivLastName:></td>
+    </tr>
+    <tr>
+      <th><label for="delivOrganization">Organisation:</label></th>
+      <td><input type="text" name="delivOrganization" id="delivOrganization" size="34" value="<:old delivOrganization:>" /></td>
+      <td><:error_img delivOrganization:></td>
+    </tr>
+    <tr>
+      <th><label for="delivStreet">Address:</label></th>
+      <td><input type="text" name="delivStreet" id="delivStreet" size="34" value="<:old delivStreet:>" /> *</td>
+      <td><:error_img delivStreet:></td>
+    </tr>
+    <tr>
+      <th><label for="delivStreet2">Address 2:</label></th>
+      <td><input type="text" name="delivStreet2" id="delivStreet2" size="34" value="<:old delivStreet2:>" /></td>
+      <td><:error_img delivStreet2:></td>
+    </tr>
+    <tr>
+      <th><label for="delivSuburb">Suburb:</label></th>
+      <td><input type="text" name="delivSuburb" id="delivSuburb" size="34" value="<:old delivSuburb:>" /> *</td>
+      <td><:error_img delivSuburb:></td>
+    </tr>
+    <tr> 
+      <th><label for="delivPostCode">Postcode:</label></th>
+      <td><input type="text" name="delivPostCode" id="delivPostCode" size="10" value="<:old delivPostCode:>" /> *</td>
+      <td><:error_img delivPostCode:></td>
+    </tr>
+    <tr>
+      <th><label for="delivState">State:</label></th>
+      <td><input type="text" name="delivState" id="delivState" size="10" value="<:old delivState:>" /> *</td>
+      <td><:error_img delivState:></td>
+    </tr>
+    <tr>
+      <th><label for="delivCountry">Country:</label></th>
+      <td><input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry:>" /> *</td>
+      <td><:error_img delivCountry:></td>
+    </tr>
+    <tr>
+      <th><label for="telephone">Telephone:</label></th>
+      <td><input type="text" name="telephone" id="telephone" size="20" value="<:old telephone:>" /> *</td>
+      <td><:error_img telephone:></td>
+    </tr>
+    <tr> 
+      <th><label for="facsimile">Facsimile:</label></th>
+      <td><input type="text" name="facsimile" id="facsimile" size="20" value="<:old facsimile:>" /></td>
+      <td><:error_img facsimile:></td>
+    </tr>
+    <tr> 
+      <th><label for="delivMobile">Mobile:</label></th>
+      <td><input type="text" name="delivMobile" id="delivMobile" size="20" value="<:old delivMobile:>" /></td>
+      <td><:error_img delivMobile:></td>
+    </tr>
+    <:if Cgi need_billing:><:or Cgi:><tr>
+      <th><label for="emailAddress">Email:</label></th>
+      <td><input type="text" name="emailAddress" id="emailAddress" size="34" value="<:old emailAddress:>" /> *</td>
+      <td><:error_img emailAddress:></td>
+    </tr><:eif Cgi:>
+    <tr valign="top">
+      <th><label for="instructions">Instructions:</label></th>
+      <td><textarea name="instructions" id="instructions" cols="34" rows="5"><:old instructions:></textarea></td>
+      <td><:error_img instructions:></td>
+    </tr>
+  </table>
+  <p class="small">* Required information for order to be shipped</p>
+  <:if Cgi need_billing:>
+  <h2><input type="checkbox" name="need_billing" id="need_billing" <:ifCgi need_billing:>checked="checked" <:or:><:eif:>onclick="this.form.checkupdate.click()" /> <label for="need_billing">Billing Details:</label></h2>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th><label for="billFirstName">First Name:</label></th>
+      <td><input  type="text" name="billFirstName" id="billFirstName" value="<:old billFirstName:>" size="34" /> *</td>
+      <td><:error_img billFirstName:></td>
+    </tr>
+    <tr>
+      <th><label for="billLastName">Last Name:</label></th>
+      <td><input name="billLastName" type="text" id="billLastName" value="<:old billLastName:>" size="34" /> *</td>
+      <td><:error_img billLastName:></td>
+    </tr>
+    <tr>
+      <th><label for="billOrganization">Organisation:</label></th>
+      <td><input type="text" name="billOrganization" id="billOrganization" size="34" value="<:old billOrganization:>" /></td>
+      <td><:error_img billOrganization:></td>
+    </tr>
+    <tr>
+      <th><label for="billStreet">Address:</label></th>
+      <td><input name="billStreet" type="text" id="billStreet" value="<:old billStreet:>" size="34" /> *</td>
+      <td><:error_img billStreet:></td>
+    </tr>
+    <tr>
+      <th><label for="billStreet2">Address 2:</label></th>
+      <td><input name="billStreet2" type="text" id="billStreet2" value="<:old billStreet2:>" size="34" /> *</td>
+      <td><:error_img billStreet2:></td>
+    </tr>
+    <tr> 
+      <th><label for="billSuburb">Suburb:</label></th>
+      <td><input name="billSuburb" type="text" id="billSuburb" value="<:old billSuburb:>" size="34" /> *</td>
+      <td><:error_img billSuburb:></td>
+    </tr>
+    <tr>
+      <th><label for="billPostCode">Postcode:</label></th>
+      <td><input name="billPostCode" type="text" id="billPostCode" value="<:old billPostCode:>" size="10" /> *</td>
+      <td><:error_img billPostCode:></td>
+    </tr>
+    <tr>
+      <th><label for="billState">State:</label></th>
+      <td><input name="billState" type="text" id="billState" value="<:old billState:>" size="10" /> *</td>
+      <td><:error_img billOrganization:></td>
+    </tr>
+    <tr>
+      <th><label for="billCountry">Country:</label></th>
+      <td><input name="billCountry" type="text" id="billCountry" value="<:old billCountry:>" size="20" /> *</td>
+      <td><:error_img billCountry:></td>
+    </tr>
+    <tr>
+      <th><label for="billTelephone">Telephone:</label></th>
+      <td><input type="text" name="billTelephone" id="billTelephone" size="20" value="<:old billTelephone:>" /> *</td>
+      <td><:error_img billTelephone:></td>
+    </tr>
+    <tr> 
+      <th><label for="billFacsimile">Facsimile:</label></th>
+      <td><input type="text" name="billFacsimile" id="billFacsimile" size="20" value="<:old billFacsimile:>" /></td>
+      <td><:error_img billFacsimile:></td>
+    </tr>
+    <tr> 
+      <th><label for="billMobile">Mobile:</label></th>
+      <td><input type="text" name="billMobile" id="billMobile" size="20" value="<:old billMobile:>" /></td>
+      <td><:error_img billMobile:></td>
+    </tr>
+    <!--//<tr>
+      <td>Email:</td>
+      <td><input type="text" name="billEmail" size="34" value="<:old billEmail:>" /> *</td>
+    </tr>//-->
+    <tr>
+      <th><label for="emailAddress">Email:</label></th>
+      <td><input type="text" name="emailAddress" id="emailAddress" size="34" value="<:old emailAddress:>" /> *</td>
+      <td><:error_img emailAddress:></td>
+    </tr>
+  </table>
+  <p class="small">* Only required if different to shipping address</p>
+  <:or Cgi:>
+  <p><input type="checkbox" name="need_billing" id="need_billing" onclick="this.form.checkupdate.click()" />
+    <label for="need_billing">Billing details different to shipping</label></p>
+  <:eif Cgi:>
+  <:if Cfg affiliate enabled:><h2>Referrer Details:</h2>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th nowrap="nowrap"><label for="affiliate_code">Referrer Id:</label></th>
+      <td><:ifAffiliate_code:><a href="<:cfg site secureurl:>/cgi-bin/affiliate.pl?lo=<:affiliate_code:>"><:affiliate_code:></a><input type="hidden" name="affiliate_code" value="<:affiliate_code:>" /><:or:><input type="text" name="affiliate_code" id="affiliate_code" size="30" value="<:old affiliate_code:>" /><:eif:></td>
+      <td><:error_img affiliate_code:></td>
+    </tr>
+  </table>
+  <:or Cfg:><:eif Cfg:>
+  <:include include/custom/checkout_custom.tmpl optional:><:include include/checkout_custom.tmpl optional:>
+  <p class="buttons">
+    <input type="submit" value="Purchase now" name="a_order" accesskey="p" title="AccessKey = p" />
+    <input type="submit" value="Update" name="checkupdate" accesskey="u" title="AccessKey = u"<:ifAjax:> style="display: none;"<:or:><:eif:> />
+    <input type="submit" value="Go back" name="cart" accesskey="b" title="AccessKey = b" />
+  </p>
+</form>
+

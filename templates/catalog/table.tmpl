@@ -1,0 +1,104 @@
+<:wrap base.tmpl:><:embed start:>
+<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
+<div id="article_<:article id:>" class="article"><:if Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Admin:><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  new Ajax.InPlaceEditor($('title_<:article id:>'), '/cgi-bin/admin/add.pl',
+    {
+    rows: 1,
+    okText: 'Save',
+    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=title',
+    callback: function(form, value) { return 'a_ajax_set=1&id=<:article id:>&field=title&value=' + encodeURIComponent(value) }
+    });
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:if Or [article body] [ifImages]:>
+<div id="body_<:article id:>" class="body">
+<:body:>
+</div><:if Admin:><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
+    {
+    rows: 15,
+    okText: 'Save',
+    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
+    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
+    });
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:><:switch:><:case Allprods:><:include include/sortallkids.tmpl:><:if UnderThreshold allprods:><:iterator begin allprods:>
+<:moveallprod:><:embed allprod:><:iterator separator allprods:><:iterator end allprods:><:or UnderThreshold:>
+<form id="addmultipleform" action="/cgi-bin/shop.pl" method="post">
+<input type="hidden" name="r" value="<:url article:>" />
+<div class="children">
+  <table class="products">
+    <tr><:iterator begin allprods:><:if Arithmetic [allprod_index] && [allprod_index] % [cfg "product table" cols 3] == 0:>
+    </tr>
+    <tr><:or Arithmetic:><:eif Arithmetic:>
+      <td class="child">
+        <:if Admin:><div class="arrows"><:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:></div><:or Admin:><:eif Admin:><:ifAllprod thumbImage:><div class="thumbnail"><a href="<:url allprod:>"><:thumbnail allprod:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url allprod:>"><:allprod title:></a></div>
+        <div class="details">
+          <p class="price"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></p><:ifAllprod retailPrice:>
+          <p class="options"><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" /></p><:or:><:eif:>
+        </div><:if And [allprod description] [cfg shop product_description 1]:>
+        <div class="summary i_description"><:allprod description:></div><:or And:><:eif And:>
+      </td><:iterator separator allprods:><:iterator end allprods:><:if Arithmetic [allprod_count] % [cfg "product table" cols 3]:><:if Cfg "product table" colspan:>
+      <td class="child" colspan="<:arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] )]:>
+      <td class="child">&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
+    </tr>
+  </table>
+</div><:eif UnderThreshold:><:endswitch:><:switch:><:case Allcats:>
+<div class="children">
+  <table class="catalogs">
+    <tr><:iterator begin allcats:><:if Arithmetic [allcat_index] && [allcat_index] % [cfg "catalog table" cols 3] == 0:>
+    </tr>
+    <tr><:or Arithmetic:><:eif Arithmetic:>
+      <td class="child">
+        <:if Admin:><div class="arrows"><:include admin/adminmenu/allcat_mini.tmpl:><:moveallcat:></div><:or Admin:><:eif Admin:><:ifAllcat thumbImage:><div class="thumbnail"><a href="<:url allcat:>"><:thumbnail allcat:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url allcat:>"><:allcat title:></a></div><:switch:>
+        <:case Allcat summary:><div class="summary"><:allcat summary:></div><:case Allcat summaryLength:><div class="summary"><:summary allcat:></div><:endswitch:>
+      </td><:iterator separator allcats:><:iterator end allcats:><:if Arithmetic [allcat_count] % [cfg "catalog table" cols 3]:><:if Cfg "catalog table" colspan:>
+      <td class="child" colspan="<:arithmetic [cfg "catalog table" cols 3] - ( [allcat_count] % [cfg "catalog table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "catalog table" cols 3] - ( [allcat_count] % [cfg "catalog table" cols 3] )]:>
+      <td class="child">&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
+    </tr>
+  </table>
+</div><:endswitch:>
+</form><:if Or [ifEmbedded]:><:or Or:><:if Stepparents:>
+<div class="relatedsections"><p><b>Related sections:</b></p>
+  <ul>
+    <:iterator begin stepparents:><li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator separator stepparents:>
+    <:iterator end stepparents:>
+  </ul>
+</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
+<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
+</div><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+function add_single_handler(id) {
+    var params = new Hash();
+    params['id'] = id;
+    //params['quantity'] = $('qty'+id).value;
+    params['a_add'] = 1;
+    params['embed'] = 'sidebar';
+    params['r'] = 'ajaxcart';
+    new Ajax.Request('/cgi-bin/shop.pl', {
+      method: 'post',
+      parameters: Hash.toQueryString(params),
+      onComplete: function(transport) {
+        $('cart_sidebar').innerHTML = transport.responseText;
+        //$('qty'+id).value = '';
+        new Effect.Highlight($('cart_item_'+id), { startcolor: '#ffb27f', endcolor: '#eeeeee' });
+      }
+    });
+    return false;
+}
+<:iterator begin allprods:>
+$('a_addsingle<:allprod id:>').onclick =
+  function() {
+    return add_single_handler(<:allprod id:>);
+  };
+<:iterator end allprods:>
+//]]>
+</script><:or Ajax:><:eif Ajax:>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
+<:embed end:>

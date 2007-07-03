@@ -1,0 +1,229 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<:include include/usermessage.tmpl:>
+<form name="register" method="post" action="<:cfg site secureurl:><:script:>">
+  <table border="0" cellpadding="1" cellspacing="1" align="center">
+    <tr>
+      <td colspan="3">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td nowrap="nowrap"><img src="/images/basic/user/user.gif" width="32" height="32" border="0" alt="User Registration" />&nbsp;&nbsp;</td>
+            <td><h2>User Registration</h2></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <:if User:><tr>
+      <td colspan="3" align="center">You are already logged on - Why register again?</td>
+    </tr><:or User:><:eif User:>
+      <:ifCgi r:>
+      <input type="hidden" name="r" value="<:cgi r:>">
+      <:or:><:eif:>
+<:if Cfg "site users" nopassword 0:>
+<:or Cfg:>
+      <tr>
+        <th align="left" nowrap="nowrap"><:cfg "site users" userid_description "Username":>:</th>
+        <td width="100%">
+          <input type="text" name="userid" value="<:old userid:>" size="40" tabindex="1" />*
+        </td>
+        <td><:error_img userid:></td>
+      </tr>
+      <tr>
+        <th align="left" nowrap="nowrap">Password:</th>
+        <td width="100%">
+          <input type="password" name="password" value="" size="40" tabindex="2" />*
+        </td>
+        <td><:error_img password:></td>
+      </tr>
+      <tr>
+        <th align="left" nowrap="nowrap">Confirm Password:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="password" name="confirm_password" value="" size="40" tabindex="3" />*
+        </td>
+        <td nowrap="nowrap"><:error_img confirm_password:></td>
+      </tr>
+<:eif Cfg:>
+      <tr>
+        <th align="left" nowrap="nowrap">Email Address:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="email" value="<:old email:>" size="40" tabindex="4" />*
+        </td>
+        <td nowrap="nowrap"><:error_img email:></td>
+      </tr>
+<:if Cfg "site users" nopassword 0:>
+      <tr>
+        <th align="left" nowrap="nowrap">Confirm Email:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="confirmemail" value="<:old confirmemail:>" size="40" tabindex="5" />*
+        </td>
+        <td nowrap="nowrap"><:error_img confirmemail:></td>
+      </tr>
+<:or Cfg:>
+      <tr>
+        <td colspan="3" align="left">If you lose your password, you can have it emailed to your registered address.</td>
+      </tr>
+<:eif Cfg:>
+<:if Cfg "site users" info_on_register:>
+      <tr>
+        <td colspan="3">&nbsp;</td>
+      </tr>
+      <:if Subscriptions:>
+      <tr>
+        <td nowrap="nowrap" valign="top">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" height="20">
+            <tr>
+              <th nowrap="nowrap" align="left">Newsletter:</th>
+            </tr>
+          </table>
+        </td>
+        <td width="100%">
+          <table border="0" cellspacing="0" cellpadding="0">
+            <input type="hidden" name="checkedsubs" value="1" />
+            <:iterator begin subscriptions:>
+            <tr height="20">
+              <td><input type="checkbox" name="subscription" id="subscription_<:subscription id:>" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> accesskey="<:arithmetic [subscription_index] + 1:>" title="AccessKey = <:arithmetic [subscription_index] + 1:>" /></td>
+              <td nowrap="nowrap"><label for="subscription_<:subscription id:>"><:subscription name:></label>&nbsp;&nbsp;</td>
+              <td nowrap="nowrap"><a href="#" onClick="javascript:window.open('<:siteUrl:><:script:>?subinfo=1&id=<:subscription id:>', 'subscription_info','width=350,height=200,location=no,status=no,menubar=no,scrollbars=yes'); return 0"><img src="/images/<:cfg theme name:>user/info.gif" width="16" height="16" border="0" /></a></td>
+            </tr>
+            <:iterator end subscriptions:>
+          </table>
+          <br />
+          <div><b>Note:</b> If you select any newsletters, they will not be sent until you confirm your newsletter subscription. If you change your email address you will need to reconfirm your subscription.</div>
+          <br />
+          <input type="hidden" name="saveTextOnlyMail" value="1" /> 
+          <!--//<input type="radio" name="textOnlyMail" value="" <:ifOld textOnlyMail:><:or:>checked="checked" <:eif:>/><label for="textOnlyMail" accesskey="h">HTML Formatted</label> &nbsp; 
+          <input type="radio" name="textOnlyMail" value="1" <:ifOld textOnlyMail:>checked="checked" <:or:><:eif:>/><label for="textOnlyMail" accesskey="t">Plain Text Formatted</label>//-->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th nowrap="nowrap">
+            Email format: &nbsp;
+          </th>
+          <td>
+            <select name="textOnlyMail" tabindex="100">
+              <option value=""<:ifOld textOnlyMail:><:or:>selected="selected"<:eif:>>HTML</option>
+              <option value="1"<:ifOld textOnlyMail:> selected="selected"<:or:><:eif:>>Plain Text</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="3">&nbsp;</td>
+      </tr>
+      <:or Subscriptions:><:eif Subscriptions:>
+      <tr>
+        <th nowrap="nowrap" align="left">First Name:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="name1" value="<:old name1:>" size="40" maxlength="127" tabindex="6" /><:ifRequired name1:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img name1:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Last Name:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="name2" value="<:old name2:>" size="40" maxlength="127" tabindex="7" /><:ifRequired name2:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img name2:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Title:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="title" value="<:old title:>" size="40" maxlength="127" tabindex="8" /><:ifRequired title:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img title:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Organisation:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="organization" value="<:old organization:>" size="40" maxlength="127" tabindex="9" /><:ifRequired organization:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img organization:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Address:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="address" value="<:old address:>" size="40" maxlength="127" tabindex="10" /><:ifRequired address:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img address:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Address 2:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="delivStreet2" value="<:old delivStreet2:>" size="40" maxlength="127" tabindex="10" /><:ifRequired delivStreet2:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img address:></td>
+      </tr>
+      <tr>
+        <th nowrap align="left">Suburb:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="city" value="<:old city:>" size="40" maxlength="127" tabindex="11" /><:ifRequired city:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img city:></td>
+      </tr>
+      <tr>
+        <th nowrap align="left">State:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="state" value="<:old state:>" size="8" maxlength="40" tabindex="12" /><:ifRequired state:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img state:></td>
+      </tr>
+      <tr>
+        <th nowrap align="left">Postcode:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="postcode" value="<:old postcode:>" size="8" maxlength="40" tabindex="13" /><:ifRequired postcode:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img postcode:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Country:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="country" value="<:old country:>" size="32" maxlength="127" tabindex="14" /><:ifRequired country:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img country:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Telephone:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="telephone" value="<:old telephone:>" size="32" maxlength="80" tabindex="15" /><:ifRequired telephone:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img telephone:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Facsimile:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="facsimile" value="<:old facsimile:>" size="32" maxlength="80" tabindex="16" /><:ifRequired facsimile:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img facsimile:></td>
+      </tr>
+      <tr>
+        <th nowrap="nowrap" align="left">Mobile:</th>
+        <td width="100%" nowrap="nowrap">
+          <input type="text" name="delivMobile" value="<:old delivMobile:>" size="32" maxlength="80" tabindex="16" /><:ifRequired delivMobile:>*<:or:><:eif:>
+        </td>
+        <td nowrap="nowrap"><:error_img delivMobile:></td>
+      </tr>
+<:or Cfg:><:eif Cfg:>
+<:include include/custom/user_register_custom.tmpl optional:>
+      <tr>
+        <td height="20" colspan="3" align="left" valign="bottom" nowrap="nowrap">* indicates required fields</td>
+      </tr>
+      <tr>
+        <td colspan="3" align="right">
+          <input type="submit" name="register" value="Register now" accesskey="r" title="AccessKey = r" tabindex="100"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="left" colspan="3">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td align="left" nowrap="nowrap"><br />
+                <a href="/cgi-bin/user.pl?show_lost_password=1"><:if Cfg "site users" nopassword:>Send your options link<:or Cfg:>Lost your password?<:eif Cfg:></a></td>
+              <:if Cfg "site users" nopassword:><:or Cfg:><td align="right" nowrap="nowrap"><br />
+                <a href="/cgi-bin/user.pl?show_logon=1<:ifCgi r:>&amp;r=<:cgi r |u:><:or:><:eif:>">Already registered?</a></td><:eif Cfg:>
+            </tr>
+          </table>
+        </td>
+      </tr>
+  </table>
+</form>

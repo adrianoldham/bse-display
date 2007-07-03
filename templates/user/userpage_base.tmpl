@@ -1,0 +1,74 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<h2>Your account manager</h2>
+<:include include/usermessage.tmpl:>
+<p>This section contains your personal account details. From here you can 
+<:ifCfg subscriptions enabled:>manage your newsletter subscriptions,<:or:><:eif:>
+<:ifCfg shop enabled:> monitor the current status or purchase history of your orders from our on-line store<:or:><:eif:>
+<:ifOr [cfg shop enabled] [cfg subscriptions enabled]:> and<:or:><:eif:> modify your personal details, for example, your
+<:ifCfg "site users" nopassword:><:or:>password, <:eif:>email and mailing addresses etc.
+</p>
+<div id="userhome"> 
+<table border="0" cellspacing="1" cellpadding="5">
+  <:if Cfg "site users" nopassword:><:or Cfg:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=1&amp;_t=password"><img src="/images/<:cfg theme name:>user/lock.gif" width="32" height="32" border="0" title="Password manager" alt="Password manager" /></a></th>
+    <td width="100%"><a href="<:script:>?show_opts=1&amp;_t=password"><b>Password manager</b></a><br />
+      Use this form to change your account password.</td>
+  </tr><:eif Cfg:>
+  <:if Cfg subscriptions enabled 1:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><img src="/images/<:cfg theme name:>user/subs.gif" width="32" height="32" border="0" title="Newsletter manager" alt="Newsletter manager" /></a></th>
+    <td width="100%"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><b>Newsletter manager</b></a><br />
+      Subscribe or Unsubscribe to our email newsletters.</td>
+  </tr><:or Cfg:><:eif Cfg:>
+  <:if Cfg "site users" nopassword:><:or Cfg:><:ifCfg affiliate enabled 0:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=1&amp;_t=affiliate"><img src="/images/<:cfg theme name:>user/affiliate.gif" width="32" height="32" border="0" title="Affiliate page manager" alt="Affiliate page manager" /></a></th>
+    <td width="100%"><a href="<:script:>?show_opts=1&amp;_t=affiliate"><b>Affiliate page manager</b></a><br />
+      Manage the content on your affiliate page.</td>
+  </tr><:or:><:eif:><:eif Cfg:>
+  <:if Cfg "site users" nopassword:><:or Cfg:><:ifCfg subscr enabled 0:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?userpage=1&amp;_t=subs"><img src="/images/<:cfg theme name:>user/subscr.gif" width="32" height="32" border="0" title="Your subscriptions" alt="Your subscriptions" /></a></th>
+    <td width="100%"><a href="<:script:>?userpage=1&amp;_t=subs"><b>Your subscriptions</b></a><br />
+      View your current subscriptions and their status here.</td>
+  </tr><:or:><:eif:><:eif Cfg:>
+  <:if Cfg "site users" nopassword:><:or Cfg:><:ifCfg seminars enabled 0:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?userpage=1&amp;_t=soa"><img src="/images/<:cfg theme name:>user/calendar.gif" width="32" height="32" border="0" title="Your seminars" alt="Your seminars" /></a></th>
+    <td width="100%"><a href="<:script:>?userpage=1&amp;_t=soa"><b>Your seminars</b></a><br />
+      View your seminar session history here.</td>
+  </tr>
+  <tr>
+    <th align="left" nowrap="nowrap"><a href="/cgi-bin/nuser.pl/user/bookinglist"><img src="/images/<:cfg theme name:>user/subscr.gif" width="32" height="32" border="0" title="Your seminars" alt="Your seminars" /></a></th>
+    <td width="100%"><a href="/cgi-bin/nuser.pl/user/bookinglist"><b>Your seminar bookings</b></a><br />
+      View your seminar bookings here.</td>
+  </tr><:or:><:eif:><:eif Cfg:>
+  <:if Cfg "site users" nopassword:><:or Cfg:><:ifCfg shop enabled:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?userpage=1&amp;_t=orders"><img src="/images/<:cfg theme name:>user/dollar.gif" width="32" height="32" border="0" title="Your orders" alt="Your orders" /></a></th>
+    <td width="100%"><a href="<:script:>?userpage=1&amp;_t=orders"><b>Your orders</b></a><br />
+      View your order details, status and history here.</td>
+  </tr><:or:><:eif:><:eif Cfg:>
+  <:if Cfg "site users" nopassword:><:or Cfg:><:ifAnd [cfg shop enabled] [cfg "site users" files]:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?userpage=1&amp;_t=files"><img src="/images/<:cfg theme name:>user/files.gif" width="32" height="32" border="0" title="Your purchased files" alt="Your purchased files" /></a></th>
+    <td width="100%"><a href="<:script:>?userpage=1&amp;_t=files"><b>Your purchased files</b></a><br />
+      Download your purchased files from here.</td>
+  </tr><:or:><:eif:><:eif Cfg:>
+  <tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><img src="/images/<:cfg theme name:>user/user.gif" width="32" height="32" border="0" title="Your contact details" alt="Your contact details" /></a></th>
+    <td width="100%"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><b>Your contact details</b></a><br />
+      Maintain your contact and address information here.</td>
+  </tr>
+  <:if Cfg "site users" nopassword:><:or Cfg:><:ifCfg shop enabled:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=1&amp;_t=billing"><img src="/images/<:cfg theme name:>user/card.gif" width="32" height="32" border="0" title="Your billing details" alt="Your billing details" /></a></th>
+    <td width="100%"><a href="<:script:>?show_opts=1&amp;_t=billing"><b>Your billing details</b></a><br /> 
+      If your billing and shipping details differ.</td>
+  </tr><:or:><:eif:><:eif Cfg:>
+  <:if Cfg shop enabled:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:cfg site secureurl:>/cgi-bin/shop.pl"><img src="/images/<:cfg theme name:>user/cart.gif" width="32" height="32" border="0" title="Your shopping cart" alt="Your shopping cart" /></a></th>
+    <td width="100%"><a href="/cgi-bin/shop.pl"><b>Your shopping cart</b></a><br />
+    View the items currently in your shopping cart.</td>
+  </tr><:or Cfg:><:eif Cfg:>
+  <:include include/custom/userpage_custom.tmpl optional:><:include include/userpage_custom.tmpl optional:>
+  <:if Or [cfg "site users" nopassword] [cfg custom user_auth]:><:or Or:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?logoff=1"><img src="/images/<:cfg theme name:>user/cross.gif" width="32" height="32" border="0" title="Logout now" alt="Logout now" /></a></th>
+    <td width="100%"><a href="<:script:>?logoff=1"><b>Logout now</b></a><br />
+      Logout immediately from your account.</td>
+  </tr><:eif Or:>
+</table>
+</div>

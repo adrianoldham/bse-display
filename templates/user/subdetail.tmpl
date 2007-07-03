@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Newsletter Info</title>
+<style type="text/css">
+<!--
+body {
+	font-family: "Lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #dddddd;
+}
+a {
+	color: #666666;
+	text-decoration: none;
+}
+a:hover {
+	color: #333333;
+	text-decoration: underline;
+}
+td.header {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #666666;
+}
+td.body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #ffffff;
+}
+th.body {
+	font-family: "Lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	background-color: #eeeeee;
+	color: #666666;
+}
+td.details {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	background-color: #dddddd;
+	color: #666666;
+}
+th.details {
+	font-family: "Lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	background-color: #dddddd;
+	color: #666666;
+}
+table.body {
+	background-color: #999999;
+}
+table.details {
+	background-color: #cccccc;
+}
+-->
+</style>
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td valign="top" nowrap="nowrap"><img src="<:cfg site url:>/images/<:cfg theme name:>user/subs_sml.gif" width="19" height="19" border="0" alt="Subscriptions" />&nbsp;</td>
+    <td width="100%" class="header"><:subscription name:></td>
+  </tr>
+</table>
+<br />
+<div>
+<table border="0" cellpadding="5" cellspacing="1" width="100%" class="body">
+  <!--//<tr> 
+    <th align="left" nowrap="nowrap"><b>Name:</b></th>
+    <td width="100%"><:subscription name:></td>
+  </tr>//-->
+  <tr> 
+    <!--//<th align="left" valign="top" nowrap="nowrap"><b>Description:</b></th>//-->
+    <td width="100%" class="body"><:bodytext subscription description:></td>
+  </tr>
+</table>
+<br />
+<table border="0" cellpadding="2" cellspacing="1" width="100%" class="details">
+  <tr> 
+    <th align="left" nowrap="nowrap" class="details"><b>Frequency:</b></th>
+    <td width="100%" class="details"><:subscription frequency:></td>
+  </tr>
+  <tr> 
+    <th align="left" nowrap="nowrap" class="details"><b>Last Published:</b></th>
+    <td width="100%" class="details"><:ifMatch [subscription lastSent] "^0000":>Never<:or:><:date subscription lastSent:><:eif:></td>
+  </tr>
+  <tr> 
+    <th align="left" nowrap="nowrap" class="details"><b>Email Format:</b></th>
+    <td width="100%" class="details"><:ifEq [subscription html_template] "":>Text Only<:or:>HTML or Text Only<:eif:></td>
+    </tr>
+  <:ifEq [subscription archive] "1":><tr> 
+    <th align="left" nowrap="nowrap" class="details"><b>Online Archive:</b></th>
+    <td width="100%" class="details"><a href="<:cfg site url:>/a/<:subscription parentId:>.html" target="_blank">View subscription archive</a> ></td>
+  </tr><:or:><:eif:>
+</table>
+</div>
+</body>
+</html>

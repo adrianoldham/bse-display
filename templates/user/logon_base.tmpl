@@ -1,0 +1,63 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<:include include/usermessage.tmpl:>
+<form action="<:cfg site secureurl:><:script:>" method="post">
+  <table width="350" align="center">
+    <tr>
+      <td colspan="2">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td nowrap="nowrap"><img src="/images/basic/user/lock.gif" width="32" height="32" border="0" alt="User logon" />&nbsp;&nbsp;</td>
+            <td width="100%"><h2>User Logon</h2></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <:if User:> 
+    <tr> 
+      <td colspan="2">You are currently logged on as <b><:user userId:></b>.<br /><br />
+        If this is not your account, please logoff now.</td>
+    </tr>
+    <tr> 
+      <td>&nbsp;</td>
+      <td align="right">
+        <input type="submit" name="logoff" value="Logoff" accesskey="l" title="AccessKey = l" tabindex="1" />
+      </td>
+    </tr>
+    <:or User:><:if Message:> 
+    <tr> 
+      <td colspan="2" align="center">&nbsp;</td>
+    </tr>
+    <:or Message:><:eif Message:> 
+    <tr> 
+      <th align="left" nowrap="nowrap"><:cfg "site users" userid_description "Username":>:</th>
+      <td>
+        <:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>" /><:or Cgi:><:eif Cgi:> 
+        <input type="text" name="userid" value="<:old userid:>" size="40" />
+      </td>
+    </tr>
+    <tr> 
+      <th align="left" nowrap="nowrap">Password:</th>
+      <td> 
+       <input type="password" name="password" value="" size="40" />
+     </td>
+   </tr>
+   <tr> 
+     <td>&nbsp; </td>
+     <td align="right">
+       <input type="submit" name="logon" value="Logon" accesskey="l" title="AccessKey = l" tabindex="1" />
+     </td>
+   </tr>
+   <tr> 
+     <td colspan="2" align="right"> 
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr> 
+           <td align="left" nowrap="nowrap"><br />
+            <a href="/cgi-bin/user.pl?show_lost_password=1">Lost your password?</a></td>
+          <:if Cfg "site users" user_register 1:><td align="right" nowrap="nowrap"><br />
+            <a href="/cgi-bin/user.pl?show_register=1<:ifCgi r:>&amp;r=<:cgi r |u:><:or:><:eif:>">Not yet registered?</a></td><:or Cfg:><:eif Cfg:>
+        </tr>
+      </table>
+    </td>
+  </tr><:eif User:>
+</table>
+</form>

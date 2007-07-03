@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+  <channel>
+    <ttl><:cfg podcast ttl 60:></ttl>
+    <title><:cfg podcast title [article title] |x:></title>
+    <link><:cfg site url:>/</link>
+    <language><:cfg podcast language "en":></language>
+    <copyright><:cfg podcast copyright [cfg site name] |x:></copyright>
+    <itunes:subtitle><:cfg podcast subtitle [article title] |x:></itunes:subtitle>
+    <itunes:author><:cfg podcast author [article author]:></itunes:author>
+    <itunes:summary><:nobodytext article body |x:></itunes:summary>
+    <description><:nobodytext article body |x:></description>
+    <itunes:owner>
+      <itunes:name><:cfg podcast owner_name [article author] |x:></itunes:name>
+      <itunes:email><:cfg podcast owner_email [adminEmail]:></itunes:email>
+    </itunes:owner>
+    <itunes:image href="<:cfg site url:>/images/<:imagen podcast image:>" />
+    <:iterator begin cfgsection "podcast categories" sort=key:><itunes:category text="<:cfgentry value:>" /><:iterator separator cfgsection:>
+    <:iterator end cfgsection:>
+    <itunes:explicit><:cfg podcast explicit no:></itunes:explicit>
+    <:iterator begin files:>
+    <item>
+      <title><:file description |x:></title>
+      <itunes:author><:article author |x:></itunes:author>
+      <itunes:subtitle><:article title |x:></itunes:subtitle>
+      <itunes:summary><:file notes |x:></itunes:summary>
+      <enclosure url="<:cfg site url:>/cgi-bin/podcast.mp3?download_file=1&amp;file=<:file id:>" length="<:file sizeInBytes:>" type="<:file contentType:>" />
+      <guid><:cfg site url:>/cgi-bin/user.pl?download_file=1&amp;file=<:file id:></guid>
+      <pubDate><:date "%a, %d %b %Y %T %z" file whenUploaded:></pubDate>
+      <itunes:duration>5:00</itunes:duration>
+      <itunes:keywords><:article keyword:></itunes:keywords>
+    </item>
+    <:iterator end files:>
+  </channel>
+</rss>

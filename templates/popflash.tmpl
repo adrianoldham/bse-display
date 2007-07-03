@@ -1,0 +1,71 @@
+<div class="popflash">
+<:iterator begin files:><:if And [ifEq [file download] "0"] [ifMatch [file name] "_popflash"]:><div>
+  <a href="/cgi-bin/user.pl?download_file=1&amp;file=<:file id:>" onclick="return bse_popup_file(<:file id:>, <:cfg popflash width 440:>, <:cfg popflash height 320:>);" title="<:file description:>" target="bse_file"><:if Imagen [file name]:><:imagen [file name]:><:or Imagen:><:file displayName:><:eif Imagen:></a>
+<:ifAnd [cfg popflash caption "1"] [file description]:>  <p><:file description:></p>
+<:or:><:eif:></div>
+<:or And:><:eif And:><:iterator end files:>
+</div>
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+<!--
+// popflash popup handler
+
+var extrawidth = <:cfg popflash extrawidth 0:>;
+var extraheight =  <:cfg popflash extraheight 0:>;
+var popmiddle =  <:cfg popflash popmiddle 0:>;
+var resizable = '<:cfg popflash resizable yes:>';
+var bse_file_popup;
+
+function init_bse_popup_file(init_extrawidth, init_extraheight, init_popmiddle, init_resizable) {
+  extrawidth = init_extrawidth;
+  extraheight = init_extraheight;
+  popmiddle = init_popmiddle;
+  resizable = init_resizable;
+}
+
+function bse_popup_file(file_id, width, height) {
+  //var url = "/cgi-bin/user.pl?download_file=1&file=" + file_id;
+  // the flash video player doesn't like the normal BSE file download url, so we need to setup an Apache Rewrite Rule
+  // RewriteRule /video/([0-9]+) /cgi-bin/user.pl?download_file=1&file=$1 [PT]
+  var url = "/video/" + file_id;
+  var work_width = width + extrawidth;
+  var work_height = height + extraheight;
+  var features = 'width=' + work_width + ',height=' + work_height + ',location=no,status=no,menubar=no,scrollbars=no,resizable=' + resizable;
+
+  // lose the old one if it exists
+  if(popmiddle) {
+    if(bse_file_popup != null && !bse_file_popup.closed) {
+      bse_file_popup.close();
+    }
+    var left = window.screenX + (window.outerWidth - work_width) / 2;
+    var top = window.screenY + (window.outerHeight - work_height) / 2;
+    features = features + ",top=" + top + ",left=" + left;
+  }
+  else if(bse_file_popup != null && !bse_file_popup.closed) {
+    var left = bse_file_popup.screenX;
+    var top = bse_file_popup.screenY;
+    features = features + ",top=" + top + ",left=" + left;
+    bse_file_popup.close();
+  }
+  bse_file_popup = window.open('', 'bse_file', features, 0);
+  bse_file_popup.document.writeln(
+        '<html><head><title><:cfg site name |h:><\/title><\/head>'
+      + '<body onload="self.focus()">'
+      + '<style type="text/css">body { margin: 0; background-color: <:cfg popflash popup_bkg_color "#333":>; color: <:cfg popflash popup_font_color "#fff":>; }<:ifOr [ifMatch [cfg popflash obj_width 342] "%"] [ifMatch [cfg popflash obj_height 231] "%"]:><:or:> object { position: absolute; top: 50%; left: 50%; margin-top: -<:arithmetic i:([cfg popflash obj_height 231] /2):>px; margin-left: -<:arithmetic i:([cfg popflash obj_width 342] /2):>px; }<:eif:><\/style>'
+      + '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="<:cfg popflash obj_width 342:>" height="<:cfg popflash obj_height 231:>" id="FLVPlayer">'
+      +   '<param name="movie" value="/video/FLVPlayer_Progressive.swf" \/>'
+      +   '<param name="salign" value="lt" \/>'
+      +   '<param name="quality" value="high" \/>'
+      +   '<param name="scale" value="noscale" \/>'
+      +   '<param name="FlashVars" value="&MM_ComponentVersion=1&skinName=/video/Halo_Skin_3&streamName=' + url + '&autoPlay=true&autoRewind=false" \/>'
+      +   '<embed src="/video/FLVPlayer_Progressive.swf" flashvars="&MM_ComponentVersion=1&skinName=/video/Halo_Skin_3&streamName=' + url + '&autoPlay=true&autoRewind=false" quality="high" scale="noscale" width="<:cfg popflash obj_width 342:>" height="<:cfg popflash obj_height 231:>" name="FLVPlayer" salign="LT" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" \/>'
+      + '<\/object>'
+      + '<\/body><\/html>'
+    );
+  bse_file_popup.document.close();
+  return false;
+}
+//-->
+//]]>
+</script>

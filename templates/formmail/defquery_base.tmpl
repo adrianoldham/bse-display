@@ -1,0 +1,35 @@
+<:wrap formmail/formbase.tmpl:>
+<form action="<:script:>" method="post"<:ifFormHasFileFields:> enctype="multipart/form-data"<:or:><:eif:>>
+<input type="hidden" name="form" value="<:id:>" /><:ifCgi r:>
+<input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:>
+<:iterator begin fields:><:if Eq [field htmltype] "hidden":><input type="hidden" name="<:field name:>" value="<:old [field name] field default:>" />
+<:or Eq:><:eif Eq:><:iterator end fields:>
+<:bodytext formcfg body "Information sent via this form will not be shared with other companies.":>
+<table>
+  <:iterator begin fields:>
+  <:if Eq [field htmltype] "header":><tr>
+    <td colspan="3">
+      <h2><:field description:></h2>
+    </td></tr><:or Eq:>
+  <:if Match [field htmltype] "hidden":><:or Match:><tr>
+    <:ifField hidelabel:><:or:><th><label for="<:field name:>"><:field description:></label>:</th><:eif:>
+    <td<:ifField hidelabel:> colspan="2"<:or:><:eif:>>
+      <:switch:><:case Eq [field htmltype] "textarea":><textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>" ><:old [field name] field default:></textarea> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:>
+      <:case Eq [field htmltype] "password":><input type="password" name="<:field name:>" id="<:field name:>" value="<:old [field name]:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:>/> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:>
+      <:case Eq [field htmltype] "select":><:values_select:> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:>
+      <:case Eq [field htmltype] "multiselect":><select name="<:field name:>" id="<:field name:>" size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple">
+        <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:or:><:eif:>><:value name:></option>
+      <:iterator end values:></select> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:>
+      <:case Eq [field htmltype] "radio":><fieldset id="<:field name:>"><:iterator begin values:><input type="radio" name="<:field name:>" value="<:value id:>" id="<:field name:>_<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <label for="<:field name:>_<:value id:>"><:value name:></label> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:>
+      <:iterator separator values:><br /><:iterator end values:></fieldset>
+      <:case Eq [field htmltype] "check":><fieldset id="<:field name:>"><:iterator begin values:><input type="checkbox" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <label for="<:field name:>_<:value id:>"><:value name:></label> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:>
+      <:iterator separator values:><br /><:iterator end values:></fieldset>
+      <:case Eq [field htmltype] "file":><input type="file" name="<:field name:>" id="<:field name:>" value="" /> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:>
+      <:case default:><input type="text" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>/> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:><:endswitch:>
+    </td>
+    <td><:error_img [field name]:></td>
+  </tr><:eif Match:><:eif Eq:><:iterator separator fields:>
+<:iterator end fields:></table>
+<p>* Indicates required fields</p>
+<p><input type="submit" name="a_send" value="<:formcfg submit "Submit Form":>" /></p>
+</form>

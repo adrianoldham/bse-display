@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Web Order No. <:order id |%06d:></title>
+<style type="text/css">
+<!--
+body {
+	font: 12px Verdana, Arial, Helvetica, sans-serif;
+	background: #fff;
+	color: #000;
+	text-align: center;
+}
+#main {
+	width: 400px;
+	margin: 30px auto;
+	text-align: left;
+}
+a {
+	color: #666;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+h1 {
+	color: #666;
+	font-size: 16px;
+}
+h2 {
+	font-size: 14px;
+}
+h3 {
+	font-size: 12px;
+}
+table {
+	font-size: 12px;
+	background: #eee;
+}
+th {
+	color: #fff;
+	background: #999;
+}
+td {
+	background: #fff;
+}
+.table {
+	background: #ccc;
+}
+.th {
+	color: #000;
+	background: #fff;
+}
+-->
+</style>
+</head>
+<body>
+<div id="main">
+<h1 title="<:if Order ccStatusText:>Message: <:order ccStatusText:><:or Order:>Tax Invoice No. <:order id |%06d:><:eif Order:>">WEB ORDER - <:uc [cfg site entity_name [cfg shop address1]] |h:></h1>
+<h2>Order #: <:order id |%06d:><br />
+Date: <:date "%d/%m/%Y" order orderDate:><:ifOrder userId:><br />
+User Id: <:order userId:><:or:><:eif:><:ifOrder affiliate_code:><br />
+Referrer: <:order affiliate_code:><:or:><:eif:><:ifOrder purchase_order:><br />
+Purchase Order: <:order purchase_order:><:or:><:eif:></h2>
+<table width="100%" border="0" cellpadding="3" cellspacing="1">
+  <tr> 
+    <th rowspan="<:if And [order delivStreet2] [order delivOrganization]:>5<:or And:><:if Or [order delivStreet2] [order delivOrganization]:>4<:or Or:>3<:eif Or:><:eif And:>" align="left" valign="top" class="th">Shipping:</th>
+    <td width="100%"><:order delivFirstName:> <:order delivLastName:></td>
+  </tr>
+  <:ifOrder delivOrganization:><tr> 
+    <td width="100%"><:order delivOrganization:></td>
+  </tr><:or:><:eif:>
+  <tr> 
+    <td width="100%"><:order delivStreet:></td>
+  </tr>
+  <:ifOrder delivStreet2:><tr> 
+    <td width="100%"><:order delivStreet2:></td>
+  </tr>
+  <:or:><:eif:><tr> 
+    <td width="100%"><:order delivSuburb:> <:order delivState:> <:order delivPostCode:>, <:order delivCountry:></td>
+  </tr>
+  <tr> 
+    <th align="left" class="th">Telephone:</th>
+    <td width="100%"><:order telephone:></td>
+  </tr>
+  <:ifOrder facsimile:><tr> 
+    <th align="left" class="th">Facsimile:</th>
+    <td width="100%"><:order facsimile:></td>
+  </tr><:or:><:eif:>
+  <:ifOrder delivMobile:><tr> 
+    <th align="left" class="th">Mobile:</th>
+    <td width="100%"><:order delivMobile:></td>
+  </tr><:or:><:eif:>
+<:if Order billStreet:>  
+  <tr> 
+    <th rowspan="<:if And [order billStreet2] [order billOrganization]:>5<:or And:><:if Or [order billStreet2] [order billOrganization]:>4<:or Or:>3<:eif Or:><:eif And:>" align="left" valign="top" class="th">Billing:</th>
+    <td width="100%"><:order billFirstName:> <:order billLastName:></td>
+  </tr>
+  <:ifOrder billOrganization:><tr> 
+    <td width="100%"><:order billOrganization:></td>
+  </tr><:or:><:eif:>
+  <tr> 
+    <td width="100%"><:order billStreet:></td>
+  </tr>
+  <:ifOrder billStreet2:><tr> 
+    <td width="100%"><:order billStreet2:></td>
+  </tr>
+  <:or:><:eif:><tr> 
+    <td width="100%"><:order billSuburb:> <:order billState:> <:order billPostCode:>, <:order billCountry:></td>
+  </tr>
+  <tr> 
+    <th align="left" class="th">Telephone:</th>
+    <td width="100%"><:order billTelephone:></td>
+  </tr>
+  <:ifOrder billFacsimile:><tr> 
+    <th align="left" class="th">Facsimile:</th>
+    <td width="100%"><:order billFacsimile:></td>
+  </tr><:or:><:eif:>
+  <:ifOrder billMobile:><tr> 
+    <th align="left" class="th">Mobile:</th>
+    <td width="100%"><:order billMobile:></td>
+  </tr><:or:><:eif:>
+<:or Order:><:eif Order:>  
+  <tr> 
+    <th align="left" class="th">Email:</th>
+    <td width="100%"><:order emailAddress:></td>
+  </tr>
+  <:ifOrder instructions:><tr> 
+    <th align="left" valign="top" class="th">Instructions:</th>
+    <td width="100%"><:order instructions:></td>
+  </tr><:or:><:eif:>
+</table>
+<br />
+<table width="100%" border="0" cellpadding="3" cellspacing="1" class="table">
+  <tr> 
+    <th width="100%" align="left">Item</th>
+    <th align="center" nowrap="nowrap">Qty</th>
+    <th align="center" nowrap="nowrap">Price</th>
+    <th align="center" nowrap="nowrap">Extended</th>
+  </tr>
+  <:iterator begin items:><tr> 
+    <td width="100%"><:item title:></td>
+    <td align="center" nowrap="nowrap"><:item units:></td>
+    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:money item price:></td>
+    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:arithmetic d2:(([item price]/100) * [item units]):></td>
+  </tr><:iterator separator items:><:iterator end items:>
+  <:ifOrder shipping_cost:><tr> 
+    <td colspan="3" align="right" width="100%"><b>Freight:</b></td>
+    <td align="right" nowrap="nowrap"><b><:cfg shop currency "$":><:money order shipping_cost:></b></td>
+  </tr><:or:><:eif:>
+  <tr> 
+    <td colspan="3" align="right" width="100%"><b>Total:</b></td>
+    <td align="right" nowrap="nowrap"><b><:cfg shop currency "$":><:money order total:></b></td>
+  </tr>
+  <tr> 
+    <td colspan="3" align="right" width="100%"> <small>(Included)</small> GST:</td>
+    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:money order gst:></td>
+  </tr>
+</table>
+<br />
+<:if Order paidFor:>
+<table width="100%" border="0" cellpadding="3" cellspacing="1" class="table">
+  <tr>
+    <th>Receipt</th>
+    <th>Date Fulfilled</th>
+    <th>Amount</th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap" width="33%" align="center"><:order ccReceipt:></td>
+    <td nowrap="nowrap" width="33%" align="center"><:ifMatch [order whenFilled] "0000-00-00 00:00:00":>Processing<:or:><:date "%d/%m/%Y" order whenFilled:><:eif:></td>
+    <td nowrap="nowrap" width="33%" align="center"><:cfg shop currency "$":><:money order total:></td>
+  </tr>
+</table><:or Order:><:eif Order:>
+<p><b><:cfg site entity_name [cfg shop address1] |h:><:ifCfg site entity_abn:> - ABN: <:cfg site entity_abn |h:><:or:><:eif:></b><br />
+<:cfg site entity_address [cfg shop address2] |h:><br />
+<:cfg site entity_address2 [cfg shop address3] |h:><br />
+<:cfg site entity_phone [cfg shop address4] |h:></p>
+</div>
+</body>
+</html>

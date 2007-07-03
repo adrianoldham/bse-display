@@ -1,0 +1,25 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<:include include/usernav.tmpl:>
+<h2>Delete custom course</h2>
+<div id="user">
+<:include include/usermessage.tmpl:>
+<p><a href="<:script:>?a_cmelist=1">Back to list</a></p>
+<form method="post" action="<:script:>">
+<input type="hidden" name="id" value="<:entry id:>" />
+<table>
+  <tr>
+   <th align="left">Date:</th>
+   <td><:date "%d/%m/%Y" entry date_at:></td>
+  </tr>
+  <tr>
+    <th align="left">Description:</th>
+    <td><:entry description:></td>
+  </tr>
+  <tr>
+    <th align="left">Points:</th>
+    <td><:entry points:></td>
+  </tr>
+</table>
+<p><input type="submit" name="a_cmedelete" value="Delete" /></p>
+</form>
+</div>

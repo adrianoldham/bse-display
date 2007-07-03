@@ -1,0 +1,43 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<:include include/usernav.tmpl:>
+<table border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <td><img src="/images/<:cfg theme name:>user/files.gif" width="32" height="32" border="0" alt="Your Purchased Files" /></td>
+    <td width="100%">
+      <h2>Your purchased files</h2>
+    </td>
+  </tr>
+</table>
+<:include include/usermessage.tmpl:>
+<div id="orders">
+<table cellpadding="0" cellspacing="0" class="table">
+  <:if Orders:><:if Orderfiles:>  
+  <tr> 
+    <td bgcolor="#CCCCCC">
+      <table width="100%" cellpadding="3" cellspacing="1" id="items">
+        <tr style="background-color: #CCCCCC;"> 
+          <th colspan="4" style="color: #666666;"><:if Order filled:>Files available<:or Order:><:ifCfg downloads must_be_filled:>Files available when order status is &#145;Complete&#146;<:or:>Files<:eif:><:eif Order:></th>
+        </tr>
+        <tr style="background-color: #EEEEEE;"> 
+          <th width="50%" align="left" style="color: #333333;">Description</th>
+          <th nowrap="nowrap" width="50%" align="left" colspan="2" style="color: #333333;">File</th>
+          <th style="color: #333333;">Size</th>
+        </tr>
+        <:iterator begin orders:><:iterator begin orderfiles:> 
+        <tr style="background-color: #FFFFFF;"> 
+          <td width="50%" style="color: #333333;"><:orderfile description:></td>
+          <td nowrap="nowrap" width="50%" style="color: #333333;"><:if FileAvail:><a href="/cgi-bin/user.pl?download=1&file=<:orderfile id:>&order=<:order id:>&item=<:orderfile item_id:>"><:orderfile displayName:></a><:or FileAvail:><:orderfile displayName:><:eif FileAvail:></td>
+          <td><:if FileAvail:><a href="/cgi-bin/user.pl?download=1&file=<:orderfile id:>&order=<:order id:>&item=<:orderfile item_id:>"><:ifOrderfile download:><img src="/images/<:cfg theme name:>filestatus/download.gif" width="15" height="15" alt="Download now" title="Download now" border="0" /><:or:><img src="/images/<:cfg theme name:>filestatus/load.gif" width="15" height="15" alt="Load in browser" title="Load in browser" border="0" /><:eif:></a><:or FileAvail:><img src="/images/filestatus/locked.gif" width="15" height="15" alt="Locked" title="Locked" /><:eif FileAvail:></td>
+          <td align="right" style="color: #333333;"><:kb orderfile sizeInBytes:></td>
+        </tr>
+        <:iterator end orderfiles:><:iterator end orders:>
+      </table>
+    </td>
+  </tr>
+  <:or Orderfiles:><:eif Orderfiles:><:or Orders:> 
+  <tr> 
+    <td  align="center">You haven't purchased any files yet.</td>
+  </tr>
+  <:eif Orders:>
+</table>
+</div>

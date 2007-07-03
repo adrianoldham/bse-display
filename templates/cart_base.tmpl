@@ -1,0 +1,51 @@
+<:wrap shopbase.tmpl title=>"Shopping Cart" :>
+<p><b>Contains</b> - <:dyncarttotalunits:> item<:if Eq [dyncarttotalunits] "1":><:or Eq:>s<:eif Eq:></p>
+<form action="<:cfg site secureurl:>/cgi-bin/shop.pl" method="post">
+<table class="items">
+  <caption>Selected Order Items</caption><:ifTotal:>
+  <thead>
+    <tr> 
+      <th class="col1">Item:</th>
+      <th class="col2">Qty:</th>
+      <th class="col3">Price:</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead><:or:><:eif:>
+  <tbody><:if Count:>
+    <:iterator begin items:><tr id="item_<:item id:>" class="item"> 
+      <td class="col1">
+        <a href="<:item link:>" class="item"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
+        <div class="i_description"><:item description:></div><:or And:><:eif And:>
+      </td>
+      <td class="col2">
+        <:if Match [item generator] "Seminar":><input type="hidden" name="quantity_<:index:>" value="<:item units:>" /><:ifTotal:><:item units:><:or:><:eif:><:or Match:><input type="text" name="quantity_<:index:>" size="2" value="<:item units:>" /><:eif Match:>
+      </td>
+      <td class="col3"><:if Item retailPrice:><:cfg shop currency "$":><:money item price:><:or Item:><:eif Item:></td>
+      <td class="col4"><input type="image" name="delete_<:index:>" id="delete_<:index:>" src="/images/basic/store/buttons/delete.gif" title="Remove this item" /></td>
+    </tr><:iterator separator items:>
+    <:iterator end items:><:or Count:>
+    <tr> 
+      <td colspan="4" class="noitems">Your shopping cart is empty</td>
+    </tr><:eif Count:>
+  </tbody>
+</table><:if Count:><:if Total:>
+<div class="totals"><p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p></div><:or Total:><:eif Total:>
+<p class="buttons">
+  <:if Total:><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
+  <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" /><:or Total:>
+  <input type="submit" name="a_order" value="Checkout now" accesskey="c" title="AccessKey = c" /><:eif Total:>
+</p><:if Total:><:or Total:>
+<input type="hidden" name="delivFirstName" id="delivFirstName" value="<:user name1:>" /> 
+<input type="hidden" name="delivLastName" id="delivLastName" value="<:user name2:>" /> 
+<input type="hidden" name="delivStreet" id="delivStreet" value="<:user address:>" />
+<input type="hidden" name="delivStreet2" id="delivStreet2" value="<:user delivStreet2:>" />
+<input type="hidden" name="delivSuburb" id="delivSuburb" value="<:user city:>" />
+<input type="hidden" name="delivPostCode" id="delivPostCode" value="<:user postcode:>" />
+<input type="hidden" name="delivState" id="delivState" value="<:user state:>" /> 
+<input type="hidden" name="delivCountry" id="delivCountry" value="<:user country:>" /> 
+<input type="hidden" name="telephone" id="telephone" value="<:user telephone:>" />
+<input type="hidden" name="facsimile" id="facsimile" value="<:user facsimile:>" />
+<input type="hidden" name="delivMobile" id="delivMobile" value="<:user delivMobile:>" />
+<input type="hidden" name="emailAddress" id="emailAddress" value="<:user email:>" /><:eif Total:><:or Count:><:eif Count:>
+</form><:if Cfg tryandbyte aufreight:><:ifFreeShippingCart:>
+<p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:or Cfg:><:eif Cfg:>

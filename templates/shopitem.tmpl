@@ -1,0 +1,86 @@
+<:wrap base.tmpl:><:embed start:>
+<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
+<div id="article_<:article id:>" class="article product"><:if Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Admin:><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  new Ajax.InPlaceEditor($('title_<:article id:>'), '/cgi-bin/admin/add.pl',
+    {
+    rows: 1,
+    okText: 'Save',
+    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=title',
+    callback: function(form, value) { return 'a_ajax_set=1&id=<:article id:>&field=title&value=' + encodeURIComponent(value) }
+    });
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:if Product retailPrice:>
+<div class="buynow">
+<form id="add_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
+  <input type="hidden" name="id" value="<:product id:>" />
+  <input type="hidden" name="r" value="<:cfg site url:><:url article:>" /><:if Options:>
+  <table>
+    <tr><:iterator begin options:>
+      <th valign="middle"><:option desc:>:</th>
+      <td><:option popup:></td><:iterator separator options:>
+      <:iterator end options:>
+    </tr>
+  </table><:or Options:><:eif Options:><:ifProduct leadTime:> 
+  <p class="leadTime"><label>Usually ships in:</label> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></p><:or:><:eif:><:ifProduct product_code:>
+  <p class="pcode"><label>Product Code:</label> <:product product_code:></p><:or:><:eif:>
+  <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:money product retailPrice:></span> (inc GST)</p>
+  <p class="buy">
+    <label for="quantity_<:article id:>">Qty:</label> <input type="text" id="quantity_<:article id:>" name="quantity" value="1" size="2" />
+    <input type="submit" id="add_<:article id:>" name="add" value="Add to cart" accesskey="a" title="AccessKey = a" />
+    <input type="submit" name="cart" value="View cart" accesskey="v" title="AccessKey = v" />
+  </p>
+</form>
+</div><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  $('add_<:article id:>').onclick =
+    function () {
+      $('add_form_<:article id:>').request({
+        parameters: { r: 'ajaxcart', embed: 'sidebar' },
+        onComplete: function(transport) { 
+          $('cart_sidebar').innerHTML = transport.responseText;
+          new Effect.Highlight($('cart_item_<:article id:>'), { startcolor: '#ffb27f', endcolor: '#eeeeee' });
+        }
+      });
+      return false;
+    };
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Product:>
+<div class="price">
+  <form name="notifyme" method="post" action="/cgi-bin/interest.pl">
+    <b>Coming soon!</b> <input type="hidden" name="product" value="<:product title:>" />
+    <p>To register your interest in this product and receive notification when it becomes available, please enter and submit your email address below.</p>
+    <b>Email:</b> <input type="text" name="email" size="40" /> <input type="submit" name="Submit" value="Register my interest" />
+  </form>
+</div><:eif Product:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
+<p><b>This product qualifies for free shipping if purchased before <:date product customDate1:></b></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [article body] [ifImages]:>
+<div id="body_<:article id:>" class="body">
+<:body:>
+</div><:if Admin:><:if Ajax:>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
+    {
+    rows: 15,
+    okText: 'Save',
+    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
+    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
+    });
+//]]>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
+<p><b>This product qualifies for free shipping if purchased before <:date product customDate1:></b></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [ifStepparents] [ifStepkids]:> 
+<div class="relatedsections">
+  <p><b>Related categories:</b></p>
+  <ul><:iterator begin stepparents:>
+    <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator separator stepparents:><:iterator end stepparents:><:iterator begin stepkids:>
+    <li><a href="<:url stepkid:>"><:stepkid title:></a></li><:iterator separator stepkids:><:iterator end stepkids:>
+  </ul>
+</div><:or Or:><:eif Or:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
+<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
+</div>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
+<:embed end:>

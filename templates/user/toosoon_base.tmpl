@@ -1,0 +1,28 @@
+<:wrap user/userbase.tmpl title=>"User Services" nomessage=>"1" :>
+<div align="center" id="user">
+  <table width="350">
+    <tr>
+      <td colspan="2">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td nowrap="nowrap"><img src="/images/basic/user/subs.gif" width="32" height="32" border="0" alt="Email Confirmations" />&nbsp;&nbsp;</td>
+            <td width="100%"><h2>Email Confirmations</h2></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="2"> 
+        A confirmation email message has been sent to <b><:user email:></b> or some similar email within the last 48 hours.<br /><br />
+        If you simply subscribed to some extra newsletters, don't worry, once you follow the URL in the confirmation message all of your selected subscriptions will become active.<br /><br />
+        To prevent this system from being abused, it will not send a confirmation email to a given email address twice within 48 hours.<br /><br />
+        If you don't receive the confirmation email within 48 hours of selection some newsletter subscriptions, resubmit the <a href="<:script:>?show_opts=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>">User Options</a> page, and another confirmation email will be sent.
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="2"> <br />
+        <a href="<:script:>?userpage=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>">User account manager</a>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,81 @@
+<:if Eq [cfg rss version] "2":><?xml version="1.0" encoding="<:cfg html charset "iso-8859-1":>"?>
+<rss version="2.0">
+  <channel>
+    <title><:cfg rss title [cfg site name] |x:></title>
+    <link><:cfg site url:>/</link>
+    <description><:cfg rss description [nobodytext body] |x:></description>
+    <language><:cfg rss language "en":></language>
+    <pubDate><:date "%a, %d %b %Y %H:%M:%S %z" article release:></pubDate>
+    <lastBuildDate><:today "%a, %d %b %Y %H:%M:%S %z":></lastBuildDate>
+    <docs><:cfg rss docs "http://blogs.law.harvard.edu/tech/rss":></docs>
+    <generator>BSE codebase <:release:></generator>
+    <managingEditor><:cfg rss managingEditor [adminEmail]:></managingEditor>
+    <webMaster><:cfg rss webMaster [adminEmail]:></webMaster>
+    <:iterator begin allkids_of [cfg rss sections 1]:>
+    <item>
+      <title><:nobodytext ofallkid title |x:></title>
+      <link><:ifMatch [ofallkid link] "://":><:or:><:cfg site url:><:eif:><:ofallkid link:></link>
+      <description><![CDATA[<:bodytext ofallkid body:>]]> [<:date "%b %d, %Y" ofallkid release:>]</description>
+      <pubDate><:date "%a, %d %b %Y %T %z" ofallkid release:></pubDate>
+      <guid isPermaLink="true"><:ifMatch [ofallkid link] "://":><:or:><:cfg site url:><:eif:><:ofallkid link:></guid>
+    </item>
+    <:iterator end allkids_of:>
+    <item>
+      <title>Search <:cfg site name |x:></title>
+      <description>Search the entire <:cfg site name |x:> web site.</description>
+      <pubDate><:today "%a, %d %b %Y %T %z":></pubDate>
+      <guid isPermaLink="true"><:cfg site url:>/cgi-bin/search.pl</guid>
+    </item>
+  </channel>
+</rss><:or Eq:><?xml version="1.0" encoding="<:cfg html charset "iso-8859-1":>"?>
+
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns="http://purl.org/rss/1.0/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
+ xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/"
+ xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel rdf:about="<:cfg site url:>/index.xml">
+  <title><:cfg rss title [cfg site name] |x:></title>
+  <link><:cfg site url:>/</link>
+  <description><:cfg rss description [nobodytext body] |x:></description>
+  <dc:language><:cfg rss language "en":></dc:language>
+  <dc:creator><:cfg rss creator [adminEmail]:></dc:creator>
+  <dc:date><:replace [today "%FT%T%z"] "(\d\d)$" ":$1":></dc:date>
+
+  <textinput rdf:resource="<:cfg site url:>/cgi-bin/search.pl" />
+  
+  <items>
+    <rdf:Seq><:iterator begin allkids_of [cfg rss sections 1]:>
+      <rdf:li rdf:resource="<:ifMatch [ofallkid link] "://":><:or:><:cfg site url:><:eif:><:ofallkid link:>" /><:iterator end allkids_of:>
+      <rdf:li rdf:resource="<:cfg site url:>/cgi-bin/search.pl" />
+    </rdf:Seq>
+  </items>
+</channel>
+<:iterator begin allkids_of [cfg rss sections 1]:>
+ <item rdf:about="<:ifMatch [ofallkid link] "://":><:or:><:cfg site url:><:eif:><:ofallkid link:>">
+  <title><:nobodytext ofallkid title |x:></title>
+  <link><:ifMatch [ofallkid link] "://":><:or:><:cfg site url:><:eif:><:ofallkid link:></link>
+  <description><:nobodytext ofallkid body |x:> [<:date "%b %d" ofallkid release:>]</description>
+  <content:encoded><![CDATA[<:bodytext ofallkid body:>]]> [<:date "%b %d, %Y" ofallkid release:>]</content:encoded><:ifEq [cfg html] "utf-8":><:or:><:eif:>
+  <dc:date><:replace [date "%FT%T%z" ofallkid release] "(\d\d)$" ":$1":></dc:date>
+  <dc:creator><:ofallkid author:></dc:creator>
+ </item>
+<:iterator end allkids_of:>
+ <item rdf:about="<:cfg site url:>/cgi-bin/search.pl">
+  <title>Search <:cfg site name |x:></title>
+  <description>Search the entire <:cfg site name:> web site.</description> 
+  <link><:cfg site url:>/cgi-bin/search.pl</link>
+  <dc:date><:replace [today "%FT%T%z"] "(\d\d)$" ":$1":></dc:date>
+ </item>
+ 
+ <textinput rdf:about="<:cfg site url:>/cgi-bin/search.pl?">
+   <title>Search <:cfg site name |x:></title>
+   <description>Search the entire <:cfg site name |x:> web site.</description> 
+  <link><:cfg site url:>/cgi-bin/search.pl</link>
+  <name>q</name>
+ </textinput>
+</rdf:RDF><:eif Eq:>

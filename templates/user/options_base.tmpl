@@ -1,0 +1,130 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<:include include/usernav.tmpl:>
+<table border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <td><img src="/images/<:cfg theme name:>user/user.gif" width="32" height="32" border="0" alt="Your Contact Details" /></td>
+    <td width="100%">
+      <h2>Your contact details</h2>
+    </td>
+  </tr>
+</table>
+<:include include/usermessage.tmpl:>
+<form action="/cgi-bin/user.pl" method="post">
+<:if Cfg "site users" nopassword:>
+<input type="hidden" name="u" value="<:user id:>" />
+<input type="hidden" name="p" value="<:user password:>" />
+<input type="hidden" name="r" value="<:script:>?userpage=<:user password:>&amp;u=<:user id:>&amp;message=User+contact+details+saved+successfully" />
+<:or Cfg:><:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:script:>?userpage=1&amp;message=User+contact+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
+<table border="0" cellpadding="1" cellspacing="1">
+  <tr>
+    <th nowrap="nowrap" align="left">First Name:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="name1" value="<:last name1:>" size="40" maxlength="127" tabindex="1" /><:ifRequired name1:>*<:or:><:eif:></td>
+    <td nowrap="nowrap"><:error_img name1:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Last Name:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="name2" value="<:last name2:>" size="40" maxlength="127" tabindex="2" /><:ifRequired name2:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img name2:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Title:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="title" value="<:last title:>" size="40" maxlength="127" tabindex="3" /><:ifRequired title:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img title:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Organisation:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="organization" value="<:last organization:>" size="40" maxlength="127" tabindex="4" /><:ifRequired organization:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img organization:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Address:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="address" value="<:last address:>" size="40" maxlength="127" tabindex="5" /><:ifRequired address:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img address:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Address 2:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="delivStreet2" value="<:last delivStreet2:>" size="40" maxlength="127" tabindex="5" /><:ifRequired delivStreet2:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivStreet2:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Suburb:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="city" value="<:last city:>" size="40" maxlength="127" tabindex="6" /><:ifRequired city:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img city:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">State:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="state" value="<:last state:>" size="8" maxlength="40" tabindex="7" /><:ifRequired state:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img state:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Postcode:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="postcode" value="<:last postcode:>" size="8" maxlength="40" tabindex="8" /><:ifRequired postcode:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img postcode:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Country:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="country" value="<:last country:>" size="32" maxlength="127" tabindex="9" /><:ifRequired country:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img country:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Telephone:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="telephone" value="<:last telephone:>" size="32" maxlength="80" tabindex="10" /><:ifRequired telephone:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img telephone:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Facsimile:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="facsimile" value="<:last facsimile:>" size="32" maxlength="80" tabindex="11" /><:ifRequired facsimile:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img facsimile:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left">Mobile:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="delivMobile" value="<:last delivMobile:>" size="32" maxlength="80" tabindex="11" /><:ifRequired delivMobile:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivMobile:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left">Email:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="email" value="<:last email:>" size="32" maxlength="255" tabindex="12" />*</td>
+    <td nowrap="nowrap"><:error_img email:></td>
+  </tr>
+<:if Cfg "site users" nopassword:>
+  <tr>
+    <th nowrap="nowrap" align="left">Confirm Email:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="confirmemail" value="<:old confirmemail:>" size="32" maxlength="255" tabindex="13" />
+    </td>
+    <td nowrap="nowrap"><:error_img confirmemail:></td>
+  </tr>
+<:or Cfg:><:eif Cfg:>
+<:include include/custom/user_options_custom.tmpl optional:>
+  <tr>
+    <td height="20" colspan="3" align="left" valign="bottom" nowrap="nowrap">* indicates required fields</td>
+  </tr>
+</table>
+<p align="right"><input type="submit" name="saveopts" value="Save changes" class="user-buttons" accesskey="s" title="AccessKey = s" tabindex="100" /></p>
+</form>

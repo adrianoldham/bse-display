@@ -1,0 +1,86 @@
+<:wrap user/userbase.tmpl title=>"User Services" :>
+<:include include/usernav.tmpl:>
+<table border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <td><img src="/images/<:cfg theme name:>user/affiliate.gif" width="32" height="32" border="0" alt="Your Affiliate Page" /></td>
+    <td width="100%">
+      <h2>Your affiliate page</h2>
+    </td>
+  </tr>
+</table>
+<:include include/usermessage.tmpl:>
+<form action="/cgi-bin/user.pl" method="post" enctype="multipart/form-data">
+<:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:script:>?userpage=1&amp;message=User+affiliate+details+saved+successfully" /><:eif Cgi:>
+<input type="hidden" name="_t" value="affiliate" />
+<table border="0" cellpadding="1" cellspacing="1">
+  <tr>
+    <th align="left" nowrap="nowrap">Affiliate Name:</th>
+    <td width="100%">
+      <input name="affiliate_name" type="text" value="<:last affiliate_name:>" size="40" tabindex="1" /><:ifRequired affiliate_name:>*<:or:><:eif:> (no spaces)</td>
+    <td nowrap="nowrap"><:error_img affiliate_name:></td>
+  </tr>
+  <:if Cfg affiliate mod_rewrite:><tr>
+    <th align="left" nowrap="nowrap">Affiliate URL:</th>
+        <td width="100%">
+      <a href="<:ifCfg affiliate url:><:cfg affiliate url:><:or:><:cfg site url:><:eif:>/<:ifUser affiliate_name:><:user affiliate_name:><:or:>~<:user userId:><:eif:>"><:ifCfg affiliate url:><:cfg affiliate url:><:or:><:cfg site url:><:eif:>/<:ifUser affiliate_name:><:user affiliate_name:><:or:>~<:user userId:><:eif:></a></td>
+    <td nowrap="nowrap"><:error_img affiliate_url:></td>
+  </tr><:or Cfg:><:eif Cfg:>
+  <:if Cfg affiliate customText1 1:><tr> 
+    <th align="left" nowrap="nowrap">Title 1:</th>
+    <td width="100%"> 
+      <input type="text" name="customStr1" value="<:last customStr1:>" size="40" tabindex="2" /><:ifRequired customStr1:>*<:or:><:eif:></td>
+    <td nowrap="nowrap"><:error_img customStr1:></td>
+  </tr>
+  <tr> 
+    <th align="left" valign="top" nowrap="nowrap">Body 1:</th>
+    <td width="100%"> 
+      <textarea name="customText1" cols="40" rows="5" tabindex="3"><:last customText1:></textarea><:ifRequired customText1:>*<:or:><:eif:></td>
+    <td valign="top" nowrap="nowrap"><:error_img customText1:></td>
+  </tr><:or Cfg:><:eif Cfg:>
+  <:if Cfg affiliate customText2 1:><tr> 
+    <th align="left" nowrap="nowrap">Title 2:</th>
+    <td width="100%"> 
+      <input type="text" name="customStr2" value="<:last customStr2:>" size="40" tabindex="4" /><:ifRequired customStr2:>*<:or:><:eif:></td>
+    <td nowrap="nowrap"><:error_img customStr2:></td>
+  </tr>
+  <tr> 
+    <th align="left" valign="top" nowrap="nowrap">Body 2:</th>
+    <td width="100%"> 
+      <textarea name="customText2" cols="40" rows="5" tabindex="5"><:last customText2:></textarea><:ifRequired customText2:>*<:or:><:eif:></td>
+    <td valign="top" nowrap="nowrap"><:error_img customText2:></td>
+  </tr><:or Cfg:><:eif Cfg:>
+  <:if Cfg affiliate customText3 1:><tr> 
+    <th align="left" nowrap="nowrap">Title 3:</th>
+    <td width="100%"> 
+      <input type="text" name="customStr3" value="<:last customStr3:>" size="40" tabindex="6" /><:ifRequired customStr3:>*<:or:><:eif:></td>
+    <td nowrap="nowrap"><:error_img customStr3:></td>
+  </tr>
+  <tr> 
+    <th align="left" valign="top" nowrap="nowrap">Body 3:</th>
+    <td width="100%"> 
+      <textarea name="customText3" cols="40" rows="10" tabindex="7"><:last customText3:></textarea><:ifRequired customText3:>*<:or:><:eif:></td>
+    <td valign="top" nowrap="nowrap"><:error_img customText3:></td>
+  </tr><:or Cfg:><:eif Cfg:>
+<:iterator begin imagetemplates:>
+  <tr> 
+    <th align="left" valign="top" nowrap="nowrap"><:imagetemplate description:>:</th>
+    <td valign="top"> 
+      <:ifSiteuser_image [imagetemplate id]:><table width="100%" border="0" cellpadding="5" cellspacing="1">
+        <tr>
+          <td width="100%"><img src="<:siteuser_image [imagetemplate id] url:>" width="<:siteuser_image [imagetemplate id] width:>" height="<:siteuser_image [imagetemplate id] height:>" alt="<:siteuser_image [imagetemplate id] alt:>" /></td>
+          <td nowrap="nowrap"><a href='<:script:>?saveopts=1&amp;id=<:user id:>&amp;image_<:imagetemplate id:>_delete=1&amp;r=<:script:>%3Fshow_opts=1%26id=<:user id:>%26_t=affiliate%26h=5%26m=User%2Bimage%2Bdeleted%2Bsuccessfully' onclick="return window.confirm('Are you sure you want to delete this user Image?')">Delete</a></td>
+        </tr>
+      </table><:or:>
+      <input type="file" name="image_<:imagetemplate id:>_file" size="40" tabindex="<:arithmetic [imagetemplate_index] * 2 + 8:>" />
+      <input type="hidden" name="image_<:imagetemplate id:>_alt" value="<:imagetemplate description:>" />
+        <!--//Alt: <input type="text" name="image_<:imagetemplate id:>_alt" value="<:siteuser_image [imagetemplate id] alt:>" size="20" tabindex="<:arithmetic [imagetemplate_index] * 2 + 9:>" />//--><:eif:>
+    </td>
+    <td valign="top"><:error_img images:></td>
+  </tr>
+<:iterator end imagetemplates:>
+  <tr> 
+    <td height="20" colspan="3" align="left" valign="bottom" nowrap="nowrap">* indicates required fields</td>
+  </tr>
+</table>
+<p align="right"><input type="submit" name="saveopts" value="Save changes" class="user-buttons" accesskey="s" title="AccessKey = s" tabindex="100" /></p>
+</form>

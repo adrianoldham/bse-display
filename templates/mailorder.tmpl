@@ -1,0 +1,73 @@
+<:uc [cfg site name]:> SHOP ADMINISTRATION
+
+Order No.    : <:order id |%06d:>
+Order Date   : <:date "%d/%m/%Y" order orderDate:><:ifOrder userId:>
+Username     : <:order userId:><:or:><:eif:><:ifOrder affiliate_code:>
+Referrer     : <:order affiliate_code:><:or:><:eif:><:ifOrder purchase_order:>
+Purchase No. : <:order purchase_order:><:or:><:eif:>
+
+--------------------------------------------------------------------------------
+
+Shipping : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
+           <:order delivOrganization:><:or:><:eif:>
+           <:order delivStreet:><:ifOrder delivStreet2:>
+           <:order delivStreet2:><:or:><:eif:>
+           <:order delivSuburb:> <:order delivPostCode:> <:order delivState:>
+           <:order delivCountry:>
+Telephone: <:order telephone:><:ifOrder facsimile:>
+Facsimile: <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
+Mobile   : <:order delivMobile:><:or:><:eif:>
+Email    : <:order emailAddress:>
+<:if Order billStreet:>
+Billing  : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
+           <:order billOrganization:><:or:><:eif:>
+           <:order billStreet:><:ifOrder delivStreet2:>
+           <:order billStreet2:><:or:><:eif:>
+           <:order billSuburb:> <:order billPostCode:> <:order billState:>
+           <:order billCountry:>
+<:or Order:><:eif Order:><:ifOrder billTelephone
+:>Telephone: <:order billTelephone:><:or:><:eif:><:ifOrder billFacsimile:>
+Facsimile: <:order billFacsimile:><:or:><:eif:><:ifOrder billMobile:>
+Mobile   : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
+Email    : <:order billEmail:>
+<:or:><:eif:>
+
+Item                                       Code         Qty     Price   Extended
+--------------------------------------------------------------------------------
+<:iterator begin items:><:item title |40:>   <:item product_code |12:> <:item units |%3d:> <:item price |m9:> <:extended price|m10:><:if Options:>
+   <:options:><:or Options:><:eif Options:>
+<:iterator separator items:><:iterator end items 
+:>--------------------------------------------------------------------------------
+<:if Or [cfg freight enabled] [cfg tryandbyte aufreight]
+:>                                                             Freight: <:if Order shipping_cost:><:order shipping_cost |m10:><:or Order:><:ifOrder customInt1:>To be quoted<:or:><:eif:>      None<:eif Order:>
+<:or Or:><:eif Or
+:>                                                               Total: <:order total |m10:>
+<:ifOrder gst
+:>                                                                 GST: <:order gst |m10:><:or:><:eif
+:>
+<:if Eq [order paymentType] "0":><:if Order ccOnline
+:>This credit card payment was processed online:
+
+         Receipt No.  : <:order ccReceipt:>
+<:or Order
+:>Debit this credit card at time of shipping:
+
+         Card No.     : <:cardNumber:>
+         Expires      : <:cardExpiry:>
+<:eif Order
+:>         Name on Card : <:order ccName:><:ifOrder ccType:>
+         Card Type    : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
+:><:ifEq [order paymentType] "1" :>The customer will pay by cheque.<:or:><:eif
+:><:ifEq [order paymentType] "2" :>Please contact the customer to make arrangements for payment.<:or:><:eif
+:><:ifEq [order paymentType] "10":>The customer will pay by electronic funds transfer.<:or:><:eif
+:><:if Cfg tryandbyte aufreight:><:if Order customInt1:>
+
+Please contact the customer to quote the shipping costs.<:or Order:><:ifFreeShippingCart:>
+
+This order qualifies for free shipping within Australia.<:or:><:eif:><:eif Order:><:or Cfg:><:eif Cfg:><:if Order instructions:>
+
+<:with begin wrap 80:>Instruction: <:order instructions:><:with end wrap:><:or Order:><:eif Order:>
+
+--------------------------------------------------------------------------------
+                                    WEB ORDER
+--------------------------------------------------------------------------------
