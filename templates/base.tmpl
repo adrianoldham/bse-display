@@ -42,7 +42,7 @@
       <h1><a href="<:cfg site url:>/" title="<:cfg site name |h:>"><:cfg site name |h:></a></h1>
       <div id="nav">
         <ul class="lev1">
-          <:iterator begin allkids_of -1:><li class="i_<:ofallkid_number:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><a href="<:url ofallkid:>"><:ofallkid title:></a></li><:iterator separator allkids_of:>
+          <:iterator begin allkids_of -1 1 filter: !defined [customInt1] :><li class="i_<:ofallkid_number:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><a href="<:url ofallkid:>"><:ofallkid title:></a></li><:iterator separator allkids_of:>
           <:iterator end allkids_of:><li class="search <:ifMatch [article title] Search:>hilite<:or:><:eif:>"><a href="<:cfg site url:>/cgi-bin/search.pl">Search</a></li>
         </ul>
       </div>
