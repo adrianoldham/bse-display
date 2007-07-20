@@ -8,28 +8,28 @@ Purchase No. : <:order purchase_order:><:or:><:eif:>
 
 --------------------------------------------------------------------------------
 
-Shipping : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
-           <:order delivOrganization:><:or:><:eif:>
-           <:order delivStreet:><:ifOrder delivStreet2:>
-           <:order delivStreet2:><:or:><:eif:>
-           <:order delivSuburb:> <:order delivPostCode:> <:order delivState:>
-           <:order delivCountry:>
-Telephone: <:order telephone:><:ifOrder facsimile:>
-Facsimile: <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
-Mobile   : <:order delivMobile:><:or:><:eif:>
-Email    : <:order emailAddress:>
+Shipping     : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
+               <:order delivOrganization:><:or:><:eif:>
+               <:order delivStreet:><:ifOrder delivStreet2:>
+               <:order delivStreet2:><:or:><:eif:>
+               <:order delivSuburb:> <:order delivPostCode:> <:order delivState:>
+               <:order delivCountry:>
+Telephone    : <:order telephone:><:ifOrder facsimile:>
+Facsimile    : <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
+Mobile       : <:order delivMobile:><:or:><:eif:>
+Email        : <:order emailAddress:>
 <:if Order billStreet:>
-Billing  : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
-           <:order billOrganization:><:or:><:eif:>
-           <:order billStreet:><:ifOrder delivStreet2:>
-           <:order billStreet2:><:or:><:eif:>
-           <:order billSuburb:> <:order billPostCode:> <:order billState:>
-           <:order billCountry:>
+Billing      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
+               <:order billOrganization:><:or:><:eif:>
+               <:order billStreet:><:ifOrder delivStreet2:>
+               <:order billStreet2:><:or:><:eif:>
+               <:order billSuburb:> <:order billPostCode:> <:order billState:>
+               <:order billCountry:>
 <:or Order:><:eif Order:><:ifOrder billTelephone
-:>Telephone: <:order billTelephone:><:or:><:eif:><:ifOrder billFacsimile:>
-Facsimile: <:order billFacsimile:><:or:><:eif:><:ifOrder billMobile:>
-Mobile   : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
-Email    : <:order billEmail:>
+:>Telephone    : <:order billTelephone:><:or:><:eif:><:ifOrder billFacsimile:>
+Facsimile    : <:order billFacsimile:><:or:><:eif:><:ifOrder billMobile:>
+Mobile       : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
+Email        : <:order billEmail:>
 <:or:><:eif:>
 
 Item                                       Code         Qty     Price   Extended
@@ -48,15 +48,16 @@ Item                                       Code         Qty     Price   Extended
 <:if Eq [order paymentType] "0":><:if Order ccOnline
 :>This credit card payment was processed online:
 
-         Receipt No.  : <:order ccReceipt:>
+             Receipt No.  : <:order ccReceipt:>
 <:or Order
 :>Debit this credit card at time of shipping:
 
-         Card No.     : <:cardNumber:>
-         Expires      : <:cardExpiry:>
+             <:cfg shop display_cardNumber "Card Number" |12:> : <:cardNumber:>
+             <:cfg shop display_cardExpiry "Expiry Date" |12:> : <:cardExpiry:>
+             <:cfg shop display_cardVerify "CVV2" |12:> : <:cardVerify:>
 <:eif Order
-:>         Name on Card : <:order ccName:><:ifOrder ccType:>
-         Card Type    : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
+:>             <:cfg shop display_cardHolder "Name on Card" |12:> : <:order ccName:><:ifOrder ccType:>
+             <:cfg shop display_cardType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
 :><:ifEq [order paymentType] "1" :>The customer will pay by cheque.<:or:><:eif
 :><:ifEq [order paymentType] "2" :>Please contact the customer to make arrangements for payment.<:or:><:eif
 :><:ifEq [order paymentType] "10":>The customer will pay by electronic funds transfer.<:or:><:eif

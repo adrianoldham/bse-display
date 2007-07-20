@@ -12,10 +12,10 @@
         <th>Receipt No.:</th><td><:order ccReceipt:></td>
       </tr>
       <:or Order:><:eif Order:><tr>
-        <th>Name on Card:</th><td><:order ccName:></td>
+        <th><:cfg shop display_cardHolder "Name on Card":>:</th><td><:order ccName:></td>
       </tr>
       <tr>
-        <th>Card Type:</th><td><:order ccType:></td>
+        <th><:cfg shop display_cardType "Card Type":>:</th><td><:order ccType:></td>
       </tr>
     </table>
   </dd>

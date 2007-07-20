@@ -43,24 +43,24 @@
       <table>
         <caption>Credit Card Details</caption>
         <tr>
-          <th><label for="cardHolder">Name on Card:</label></th>
+          <th><label for="cardHolder"><:cfg shop display_cardHolder "Name on Card":>:</label></th>
           <td><input type="text" name="cardHolder" id="cardHolder" size="30" value="<:old cardHolder:>" /></td>
           <td><:error_img cardHolder:></td>
         </tr>
         <tr>
-          <th><label for="cardNumber">Card Number:</label></th>
+          <th><label for="cardNumber"><:cfg shop display_cardNumber "Card Number":>:</label></th>
           <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" />
-            <label for="cardVerify">CVV:</label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" />
+            <label for="cardVerify"><:cfg shop display_cardVerify "CVV":>:</label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" />
           </td>
-          <td><:error_img cardNumber:><:error_img cardVerify:></td>
+          <td><:error_img cardNumber:> <:error_img cardVerify:></td>
         </tr>
         <tr>
-          <th><label for="cardExpiry">Expiry Date:</label></th>
-          <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" /> <span class="small">(mm/yy)</span></td>
+          <th><label for="cardExpiry"><:cfg shop display_cardExpiry "Expiry Date":>:</label></th>
+          <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" /> <span class="small">(MM/YY)</span></td>
           <td><:error_img cardExpiry:></td>
         </tr>
         <tr>
-          <th><label for="cardType">Card Type:</label></th>
+          <th><label for="cardType"><:cfg shop display_cardType "Card Type":>:</label></th>
           <td>
             <select name="cardType" id="cardType">
               <option value="" selected="selected">Select card type</option>
