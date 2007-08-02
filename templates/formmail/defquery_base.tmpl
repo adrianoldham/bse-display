@@ -27,7 +27,7 @@
       <:case Eq [field htmltype] "file":><input type="file" name="<:field name:>" id="<:field name:>" value="" /> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:>
       <:case default:><input type="text" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>/> <:ifField required:>*<:or:><:eif:> <:ifField notes:><:field notes:><:or:><:eif:><:endswitch:>
     </td>
-    <td><:error_img [field name]:></td>
+    <td><:ifField help:><img src="<:cfg "help style user" icon /images/basic/user/help.gif:>" title="<:field help:>" alt="<:field help:>" /> <:or:><:eif:><:error_img [field name]:></td>
   </tr><:eif Match:><:eif Eq:><:iterator separator fields:>
 <:iterator end fields:></table>
 <p>* Indicates required fields</p>
