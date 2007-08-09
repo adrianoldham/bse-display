@@ -32,19 +32,19 @@
       <th align="left" nowrap="nowrap"><:cfg "site users" userid_description "Username":>:</th>
       <td>
         <:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>" /><:or Cgi:><:eif Cgi:> 
-        <input type="text" name="userid" value="<:old userid:>" size="40" />
+        <input type="text" name="userid" value="<:old userid:>" size="40" tabindex="1" />
       </td>
     </tr>
     <tr> 
       <th align="left" nowrap="nowrap">Password:</th>
       <td> 
-       <input type="password" name="password" value="" size="40" />
+       <input type="password" name="password" value="" size="40" tabindex="2" />
      </td>
    </tr>
    <tr> 
      <td>&nbsp; </td>
      <td align="right">
-       <input type="submit" name="logon" value="Logon" accesskey="l" title="AccessKey = l" tabindex="1" />
+       <input type="submit" name="logon" value="Logon" accesskey="l" title="AccessKey = l" tabindex="3" />
      </td>
    </tr>
    <tr> 
