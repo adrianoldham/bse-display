@@ -28,7 +28,7 @@
     });
 //]]>
 </script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:><:if Dynamic:><:switch:><:case Dynallkids:><:include include/sortallkids.tmpl:>
-<div id="children-<:article id:>" class="children">
+<div id="children_<:article id:>" class="children">
   <ul><:iterator begin dynallkids:>
     <li<:ifDynallkid thumbImage:> class="thumbnail"<:or:><:eif:>>
       <div class="child"><:if Admin:><div class="arrows"><:include admin/adminmenu/dynallkid_mini.tmpl:><:dynmoveallkid:></div><:or Admin:><:eif Admin:><:ifDynallkid thumbImage:><div class="thumbnail"><a href="<:url dynallkid:>"><:thumbnail dynallkid:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url dynallkid:>"><:dynallkid title:></a></div><:switch:>
