@@ -27,7 +27,7 @@
     callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
     });
 //]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:><:switch:><:case Allprods:><:include include/sortallkids.tmpl:><:if UnderThreshold allprods:><:iterator begin allprods:>
+</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:><:switch:><:case Allprods:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allprods:>
 <:moveallprod:><:embed allprod:><:iterator separator allprods:><:iterator end allprods:><:or UnderThreshold:>
 <form id="addmultipleform" action="/cgi-bin/shop.pl" method="post">
 <input type="hidden" name="r" value="<:url article:>" />
