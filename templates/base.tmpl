@@ -42,7 +42,7 @@
     <div id="header">
       <h1><a href="<:cfg site url:>/" title="<:cfg site name |h:>"><:cfg site name |h:></a></h1>
       <div id="nav">
-        <h1 class="hidden">Main Menu</a></h1>
+        <h1 class="hidden">Main Menu</h1>
         <ul class="lev1">
           <:iterator begin allkids_of -1 filter: [menu] == 0 :><li class="i_<:ofallkid_number:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
           <:iterator end allkids_of:><li class="search <:ifMatch [article title] Search:>hilite<:or:><:eif:>"><a href="<:cfg site url:>/cgi-bin/search.pl">Search</a></li>
@@ -52,7 +52,7 @@
     <div id="content">
       <div id="columns">
         <div id="sidebarL">
-          <h1 class="hidden">Topic Menu</a></h1>
+          <h1 class="hidden">Topic Menu</h1>
           <ul class="lev2">
             <:iterator begin allkids_of 3:><li class="i_<:ofallkid_number:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
             <:iterator end allkids_of:>
