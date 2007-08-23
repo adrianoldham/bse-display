@@ -1,18 +1,20 @@
 /* @group body */
 
 html {
+	float: left;
+	width: 100%;
+}
+
+body {
 	font-family: Verdana, Arial, Helvetica;
 	font-size: 11px;
 	margin: 0;
 	padding: 0;
 	text-align: center;
 	background: #666 url(/images/interface/page_bkg.gif) repeat-y 50% 0;
-}
-
-body {
-	width: 910px;
-	margin: 0 auto;
-	text-align: left;
+	color: #333;
+	float: left;
+	width: 100%;
 }
 
 a:link, a:visited {
@@ -55,7 +57,7 @@ h2 {
 	font-size: 16px;
 	margin: 10px 0;
 	font-weight: normal;
-	color: #ccc;
+	color: #999;
 }
 
 h3 {
@@ -63,7 +65,7 @@ h3 {
 	margin: 10px 0 5px 0;
 	padding: 0;
 	font-weight: normal;
-	color: #ccc;
+	color: #999;
 }
 
 h4 {
@@ -84,7 +86,7 @@ form {
 	margin: 0;
 	padding: 0;
 	/* hide from mac ie \*/
-	height: 1%; /**/
+	/*height: 1%; */
 }
 
 select, input, textarea {
@@ -135,13 +137,17 @@ p.error {
 /* @group layout */
 
 #wrapper {
-	float: left;
+	width: 910px;
+	margin: 0 auto;
+	text-align: left;
 	position: relative; /* logo position relies on this */
-	padding-bottom: 10px;
 }
 
 #container {
 	float: left;
+	width: 100%;
+	padding-bottom: 10px;
+	background-color: #fff;
 }
 
 #header {
@@ -156,22 +162,22 @@ p.error {
 }
 
 #content {
-	margin: 0;
-	padding: 0;
 	float: left;
 	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 #columns {
 	float: left;
+	width: 100%;
 	margin: 0;
 	padding: 0;
-	width: 100%;
 }
 
 #main {
-	width: 461px;
 	float: left;
+	width: 461px;
 	display: inline; /* combat IE6 Doubled float-margin bug */
 	padding: 20px 20px 0 20px;
 	background-color: #eee;
@@ -180,32 +186,32 @@ p.error {
 
 #sidebarL {	
 	float: left;
-	display: inline; /* combat IE6 Doubled float-margin bug */
 	width: 170px;
+	display: inline; /* combat IE6 Doubled float-margin bug */
 	margin: 0 10px 0 10px;
 	padding: 0;
 }
 
 #sidebarR {
 	float: right;
-	display: inline; /* combat IE6 Doubled float-margin bug */
 	width: 199px;
+	display: inline; /* combat IE6 Doubled float-margin bug */
 	margin: 59px 10px 0 10px; /* top margin used to dodge dropped logo */
 	padding: 0;
 }
 
 #footer {
+	float: left;
+	width: 890px;
+	display: inline; /* combat IE6 Doubled float-margin bug */
 	font-size: 10px;
 	line-height: 14px;
 	padding: 7px 0;
-	margin: 0 10px;
+	margin: 0 0 0 10px;
 	color: #999;
 	text-transform: lowercase;
 	/*clear: both; apparently redundant because of width */
 	background-color: #333;
-	width: 890px;
-	float: left;
-	display: inline; /* combat IE6 Doubled float-margin bug */
 }
 
 /* @end */
@@ -222,6 +228,7 @@ p.error {
 	height: 89px;
 	display: block;
 	text-indent: -9999px;
+	overflow: hidden;
 	background: #f60 url(/images/interface/rh_logo.gif) no-repeat 50% 50%;
 	padding: 0;
 	margin: 0;
@@ -238,6 +245,7 @@ p.error {
 /* @group lev1 */
 
 .lev1 {
+	float: left;
 	text-align: left;
 	padding: 0 0 0 40px;
 	margin: 0;
@@ -245,7 +253,6 @@ p.error {
 	font-size: 11px;
 	font-family: "Lucida Grande", "Trebuchets MS", Verdana, Helvetica, sans-serif;
 	text-transform: uppercase;
-	float: left;
 	background: #333 url(/images/interface/nav1_red_square.gif) repeat-y 0 50%;
 }
 
@@ -360,7 +367,7 @@ p.error {
 #main .article, #main .article .article {
 	line-height: 16px;
 	background: #fff url(/images/interface/feature_body_bot.gif) no-repeat 50% 100%;
-	padding: 0 10px 1px 10px; /* 1px padding to prevent margin collapse */
+	padding: 0 10px 0 10px; /* 1px padding to prevent margin collapse */
 	margin: 0 0 20px 0;
 	float: left; /* required to stop images escaping */
 	width: 441px; /* required beause float collapses width */
@@ -371,6 +378,7 @@ p.error {
 	padding: 0;
 	margin: 0;
 	background: none;
+	width: 100%;
 }
 
 #main h1.pagetitle, #main h1.embedtitle {
@@ -522,8 +530,17 @@ p.error {
 }
 
 .children .details .price {
-	margin-top: 1px;
 	float: left;
+	margin: 5px;
+	padding: 0;
+	font-weight: bold;
+	color: #333;
+}
+
+.children .details .options {
+	float: right;
+	margin: 6px 5px;
+	padding: 0;
 }
 
 .children .details .options a img {
@@ -680,7 +697,7 @@ p.error {
 
 #sidebarR .article a:link, #sidebarR .article a:visited {
 	color: #333;
-	border-bottom: 1px dotted #ccc;
+	border-bottom: 1px solid #ddd;
 	text-decoration: none;
 }
 
@@ -838,23 +855,28 @@ p.error {
 .buynow {
 	margin: 10px 0;
 	border:  1px solid #ddd;
-	padding: 0 10px 10px 10px;
+	padding: 5px 10px;
 	font-size: 11px;
 }
 
-.price {
-	color: #999;
+.buynow p {
+	margin: 5px 0;
 }
 
-.price span {
+.buynow label {
+	color: #999;
+	font-weight: bold;
+}
+
+.buynow .price span {
+	padding-left: 5px;
 	font-size: 14px;
 	font-weight: bold;
-	color: #333;
+	color: #f30;
 }
 
-.buy {
-	font-size: 11px;
-	color: #999;
+.buynow .light span {
+	color: #666;
 }
 
 /* @end */
@@ -982,6 +1004,10 @@ p.error {
 	border-right: 1px solid #ccc;
 	white-space: nowrap;
 	padding-left: 0;
+}
+
+.shop dd table td img {
+	margin-bottom: -3px;
 }
 
 /* @end */
@@ -1292,6 +1318,7 @@ html>body .search p.s_scoreC {
 
 .inplaceeditor-form {
 	margin-bottom: 10px;
+	clear: both;
 }
 
 .inplaceeditor-form .editor_field {
@@ -1357,5 +1384,3 @@ html>body .search p.s_scoreC {
 /* @end */
 
 /* @end */
-
-
