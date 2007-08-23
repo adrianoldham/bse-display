@@ -62,7 +62,7 @@
           <div class="clear"><!-- prevent bottom margin collapse on ie --></div>
         </div>
         <div id="sidebarR"><:if Allkids_of -1 filter: [menu] == 2 :>
-          <h1 class="hidden">Topic Menu</a></h1>
+          <h1 class="hidden">Topic Menu</h1>
           <ul class="lev2">
             <:iterator begin allkids_of -1 filter: [menu] == 2 :><li class="i_<:ofallkid_number:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
             <:iterator end allkids_of:>
