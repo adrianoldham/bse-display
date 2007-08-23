@@ -124,6 +124,12 @@ p.error {
 	border: 0;
 }
 
+.hidden {
+	/* used to hide accessibility items */
+	position: absolute;
+	left: -9999px;
+}
+
 /* @end */
 
 /* @group layout */
