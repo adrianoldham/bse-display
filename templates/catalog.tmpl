@@ -93,24 +93,24 @@ $('addmultiple').onclick =
     new Ajax.Request('/cgi-bin/shop.pl', {
       method: 'post',
       onComplete: function (transport) { 
-	$('cart_sidebar').innerHTML = transport.responseText;
-	var elems = $('addmultipleform').elements;
+        $('cart_sidebar').innerHTML = transport.responseText;
+        var elems = $('addmultipleform').elements;
         var index;
         for (index = 0; index < elems.length; ++index) {
-	  var ele = elems[index];
+          var ele = elems[index];
           if (ele.name.substr(0,3) == 'qty') {
             if (ele.value > 0) {
               new Effect.Highlight($('cart_item_' + ele.name.substr(3)), { startcolor: '#ffb27f', endcolor: '#eeeeee' });
             }
             ele.value = '';
-	  }
+          }
         }
       },
       parameters: Hash.toQueryString(params_h)
     });
     return false;
   };
-function add_single_handler (id) {
+function add_single_handler(id) {
     var params = new Hash();
     params['id'] = id;
     params['quantity'] = $('qty'+id).value;
@@ -128,12 +128,7 @@ function add_single_handler (id) {
     });
     return false;
 }
-<:iterator begin allprods:>
-$('a_addsingle<:allprod id:>').onclick =
-  function() {
-    return add_single_handler(<:allprod id:>);
-  };
-<:iterator end allprods:>
+[<:iterator begin allprods:><:allprod id:><:iterator separator allprods:>, <:iterator end allprods:>].each(function(e){$('a_addsingle'+e).onclick=function(){return add_single_handler(e)}});
 //]]>
 </script><:or Ajax:><:eif Ajax:>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->

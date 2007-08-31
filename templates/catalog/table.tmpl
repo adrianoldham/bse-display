@@ -92,12 +92,7 @@ function add_single_handler(id) {
     });
     return false;
 }
-<:iterator begin allprods:>
-$('a_addsingle<:allprod id:>').onclick =
-  function() {
-    return add_single_handler(<:allprod id:>);
-  };
-<:iterator end allprods:>
+[<:iterator begin allprods:><:allprod id:><:iterator separator allprods:>, <:iterator end allprods:>].each(function(e){$('a_addsingle'+e).onclick=function(){return add_single_handler(e)}});
 //]]>
 </script><:or Ajax:><:eif Ajax:>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
