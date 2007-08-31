@@ -6,7 +6,7 @@
 <meta name="robots" content="<:cfg site robots all:>" /><:if Article release:>
 <meta name="author" content="<:article author:>" />
 <meta name="keywords" content="<:article metaKeywords:>" />
-<meta name="description" content="<:article metaDescription:>" />
+<meta name="description" content="<:article metaDescription:>" /><:if Cfg metadata dublincore:>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
 <meta name="DC.creator" content="<:article author:>" />
 <meta name="DC.publisher" content="<:cfg site name |h:>" />
@@ -16,12 +16,11 @@
 <meta name="DC.keywords" content="<:article metaKeywords:>" />
 <meta name="DC.description" content="<:article metaDescription:>" />
 <meta name="DC.format" content="<:cfg site format text/html:>" />
-<meta name="DC.language" content="<:cfg site language en:>" /><:or Article:><:eif Article:>
+<meta name="DC.language" content="<:cfg site language en:>" /><:or Cfg:><:eif Cfg:><:or Article:><:eif Article:>
 <meta name="VTC.generated" content='<:replace [today "%FT%T%z"] "(\d\d)$" ":$1":>' />
 <meta name="VTC.generator" content="BSE codebase <:release:>" />
 <meta name="VTC.release" content="<:include include/release.tmpl:>" /><:ifCfg rss enabled:>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" /><:or:><:eif:>
-<:ajax includes:>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" /><:or:><:eif:><:ajax includes:>
 <link rel="stylesheet" type="text/css" title="screen" href="/css/<:cfg theme name:>custom.css" />
 <!--[if lt IE 6]>
 <link rel="stylesheet" type="text/css" title="screen" href="/css/<:cfg theme name:>oldie.css" />
