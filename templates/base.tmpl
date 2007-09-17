@@ -22,17 +22,6 @@
 <meta name="VTC.release" content="<:include include/release.tmpl:>" /><:ifCfg rss enabled:>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" /><:or:><:eif:><:ajax includes:>
 <link rel="stylesheet" type="text/css" title="screen" href="/css/<:cfg theme name:>custom.css" />
-<!--[if lt IE 6]>
-<link rel="stylesheet" type="text/css" title="screen" href="/css/<:cfg theme name:>oldie.css" />
-<![endif]--><:if Ajax:>
-<script type="text/javascript" language="javascript">
-  Event.observe(window, 'load', page_init);
-  function page_init() {
-    if ($('message')) {
-      new Effect.DropOut($('message'),{delay: 5});
-    }
-  }
-</script><:or Ajax:><:eif Ajax:>
 </head>
 <body>
 <p class="hidden"><a href="#main" accesskey="S">Skip to main content</a>.</p>
