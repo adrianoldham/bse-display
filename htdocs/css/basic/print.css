@@ -1,0 +1,340 @@
+/* @group body */
+
+body {
+	font: 12px/18px Helvetica, Arial, Verdana, sans-serif;
+	color: #000;
+	margin: 20px;
+}
+
+a:link, a:visited {
+	color: #666;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+}
+
+pre, tt, kbd, code, samp {
+	font-family: Monaco, "Courier New", Courier, mono;
+	font-size: 10px;
+	line-height: 12px;
+	padding: 5px;
+	border: 1px solid #ddd;
+	display: block;
+	background-color: #ddd;
+}
+
+acronym, abbr, dfn {
+	font-style: normal;
+}
+
+acronym[title], abbr[title], dfn[title] {
+	border-bottom: 1px dotted #999;
+	cursor: help;
+}
+
+h1 {
+	font-size: 22px;
+	margin: 10px 0;
+	color: #333;
+}
+
+h2 {
+	font-size: 18px;
+	margin: 10px 0;
+	color: #666;
+}
+
+h3 {
+	font-size: 14px;
+	margin: 10px 0 5px 0;
+	color: #666;
+}
+
+h4 {
+	font-size: 12px;
+	color: #666;
+}
+
+p, ul, ol, blockquote, address {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-style: normal;
+}
+
+table {
+	clear: both;
+	margin: 10px 0;
+	border-collapse: collapse;
+}
+
+th, td {
+	font-size: 12px;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+select, input, textarea {
+	font-family: "Lucida Grande", Verdana, sans-serif;
+	font-size: 11px;
+}
+
+fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+p, ul, ol, blockquote, address {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-style: normal;
+}
+
+.hidden {
+	/* used to hide accessibility items */
+	position: absolute;
+	left: -9999px;
+}
+
+.note, .case {
+	font-size: 11px;
+	line-height: 14px;
+	padding: 0 14px;
+	color: #666;
+	margin: 10px 0;
+	border: 1px solid #ddd;
+}
+
+/* @end */
+
+/* @group layout */
+
+#nav, #sidebarL, #sidebarR {
+	display: none;
+}
+
+/* @end */
+
+/* @group header */
+
+#header h1 {
+	padding: 20px;
+	font-size: 28px;
+	line-height: 28px;
+	margin: 0 0 20px 0;
+	border: 2px solid #999;
+}
+
+/* @end */
+
+/* @group footer */
+
+#footer {
+	font-size: 11px;
+	padding: 10px 0;
+	border-top: 2px solid #ccc;
+}
+
+#footer .left, #footer .right {
+	display: block;
+}
+
+#footer .left {
+	display: none;
+}
+
+#footer .sitename {
+	font-weight: bold;
+}
+
+/* @end */
+
+/* @group main */
+
+#main .article {
+	margin: 0;
+}
+
+#main h1.pagetitle, #main h1.embedtitle {
+	padding: 10px 0;
+	border-bottom: 2px solid #999;
+	clear: both;
+}
+
+#main .body div img {
+	float: left;
+	padding-right: 10px;
+	clear: both;
+}
+
+/* @group tables */
+
+#main .body table {
+	border: 1px solid #ccc;
+	width: 100%;
+}
+
+#main .body table caption {
+	display: none;
+}
+
+#main .body table td, #main .body table th {
+	border: 1px solid #ccc;
+	padding: 3px;
+	font-size: 12px;
+}
+
+#main .body table th {
+	text-align: left;
+	white-space: nowrap;
+}
+
+/* @end */
+
+/* @group children */
+
+.children {
+	margin: 10px 0;
+	border-top: 1px solid #999;
+}
+
+/* @end */
+
+/* @group files */
+
+.files {
+	border: 2px solid #ddd;
+	margin: 5px 0 20px 0;
+	padding: 5px;
+}
+
+.files dl {
+	margin: 0;
+	padding: 1px 5px; /* 1px padding to prevent margin collapse */
+	background-color: #fff;
+	border: 1px solid #ddd;
+}
+
+.files dl dt {
+	border-top: 1px solid #ddd;
+	font-weight: bold;
+	margin: 0;
+	padding: 4px 1px; /* 1px padding to prevent margin collapse */
+}
+
+.files dl dt.first {
+	border: none;
+}
+
+.files dl span, .files dl strong {
+	display: none;
+}
+
+.files dl span.s_size {
+	display: inline;
+	font-weight: normal;
+}
+
+.files dl dt {
+}
+
+.files dl dd {
+	margin: 0;
+	padding: 1px 1px 5px 1px; /* 1px padding to prevent margin collapse */
+	color: #666;
+	position: relative;
+}
+
+.files dl dd p {
+	margin: 0;
+	padding: 0;
+}
+
+.files dl dd div.s_notes {
+	color: #333;
+}
+
+.files dl dd div.s_notes p {
+	margin: 5px 0 0 0;
+}
+
+.files dl dd p.s_toggle {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.files dl dt.forSale {
+	background-image: url(/images/interface/forSale.gif);
+}
+
+.files dl dt.requireUser {
+	background-image: url(/images/interface/locked.gif);
+}
+
+/* @end */
+
+/* @end */
+
+/* @group formmail */
+
+.formmail table {
+	border-top: 1px solid #ddd;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.formmail th, .formmail td {
+	font-size: 12px;
+	padding: 3px;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+	border-collapse: collapse;
+}
+
+.formmail th {
+	padding-top: 7px;
+	padding-right: 10px;
+	font-size: 11px;
+	color: #666;
+	border-right: 1px solid #ddd;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+.formmail td {
+	width: 100%;
+}
+
+/* @end */
+
+/* @group overrides */
+
+a:link, a:visited, a:hover, a:active {
+	color: #036;
+}
+
+#header h1 {
+	border-color: #036;
+}
+
+#main .article, #main .body div {
+	clear: both;
+}
+
+#main .body div img {
+	margin-right: 10px;
+	padding-right: 10px;
+	border-right: 5px solid #ccc;
+	float: left;
+	clear: both;
+}
+
+/* @end */

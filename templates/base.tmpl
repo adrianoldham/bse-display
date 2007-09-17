@@ -21,7 +21,8 @@
 <meta name="VTC.generator" content="BSE codebase <:release:>" />
 <meta name="VTC.release" content="<:include include/release.tmpl:>" /><:ifCfg rss enabled:>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" /><:or:><:eif:><:ajax includes:>
-<link rel="stylesheet" type="text/css" title="screen" href="/css/<:cfg theme name:>custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" title="screen" href="/css/<:cfg theme name:>custom.css" />
+<link rel="stylesheet" type="text/css" media="print" href="/css/<:cfg theme name:>print.css" />
 </head>
 <body>
 <p class="hidden"><a href="#main" accesskey="S">Skip to main content</a>.</p>
