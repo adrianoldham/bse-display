@@ -10,17 +10,11 @@ function do_search_menu() {
       onLoading: menu_result_loading,
       onComplete: function(transport) {
         $('search_menu_results').innerHTML = transport.responseText;
-        $$('.menu_result_close').each(function(e){e.onclick=menu_result_close;});
-        //$$('.menu_result_title').each(function(e){e.onclick=function(){return menu_result_toggle(e.id.match(/\d+$/)[0])}});
-        $$('.menu_result_title a').each(function(e){e.onclick=function(){return location.href=e.href;}}); // because accordion returns false on title href
+        $('menu_result_close').observe('click', menu_result_close);
         menu_result_display();
       }
     });
   }
-}
-
-function menu_result_toggle(id) {
-    new Effect.toggle('menu_result_excerpt_'+id, 'blind', {duration: 0.25} );
 }
 
 function menu_result_close() {
@@ -45,8 +39,8 @@ function menu_result_display() {
 }
 
 function loadAccordions() {
-  var searchAccordion = new accordion('#search_menu_container ul', {
-	onEvent: 'mousemove',
+  var searchAccordion = new accordion('search_menu_container', {
+	onEvent: 'mouseover',
     resizeSpeed : 9,
     classNames : {
       toggle : 'menu_result_title',
@@ -54,7 +48,7 @@ function loadAccordions() {
       content : 'menu_result_excerpt'
     }
   });
-  //searchAccordion.activate($$('#search_menu_container ul .menu_result_title')[0]); // only Safari2 seems to honour this on menu load
+  searchAccordion.activate($$('#search_menu_container ul .menu_result_title')[0]);
 }
 
 // Wait for the DOM to load before executing
