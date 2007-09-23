@@ -39,37 +39,4 @@
 <div id="search_results">
 <:include include/search_results.tmpl:>
 </div>
-</div><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-function do_search() {
-  var query = $('search_query').value;
-  if (query != 'Enter search terms' && query != '') {
-    $('search_form').request({
-      parameters: { embed: '1'},
-      onComplete: function(transport) { 
-        $('search_results').innerHTML = transport.responseText;
-      }
-    });
-  }
-  return false;
-}
-
-new Form.Observer($('search_form'), 1.5, do_search);
-
-$('search_submit').onclick = do_search;
-
-$('search_query').onfocus =
-  function() {
-    if ($('search_query').value == 'Enter search terms') {
-      $('search_query').value = '';
-    }
-  }
-$('search_query').onblur =
-  function() {
-    if ($('search_query').value == '') {
-      $('search_query').value = 'Enter search terms';
-    }
-  }
-//]]>
-</script><:or Ajax:><:eif Ajax:>
+</div>

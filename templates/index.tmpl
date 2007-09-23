@@ -3,18 +3,7 @@
 <div id="article_<:article id:>" class="article home"><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 15,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
-    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:><:switch:><:case Allkids:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allkids:>
+</div><:or Or:><:eif Or:><:switch:><:case Allkids:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allkids:>
 <:movestepkid:><:embed allkid:><:iterator separator allkids:><:iterator end allkids:><:or UnderThreshold:>
 <div id="children-<:article id:>" class="children">
   <ul><:iterator begin allkids:>

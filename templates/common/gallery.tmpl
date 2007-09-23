@@ -2,32 +2,10 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article"><:if Embedded:>
 <h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('title_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 1,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=title',
-    callback: function(form, value) { return 'a_ajax_set=1&id=<:article id:>&field=title&value=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:if Or [article body] [ifImages]:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 15,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
-    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:>
+</div>
 <div class="gallery"><:switch:><:case Cfg popimage table:>
   <table>
     <tr><:iterator begin images named /(?<!_lrg)$/ :><:if Arithmetic [image_index] && [image_index] % [cfg popimage cols 3] == 0:>

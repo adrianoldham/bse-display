@@ -2,22 +2,11 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article product"><:if Embedded:>
 <h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('title_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 1,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=title',
-    callback: function(form, value) { return 'a_ajax_set=1&id=<:article id:>&field=title&value=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:if Product retailPrice:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Product retailPrice:>
 <div class="buynow">
 <form id="add_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
   <input type="hidden" name="id" value="<:product id:>" />
-  <input type="hidden" name="r" value="<:cfg site url:><:url article:>" /><:if Options:>
+  <input type="hidden" name="r" value="<:url top:>" /><:if Options:>
   <table>
     <tr><:iterator begin options:>
       <th valign="middle"><:option desc:>:</th>
@@ -29,27 +18,12 @@
   <p class="pcode"><label>Product Code:</label> <:product product_code:></p><:or:><:eif:>
   <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:money product retailPrice:></span> (inc GST)</p>
   <p class="buy">
-    <label for="quantity_<:article id:>">Qty:</label> <input type="text" id="quantity_<:article id:>" name="quantity" value="1" size="2" />
-    <input type="submit" id="add_<:article id:>" name="add" value="Add to cart" accesskey="a" title="AccessKey = a" />
+    <label for="qty<:article id:>">Qty:</label> <input type="text" id="qty<:article id:>" name="quantity" value="1" size="2" />
+    <input type="submit" id="add<:article id:>" name="add" value="Add to cart" accesskey="a" title="AccessKey = a" class="shop_addshopitem" />
     <input type="submit" name="cart" value="View cart" accesskey="v" title="AccessKey = v" />
   </p>
 </form>
-</div><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  $('add_<:article id:>').onclick =
-    function () {
-      $('add_form_<:article id:>').request({
-        parameters: { r: 'ajaxcart', embed: 'sidebar' },
-        onComplete: function(transport) { 
-          $('cart_sidebar').innerHTML = transport.responseText;
-          new Effect.Highlight($('cart_item_<:article id:>'), { startcolor: '#ffb27f', endcolor: '#eeeeee' });
-        }
-      });
-      return false;
-    };
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Product:>
+</div><:or Product:>
 <div class="price">
   <form name="notifyme" method="post" action="/cgi-bin/interest.pl">
     <b>Coming soon!</b> <input type="hidden" name="product" value="<:product title:>" />
@@ -60,18 +34,7 @@
 <p><b>This product qualifies for free shipping if purchased before <:date product customDate1:></b></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 15,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
-    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
+</div><:or Or:><:eif Or:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
 <p><b>This product qualifies for free shipping if purchased before <:date product customDate1:></b></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [ifStepparents] [ifStepkids]:> 
 <div class="relatedsections">
   <p><b>Related categories:</b></p>

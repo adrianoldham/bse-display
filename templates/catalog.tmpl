@@ -2,35 +2,13 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article shop catalog"><:if Embedded:>
 <h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('title_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 1,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=title',
-    callback: function(form, value) { return 'a_ajax_set=1&id=<:article id:>&field=title&value=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:if Or [article body] [ifImages]:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 15,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
-    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:><:switch:><:case Allprods:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allprods:>
+</div><:or Or:><:eif Or:><:switch:><:case Allprods:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allprods:>
 <:movestepkid:><:embed allprod:><:iterator separator allprods:><:iterator end allprods:><:or UnderThreshold:>
-<form id="addmultipleform" action="/cgi-bin/shop.pl" method="post">
-<input type="hidden" name="r" value="<:url article:>" /><:if Cfg shop catalog_list:>
+<form id="add_multiple_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
+<input type="hidden" name="r" value="<:url top:>" /><:if Cfg shop catalog_list:>
 <ul><:iterator begin allprods:>
   <li<:ifAllprod thumbImage:> class="thumbnail"<:or:><:eif:>>
     <div class="child"><div class="arrows"><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" /> <b><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></b><:if Admin:><:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:><:or Admin:><:eif Admin:></div><:ifAllprod thumbImage:><div class="thumbnail"><a href="<:url allprod:>"><:thumbnail allprod:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url allprod:>"><:allprod title:></a></div><:if And [allprod description] [cfg shop product_description 1]:>
@@ -54,12 +32,12 @@
       </td>
       <td class="col2"><input type="text" id="qty<:allprod id:>" name="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /></td>
       <td class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></td>
-      <td class="col4"><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" /><:if Admin:> <:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:><:or Admin:><:eif Admin:></td>
+      <td class="col4"><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:if Admin:> <:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:><:or Admin:><:eif Admin:></td>
     </tr><:iterator end allprods:>
   </tbody>
 </table><:eif Cfg:>
 <p class="buttons">
-  <input type="submit" id="addmultiple" name="a_addmultiple" value="Add items to cart" accesskey="a" title="AccessKey = a" tabindex="10000" />
+  <input type="submit" id="addmultiple<:article id:>" name="a_addmultiple" value="Add items to cart" accesskey="a" title="AccessKey = a" tabindex="10000" class="shop_addmultiple" />
   <input type="submit" name="cart" value="View cart" accesskey="v" title="AccessKey = v" tabindex="11000" />
 </p>
 </form><:eif UnderThreshold:><:endswitch:><:switch:><:case Allcats:>
@@ -78,58 +56,6 @@
   </ul>
 </div><:or Stepparents:><:eif Stepparents:><:eif And:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
-</div><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-$('addmultiple').onclick =
-  function() {
-    // Form.request passes in all form fields, including every button
-    // which isn't what we want, so do it the long way
-    var params_a = $('addmultipleform').getInputs('text');
-    var params_h = $H(Form.serializeElements(params_a, 1));
-    params_h.merge({ r: 'ajaxcart',
-                     a_addmultiple: 1,
-                     embed: 'sidebar' });
-    new Ajax.Request('/cgi-bin/shop.pl', {
-      method: 'post',
-      onComplete: function (transport) { 
-        $('cart_sidebar').innerHTML = transport.responseText;
-        var elems = $('addmultipleform').elements;
-        var index;
-        for (index = 0; index < elems.length; ++index) {
-          var ele = elems[index];
-          if (ele.name.substr(0,3) == 'qty') {
-            if (ele.value > 0) {
-              new Effect.Highlight($('cart_item_' + ele.name.substr(3)), { startcolor: '#ffb27f', endcolor: '#eeeeee' });
-            }
-            ele.value = '';
-          }
-        }
-      },
-      parameters: Hash.toQueryString(params_h)
-    });
-    return false;
-  };
-function add_single_handler(id) {
-    var params = new Hash();
-    params['id'] = id;
-    params['quantity'] = $('qty'+id).value;
-    params['a_add'] = 1;
-    params['embed'] = 'sidebar';
-    params['r'] = 'ajaxcart';
-    new Ajax.Request('/cgi-bin/shop.pl', {
-      method: 'post',
-      parameters: Hash.toQueryString(params),
-      onComplete: function(transport) {
-        $('cart_sidebar').innerHTML = transport.responseText;
-        $('qty'+id).value = '';
-        new Effect.Highlight($('cart_item_'+id), { startcolor: '#ffb27f', endcolor: '#eeeeee' });
-      }
-    });
-    return false;
-}
-[<:iterator begin allprods:><:allprod id:><:iterator separator allprods:>, <:iterator end allprods:>].each(function(e){$('a_addsingle'+e).onclick=function(){return add_single_handler(e)}});
-//]]>
-</script><:or Ajax:><:eif Ajax:>
+</div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>

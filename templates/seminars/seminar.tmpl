@@ -2,33 +2,14 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article seminar"><:if Embedded:>
 <h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('title_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 1,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=title',
-    callback: function(form, value) { return 'a_ajax_set=1&id=<:article id:>&field=title&value=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:if Or [article body] [ifImages]:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:if Admin:><:if Ajax:>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-  new Ajax.InPlaceEditor($('body_<:article id:>'), '/cgi-bin/admin/add.pl',
-    {
-    rows: 15,
-    okText: 'Save',
-    loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id=<:article id:>&field=body',
-    callback: function(form, value) { return 'a_ajax_save_body=1&id=<:article id:>&body=' + encodeURIComponent(value) }
-    });
-//]]>
-</script><:or Ajax:><:eif Ajax:><:or Admin:><:eif Admin:><:or Or:><:eif Or:>
+</div><:or Or:><:eif Or:>
 <form name="ff" method="post" action="<:ifSeminar retailPrice:>/cgi-bin/shop.pl<:or:>/cgi-bin/nuser.pl<:if Cfg seminars no_confirm :>/user/book<:or Cfg:>/user/bookconfirm<:eif Cfg:><:eif:>">
+<input type="hidden" name="id" value="<:seminar id:>" />
+<input type="hidden" name="r" value="<:url top:>" />
+<input type="hidden" name="quantity" value="1" />
 <p class="duration"><span>Duration:</span> <:seminar duration:> minutes</p><:ifSeminar customInt1:>
 <p class="points"><span>CME Points:</span> <:seminar customInt1:></p><:or:><:eif:>
 <p class="price"><:ifSeminar retailPrice:><span>Price:</span> <strong><:cfg shop currency "$":><:money product retailPrice:></strong> (inc GST)<:or:><strong>FREE Seminar</strong><:eif:></p>
@@ -39,9 +20,7 @@
 <:iterator end location_sessions:><:iterator end locations:>
 <:or Cfg:><:iterator begin sessions:><p><input type="radio" name="session_id" id="session_id<:session id:>" value="<:session id:>" /><label for="session_id<:session id:>"><:date "%I:%M %p %d/%m/%Y" session when_at:></label> - <a href="/cgi-bin/shop.pl?a_location=1&amp;location_id=<:session location_id:>" onclick="return show_location(<:session location_id:>)"><:session description:></a></p>
 <:iterator end sessions:><:eif Cfg:>
-</div>
-<input type="hidden" name="id" value="<:seminar id:>" />
-<input type="hidden" name="quantity" value="1" /><:if Options:>
+</div><:if Options:>
 <div class="options">
   <table>
     <caption>Options</caption><:iterator begin options:>
