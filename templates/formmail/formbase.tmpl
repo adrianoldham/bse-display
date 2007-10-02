@@ -1,6 +1,6 @@
 <:wrap base.tmpl title=>"FORMTITLE" :>
 <div id="formmail" class="article formmail">
-<h1 class="pagetitle"><:formcfg title |h:></h1><:switch:><:case Param nomessage:>
+<h1 class="pagetitle"><:formcfg title:></h1><:switch:><:case Param nomessage:>
 <:case default:><:ifMsg:><p id="message" class="error"><:msg:></p><:or:><:eif:><:endswitch:>
 <:wrap here:>
 </div>
