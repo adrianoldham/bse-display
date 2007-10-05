@@ -1,3 +1,8 @@
+/* @override 
+	http://tandb.devbox.org/css/basic/custom.css
+	http://secure.tandb.devbox.org/css/basic/custom.css
+*/
+
 /* @group body */
 
 html {
@@ -130,6 +135,29 @@ p.error {
 	/* used to hide accessibility items */
 	position: absolute;
 	left: -9999px;
+}
+
+div.nicetitle {
+	background-color: #333;
+	color: #fff;
+	font: bold 13px "Trebuchet MS", Verdana, Arial, sans-serif;
+	left: 0;
+	padding: 4px;
+	position: absolute;
+	top: 0;
+	width: 25em;
+	z-index: 20;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	opacity: 0.87;
+}
+
+div.nicetitle p {
+    margin: 0;
+	padding: 0 3px;
+	-moz-opacity: 1;
+	opacity: 1;
 }
 
 /* @end */
@@ -477,7 +505,7 @@ p.error {
 	padding: 3px 0;
 }
 
-.children .summary {
+.children .summary  {
 	font-size: 10px;
 	line-height: 12px;
 	color: #999;
@@ -498,7 +526,7 @@ p.error {
 	width: 100%;
 }
 
-.children table td .childtitle {
+.children table td .childtitle  {
 	margin-top: 0;
 }
 
@@ -511,7 +539,7 @@ p.error {
 	width: 33.33%;
 }
 
-.children table td .summary {
+.children table td .summary  {
 	clear: both;
 	margin-bottom: 0;
 }
@@ -523,10 +551,13 @@ p.error {
 
 .children .details {
 	font-size: 12px;
-	height: 17px;
-	padding: 5px;
+	line-height: 14px;
+	margin: 0 -1px;
+	padding: 0;
 	border: 1px solid #ccc;
 	color: #000;
+	float: left;
+	width: 100%;
 }
 
 .children .details .price {
@@ -1312,9 +1343,40 @@ html>body .search p.s_scoreC {
 
 /* @end */
 
+/* @group gallery */
+
+.gallery div {
+	float: left;
+	/*margin: 0 28px 28px 0;*/
+	margin: 0 10px 10px 0;
+}
+.gallery div.row_end {
+	/*margin: 0 0 28px 0;*/
+	margin: 0 0 10px 0;
+}
+
+/* @end */
+
 /* @group InPlaceEditor */
 
 /* @group common */
+
+.editor_control {
+	width: 24px;
+	height: 17px;
+	text-indent: -9999px;
+	background: transparent url(/images/admin/vtc/buttons/inplace.gif) no-repeat 100% 50%;
+	z-index: 1000;
+	margin: 0;
+	padding: 0;
+	left: -29px;
+}
+
+.editor_control_hilite {
+	width: 48px;
+	background-image: url(/images/admin/vtc/buttons/inplaceH.gif);
+	left: -53px;
+}
 
 .inplaceeditor-form {
 	margin-bottom: 10px;
@@ -1340,6 +1402,11 @@ html>body .search p.s_scoreC {
 /* @end */
 
 /* @group main */
+
+#main .body .editor_control, #main .body .editor_container {
+	margin: 0;
+	padding: 0;
+}
 
 #main .inplaceeditor-form input.editor_field {
 	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
@@ -1382,5 +1449,21 @@ html>body .search p.s_scoreC {
 }
 
 /* @end */
+
+/* @end */
+
+/* @group MobileWebKit */
+
+html {
+	-webkit-text-size-adjust: none;
+}
+
+#main .article {
+	-webkit-text-size-adjust: auto;
+}
+
+#main .home .body {
+	/*-webkit-text-size-adjust: none;*/
+}
 
 /* @end */

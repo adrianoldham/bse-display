@@ -4,7 +4,7 @@ var timer = {};
 
 function title_editor(id) {
   var title = $('title_'+id);
-  var eb_id = "eb_" + id;
+  var eb_id = "eb_"+id;
   add_edit_button(title, eb_id);
 
   new Ajax.InPlaceEditor(title, '/cgi-bin/admin/add.pl',
@@ -14,7 +14,7 @@ function title_editor(id) {
     externalControl: eb_id,
     externalControlOnly: true,
     loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id='+id+'&field=title',
-    callback: function(form, value) { return 'a_ajax_set=1&id='+id+'&field=title&value=' + encodeURIComponent(value) }
+    callback: function(form, value) { return 'a_ajax_set=1&id='+id+'&field=title&value='+encodeURIComponent(value) }
   });
 }
 
@@ -22,7 +22,7 @@ function title_editor(id) {
 
 function body_editor(id) {
   var body = $('body_'+id);
-  var eb_id = "b_eb_" + id;
+  var eb_id = "b_eb_"+id;
   add_edit_button(body, eb_id);
 
   new Ajax.InPlaceEditor(body, '/cgi-bin/admin/add.pl',
@@ -38,23 +38,39 @@ function body_editor(id) {
 
 
 function add_edit_button(e,id) {
+
+    // create, populate and position edit button container
+
+	var ec = document.createElement('div');
+	Element.extend(ec);
+
+    ec.style.position = 'relative';
+    ec.addClassName("editor_container");
+    
+	e.insertBefore( ec, e.firstChild);
+
+	// create, populate and position edit button
+	
 	var eb = document.createElement('div');
+	Element.extend(eb);
+	
+	eb.hide();
+	eb.style.position = 'absolute';
+	eb.addClassName("editor_control");
 	eb.innerHTML = "Edit";
 	eb.id = id;
-	Element.extend(eb);
-	eb.addClassName("editor_control");
-	eb.hide();
-	e.parentNode.insertBefore( eb, e );
 
+    ec.insertBefore( eb, ec.firstChild);
+    
 	var clear_show = function(){if(timer[id]) clearTimeout(timer[id]); $(id).show()};
     var set_hide = function(){timer[id] = setTimeout(function(){$(id).hide()}, 1000)};
-    //var clear_show = function(){ if(timer[id]) clearTimeout(timer[id]); new Effect.Appear($(id),{ duration: 0.25 }); };
-    //var set_hide = function(){ timer[id] = setTimeout(function() { new Effect.Fade($(id),{ duration: 0.25 }); }, 1000)};
+    var set_hilite = function(){eb.addClassName("editor_control_hilite")};
+    var clear_hilite = function(){eb.removeClassName("editor_control_hilite")};
 
 	e.observe("mouseover", clear_show);
 	e.observe("mouseout", set_hide);
-	eb.observe("mouseover", clear_show);
-	eb.observe("mouseout", set_hide);
+	eb.observe("mouseover", set_hilite);
+	eb.observe("mouseout", clear_hilite);
 }
 
 
