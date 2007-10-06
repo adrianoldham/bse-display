@@ -2,10 +2,10 @@
 
 var timer = {};
 
-function title_editor(id) {
+function title_editor(id,reset) {
   var title = $('title_'+id);
   var eb_id = "eb_"+id;
-  add_edit_button(title, eb_id);
+  add_edit_button(title, eb_id, reset);
 
   new Ajax.InPlaceEditor(title, '/cgi-bin/admin/add.pl',
     {
@@ -14,16 +14,17 @@ function title_editor(id) {
     externalControl: eb_id,
     externalControlOnly: true,
     loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id='+id+'&field=title',
-    callback: function(form, value) { return 'a_ajax_set=1&id='+id+'&field=title&value='+encodeURIComponent(value) }
+    callback: function(form, value) { return 'a_ajax_set=1&id='+id+'&field=title&value='+encodeURIComponent(value) },
+    onComplete: function(transport, element) { if (!transport) return; title_editor(id,true) }
   });
 }
 
-// article body InPlaceEditor
+// article body InPlaceEditors
 
-function body_editor(id) {
+function body_editor(id,reset) {
   var body = $('body_'+id);
   var eb_id = "b_eb_"+id;
-  add_edit_button(body, eb_id);
+  add_edit_button(body, eb_id, reset);
 
   new Ajax.InPlaceEditor(body, '/cgi-bin/admin/add.pl',
     {
@@ -32,12 +33,13 @@ function body_editor(id) {
 	externalControl: eb_id,
 	externalControlOnly: true,
     loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id='+id+'&field=body',
-    callback: function(form, value) { return 'a_ajax_save_body=1&id='+id+'&body='+encodeURIComponent(value) }
+    callback: function(form, value) { return 'a_ajax_save_body=1&id='+id+'&body='+encodeURIComponent(value) },
+    onComplete: function(transport, element) { if (!transport) return; body_editor(id,true) }
   });
 }
 
 
-function add_edit_button(e,id) {
+function add_edit_button(e,id,reset) {
 
     // create, populate and position edit button container
 
@@ -66,9 +68,11 @@ function add_edit_button(e,id) {
     var set_hide = function(){timer[id] = setTimeout(function(){$(id).hide()}, 1000)};
     var set_hilite = function(){eb.addClassName("editor_control_hilite")};
     var clear_hilite = function(){eb.removeClassName("editor_control_hilite")};
-
-	e.observe("mouseover", clear_show);
-	e.observe("mouseout", set_hide);
+    
+    if (!reset) {
+	  e.observe("mouseover", clear_show);
+	  e.observe("mouseout", set_hide);
+	}
 	eb.observe("mouseover", set_hilite);
 	eb.observe("mouseout", clear_hilite);
 }
