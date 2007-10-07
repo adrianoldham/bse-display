@@ -15,8 +15,15 @@ function title_editor(id,reset) {
     externalControlOnly: true,
     loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id='+id+'&field=title',
     callback: function(form, value) { return 'a_ajax_set=1&id='+id+'&field=title&value='+encodeURIComponent(value) },
-    onComplete: function(transport, element) { if (!transport) return; title_editor(id,true) }
+    onComplete: function(transport, element) { if (!transport) return cleanup(eb_id); title_editor(id,true) }
   });
+}
+
+// if editor is cancelled, reset visibility and class names
+
+function cleanup(id) {
+  $(id).hide();
+  $(id).removeClassName("editor_control_hilite");
 }
 
 // article body InPlaceEditors
@@ -34,10 +41,9 @@ function body_editor(id,reset) {
 	externalControlOnly: true,
     loadTextURL: '/cgi-bin/admin/add.pl?a_ajax_get=1&id='+id+'&field=body',
     callback: function(form, value) { return 'a_ajax_save_body=1&id='+id+'&body='+encodeURIComponent(value) },
-    onComplete: function(transport, element) { if (!transport) return; body_editor(id,true) }
+    onComplete: function(transport, element) { if (!transport) return cleanup(eb_id); body_editor(id,true) }
   });
 }
-
 
 function add_edit_button(e,id,reset) {
 
@@ -76,7 +82,6 @@ function add_edit_button(e,id,reset) {
 	eb.observe("mouseover", set_hilite);
 	eb.observe("mouseout", clear_hilite);
 }
-
 
 // wait for DOM to load before initialising
 
