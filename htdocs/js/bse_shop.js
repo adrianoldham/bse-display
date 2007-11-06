@@ -66,7 +66,7 @@ function add_shopitem_handler(id) {
 
 // wait for DOM to load before initialising
 
-document.observe("contentloaded", function() {
+document.observe("dom:loaded", function() {
   $$('.shop_addmultiple').each(function(e){e.onclick=function(){return add_multiple_handler(e.id.match(/\d+$/)[0])}});
   $$('.shop_addsingle').each(function(e){e.onclick=function(){return add_single_handler(e.id.match(/\d+$/)[0])}});
   $$('.shop_addshopitem').each(function(e){e.onclick=function(){return add_shopitem_handler(e.id.match(/\d+$/)[0])}});

@@ -85,7 +85,7 @@ function add_edit_button(e,id,reset) {
 
 // wait for DOM to load before initialising
 
-document.observe("contentloaded", function() {
+document.observe("dom:loaded", function() {
   if($('bse_edit_mode')) {
     $$('div.article[id] > h1.pagetitle[id]', 'div.article[id] > h1.embedtitle[id]').each(function(e){ return title_editor(e.id.match(/\d+$/)[0]) });
     $$('div.article[id] > div.body[id]').each(function(e){ return body_editor(e.id.match(/\d+$/)[0])});

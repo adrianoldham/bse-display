@@ -7,7 +7,7 @@ document.write('<script type="text/javascript" src="/js/accordion.js"></script>'
 
 // wait for DOM to load before initialising
 
-document.observe("contentloaded", page_init);
+document.observe("dom:loaded", page_init);
 
 var bse_debug = false;
 

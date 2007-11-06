@@ -11,6 +11,7 @@ function do_search_menu() {
       onComplete: function(transport) {
         $('search_menu_results').innerHTML = transport.responseText;
         $('menu_result_close').observe('click', menu_result_close);
+        $$('.menu_result_title a', '.menu_result_more a').each(function(e){e.onclick=function(){return location.href=e.href;}}); // because search_menu_results returns false, which blocks the hrefs
         menu_result_display();
       }
     });
@@ -40,7 +41,7 @@ function menu_result_display() {
 
 function loadAccordions() {
   var searchAccordion = new accordion('search_menu_container', {
-	onEvent: 'mouseover',
+    onEvent: 'mouseover',
     resizeSpeed : 9,
     classNames : {
       toggle : 'menu_result_title',
@@ -53,7 +54,7 @@ function loadAccordions() {
 
 // Wait for the DOM to load before executing
 
-document.observe("contentloaded", init_search_menu);
+document.observe("dom:loaded", init_search_menu);
 
 function init_search_menu() {
 
@@ -68,6 +69,8 @@ function init_search_menu() {
     if (/WebKit/i.test(navigator.userAgent)) {
       $('search_menu_query').type = 'search';
       $('search_menu_query').autocomplete = 'off';
+      $('search_menu_query').autocorrect = 'off';
+      $('search_menu_query').autocapitalize = 'off';
     }
 
     $('search_menu_query').onfocus =
@@ -137,7 +140,7 @@ function do_search() {
 
 // Wait for the DOM to load before executing
 
-document.observe("contentloaded", init_search);
+document.observe("dom:loaded", init_search);
 
 function init_search() {
 
@@ -146,7 +149,12 @@ function init_search() {
     new Form.Observer($('search_form'), 1.5, do_search);
 
     $('search_submit').onclick = do_search;
-
+    
+    if (/WebKit/i.test(navigator.userAgent)) {
+      $('search_query').autocorrect = 'off';
+      $('search_query').autocapitalize = 'off';
+    }
+    
     $('search_query').onfocus =
       function() {
         if ($('search_query').value == 'Enter search terms') {
