@@ -755,6 +755,13 @@ div.nicetitle p {
 
 /* @group sidebar cart */
 
+#sidebarR p.error {
+	margin: 0 0 10px 0;
+	float: left; /* required to stop images escaping */
+	width: 179px; /* required beause float collapses width */
+	display: inline; /* combat IE6 Doubled float-margin bug */
+}
+
 #sidebarR .cart, #sidebarR .logon {
 	border-collapse: collapse;
 	padding: 0;
