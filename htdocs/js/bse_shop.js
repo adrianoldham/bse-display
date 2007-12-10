@@ -5,7 +5,7 @@ function add_multiple_handler(id) {
   // which isn't what we want, so do it the long way
   var params_a = $('add_multiple_form_'+id).getInputs('text');
   var params_h = $H(Form.serializeElements(params_a, 1));
-  params_h.merge({ r: 'ajaxcart',
+  params_h = params_h.merge({ r: 'ajaxcart',
                    a_addmultiple: 1,
                    embed: 'sidebar' });
   new Ajax.Request('/cgi-bin/shop.pl', {
@@ -32,12 +32,13 @@ function add_multiple_handler(id) {
 // add a single cart item from catalog
 
 function add_single_handler(id) {
-  var params = new Hash();
-  params['id'] = id;
-  params['quantity'] = $('qty'+id).value;
-  params['a_add'] = 1;
-  params['embed'] = 'sidebar';
-  params['r'] = 'ajaxcart';
+  var params = new Hash({
+    id: id,
+    quantity: $('qty'+id).value,
+    a_add: 1,
+    embed: 'sidebar',
+    r: 'ajaxcart'
+    });
   new Ajax.Request('/cgi-bin/shop.pl', {
     method: 'post',
     parameters: Hash.toQueryString(params),
@@ -73,4 +74,4 @@ document.observe("dom:loaded", function() {
   if(bse_debug) {
     window.alert("bse_shop loaded");
   }
-})
+});

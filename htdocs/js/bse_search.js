@@ -95,12 +95,13 @@ function init_search_menu() {
 
 function menu_add_single_handler(id) {
   menu_result_status_start(id);
-  var params = new Hash();
-  params['id'] = id;
-  params['quantity'] = 1;
-  params['a_add'] = 1;
-  params['embed'] = 'sidebar';
-  params['r'] = 'ajaxcart';
+  var params = new Hash({
+    id: id,
+    quantity: 1,
+    a_add: 1,
+    embed: 'sidebar',
+    r: 'ajaxcart'
+    });
   new Ajax.Request('/cgi-bin/shop.pl', {
     method: 'post',
     parameters: Hash.toQueryString(params),
