@@ -3,6 +3,7 @@
 document.write('<script type="text/javascript" src="/js/bse_shop.js"></script>');
 document.write('<script type="text/javascript" src="/js/bse_admin.js"></script>');
 document.write('<script type="text/javascript" src="/js/bse_search.js"></script>');
+document.write('<script type="text/javascript" src="/js/bse_cycler.js"></script>');
 document.write('<script type="text/javascript" src="/js/accordion.js"></script>');
 
 // wait for DOM to load before initialising
