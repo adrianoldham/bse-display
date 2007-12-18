@@ -64,6 +64,7 @@ Item                                       Code         Qty     Price   Extended
 :><:ifEq [order paymentType] "2":>We will contact you to make arrangements for payment.<:or:><:eif
 :><:ifEq [order paymentType] "10":>Please transfer the funds to:
 
+             Name      : <:cfg shop accountname:>
              BSB       : <:cfg shop bsb:>
              Account   : <:cfg shop accountno:>
              Reference : <:order id |%06d:><:or:><:eif
