@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<:iterator begin children_of -1 filter: [flags] !~ /G/ :><:if AccessControlled ofchild:><:or AccessControlled:>
+<url>
+  <loc><:url ofchild:></loc>
+  <priority><:switch:><:case Eq [ofchild id] 1:>1.0<:case Eq [ofchild level] 1:>0.8<:case default:>0.5<:endswitch:></priority>
+  <lastmod><:replace [date "%FT%T%z" ofchild lastModified] "(\d\d)$" ":$1":></lastmod>
+</url><:eif AccessControlled:><:if Allkids_of ofchild:><:iterator begin allkids_of ofchild:><:if AccessControlled ofallkid:><:or AccessControlled:>
+<:embed ofallkid google/include/lowmap.tmpl 10:><:eif AccessControlled:><:iterator end allkids_of:><:or Allkids_of:><:eif Allkids_of:><:iterator separator children_of:><:iterator end children_of:>
+
+</urlset>

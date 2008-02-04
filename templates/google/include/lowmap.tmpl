@@ -1,0 +1,7 @@
+﻿This template is used for generating the xml sitemap.
+<:embed start:><url>
+  <loc><:url article:></loc>
+  <priority><:switch:><:case Eq [article id] 1:>1<:case Eq [article level] 1:>0.8<:case default:>0.5<:endswitch:></priority>
+  <lastmod><:replace [date "%FT%T%z" article lastModified] "(\d\d)$" ":$1":></lastmod>
+</url><:if CanEmbed:><:if Children:><:iterator begin children_of [article id] filter: [flags] !~ /G/ :><:if AccessControlled child:><:or AccessControlled:>
+<:embed child google/include/lowmap.tmpl 10:><:eif AccessControlled:><:iterator separator children_of:><:iterator end children_of:><:or Children:><:eif Children:><:or CanEmbed:><:eif CanEmbed:><:embed end:>
