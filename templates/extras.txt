@@ -4,3 +4,7 @@
 # input output
 # input - the name of the template, no directory
 # output - name of the output file, based on the CONTENTBASE
+
+apache/404.tmpl 404.shtml
+apache/403.tmpl 403.shtml
+apache/500.tmpl 500.shtml

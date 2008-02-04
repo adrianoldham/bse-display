@@ -1,0 +1,22 @@
+<:wrap base.tmpl title=>"Oops! File not found" :>
+<div id="article_error" class="article">
+<h1 id="title_error" class="pagetitle"><:param title:> <!--#echo var='REDIRECT_STATUS' --></h1>
+<div id="body_error" class="body">
+<p>The file you attempted to access was not found, it's possible that the request was simply mistyped or the file no longer exists at this location.  You may find what you are looking for elsewhere on the site, here are some useful places to start:</p>
+<ul>
+<li><a href="/index.html">home</a></li>
+<li><a href="/sitemap.html">sitemap</a></li>
+<li><a href="/cgi-bin/search.pl">search</a></li>
+</ul>
+<div class="note">
+<!--#if expr="$HTTP_REFERER != ''" -->
+<p>It seems you have arrived at this page by following a <a href="<!--#echo var="HTTP_REFERER" -->">link from another page</a>, you can help us resolve broken links by notifying our <a href="mailto:<!--#echo var='SERVER_ADMIN' -->?subject=<:param title:> [<!--#echo var='REDIRECT_STATUS' -->] on <!--#echo var='SERVER_NAME' -->&amp;body=Request: <!--#echo var='REQUEST_URI' --> Referrer: <!--#echo var='HTTP_REFERER' -->">webmaster</a>, please include the address of the file you requested and the address of the referring page.</p>
+<p>Request: <!--#echo var="REQUEST_URI" --></p>
+<p>Referrer: <!--#echo var="HTTP_REFERER" --></p>
+<!--#else -->
+<p>It seems you have arrived at this page directly, which generally means the address you used was mistyped or you used an out-of-date bookmark.  Please check the address for possible errors and/or update your bookmarks accordingly.</p>
+<p>Request: <!--#echo var="REQUEST_URI" --></p>
+<!--#endif -->
+</div>
+</div>
+</div>
