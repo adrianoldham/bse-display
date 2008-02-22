@@ -1,8 +1,0 @@
-<:wrap base.tmpl:><:if Or [article body] [ifImages]:><div id="body_<:article id:>" class="body">
-<:body:>
-</div><:or Or:><:eif Or:><:embed start:>
-<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:eif Embedded:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
-<:movestepkid:><:embed allkid:><:iterator separator allkids:><:iterator end allkids:>
-<!-- END ID: <:article id:> - TEMP: <:article template:> -->
-<:embed end:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
-<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
