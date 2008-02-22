@@ -20,7 +20,7 @@
       <td>&nbsp;</td><:iterator end strepeats:><:or Arithmetic:><:eif Arithmetic:><:eif Cfg:>
     </tr>
   </table><:case default:><:iterator begin images named /(?<!_lrg)$/ :>
-  <div><:if Imagen [concatenate [image - name] _lrg]:>
+  <div<:ifArithmetic ([image_index] +1) % [cfg popimage cols 3] == 0:> class="row_end"<:or:><:eif:>><:if Imagen [concatenate [image - name] _lrg]:>
     <a href="/cgi-bin/image.pl?id=<:article id:>&amp;imid=<:imagen [concatenate [image - name] _lrg] id:>" onclick="return bse_popup_image(<:article id:>, <:imagen [concatenate [image - name] _lrg] id:>, <:imagen [concatenate [image - name] _lrg] width:>, <:imagen [concatenate [image - name] _lrg] height:>, '')" title="<:imagen [concatenate [image - name] _lrg] alt:>" target="bse_image"><:image:></a><:or Imagen:>
     <:image:><:eif Imagen:><:if And [cfg popimage caption 1] [image - alt]:>
     <p><:image - alt:></p><:or And:><:eif And:>
