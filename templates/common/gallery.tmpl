@@ -8,7 +8,7 @@
 </div>
 <div class="gallery"><:switch:><:case Cfg popimage table:>
   <table>
-    <tr><:iterator begin images named /(?<!_lrg)$/ :><:if Arithmetic [image_index] && [image_index] % [cfg popimage cols 3] == 0:>
+    <tr><:iterator begin images named /(?<!_lrg)$/ :><:if Arithmetic [image_index] % [cfg popimage cols 3] == 0:>
     </tr>
     <tr><:or Arithmetic:><:eif Arithmetic:>
       <td><:if Imagen [concatenate [image - name] _lrg]:>
