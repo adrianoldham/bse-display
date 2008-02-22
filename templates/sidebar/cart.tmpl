@@ -1,0 +1,11 @@
+<:wrap base.tmpl:><:embed start:>
+<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:><:if Dynamic:>
+<div id="cart_sidebar">
+  <:include include/cart_sidebar.tmpl:>
+</div><:if Admin:><:if Dyncart:><:or Dyncart:>
+<div id="article_<:article id:>" class="article"><:if Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
+<h1 id="title_<:article id:>" class="pageitle"><:title:></h1><:eif Embedded:>
+</div><:eif Dyncart:><:or Admin:><:eif Admin:><:or Dynamic:><:eif Dynamic:>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
+<:embed end:>

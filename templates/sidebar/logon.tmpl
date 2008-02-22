@@ -1,0 +1,23 @@
+<:wrap base.tmpl:><:embed start:>
+<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:><:if Dynamic:>
+<div id="article_<:article id:>" class="article"><:if User:><:if Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:>
+  <p><a href="<:cfg site secureurl:>/cgi-bin/user.pl"><:user name1:> <:user name2:> - (<:user userId:>)</a></p><:or User:>
+  <form action="<:cfg site secureurl:>/cgi-bin/user.pl" method="post">
+    <input type="hidden" name="r" value="<:switch:><:case Match [script] "page":><:cfg site url:><:url article:><:case Script:><:cfg site url:><:script:><:case default:><:cfg site url:><:url article:><:endswitch:>" />
+    <table class="logon">
+      <caption><:article title:></caption>
+      <tbody>
+        <tr><th><label for="userid"><:cfg "site users" userid_description "Username":>:</label></th><td><input type="text" id="userid" name="userid" value="<:old userid:>" /></td></tr>
+        <tr><th><label for="password">Password:</label></th><td><input type="password" id="password" name="password" value="<:old password:>" /></td></tr>
+      </tbody>
+    </table>
+    <p>
+      <input type="submit" name="logon" value="Logon" accesskey="l" title="AccessKey = l" />
+      <input type="submit" name="show_register" value="Register" accesskey="r" title="AccessKey = r" />
+    </p>
+  </form><:eif User:>
+</div><:or Dynamic:><:eif Dynamic:>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
+<:embed end:>

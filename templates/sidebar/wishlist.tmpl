@@ -1,0 +1,27 @@
+<:wrap base.tmpl:><:embed start:>
+<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:><:if Dynamic:><:if User:><:if Wishlist:>
+<div id="article_<:article id:>" class="article">
+  <table class="cart">
+    <caption><:article title:></caption>
+    <thead>
+      <tr>
+        <th class="col1">Item</th>
+        <th class="col3">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <:iterator begin wishlist:><tr id="wishlist_item_<:wishlistentry id:>">
+        <td class="col1"><a href="<:url wishlistentry:>" title="<:wishlistentry title:>"><:dynreplace [wishlistentry title] "((?:&[^;]*;|[^&]){16}).*" $1...:></a></td>
+        <td class="col3"><:cfg shop currency "$":><:money wishlistentry retailPrice:></td>
+      </tr><:iterator separator wishlist:>
+      <:iterator end wishlist:>
+    </tbody>
+  </table>
+  <form action="<:cfg site secureurl:>/cgi-bin/user.pl" method="post"><p><input type="hidden" name="_t" value="wishlist" /><input type="submit" name="wishlistview" value="View wishlist" accesskey="w" title="AccessKey = w" /></p></form>
+</div><:or Wishlist:><:eif Wishlist:><:or User:><:if Admin:>
+<div id="article_<:article id:>" class="article"><:if Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
+<h1 id="title_<:article id:>" class="pageitle"><:title:></h1><:eif Embedded:>
+</div><:or Admin:><:eif Admin:><:eif User:><:or Dynamic:><:eif Dynamic:>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
+<:embed end:>

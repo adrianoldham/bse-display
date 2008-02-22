@@ -1,0 +1,15 @@
+<:wrap base.tmpl:><:embed start:>
+<!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
+<div id="search_menu">
+  <form id="search_menu_form" method="get" action="/cgi-bin/search.pl">
+    <fieldset>
+      <label for="search_menu_query"><:article title:></label>
+      <input type="text" id="search_menu_query" name="q" size="20" title="Enter search terms" value="Enter search terms" />
+      <input type="hidden" id="search_menu_date" name="d" value="ar" />
+      <input type="submit" id="search_menu_submit" name="search_menu_submit" value="Go" accesskey="s" title="AccessKey = s" />
+    </fieldset>
+  </form>
+  <div id="search_menu_results"></div>
+</div>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
+<:embed end:>
