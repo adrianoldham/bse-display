@@ -5,25 +5,25 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div>
-<div class="gallery"><:switch:><:case Cfg popimage table:>
-  <table>
-    <tr><:iterator begin images named /(?<!_hide)$/ :><:if Arithmetic [image_index] % [cfg popimage cols 3] == 0:>
-    </tr>
-    <tr><:or Arithmetic:><:eif Arithmetic:>
-      <td>
-        <a href="/cgi-bin/thumb.pl?g=gallery_full&amp;page=<:article id:>&amp;image=<:image - id:>" rel="lytebox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery -:></a><:if And [cfg popimage caption 0] [image - alt]:>
-        <div><:image - alt:></div><:or And:><:eif And:>
-      </td><:iterator separator images:><:iterator end images:><:if Cfg popimage colspan 1:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:>
-      <td colspan="<:arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]) :>">&nbsp;</td><:or Arithmetic:><:eif Arithmetic:><:or Cfg:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:><:iterator begin strepeats [arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3] )]:>
-      <td>&nbsp;</td><:iterator end strepeats:><:or Arithmetic:><:eif Arithmetic:><:eif Cfg:>
-    </tr>
-  </table><:case default:><:iterator begin images named /(?<!_hide)$/ :>
-  <div<:ifArithmetic ([image_index] +1) % [cfg popimage cols 3] == 0:> class="row_end"<:or:><:eif:>>
+</div><:switch:><:case Cfg popimage table:>
+<table class="gallery">
+  <tr><:iterator begin images named /(?<!_hide)$/ :><:if Arithmetic [image_index] && [image_index] % [cfg popimage cols 3] == 0:>
+  </tr>
+  <tr><:or Arithmetic:><:eif Arithmetic:>
+    <td>
+      <a href="/cgi-bin/thumb.pl?g=gallery_full&amp;page=<:article id:>&amp;image=<:image - id:>" rel="lytebox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery -:></a><:if And [cfg popimage caption 0] [image - alt]:>
+      <p><:image - alt:></p><:or And:><:eif And:>
+    </td><:iterator separator images:><:iterator end images:><:if Cfg popimage colspan 1:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:>
+    <td colspan="<:arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]) :>">&nbsp;</td><:or Arithmetic:><:eif Arithmetic:><:or Cfg:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:><:iterator begin strepeats [arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3] )]:>
+    <td>&nbsp;</td><:iterator end strepeats:><:or Arithmetic:><:eif Arithmetic:><:eif Cfg:>
+  </tr>
+</table><:case default:>
+<ul class="gallery"><:iterator begin images named /(?<!_hide)$/ :>
+  <li<:ifArithmetic [image_index] && ([image_index] +1) % [cfg popimage cols 3] == 0:> class="row_end"<:or:><:eif:>>
     <a href="<:thumbimage gallery_full - image:>" rel="lytebox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery -:></a><:if And [cfg popimage caption 0] [image - alt]:>
     <p><:image - alt:></p><:or And:><:eif And:>
-  </div><:iterator separator images:><:iterator end images:><:endswitch:>
-</div><:or Or:><:eif Or:><:switch:><:case Allkids:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allkids:>
+  </li><:iterator separator images:><:iterator end images:>
+</ul><:endswitch:><:or Or:><:eif Or:><:switch:><:case Allkids:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allkids:>
 <:movestepkid:><:embed allkid:><:iterator separator allkids:><:iterator end allkids:><:or UnderThreshold:>
 <div id="children-<:article id:>" class="children">
   <ul><:iterator begin allkids:>
@@ -42,6 +42,6 @@
 </div><:or Stepparents:><:eif Stepparents:><:eif And:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
 </div>
-<!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <script type="text/javascript" src="/js/lytebox.js"></script>
+<!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>
