@@ -1187,7 +1187,8 @@ html>body .search p.s_scoreC {
 }
 
 .search span.s_scoreB {
-	background: #f60 url(/images/interface/score.gif) repeat-x 0px 50%;
+	/*background: #f60 url(/images/interface/score.gif) repeat-x 0px 50%;*/
+	background-color: #f60;
 	border-right: 1px solid #f30;/**/
 }
 
