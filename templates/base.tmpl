@@ -23,6 +23,11 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" /><:or:><:eif:><:ajax includes:>
 <link rel="stylesheet" type="text/css" media="screen" title="screen" href="/css/<:cfg theme name:>custom.css" />
 <link rel="stylesheet" type="text/css" media="print" href="/css/<:cfg theme name:>print.css" />
+<!--[if lt IE 6]>
+<link rel="stylesheet" type="text/css" title="screen" href="/css/<:cfg theme name:>oldie.css" />
+<![endif]-->
+<link rel="stylesheet" type="text/css" media="screen" href="/css/<:cfg theme name:>lightbox.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/<:cfg theme name:>lytebox.css" />
 </head>
 <body>
 <p class="hidden"><a href="#main" accesskey="S">Skip to main content</a>.</p>
@@ -41,44 +46,24 @@
     </div>
     <div id="content">
       <div id="columns">
-        <div id="sidebarL"><:if Allkids_of 3 :>
+        <div id="sidebarL"><:if Allkids_of 3 filter: [listed] != 2 :>
           <h1 class="hidden">Topic Menu</h1>
           <ul class="lev2">
-            <:iterator begin allkids_of 3 filter: [listed] != 2:><li class="i_<:ofallkid_number:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
+            <:iterator begin allkids_of 3 filter: [listed] != 2 :><li class="i_<:ofallkid_number:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
             <:iterator end allkids_of:>
           </ul><:or Allkids_of:><:eif Allkids_of:><:if Imagen imgleft:>
           <p class="imgleft"><:imagen imgleft:></p><:or Imagen:><:if Gimage imgleft:>
           <p class="imgleft"><:gimage imgleft:></p><:or Gimage:><:eif Gimage:><:eif Imagen:>
           <div class="clear"><!-- prevent bottom margin collapse on ie --></div>
         </div>
-        <div id="sidebarR"><:if Allkids_of -1 filter: [menu] == 2 && [listed] != 2 :>
+        <div id="sidebarR">
+        <:if Allkids_of -1 filter: [menu] == 2 && [listed] != 2 :>
           <h1 class="hidden">Topic Menu</h1>
           <ul class="lev2">
             <:iterator begin allkids_of -1 filter: [menu] == 2 && [listed] != 2 :><li class="i_<:ofallkid_number:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
             <:iterator end allkids_of:>
-          </ul><:or Allkids_of:><:eif Allkids_of:><:if Cfg shop sidebar_cart 1:><:if Dynamic:>
-          <div id="cart_sidebar">
-            <:include include/cart_sidebar.tmpl:>
-          </div><:or Dynamic:><:eif Dynamic:><:or Cfg:><:eif Cfg:>
-          <:embed 4:><:if Dynamic:>
-          <div class="article"><:if User:>
-            <h1 class="embedtitle">Your Account</h1>
-            <p><a href="<:cfg site secureurl:>/cgi-bin/user.pl"><:user name1:> <:user name2:> - (<:user userId:>)</a></p><:or User:>
-            <form action="<:cfg site secureurl:>/cgi-bin/user.pl" method="post">
-              <input type="hidden" name="r" value="<:switch:><:case Match [script] "page":><:cfg site url:><:url article:><:case Script:><:cfg site url:><:script:><:case default:><:cfg site url:><:url article:><:endswitch:>" />
-              <table class="logon">
-                <caption>Your Account</caption>
-                <tbody>
-                  <tr><th><label for="userid"><:cfg "site users" userid_description "Username":>:</label></th><td><input type="text" id="userid" name="userid" value="<:old userid:>" /></td></tr>
-                  <tr><th><label for="password">Password:</label></th><td><input type="password" id="password" name="password" value="<:old password:>" /></td></tr>
-                </tbody>
-              </table>
-              <p>
-                <input type="submit" name="logon" value="Logon" accesskey="l" title="AccessKey = l" />
-                <input type="submit" name="show_register" value="Register" accesskey="r" title="AccessKey = r" />
-              </p>
-            </form><:eif User:>
-          </div><:or Dynamic:><:eif Dynamic:><:if Imagen imgright:>
+          </ul><:or Allkids_of:><:eif Allkids_of:>
+          <:embed 4:><:if Imagen imgright:>
           <p class="imgright"><:imagen imgright:></p><:or Imagen:><:if Gimage imgright:>
           <p class="imgright"><:gimage imgright:></p><:or Gimage:><:eif Gimage:><:eif Imagen:>
           <div class="clear"><!-- prevent bottom margin collapse on ie --></div>
