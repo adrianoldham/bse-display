@@ -1,21 +1,5 @@
-<:if Eq [article id] 1:><:or Eq:><div id="crumbs">
-		<table width="100%" border="0" cellpadding="0" cellspacing="0">
-	    <tr>
-          <th height="1" class="hr"><img src="/images/trans_pixel.gif" width="24" height="1" border="0" alt="" /></th>
-        </tr>
-		</table>
-		<table width="100%" border="0" cellpadding="2" cellspacing="0">
-          <tr>
-            <:if Cfg theme crumb_indent_width 1:><td><img src="/images/trans_pixel.gif" width="<:cfg theme crumb_indent_width 100:>" height="<:cfg theme crumb_indent_height 10:>" alt="" /></td><:or Cfg:>
-			<th><img src="/images/trans_pixel.gif" width="1" height="10" alt="" /></th><:eif Cfg:>
-			<th width="100%" align="left">
-<:if Ancestor 1:><:or Ancestor:>
-<:iterator begin inlines 1:>/ <a href="<:ifAdmin:><:inline admin:><:or:><:siteUrl:><:inline link:><:eif:>"><:inline title:></a><:iterator end inlines:>
-<:eif Ancestor:><:ifCrumbs:> / <:or:><:eif:>
-<:iterator begin crumbs:><a href="<:url crumb:>"><:crumb title:></a><:iterator separator crumbs:> / 
-<:iterator end crumbs:>
-            </th>
-            <th><img src="/images/trans_pixel.gif" width="1" height="10" alt="" /></th>
-          </tr>
-        </table>
-</div><:eif Eq:>
+<:if Eq [article id] 1:><:or Eq:><ul id="crumbs"><:if Ancestor 1:><:or Ancestor:><:iterator begin inlines 1:>
+  <li class="home"><a href="<:ifAdmin:><:inline admin:><:or:><:cfg site url:><:inline link:><:eif:>" title="<:inline title:>"><:ifInline titleAlias:><:inline titleAlias:><:or:><:inline title:><:eif:></a></li><:iterator end inlines:><:eif Ancestor:><:iterator begin crumbs:>
+  <li<:ifEq [crumb id] 1:> class="home"<:or:><:eif:>><a href="<:url crumb:>" title="<:crumb title:>"><:ifCrumb titleAlias:><:crumb titleAlias:><:or:><:crumb title:><:eif:></a></li><:iterator end crumbs:>
+  <li><a href="<:url article:>" title="<:article title:>"><:ifArticle titleAlias:><:article titleAlias:><:or:><:article title:><:eif:></a></li>
+</ul><:eif Eq:>
