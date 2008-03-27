@@ -36,7 +36,8 @@
 </div>
 <p class="buy"><:ifSeminar retailPrice:><input type="submit" name="add" value="Add to cart" /> <input type="submit" name="cart" value="View cart" /><:or:><input type="submit" name="book" value="Book now" /><:eif:></p>
 </form><:if Or [ifStepparents] [ifStepkids]:> 
-<div class="relatedsections"><p><b>Related categories:</b></p>
+<div class="relatedsections">
+  <p><strong>Related categories:</strong></p>
   <ul>
     <:iterator begin stepparents:><li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator separator stepparents:>
     <:iterator end stepparents:><:iterator begin stepkids:><li><a href="<:url stepkid:>"><:stepkid title:></a></li><:iterator separator stepkids:>
