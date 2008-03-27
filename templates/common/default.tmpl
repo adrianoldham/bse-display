@@ -14,13 +14,13 @@
         <:case Allkid summary:><div class="summary"><:allkid summary:></div><:case Allkid summaryLength:><div class="summary"><:summary allkid:></div><:endswitch:></div>
     </li><:iterator separator allkids:><:iterator end allkids:>
   </ul>
-</div><:endswitch:><:if And [ifEmbedded] [cfg basic relatedsections 1]:><:or And:><:if Stepparents:>
+</div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Stepparents:>
 <div class="relatedsections">
   <p><strong>Related sections:</strong></p>
   <ul><:iterator begin stepparents:>
     <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator end stepparents:>
   </ul>
-</div><:or Stepparents:><:eif Stepparents:><:eif And:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
+</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
