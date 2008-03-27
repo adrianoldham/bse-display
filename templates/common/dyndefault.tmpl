@@ -34,7 +34,7 @@
   <ul><:iterator begin stepparents:>
     <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator end stepparents:>
   </ul>
-</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:eif Dynamic:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
+</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:eif Dynamic:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "H"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
 </div>
 <:if And [ifDynamic] [ifMatch [article flags] "a"]:><:dynreport article_comments include/custom/article_comments [dynarticle id]:><:or And:><:eif And:>

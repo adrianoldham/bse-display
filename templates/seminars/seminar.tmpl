@@ -42,7 +42,7 @@
     <:iterator end stepparents:><:iterator begin stepkids:><li><a href="<:url stepkid:>"><:stepkid title:></a></li><:iterator separator stepkids:>
     <:iterator end stepkids:>
   </ul>
-</div><:or Or:><:eif Or:><:if Files:><:if Or [cfg downloads hide_list] [ifMatch [article flags] "H"]:><:or Or:>
+</div><:or Or:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "H"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
 <script type="text/javascript" language="javascript">
 //<![CDATA[
