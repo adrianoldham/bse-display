@@ -3,8 +3,8 @@
 <div id="article_<:article id:>" class="article home"><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:switch:><:case Allkids:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allkids:>
-<:movestepkid:><:embed allkid:><:iterator separator allkids:><:iterator end allkids:><:or UnderThreshold:>
+</div><:or Or:><:eif Or:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
+<:movestepkid:><:embed allkid:><:iterator end allkids:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids:><:include include/sortallkids.tmpl:>
 <div id="children-<:article id:>" class="children">
   <ul><:iterator begin allkids:>
     <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>>
@@ -12,7 +12,7 @@
         <:case Allkid summary:><div class="summary"><:allkid summary:></div><:case Allkid summaryLength:><div class="summary"><:summary allkid:></div><:endswitch:></div>
     </li><:iterator separator allkids:><:iterator end allkids:>
   </ul>
-</div><:eif UnderThreshold:><:endswitch:><:if And [ifEmbedded] [cfg basic relatedsections 1]:><:or And:><:if Stepparents:>
+</div><:endswitch:><:if And [ifEmbedded] [cfg basic relatedsections 1]:><:or And:><:if Stepparents:>
 <div class="relatedsections">
   <p><strong>Related sections:</strong></p>
   <ul><:iterator begin stepparents:>

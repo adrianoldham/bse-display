@@ -23,9 +23,9 @@
     <a href="<:thumbimage gallery_full - image:>" rel="lightbox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery -:></a><:if And [cfg popimage caption 0] [image - alt]:>
     <p><:image - alt:></p><:or And:><:eif And:>
   </li><:iterator separator images:><:iterator end images:>
-</ul><:endswitch:><:or Or:><:eif Or:><:switch:><:case Allkids:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allkids:>
-<:movestepkid:><:embed allkid:><:iterator separator allkids:><:iterator end allkids:><:or UnderThreshold:>
-<div id="children-<:article id:>" class="children">
+</ul><:endswitch:><:or Or:><:eif Or:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
+<:movestepkid:><:embed allkid:><:iterator end allkids:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids:><:include include/sortallkids.tmpl:>
+<div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids:>
     <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>>
       <div class="child"><:if Admin:><div class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></div><:or Admin:><:eif Admin:><:ifAllkid thumbImage:><div class="thumbnail"><a href="<:url allkid:>"><:thumbnail allkid:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url allkid:>"><:allkid title:></a></div><:switch:>
@@ -33,7 +33,7 @@
       </div>
     </li><:iterator separator allkids:><:iterator end allkids:>
   </ul>
-</div><:eif UnderThreshold:><:endswitch:><:if And [ifEmbedded] [cfg basic relatedsections 1]:><:or And:><:if Stepparents:>
+</div><:endswitch:><:if And [ifEmbedded] [cfg basic relatedsections 1]:><:or And:><:if Stepparents:>
 <div class="relatedsections">
   <p><strong>Related sections:</strong></p>
   <ul><:iterator begin stepparents:>
