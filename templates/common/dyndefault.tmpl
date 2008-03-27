@@ -5,13 +5,16 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:if Dynamic:><:switch:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Dynallkids:><:include include/sortallkids.tmpl:>
+</div><:or Or:><:eif Or:><:if Dynamic:><:switch:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:>
+<:case Dynallkids:><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin dynallkids:>
-    <li<:ifDynallkid thumbImage:> class="thumbnail"<:or:><:eif:>>
-      <div class="child"><:if Admin:><div class="arrows"><:include admin/adminmenu/dynallkid_mini.tmpl:><:dynmoveallkid:></div><:or Admin:><:eif Admin:><:ifDynallkid thumbImage:><div class="thumbnail"><a href="<:url dynallkid:>"><:thumbnail dynallkid:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url dynallkid:>"><:dynallkid title:></a></div><:switch:>
-        <:case Dynallkid summary:><div class="summary"><:dynallkid summary:></div><:endswitch:></div>
-    </li><:iterator separator dynallkids:><:iterator end dynallkids:>
+    <li<:ifDynallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynallkid thumbImage:>
+      <span class="thumbnail"><a href="<:url dynallkid:>"><:thumbnail dynallkid:></a></span><:or:><:eif:>
+      <a href="<:url dynallkid:>"><:dynallkid title:></a><:if Admin:>
+      <span class="arrows"><:include admin/adminmenu/dynallkid_mini.tmpl:><:dynmoveallkid:></span><:or Admin:><:eif Admin:><:switch:><:case Dynallkid summary:>
+      <span class="summary"><:dynallkid summary:></span><:endswitch:>
+    </li><:iterator end dynallkids:>
   </ul>
 </div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Dynstepparents:>
 <div class="relatedsections">
@@ -23,10 +26,13 @@
 <:movestepkid:><:embed allkid:><:iterator end allkids:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids:><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids:>
-    <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>>
-      <div class="child"><:if Admin:><div class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></div><:or Admin:><:eif Admin:><:ifAllkid thumbImage:><div class="thumbnail"><a href="<:url allkid:>"><:thumbnail allkid:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url allkid:>"><:allkid title:></a></div><:switch:>
-        <:case Allkid summary:><div class="summary"><:allkid summary:></div><:case Allkid summaryLength:><div class="summary"><:summary allkid:></div><:endswitch:></div>
-    </li><:iterator separator allkids:><:iterator end allkids:>
+    <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllkid thumbImage:>
+      <span class="thumbnail"><a href="<:url allkid:>"><:thumbnail allkid:></a></span><:or:><:eif:>
+      <a href="<:url allkid:>"><:allkid title:></a><:if Admin:>
+      <span class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></span><:or Admin:><:eif Admin:><:switch:><:case Allkid summary:>
+      <span class="summary"><:allkid summary:></span><:case Allkid summaryLength:>
+      <span class="summary"><:summary allkid:></span><:endswitch:>
+    </li><:iterator end allkids:>
   </ul>
 </div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Stepparents:>
 <div class="relatedsections">
@@ -36,7 +42,7 @@
   </ul>
 </div><:or Stepparents:><:eif Stepparents:><:eif Or:><:eif Dynamic:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "H"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
-</div>
-<:if And [ifDynamic] [ifMatch [article flags] "a"]:><:dynreport article_comments include/custom/article_comments [dynarticle id]:><:or And:><:eif And:>
+</div><:if And [ifDynamic] [ifMatch [article flags] "a"]:>
+<:dynreport article_comments include/custom/article_comments [dynarticle id]:><:or And:><:eif And:>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>
