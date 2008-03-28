@@ -10,7 +10,7 @@
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids:>
     <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllkid thumbImage:>
-      <span class="thumbnail"><a href="<:url allkid:>"><:thumbnail allkid:></a></span><:or:><:eif:>
+      <a href="<:url allkid:>" class="thumbnail"><:thumbnail allkid:></a><:or:><:eif:>
       <a href="<:url allkid:>"><:allkid title:></a><:if Admin:>
       <span class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></span><:or Admin:><:eif Admin:><:switch:><:case Allkid summary:>
       <span class="summary"><:allkid summary:></span><:case Allkid summaryLength:>

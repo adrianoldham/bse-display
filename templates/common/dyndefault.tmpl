@@ -10,8 +10,8 @@
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin dynallkids:>
     <li<:ifDynallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynallkid thumbImage:>
-      <span class="thumbnail"><a href="<:url dynallkid:>"><:thumbnail dynallkid:></a></span><:or:><:eif:>
-      <a href="<:url dynallkid:>"><:dynallkid title:></a><:if Admin:>
+      <a href="<:url dynallkid:>" class="thumbnail"><:thumbnail dynallkid:></a><:or:><:eif:>
+      <a href="<:url dynallkid:>" class="title"><:dynallkid title:></a><:if Admin:>
       <span class="arrows"><:include admin/adminmenu/dynallkid_mini.tmpl:><:dynmoveallkid:></span><:or Admin:><:eif Admin:><:switch:><:case Dynallkid summary:>
       <span class="summary"><:dynallkid summary:></span><:endswitch:>
     </li><:iterator end dynallkids:>
@@ -27,8 +27,8 @@
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids:>
     <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllkid thumbImage:>
-      <span class="thumbnail"><a href="<:url allkid:>"><:thumbnail allkid:></a></span><:or:><:eif:>
-      <a href="<:url allkid:>"><:allkid title:></a><:if Admin:>
+      <a href="<:url allkid:>" class="thumbnail"><:thumbnail allkid:></a><:or:><:eif:>
+      <a href="<:url allkid:>" class="title"><:allkid title:></a><:if Admin:>
       <span class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></span><:or Admin:><:eif Admin:><:switch:><:case Allkid summary:>
       <span class="summary"><:allkid summary:></span><:case Allkid summaryLength:>
       <span class="summary"><:summary allkid:></span><:endswitch:>

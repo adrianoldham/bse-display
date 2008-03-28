@@ -11,10 +11,10 @@
       <th>&nbsp;</th>
     </tr>
   </thead><:or:><:eif:>
-  <tbody><:if Count:>
-    <:iterator begin items:><tr id="item_<:item id:>" class="item"> 
+  <tbody><:if Count:><:iterator begin items:>
+    <tr id="item_<:item id:>" class="item"> 
       <td class="col1">
-        <a href="<:item link:>" class="item"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
+        <a href="<:item link:>" class="title"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
         <div class="i_description"><:item description:></div><:or And:><:eif And:>
       </td>
       <td class="col2">
@@ -22,8 +22,7 @@
       </td>
       <td class="col3"><:if Item retailPrice:><:cfg shop currency "$":><:money item retailPrice:><:or Item:><:eif Item:></td>
       <td class="col4"><input type="image" name="delete_<:index:>" id="delete_<:index:>" src="/images/basic/store/buttons/delete.gif" title="Remove this item" /></td>
-    </tr><:iterator separator items:>
-    <:iterator end items:><:or Count:>
+    </tr><:iterator end items:><:or Count:>
     <tr> 
       <td colspan="4" class="noitems">Your shopping cart is empty</td>
     </tr><:eif Count:>

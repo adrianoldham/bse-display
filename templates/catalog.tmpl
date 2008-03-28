@@ -13,8 +13,8 @@
   <ul><:iterator begin allprods:>
     <li<:ifAllprod thumbImage:> class="thumbnail"<:or:><:eif:>>
       <div class="col1"><:ifAllprod thumbImage:>
-        <span class="thumbnail"><a href="<:url allprod:>"><:thumbnail allprod:></a></span><:or:><:eif:>
-        <a href="<:url allprod:>" class="itemtitle"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
+        <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:or:><:eif:>
+        <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <span class="i_description"><:allprod description:></span><:or And:><:eif And:>
       </div>
       <div class="col2"><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /></div>
@@ -40,7 +40,7 @@
     <tr class="item">
       <td class="col1"><:ifAllprod thumbImage:>
         <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:or:><:eif:>
-        <a href="<:url allprod:>" class="itemtitle"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
+        <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <div class="i_description"><:allprod description:></div><:or And:><:eif And:>
       </td>
       <td class="col2"><input type="text" id="qty<:allprod id:>" name="qty<:allprod id:>" size="2" /></td>
@@ -57,8 +57,8 @@
 <div class="children">
   <ul><:iterator begin allcats:>
     <li<:ifAllcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllcat thumbImage:>
-      <span class="thumbnail"><a href="<:url allcat:>"><:thumbnail allcat:></a></span><:or:><:eif:>
-      <a href="<:url allcat:>"><:allcat title:></a><:if Admin:>
+      <a href="<:url allcat:>" class="thumbnail"><:thumbnail allcat:></a><:or:><:eif:>
+      <a href="<:url allcat:>" class="title"><:allcat title:></a><:if Admin:>
       <span class="arrows"><:include admin/adminmenu/allcat_mini.tmpl:><:moveallcat:></span><:or Admin:><:eif Admin:><:switch:><:case Allcat summary:>
       <span class="summary"><:allcat summary:></span><:case Allcat summaryLength:>
       <span class="summary"><:summary allcat:></span><:endswitch:>

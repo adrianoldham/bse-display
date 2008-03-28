@@ -9,16 +9,15 @@
       <th class="col3">Price:</th>
     </tr>
   </thead>
-  <tbody>
-    <:iterator begin items:><tr class="item"> 
+  <tbody><:iterator begin items:>
+    <tr class="item"> 
       <td class="col1">
-        <a href="<:item link:>"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
+        <a href="<:item link:>" class="title"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
         <div class="i_description"><:item description:></div><:or And:><:eif And:>
       </td>
       <td class="col2"><:item units:> &times;</td>
       <td class="col3"><:cfg shop currency "$":><:money item retailPrice:></td>
-    </tr>
-    <:iterator end items:>
+    </tr><:iterator end items:>
   </tbody>
 </table>
 <div class="totals">
