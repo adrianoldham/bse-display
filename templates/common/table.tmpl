@@ -12,10 +12,13 @@
     <tr><:iterator begin allkids:><:if Arithmetic [allkid_index] && [allkid_index] % [cfg "article table" cols 3] == 0:>
     </tr>
     <tr><:or Arithmetic:><:eif Arithmetic:>
-      <td class="child">
-        <:if Admin:><div class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></div><:or Admin:><:eif Admin:><:ifAllkid thumbImage:><div class="thumbnail"><a href="<:url allkid:>"><:thumbnail allkid:></a></div><:or:><:eif:><div class="childtitle"><a href="<:url allkid:>"><:allkid title:></a></div><:switch:>
-        <:case Allkid summary:><div class="summary"><:allkid summary:></div><:case Allkid summaryLength:><div class="summary"><:summary allkid:></div><:endswitch:>
-      </td><:iterator separator allkids:><:iterator end allkids:><:if Arithmetic [ifAllkids] % [cfg "article table" cols 3]:><:if Cfg "article table" colspan:>
+      <td class="child"><:if Admin:>
+        <div class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></div><:or Admin:><:eif Admin:><:ifAllkid thumbImage:>
+        <div class="thumbnail"><a href="<:url allkid:>"><:thumbnail allkid:></a></div><:or:><:eif:>
+        <div class="childtitle"><a href="<:url allkid:>"><:allkid title:></a></div><:switch:><:case Allkid summary:>
+        <div class="summary"><:allkid summary:></div><:case Allkid summaryLength:>
+        <div class="summary"><:summary allkid:></div><:endswitch:>
+      </td><:iterator end allkids:><:if Arithmetic [ifAllkids] % [cfg "article table" cols 3]:><:if Cfg "article table" colspan:>
       <td class="child" colspan="<:arithmetic [cfg "article table" cols 3] - ( [ifAllkids] % [cfg "article table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "article table" cols 3] - ( [ifAllkids] % [cfg "article table" cols 3] )]:>
       <td class="child">&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
     </tr>
