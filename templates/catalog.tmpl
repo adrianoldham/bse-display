@@ -15,7 +15,7 @@
       <div class="col1"><:ifAllprod thumbImage:>
         <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:or:><:eif:>
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
-        <span class="i_description"><:allprod description:></span><:or And:><:eif And:>
+        <div class="i_description"><:allprod description:></div><:or And:><:eif And:>
       </div>
       <div class="col2"><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /></div>
       <div class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></div>
