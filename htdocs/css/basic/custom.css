@@ -483,40 +483,39 @@ div.nicetitle p {
 	margin-left: 0;
 	padding-left: 0;
 	border-top: 1px solid #ddd;
+	background-image: url(/images/trans_pixel.gif); /* required because IE6 loses the border on LI with summary */
+	clear: both;
 }
 
-.children li .thumbnail {
+.children li {
+	position: relative;
+	padding: 8px 0;
+	margin: 0 0 0 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+.children li.thumbnail {
 	list-style-type: none;
 	margin-left: 0;
 }
 
-.children li {
-	margin-left: 20px;
-	border-bottom: 1px solid #ddd;
-}
-
-.children .childtitle, .children .childtitle a:link, .children .childtitle a:visited {
+.children li a:link, .children li a:visited, .children li a:hover, .children li a:active {
 	font: bold 11px/13px "Lucida Grande", Verdana, Helvetica, sans-serif;
-	margin: 5px 0;
-	padding: 0;
 }
 
-.children .child {
-	padding: 3px 0;
-}
-
-.children .summary  {
+.children li .summary  {
 	font-size: 10px;
 	line-height: 12px;
 	color: #999;
-	margin: 5px 0;
+	margin: 1px 0 5px 0;
+	display: block;
 }
 
-.children .arrows {
-	float: right;
-	margin: 0;
-	padding: 0;
-	margin-top: 4px; /* new for vertical alignment of prices */
+.children li .arrows {
+	position: absolute;
+	right: 0;
+	top: 0.95em;
+	z-index: 10;
 }
 
 /* @group children table */
