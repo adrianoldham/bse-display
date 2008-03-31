@@ -11,7 +11,7 @@
 <input type="hidden" name="r" value="<:url top:>" /><:if Cfg shop catalog_list:>
 <div class="items">
   <ul><:iterator begin allprods:>
-    <li<:ifAllprod thumbImage:> class="thumbnail"<:or:><:eif:>>
+    <li class="item">
       <div class="col1"><:ifAllprod thumbImage:>
         <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:or:><:eif:>
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
@@ -60,8 +60,8 @@
       <a href="<:url allcat:>" class="thumbnail"><:thumbnail allcat:></a><:or:><:eif:>
       <a href="<:url allcat:>" class="title"><:allcat title:></a><:if Admin:>
       <span class="arrows"><:include admin/adminmenu/allcat_mini.tmpl:><:moveallcat:></span><:or Admin:><:eif Admin:><:switch:><:case Allcat summary:>
-      <span class="summary"><:allcat summary:></span><:case Allcat summaryLength:>
-      <span class="summary"><:summary allcat:></span><:endswitch:>
+      <p class="summary"><:allcat summary:></p><:case Allcat summaryLength:>
+      <p class="summary"><:summary allcat:></p><:endswitch:>
     </li><:iterator end allcats:>
   </ul>
 </div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Stepparents:>
