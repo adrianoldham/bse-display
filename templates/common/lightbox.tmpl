@@ -10,12 +10,12 @@
   <tr><:iterator begin images named /(?<!_hide)$/ :><:if Arithmetic [image_index] && [image_index] % [cfg popimage cols 3] == 0:>
   </tr>
   <tr><:or Arithmetic:><:eif Arithmetic:>
-    <td>
+    <td<:ifArithmetic [image_index] && ([image_index] +1) % [cfg popimage cols 3] == 0:> class="row_end"<:or:><:eif:>>
       <a href="/cgi-bin/thumb.pl?g=gallery_full&amp;page=<:article id:>&amp;image=<:image - id:>" rel="lightbox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery -:></a><:if And [cfg popimage caption 0] [image - alt]:>
       <p><:image - alt:></p><:or And:><:eif And:>
     </td><:iterator separator images:><:iterator end images:><:if Cfg popimage colspan 1:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:>
-    <td colspan="<:arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]) :>">&nbsp;</td><:or Arithmetic:><:eif Arithmetic:><:or Cfg:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:><:iterator begin strepeats [arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3] )]:>
-    <td>&nbsp;</td><:iterator end strepeats:><:or Arithmetic:><:eif Arithmetic:><:eif Cfg:>
+    <td class="row_end" colspan="<:arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]) :>">&nbsp;</td><:or Arithmetic:><:eif Arithmetic:><:or Cfg:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:><:iterator begin strepeats [arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3] )]:>
+    <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:or:><:eif:>>&nbsp;</td><:iterator end strepeats:><:or Arithmetic:><:eif Arithmetic:><:eif Cfg:>
   </tr>
 </table><:case default:>
 <ul class="gallery"><:iterator begin images named /(?<!_hide)$/ :>

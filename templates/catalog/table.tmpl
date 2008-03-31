@@ -14,7 +14,7 @@
     <tr><:iterator begin allprods:><:if Arithmetic [allprod_index] && [allprod_index] % [cfg "product table" cols 3] == 0:>
     </tr>
     <tr><:or Arithmetic:><:eif Arithmetic:>
-      <td><:if Admin:>
+      <td<:ifArithmetic [allprod_number] && [allprod_number] % [cfg "product table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:if Admin:>
         <div class="arrows"><:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:></div><:or Admin:><:eif Admin:>
         <a href="<:url allprod:>" class="thumbnail"><:switch:><:case Allprod thumbImage:><:thumbnail allprod:><:case default:><:sthumbimage allprod product_table thumbnail,1:><:endswitch:></a>
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
@@ -24,8 +24,8 @@
           <p class="options"><input type="hidden" id="qty<:allprod id:>" name="qty<:allprod id:>" value="" /><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /></p><:or:><:eif:>
         </div>
       </td><:iterator end allprods:><:if Arithmetic [allprod_count] % [cfg "product table" cols 3]:><:if Cfg "product table" colspan:>
-      <td colspan="<:arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] )]:>
-      <td>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
+      <td class="row_end" colspan="<:arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] )]:>
+      <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:or:><:eif:>>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
     </tr>
   </table>
 </div><:endswitch:><:switch:><:case Allcats:>
@@ -34,14 +34,14 @@
     <tr><:iterator begin allcats:><:if Arithmetic [allcat_index] && [allcat_index] % [cfg "catalog table" cols 3] == 0:>
     </tr>
     <tr><:or Arithmetic:><:eif Arithmetic:>
-      <td><:if Admin:>
+      <td<:ifArithmetic [allcat_number] && [allcat_number] % [cfg "catalog table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:if Admin:>
         <div class="arrows"><:include admin/adminmenu/allcat_mini.tmpl:><:moveallcat:></div><:or Admin:><:eif Admin:>
         <a href="<:url allcat:>" class="thumbnail"><:switch:><:case Allcat thumbImage:><:thumbnail allcat:><:case default:><:sthumbimage allcat catalog_table thumbnail,1:><:endswitch:></a>
         <a href="<:url allcat:>" class="title"><:allcat title:></a><:switch:><:case Allcat summary:>
         <p class="summary"><:allcat summary:></p><:case Allcat summaryLength:>
         <p class="summary"><:summary allcat:></p><:endswitch:>
       </td><:iterator end allcats:><:if Arithmetic [allcat_count] % [cfg "catalog table" cols 3]:><:if Cfg "catalog table" colspan:>
-      <td colspan="<:arithmetic [cfg "catalog table" cols 3] - ( [allcat_count] % [cfg "catalog table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "catalog table" cols 3] - ( [allcat_count] % [cfg "catalog table" cols 3] )]:>
+      <td class="row_end" colspan="<:arithmetic [cfg "catalog table" cols 3] - ( [allcat_count] % [cfg "catalog table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "catalog table" cols 3] - ( [allcat_count] % [cfg "catalog table" cols 3] )]:>
       <td>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
     </tr>
   </table>

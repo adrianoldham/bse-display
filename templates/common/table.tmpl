@@ -12,15 +12,15 @@
     <tr><:iterator begin allkids:><:if Arithmetic [allkid_index] && [allkid_index] % [cfg "article table" cols 3] == 0:>
     </tr>
     <tr><:or Arithmetic:><:eif Arithmetic:>
-      <td><:if Admin:>
+      <td<:ifArithmetic [allkid_number] && [allkid_number] % [cfg "article table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:if Admin:>
         <div class="arrows"><:include admin/adminmenu/allkid_mini.tmpl:><:movestepkid:></div><:or Admin:><:eif Admin:>
         <a href="<:url allkid:>" class="thumbnail"><:switch:><:case Allkid thumbImage:><:thumbnail allkid:><:case default:><:sthumbimage allkid table_thumbnail thumbnail,1:><:endswitch:></a>
         <a href="<:url allkid:>" class="title"><:allkid title:></a><:switch:><:case Allkid summary:>
         <p class="summary"><:allkid summary:></p><:case Allkid summaryLength:>
         <p class="summary"><:summary allkid:></p><:endswitch:>
-      </td><:iterator end allkids:><:if Arithmetic [ifAllkids] % [cfg "article table" cols 3]:><:if Cfg "article table" colspan:>
-      <td colspan="<:arithmetic [cfg "article table" cols 3] - ( [ifAllkids] % [cfg "article table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "article table" cols 3] - ( [ifAllkids] % [cfg "article table" cols 3] )]:>
-      <td>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
+      </td><:iterator end allkids:><:if Arithmetic [allkid_count] % [cfg "article table" cols 3]:><:if Cfg "article table" colspan:>
+      <td class="row_end" colspan="<:arithmetic [cfg "article table" cols 3] - ( [allkid_count] % [cfg "article table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "article table" cols 3] - ( [allkid_count] % [cfg "article table" cols 3] )]:>
+      <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:or:><:eif:>>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
     </tr>
   </table>
 </div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Stepparents:>
