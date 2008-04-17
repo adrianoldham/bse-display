@@ -7,7 +7,7 @@ Hello <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
 access your <:cfg site name:> account details.
 
 If you did not make this request, please rest assured that your link is 
-only forwarded to your registered email address for security reasons.  
+only ever delivered to your account email address for security reasons.  
 No-one else can ever access it.
 
 ACCOUNT ACCESS LINK:
@@ -15,13 +15,14 @@ ACCOUNT ACCESS LINK:
 
 <:or Cfg:>We have received a request to send you a reminder of your password.
 
-If you did not make this request, please rest assured that your password is 
-only forwarded to your registered email address for security reasons.  
+If you did not make this request, please rest assured that this reminder email is 
+only ever delivered to your account email address for security reasons.  
 No-one else can ever access it.
 
-YOUR ACCOUNT PASSWORD:
+ACCOUNT LOGON DETAILS:
 
-  <:user password:>
+  Username: <:user userId:>
+  Password: <:user password:>
 
 ACCOUNT LOGON LINK:
   <:cfg site secureurl:>/cgi-bin/user.pl<:ifCfg "site users" password_link 0:>?logon=1&userid=<:user userId:>&password=<:user password:><:or:><:eif:>
