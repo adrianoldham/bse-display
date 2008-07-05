@@ -5,7 +5,7 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:switch:><:case Cfg popimage table:>
+</div><:or Or:><:eif Or:><:if Images named /(?<!_hide)$/ :><:switch:><:case Cfg popimage table:>
 <table class="gallery">
   <tr><:iterator begin images named /(?<!_hide)$/ :><:if Arithmetic [image_index] && [image_index] % [cfg popimage cols 3] == 0:>
   </tr>
@@ -23,7 +23,7 @@
     <a href="<:thumbimage gallery_full - image:>" rel="lightbox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery -:></a><:if And [cfg popimage caption 0] [image - alt]:>
     <p><:image - alt:></p><:or And:><:eif And:>
   </li><:iterator separator images:><:iterator end images:>
-</ul><:endswitch:><:or Or:><:eif Or:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
+</ul><:endswitch:><:or Images:><:eif Images:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
 <:movestepkid:><:embed allkid:><:iterator end allkids:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids:><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids:>
