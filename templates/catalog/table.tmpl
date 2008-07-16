@@ -16,7 +16,7 @@
     <tr><:or Arithmetic:><:eif Arithmetic:>
       <td<:ifArithmetic [allprod_number] && [allprod_number] % [cfg "product table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:if Admin:>
         <div class="arrows"><:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:></div><:or Admin:><:eif Admin:>
-        <a href="<:url allprod:>" class="thumbnail"><:switch:><:case Allprod thumbImage:><:thumbnail allprod:><:case default:><:sthumbimage allprod product_table thumbnail,1:><:endswitch:></a>
+        <a href="<:url allprod:>" class="thumbnail"><:switch:><:case Allprod thumbImage:><:thumbnail allprod:><:case Cfg "thumb geometries" product_table:><:sthumbimage allprod product_table thumbnail,1:><:endswitch:></a>
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <p class="summary"><:allprod description:></p><:or And:><:eif And:>
         <div class="details">
@@ -37,7 +37,7 @@
     <tr><:or Arithmetic:><:eif Arithmetic:>
       <td<:ifArithmetic [allcat_number] && [allcat_number] % [cfg "catalog table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:if Admin:>
         <div class="arrows"><:include admin/adminmenu/allcat_mini.tmpl:><:moveallcat:></div><:or Admin:><:eif Admin:>
-        <a href="<:url allcat:>" class="thumbnail"><:switch:><:case Allcat thumbImage:><:thumbnail allcat:><:case default:><:sthumbimage allcat catalog_table thumbnail,1:><:endswitch:></a>
+        <a href="<:url allcat:>" class="thumbnail"><:switch:><:case Allcat thumbImage:><:thumbnail allcat:><:case Cfg "thumb geometries" catalog_table:><:sthumbimage allcat catalog_table thumbnail,1:><:endswitch:></a>
         <a href="<:url allcat:>" class="title"><:allcat title:></a><:switch:><:case Allcat summary:>
         <p class="summary"><:allcat summary:></p><:case Allcat summaryLength:>
         <p class="summary"><:summary allcat:></p><:endswitch:>

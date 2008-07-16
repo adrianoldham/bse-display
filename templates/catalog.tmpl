@@ -12,8 +12,9 @@
 <div class="items">
   <ul><:iterator begin allprods:>
     <li class="item">
-      <div class="col1"><:ifAllprod thumbImage:>
-        <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:or:><:eif:>
+      <div class="col1"><:switch:><:case Allprod thumbImage:>
+        <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:case Cfg "thumb geometries" product_list:>
+        <a href="<:sthumbimage allprod product_zoom thumbnail,1 src:>" class="thumbnail"><:sthumbimage allprod product_list thumbnail,1:></a><:endswitch:>
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <div class="i_description"><:allprod description:></div><:or And:><:eif And:>
       </div>
@@ -38,8 +39,9 @@
   </thead>
   <tbody><:iterator begin allprods:>
     <tr class="item">
-      <td class="col1"><:ifAllprod thumbImage:>
-        <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:or:><:eif:>
+      <td class="col1"><:switch:><:case Allprod thumbImage:>
+        <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:case Cfg "thumb geometries" product_list:>
+        <a href="<:sthumbimage allprod product_zoom thumbnail,1 src:>" class="thumbnail"><:sthumbimage allprod product_list thumbnail,1:></a><:endswitch:>
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <div class="i_description"><:allprod description:></div><:or And:><:eif And:>
       </td>
