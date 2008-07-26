@@ -1,8 +1,9 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<div id="article_<:article id:>" class="article product"><:if Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Product retailPrice:>
+<div id="article_<:article id:>" class="article product"><:switch:><:case Match [article flags] "T":>
+<h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Product retailPrice:>
 <div class="buynow">
 <form id="add_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
   <input type="hidden" name="id" value="<:product id:>" />

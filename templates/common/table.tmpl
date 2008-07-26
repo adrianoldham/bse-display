@@ -1,8 +1,9 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<div id="article_<:article id:>" class="article"><:if Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:or Embedded:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:eif Embedded:><:if Or [article body] [ifImages]:>
+<div id="article_<:article id:>" class="article"><:switch:><:case Match [article flags] "T":>
+<h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
+<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
 </div><:or Or:><:eif Or:><:switch:><:case And [ifAllkids] [ifUnderThreshold]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
