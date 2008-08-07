@@ -6,8 +6,8 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:switch:><:case Allprods:><:include include/sortallkids.tmpl:><:if UnderThreshold allkids:><:iterator begin allprods:>
-<:movestepkid:><:embed allprod:><:iterator separator allprods:><:iterator end allprods:><:or UnderThreshold:>
+</div><:or Or:><:eif Or:><:switch:><:case Allprods:><:include include/sortallkids.tmpl:><:if UnderThreshold allprods:><:iterator begin allprods:>
+<:moveallprod:><:embed allprod:><:iterator separator allprods:><:iterator end allprods:><:or UnderThreshold:>
 <form id="add_multiple_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
 <input type="hidden" name="r" value="<:url top:>" /><:if Cfg shop catalog_list:>
 <div class="items">
