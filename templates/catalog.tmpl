@@ -48,7 +48,7 @@
       </td>
       <td class="col2"><input type="text" id="qty<:allprod id:>" name="qty<:allprod id:>" size="2" /></td>
       <td class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></td>
-      <td class="col4"><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:if Admin:> <:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:><:or Admin:><:eif Admin:></td>
+      <td class="col4"><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:include admin/adminmenu/allprod_mini.tmpl:></td>
     </tr><:iterator end allprods:>
   </tbody>
 </table><:eif Cfg:>
