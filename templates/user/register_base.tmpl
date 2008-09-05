@@ -1,6 +1,6 @@
 <:wrap user/pubbase.tmpl title=>"User Services" :>
 <:include include/usermessage.tmpl:>
-<form name="register" method="post" action="<:cfg site secureurl:><:script:>">
+<form name="register_form" method="post" action="<:cfg site secureurl:><:script:>">
   <table border="0" cellpadding="1" cellspacing="1" align="center">
     <tr>
       <td colspan="3">
@@ -16,7 +16,7 @@
       <td colspan="3" align="center">You are already logged on - Why register again?</td>
     </tr><:or User:><:eif User:>
       <:ifCgi r:>
-      <input type="hidden" name="r" value="<:cgi r:>">
+      <input type="hidden" name="r" value="<:cgi r:>" />
       <:or:><:eif:>
 <:if Cfg "site users" nopassword 0:>
 <:or Cfg:>
