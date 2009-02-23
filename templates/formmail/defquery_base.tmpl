@@ -10,6 +10,7 @@
   <:if Eq [field htmltype] "header":><tr>
     <td colspan="3">
       <h2><:field description:></h2>
+      <input type="hidden" name="<:field name:>" value="<:field description:>" />
     </td></tr><:or Eq:>
   <:if Match [field htmltype] "hidden":><:or Match:><tr>
     <:ifField hidelabel:><:or:><th><label for="<:field name:>"><:field description:></label>:</th><:eif:>
