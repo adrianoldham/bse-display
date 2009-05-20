@@ -30,7 +30,12 @@
     </td>
     <td><:ifField help:><img src="<:cfg "help style user" icon /images/basic/user/help.gif:>" title="<:field help:>" alt="<:field help:>" /> <:or:><:eif:><:error_img [field name]:></td>
   </tr><:eif Match:><:eif Eq:><:iterator separator fields:>
-<:iterator end fields:></table>
+<:iterator end fields:><:if Recaptcha:>
+  <tr>
+    <th><:formcfg recaptcha_description "Anti-spam verification":>:</th>
+    <td><:recaptcha:></td>
+  </tr><:or Recaptcha:><:eif Recaptcha:>
+</table>
 <p>* Indicates required fields</p>
 <p><input type="submit" name="a_send" value="<:formcfg submit "Submit Form":>" /></p>
 </form>
