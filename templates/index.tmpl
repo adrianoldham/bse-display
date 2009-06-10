@@ -9,7 +9,7 @@
   <ul><:iterator begin allkids:>
     <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllkid thumbImage:>
       <a href="<:url allkid:>" class="thumbnail"><:thumbnail allkid:></a><:or:><:eif:>
-      <a href="<:url allkid:>" class="title"><:allkid title:></a><:include admin/adminmenu/allkid_mini.tmpl:><:switch:><:case Allkid summary:>
+      <a href="<:url allkid:>" class="title"><:allkid title:></a><:include admin/adminmenu/allkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Allkid summary:>
       <p class="summary"><:allkid summary:></p><:case Allkid summaryLength:>
       <p class="summary"><:summary allkid:></p><:endswitch:>
     </li><:iterator end allkids:>

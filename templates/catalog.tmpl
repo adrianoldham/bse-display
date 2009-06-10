@@ -61,7 +61,7 @@
   <ul><:iterator begin allcats:>
     <li<:ifAllcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllcat thumbImage:>
       <a href="<:url allcat:>" class="thumbnail"><:thumbnail allcat:></a><:or:><:eif:>
-      <a href="<:url allcat:>" class="title"><:allcat title:></a><:include admin/adminmenu/allcat_mini.tmpl:><:switch:><:case Allcat summary:>
+      <a href="<:url allcat:>" class="title"><:allcat title:></a><:include admin/adminmenu/allcat_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Allcat summary:>
       <p class="summary"><:allcat summary:></p><:case Allcat summaryLength:>
       <p class="summary"><:summary allcat:></p><:endswitch:>
     </li><:iterator end allcats:>

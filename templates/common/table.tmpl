@@ -15,7 +15,7 @@
     <tr><:or Arithmetic:><:eif Arithmetic:>
       <td<:ifArithmetic [allkid_number] && [allkid_number] % [cfg "article table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:include admin/adminmenu/allkid_mini.tmpl:>
         <a href="<:url allkid:>" class="thumbnail"><:switch:><:case Allkid thumbImage:><:thumbnail allkid:><:case default:><:sthumbimage allkid article_table thumbnail,1:><:endswitch:></a>
-        <a href="<:url allkid:>" class="title"><:allkid title:></a><:switch:><:case Allkid summary:>
+        <a href="<:url allkid:>" class="title"><:allkid title:></a><:switch:><:case Cfg basic hide_child_summary:><:case Allkid summary:>
         <p class="summary"><:allkid summary:></p><:case Allkid summaryLength:>
         <p class="summary"><:summary allkid:></p><:endswitch:>
       </td><:iterator end allkids:><:if Arithmetic [allkid_count] % [cfg "article table" cols 3]:><:if Cfg "article table" colspan:>

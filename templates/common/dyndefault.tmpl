@@ -12,7 +12,7 @@
   <ul><:iterator begin dynallkids:>
     <li<:ifDynallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynallkid thumbImage:>
       <a href="<:url dynallkid:>" class="thumbnail"><:thumbnail dynallkid:></a><:or:><:eif:>
-      <a href="<:url dynallkid:>" class="title"><:dynallkid title:></a><:include admin/adminmenu/dynallkid_mini.tmpl:><:switch:><:case Dynallkid summary:>
+      <a href="<:url dynallkid:>" class="title"><:dynallkid title:></a><:include admin/adminmenu/dynallkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Dynallkid summary:>
       <span class="summary"><:dynallkid summary:></span><:endswitch:>
     </li><:iterator end dynallkids:>
   </ul>
@@ -28,8 +28,8 @@
   <ul><:iterator begin allkids:>
     <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllkid thumbImage:>
       <a href="<:url allkid:>" class="thumbnail"><:thumbnail allkid:></a><:or:><:eif:>
-      <a href="<:url allkid:>" class="title"><:allkid title:></a><:include admin/adminmenu/allkid_mini.tmpl:><:switch:><:case Allkid summary:>
-      <p class="summary"><:allkid summary:></p><:case Allkid summaryLength:>
+      <a href="<:url allkid:>" class="title"><:allkid title:></a><:include admin/adminmenu/allkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Allkid summary:>
+      <p class="summary"><:allkid summary:></p><:case Allkid summaryLength:><!-- summary tag is not currently supported in dynamic iterators -->
       <p class="summary"><:summary allkid:></p><:endswitch:>
     </li><:iterator end allkids:>
   </ul>

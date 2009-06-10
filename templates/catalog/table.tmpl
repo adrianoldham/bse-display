@@ -37,7 +37,7 @@
     <tr><:or Arithmetic:><:eif Arithmetic:>
       <td<:ifArithmetic [allcat_number] && [allcat_number] % [cfg "catalog table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:include admin/adminmenu/allcat_mini.tmpl:>
         <a href="<:url allcat:>" class="thumbnail"><:switch:><:case Allcat thumbImage:><:thumbnail allcat:><:case Cfg "thumb geometries" catalog_table:><:sthumbimage allcat catalog_table thumbnail,1:><:endswitch:></a>
-        <a href="<:url allcat:>" class="title"><:allcat title:></a><:switch:><:case Allcat summary:>
+        <a href="<:url allcat:>" class="title"><:allcat title:></a><:switch:><:case Cfg basic hide_child_summary:><:case Allcat summary:>
         <p class="summary"><:allcat summary:></p><:case Allcat summaryLength:>
         <p class="summary"><:summary allcat:></p><:endswitch:>
       </td><:iterator end allcats:><:if Arithmetic [allcat_count] % [cfg "catalog table" cols 3]:><:if Cfg "catalog table" colspan:>
