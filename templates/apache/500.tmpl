@@ -13,9 +13,9 @@
 <p>Request: <!--#echo var="REQUEST_URI" --></p>
 <!--#if expr="$HTTP_REFERER != ''" -->
 <p>Referrer: <!--#echo var="HTTP_REFERER" --></p>
-<!--#endif -->
+<!--#endif --><:ifCfg "error settings" printenv:>
 <h2>Environment details</h2>
-<p style="overflow: auto; white-space: pre-wrap; height: 100px; border: 1px solid #333; padding: 5px" class="printenv"><!--#printenv --></p>
+<p style="overflow: auto; white-space: pre-wrap; height: 100px; border: 1px solid #333; padding: 5px" class="printenv"><!--#printenv --></p><:or:><:eif:>
 </div>
 </div>
 </div>
