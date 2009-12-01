@@ -1,0 +1,41 @@
+<:wrap formmail/formbase.tmpl:><:ifFormcfg body:>
+<:bodytext formcfg body "Information sent via this form will not be shared with other organisations.":><:or:><:eif:>
+<form action="<:script:>" method="post"<:ifFormHasFileFields:> enctype="multipart/form-data"<:or:><:eif:> class="<:id:>">
+<input type="hidden" name="form" value="<:id:>" /><:ifCgi r:>
+<input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:><:ifFormcfg spam_check_field:>
+<input type="hidden" name="<:formcfg spam_check_field:>" value="" /><:or:><:eif:><:iterator begin fields:><:if Eq [field htmltype] "hidden":>
+<input type="hidden" name="<:field name:>" value="<:old [field name] field default:>" /><:or Eq:><:eif Eq:><:iterator end fields:>
+<fieldset class="group first"><:iterator begin fields:><:if Eq [field htmltype] "header":><:ifEq [field_number] "1":><:or:>
+</fieldset>
+<fieldset class="group <:field name:>"><:eif:>
+  <legend><:field description:></legend>
+  <input type="hidden" name="<:field name:>" value="<:field description:>" /><:or Eq:><:if Match [field htmltype] "hidden":><:or Match:>
+  <div class="<:ifFirstField:>first <:or:><:eif:><:ifLastField:>last <:or:><:eif:><:switch:><:case Eq [field htmltype] "bodytext":>bodytext<:case Eq [field htmltype] "textarea":>textarea<:case Eq [field htmltype] "password":>password<:case Eq [field htmltype] "select":>select<:case Eq [field htmltype] "multiselect":>multiselect<:case Eq [field htmltype] "check":>checkbox<:case Eq [field htmltype] "radio":>radio<:case default:>input<:endswitch:><:ifField required:> required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:><:ifField class:> <:field class:><:or:><:eif:> <:field name:>"<:ifField help:> title="<:field help:>"<:or:><:eif:>><:if Field hidelabel:><:or Field:>
+    <label for="<:field name:>"><:error_img [field name]:> <:field description:>:<:ifField required:> <span class="required">*</span><:or:><:eif:></label><:eif Field:><:ifField intro:>
+    <span class="intro"><:field intro:></span><:or:><:eif:><:switch:><:case Eq [field htmltype] "bodytext":>
+    <:bodytext field bodytext:><:case Eq [field htmltype] "textarea":>
+    <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>" class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>"<:ifField help:> title="<:field help:>"<:or:><:eif:>><:old [field name] field default:></textarea><:case Eq [field htmltype] "password":>
+    <input type="password" name="<:field name:>" id="<:field name:>" value="<:old [field name]:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:>/><:case Eq [field htmltype] "select":>
+    <:values_select:><:case Eq [field htmltype] "multiselect":>
+    <select name="<:field name:>" id="<:field name:>" size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple">
+      <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:or:><:eif:>><:value name:></option>
+      <:iterator end values:>
+    </select><:case Eq [field htmltype] "radio":>
+    <fieldset id="<:field name:>">
+      <:iterator begin values:><span class="radio"><input type="radio" name="<:field name:>" value="<:value id:>" id="<:field name:>_<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <label for="<:field name:>_<:value id:>"><:value name:></label></span><:iterator separator values:>
+      <:iterator end values:>
+    </fieldset><:case Match [field htmltype] "check":>
+    <fieldset id="<:field name:>">
+      <:iterator begin values:><span class="checkbox"><input type="checkbox" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <label for="<:field name:>_<:value id:>"><:value name:></label></span><:iterator separator values:>
+      <:iterator end values:>
+    </fieldset><:case Eq [field htmltype] "file":>
+    <input type="file" name="<:field name:>" id="<:field name:>" value="" /><:case default:>
+    <input type="text" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>"<:ifField help:> title="<:field help:>"<:or:><:eif:> /><:endswitch:><:ifField notes:>
+    <span class="notes"><:field notes:></span><:or:><:eif:>
+  </div><:eif Match:><:eif Eq:><:iterator end fields:><:if Recaptcha:>
+  <label><:formcfg recaptcha_description "Anti-spam verification":>:</label>
+  <:recaptcha:><:or Recaptcha:><:eif Recaptcha:>
+</fieldset>
+<p><span class="required">* Required.</span> <:formcfg required_text "Please provide information for all marked fields.":></p>
+<p><input type="submit" name="a_send" value="<:formcfg submit "Submit Form":>" class="submit" /></p>
+</form>
