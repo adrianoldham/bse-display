@@ -19,10 +19,11 @@
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <div class="i_description"><:allprod description:></div><:or And:><:eif And:>
       </div>
-      <div class="col2"><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /></div>
+      <div class="col2"><:ifAllprod options:><:or:><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /><:eif:></div>
       <div class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></div>
-      <div class="col4">
-        <input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:if Admin:>
+      <div class="col4"><:switch:><:case Allprod options:>
+        <a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:>
+        <input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:if Admin:>
         <span class="arrows"><:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:></span><:or Admin:><:eif Admin:>
       </div>
     </li><:iterator end allprods:>
@@ -46,9 +47,9 @@
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <div class="i_description"><:allprod description:></div><:or And:><:eif And:>
       </td>
-      <td class="col2"><input type="text" id="qty<:allprod id:>" name="qty<:allprod id:>" size="2" /></td>
+      <td class="col2"><:ifAllprod options:><:or:><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /><:eif:></td>
       <td class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></td>
-      <td class="col4"><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:include admin/adminmenu/allprod_mini.tmpl:></td>
+      <td class="col4"><:switch:><:case Allprod options:><a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="hidden" id="qty<:allprod id:>" name="qty<:allprod id:>" value="" /><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/allprod_mini.tmpl:></td>
     </tr><:iterator end allprods:>
   </tbody>
 </table><:eif Cfg:>

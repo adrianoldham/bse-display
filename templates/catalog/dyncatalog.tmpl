@@ -6,8 +6,7 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:if Dynamic:>
-<:switch:><:case Dynallprods:><:include include/sortallkids.tmpl:>
+</div><:or Or:><:eif Or:><:if Dynamic:><:switch:><:case Dynallprods:><:include include/sortallkids.tmpl:>
 <form id="add_multiple_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <table class="items">
@@ -25,9 +24,9 @@
       <td class="col1"><:ifDynallprod thumbImage:><a href="<:url dynallprod:>" class="thumbnail"><:thumbnail dynallprod:></a> <:or:><:eif:><a href="<:url dynallprod:>" class="itemtitle"><:dynallprod title:></a><:if And [dynallprod description] [cfg shop product_description 1]:>
         <div class="i_description"><:dynallprod description:></div><:or And:><:eif And:>
       </td>
-      <td class="col2"><input type="text" id="qty<:dynallprod id:>" name="qty<:dynallprod id:>" size="2" tabindex="<:dynallprod_number:>" /></td>
+      <td class="col2"><:ifDynallprod options:><:or:><input type="text" id="qty<:dynallprod id:>" name="qty<:dynallprod id:>" size="2" tabindex="<:dynallprod_number:>" /><:eif:></td>
       <td class="col3"><:ifDynallprod retailPrice:><:cfg shop currency "$":><:money dynallprod retailPrice:><:or:>NA<:eif:></td>
-      <td class="col4"><input type="image" name="a_addsingle<:dynallprod id:>" id="a_addsingle<:dynallprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:include admin/adminmenu/dynallprod_mini.tmpl:></td>
+      <td class="col4"><:switch:><:case ifDynallprod options:><a href="<:url dynallprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Dynallprod retailPrice:><input type="image" name="a_addsingle<:dynallprod id:>" id="a_addsingle<:dynallprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/dynallprod_mini.tmpl:></td>
     </tr><:iterator end dynallprods:>
   </tbody>
 </table>
