@@ -8,6 +8,7 @@
 <:ifCfg "site users" nopassword:><:or:>password, <:eif:>email and mailing addresses etc.
 </p>
 <div id="userhome"> 
+  <:include include/custom/userpage_top_custom.tmpl optional:><:include include/userpage_top_custom.tmpl optional:>
 <table border="0" cellspacing="1" cellpadding="5">
   <:if Cfg "site users" nopassword:><:or Cfg:><tr>
     <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=1&amp;_t=password"><img src="/images/<:cfg theme name:>user/lock.gif" width="32" height="32" border="0" title="Password manager" alt="Password manager" /></a></th>
@@ -15,9 +16,9 @@
       Use this form to change your account password.</td>
   </tr><:eif Cfg:>
   <:if Cfg subscriptions enabled 1:><tr>
-    <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><img src="/images/<:cfg theme name:>user/subs.gif" width="32" height="32" border="0" title="Newsletter manager" alt="Newsletter manager" /></a></th>
-    <td width="100%"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><b>Newsletter manager</b></a><br />
-      Subscribe or Unsubscribe to our email newsletters.</td>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><img src="/images/<:cfg theme name:>user/subs.gif" width="32" height="32" border="0" title="Email manager" alt="Email manager" /></a></th>
+    <td width="100%"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><b>Email manager</b></a><br />
+      Manage your subscriptions to email announcements.</td>
   </tr><:or Cfg:><:eif Cfg:>
   <:if Cfg "site users" nopassword:><:or Cfg:><:ifCfg affiliate enabled 0:><tr>
     <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=1&amp;_t=affiliate"><img src="/images/<:cfg theme name:>user/affiliate.gif" width="32" height="32" border="0" title="Affiliate page manager" alt="Affiliate page manager" /></a></th>
@@ -44,11 +45,16 @@
     <td width="100%"><a href="<:script:>?userpage=1&amp;_t=orders"><b>Your orders</b></a><br />
       View your order details, status and history here.</td>
   </tr><:or:><:eif:><:eif Cfg:>
-  <:if Cfg "site users" nopassword:><:or Cfg:><:ifAnd [cfg shop enabled] [cfg "site users" files]:><tr>
-    <th align="left" nowrap="nowrap"><a href="<:script:>?userpage=1&amp;_t=files"><img src="/images/<:cfg theme name:>user/files.gif" width="32" height="32" border="0" title="Your purchased files" alt="Your purchased files" /></a></th>
-    <td width="100%"><a href="<:script:>?userpage=1&amp;_t=files"><b>Your purchased files</b></a><br />
-      Download your purchased files from here.</td>
+  <:if Cfg "site users" nopassword:><:or Cfg:><:ifCfg shop enabled:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?userpage=1&amp;_t=wishlist"><img src="/images/<:cfg theme name:>user/wishlist.gif" width="32" height="32" border="0" title="Your wishlist" alt="Your wishlist" /></a></th>
+    <td width="100%"><a href="<:script:>?userpage=1&amp;_t=wishlist"><b>Your wishlist</b></a><br />
+      View and manage your wishlist here.</td>
   </tr><:or:><:eif:><:eif Cfg:>
+  <:ifCfg "site users" files 1:><tr>
+    <th align="left" nowrap="nowrap"><a href="<:script:>?userpage=1&amp;_t=files"><img src="/images/<:cfg theme name:>user/files.gif" width="32" height="32" border="0" title="File manager" alt="File manager" /></a></th>
+    <td width="100%"><a href="<:script:>?userpage=1&amp;_t=files"><b>File manager</b></a><br />
+      Download your files from here.</td>
+  </tr><:or:><:eif:>
   <tr>
     <th align="left" nowrap="nowrap"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><img src="/images/<:cfg theme name:>user/user.gif" width="32" height="32" border="0" title="Your contact details" alt="Your contact details" /></a></th>
     <td width="100%"><a href="<:script:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><b>Your contact details</b></a><br />

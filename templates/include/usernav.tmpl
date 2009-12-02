@@ -4,8 +4,8 @@
   <:if Cfg "site users" nopassword:><:or Cfg:>
     <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=password"><img src="/images/<:cfg theme name:>user/lock_sml.gif" width="19" height="19" border="0" title="Password manager" alt="Password manager" /></a></th>
     <:eif Cfg:>
-  <:if Cfg subscriptions enabled 1:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><img src="/images/<:cfg theme name:>user/subs_sml.gif" width="19" height="19" border="0" title="Newsletter manager" alt="Newsletter manager" /></a></th>
+  <:if Cfg subscriptions enabled 0:>
+    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><img src="/images/<:cfg theme name:>user/subs_sml.gif" width="19" height="19" border="0" title="Email manager" alt="Email manager" /></a></th>
     <:or Cfg:><:eif Cfg:>
   <:if Cfg "site users" nopassword:><:or Cfg:>
     <:ifCfg affiliate enabled 0:>
@@ -27,11 +27,14 @@
     <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=orders"><img src="/images/<:cfg theme name:>user/dollar_sml.gif" width="19" height="19" border="0" title="Your orders" alt="Your orders" /></a></th>
     <:or:><:eif:><:eif Cfg:>
   <:if Cfg "site users" nopassword:><:or Cfg:>
-    <:ifAnd [cfg shop enabled] [cfg "site users" files]:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=files"><img src="/images/<:cfg theme name:>user/files_sml.gif" width="19" height="19" border="0" title="Your purchased files" alt="Your purchased files" /></a></th>
+    <:ifCfg shop enabled:>
+    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=wishlist"><img src="/images/<:cfg theme name:>user/wishlist_sml.gif" width="19" height="19" border="0" title="Your wishlist" alt="Your wishlist" /></a></th>
     <:or:><:eif:><:eif Cfg:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><img src="/images/<:cfg theme name:>user/user_sml.gif" width="19" height="19" border="0" title="Your contact details" alt="Your contact details" /></a></th>
+    <:ifCfg "site users" files 1:>
+    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=files"><img src="/images/<:cfg theme name:>user/files_sml.gif" width="19" height="19" border="0" title="File manager" alt="File manager" /></a></th>
+    <:or:><:eif:>
   <:if Cfg "site users" nopassword:><:or Cfg:>
+    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><img src="/images/<:cfg theme name:>user/user_sml.gif" width="19" height="19" border="0" title="Your contact details" alt="Your contact details" /></a></th>
     <:ifCfg shop enabled:>
     <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=billing"><img src="/images/<:cfg theme name:>user/card_sml.gif" width="19" height="19" border="0" title="Your billing details" alt="Your billing details" /></a></th>
     <:or:><:eif:>
