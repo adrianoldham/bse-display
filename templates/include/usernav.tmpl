@@ -40,7 +40,7 @@
     <:or:><:eif:>
   <:eif Cfg:>
     <:ifCfg shop enabled:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/shop.pl"><img src="/images/<:cfg theme name:>user/cart_sml.gif" width="19" height="19" border="0" title="Your shopping cart" alt="Your shopping cart" /></a></th>
+    <th align="left" nowrap="nowrap"><a href="/cgi-bin/shop.pl"><img src="/images/<:cfg theme name:>user/cart_sml.gif" width="19" height="19" border="0" title="Your shopping <:cfg shop cart_name cart:>" alt="Your shopping <:cfg shop cart_name cart:>" /></a></th>
     <:or:><:eif:>
   <:if Or [cfg "site users" nopassword] [cfg custom user_auth]:><:or Or:>
     <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?logoff=1"><img src="/images/<:cfg theme name:>user/cross_sml.gif" width="19" height="19" border="0" title="Logout now" alt="Logout now" /></a></th>

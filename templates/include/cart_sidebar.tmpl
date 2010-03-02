@@ -19,5 +19,5 @@
     </tbody>
   </table>
   <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money dyncarttotalcost:></p><:if Dyncarttotalcost:>
-  <form action="<:dyntarget shop:>" method="post"><p><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" /> <input type="submit" name="cart" value="View cart" accesskey="v" title="AccessKey = v" /></p></form><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
+  <form action="<:dyntarget shop:>" method="post"><p><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" /> <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" /></p></form><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
 </div><:or Dyncart:><:eif Dyncart:>

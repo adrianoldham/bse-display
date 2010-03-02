@@ -20,8 +20,8 @@
   <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:money product retailPrice:></span> (inc GST)</p>
   <p class="buy"><:ifProduct listed:>
     <label for="qty<:article id:>">Qty:</label> <input type="text" id="qty<:article id:>" name="quantity" value="1" size="2" />
-    <input type="submit" id="add<:article id:>" name="add" value="Add to cart" accesskey="a" title="AccessKey = a" class="shop_addshopitem" />
-    <input type="submit" name="cart" value="View cart" accesskey="v" title="AccessKey = v" /><:or:>
+    <input type="submit" id="add<:article id:>" name="add" value="Add to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" class="shop_addshopitem" />
+    <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" /><:or:>
     This product is currenty not available for sale<:eif:>
   </p>
 </form>

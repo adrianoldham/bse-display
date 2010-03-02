@@ -21,7 +21,7 @@
         <p class="summary"><:allprod description:></p><:or And:><:eif And:>
         <div class="details">
           <p class="price"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></p>
-          <p class="options"><:switch:><:case Allprod options:><a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="hidden" id="qty<:allprod id:>" name="qty<:allprod id:>" value="" /><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:></p>
+          <p class="options"><:switch:><:case AnyProductOptions allprod:><a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="hidden" id="qty<:allprod id:>" name="qty<:allprod id:>" value="" /><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:></p>
         </div>
       </td><:iterator end allprods:><:if Arithmetic [allprod_count] % [cfg "product table" cols 3]:><:if Cfg "product table" colspan:>
       <td class="row_end" colspan="<:arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] )]:>

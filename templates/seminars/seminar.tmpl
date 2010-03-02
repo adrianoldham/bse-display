@@ -35,7 +35,7 @@
   <h2>Special Instructions</h2>
   <textarea name="customer_instructions" cols="60" rows="10"></textarea>
 </div>
-<p class="buy"><:ifSeminar retailPrice:><input type="submit" name="add" value="Add to cart" /> <input type="submit" name="cart" value="View cart" /><:or:><input type="submit" name="book" value="Book now" /><:eif:></p>
+<p class="buy"><:ifSeminar retailPrice:><input type="submit" name="add" value="Add to <:cfg shop cart_name cart:>" /> <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" /><:or:><input type="submit" name="book" value="Book now" /><:eif:></p>
 </form><:if Or [ifStepparents] [ifStepkids]:> 
 <div class="relatedsections">
   <p><strong>Related categories:</strong></p>

@@ -66,9 +66,9 @@
       If your billing and shipping details differ.</td>
   </tr><:or:><:eif:><:eif Cfg:>
   <:if Cfg shop enabled:><tr>
-    <th align="left" nowrap="nowrap"><a href="<:cfg site secureurl:>/cgi-bin/shop.pl"><img src="/images/<:cfg theme name:>user/cart.gif" width="32" height="32" border="0" title="Your shopping cart" alt="Your shopping cart" /></a></th>
-    <td width="100%"><a href="/cgi-bin/shop.pl"><b>Your shopping cart</b></a><br />
-    View the items currently in your shopping cart.</td>
+    <th align="left" nowrap="nowrap"><a href="<:cfg site secureurl:>/cgi-bin/shop.pl"><img src="/images/<:cfg theme name:>user/cart.gif" width="32" height="32" border="0" title="Your shopping <:cfg shop cart_name cart:>" alt="Your shopping <:cfg shop cart_name cart:>" /></a></th>
+    <td width="100%"><a href="/cgi-bin/shop.pl"><b>Your shopping <:cfg shop cart_name cart:></b></a><br />
+    View the items currently in your shopping <:cfg shop cart_name cart:>.</td>
   </tr><:or Cfg:><:eif Cfg:>
   <:include include/custom/userpage_custom.tmpl optional:><:include include/userpage_custom.tmpl optional:>
   <:if Or [cfg "site users" nopassword] [cfg custom user_auth]:><:or Or:><tr>
