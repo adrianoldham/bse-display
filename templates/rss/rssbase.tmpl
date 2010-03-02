@@ -15,7 +15,7 @@
     <item>
       <title><:nobodytext ofallkid title |x:></title>
       <link><:ifMatch [ofallkid link] "://":><:or:><:cfg site url:><:eif:><:ofallkid link:></link>
-      <description><![CDATA[<:replace [bodytext ofallkid body] "(=\")/" [concatenate $1 [cfg site url] / ] :>]]></description>
+      <description><![CDATA[<:embed ofallkid rss/rssbody.tmpl:>]]></description>
       <pubDate><:date "%a, %d %b %Y %T %z" ofallkid release:></pubDate>
       <guid isPermaLink="true"><:ifMatch [ofallkid link] "://":><:or:><:cfg site url:><:eif:><:ofallkid link:></guid>
     </item>
