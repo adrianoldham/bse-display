@@ -29,7 +29,7 @@
     </tr>
   </table>
 </div>
-</form><:endswitch:><:switch:><:case Allcats:>
+</form><:endswitch:><:switch:><:case Allcats:><:include include/sortallkids.tmpl:>
 <div class="children">
   <table class="catalogs">
     <tr><:iterator begin allcats:><:if Arithmetic [allcat_index] && [allcat_index] % [cfg "catalog table" cols 3] == 0:>

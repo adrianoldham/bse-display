@@ -1,6 +1,6 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "T":>
+<div id="article_<:article id:>" class="article shop catalog<:switch:><:case Match [article flags] "t":> tabs<:endswitch:>"><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
@@ -9,65 +9,61 @@
 </div><:or Or:><:eif Or:><:switch:><:case Allprods:><:include include/sortallkids.tmpl:><:if UnderThreshold allprods:><:iterator begin allprods:>
 <:moveallprod:><:embed allprod:><:iterator separator allprods:><:iterator end allprods:><:or UnderThreshold:>
 <form id="add_multiple_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
-<input type="hidden" name="r" value="<:url top:>" /><:if Cfg shop catalog_list:>
-<div class="items">
-  <ul><:iterator begin allprods:>
-    <li class="item">
-      <div class="col1"><:switch:><:case Allprod thumbImage:>
-        <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:case Cfg "thumb geometries" product_list:>
-        <a href="<:sthumbimage allprod product_zoom thumbnail,1 src:>" class="thumbnail"><:sthumbimage allprod product_list thumbnail,1:></a><:endswitch:>
-        <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
-        <div class="i_description"><:allprod description:></div><:or And:><:eif And:>
-      </div>
-      <div class="col2"><:ifAnyProductOptions allprod:><:or:><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /><:eif:></div>
-      <div class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></div>
-      <div class="col4"><:switch:><:case AnyProductOptions allprod:>
-        <a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:>
-        <input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:if Admin:>
-        <span class="arrows"><:include admin/adminmenu/allprod_mini.tmpl:><:moveallprod:></span><:or Admin:><:eif Admin:>
-      </div>
-    </li><:iterator end allprods:>
-  </ul>
-</div><:or Cfg:>
+<input type="hidden" name="r" value="<:url top:>" />
 <table class="items">
   <caption>Select Order Items</caption>
   <thead>
     <tr>
-      <th class="col1">Item:</th>
+      <th class="col1" colspan="2">Item:</th>
       <th class="col2">Qty:</th>
       <th class="col3">Price:</th>
       <th class="col4">&nbsp;</th>
     </tr>
   </thead>
   <tbody><:iterator begin allprods:>
-    <tr class="item">
-      <td class="col1"><:switch:><:case Allprod thumbImage:>
-        <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a><:case Cfg "thumb geometries" product_list:>
-        <a href="<:sthumbimage allprod product_zoom thumbnail,1 src:>" class="thumbnail"><:sthumbimage allprod product_list thumbnail,1:></a><:endswitch:>
-        <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
-        <div class="i_description"><:allprod description:></div><:or And:><:eif And:>
+    <tr class="item"><:switch:><:case Allprod thumbImage:>
+      <td class="thumbnail">
+        <a href="<:url allprod:>" class="thumbnail"><:thumbnail allprod:></a>
+      </td>
+      <td class="col1"><:case Cfg "thumb geometries" product_list:>
+      <td class="thumbnail"><:switch:><:case Or [ifVimages allprod named /thumbnail/] [ifVimages allprod numbered 1]:>
+        <a href="<:url allprod:>" class="thumbnail" title="<:allprod title:>" rel="<:sthumbimage allprod product_tooltip thumbnail,1 src:>&amp;d=<:sthumbimage allprod product_tooltip thumbnail,1 width:>,<:sthumbimage allprod product_tooltip thumbnail,1 height:>"><:sthumbimage allprod product_list thumbnail,1:></a><:case Gimage product_placeholder:>
+        <a href="<:url allprod:>" class="thumbnail" title="<:allprod title:>"><:gthumbimage product_list product_placeholder:></a><:case Gimage placeholder:>
+        <a href="<:url allprod:>" class="thumbnail" title="<:allprod title:>"><:gthumbimage product_list placeholder:></a><:endswitch:>
+      </td>
+      <td class="col1"><:case default:>
+      <td class="col1" colspan="2"><:endswitch:>
+        <a href="<:url allprod:>" class="title"><:allprod title:></a><:switch:><:case Cfg shop hide_product_description:><:case Allprod description:>
+        <div class="description"><:allprod description:></div><:endswitch:><:switch:><:case Cfg shop hide_product_summary:><:case Allprod summary:>
+        <div class="summary"><:allprod summary:></div><:case Allprod summaryLength:>
+        <div class="summary"><:summary allprod [allprod summaryLength]:></div><:endswitch:>
       </td>
       <td class="col2"><:ifAnyProductOptions allprod:><:or:><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /><:eif:></td>
       <td class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></td>
-      <td class="col4"><:switch:><:case AnyProductOptions allprod:><a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="hidden" id="qty<:allprod id:>" name="qty<:allprod id:>" value="" /><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/allprod_mini.tmpl:></td>
+      <td class="col4"><:switch:><:case AnyProductOptions allprod:><a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/allprod_mini.tmpl:></td>
     </tr><:iterator end allprods:>
   </tbody>
-</table><:eif Cfg:>
+</table>
 <p class="buttons">
   <input type="submit" id="addmultiple<:article id:>" name="a_addmultiple" value="Add items to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" tabindex="10000" class="shop_addmultiple" />
   <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" tabindex="11000" />
 </p>
-</form><:eif UnderThreshold:><:endswitch:><:switch:><:case Allcats:>
+</form><:eif UnderThreshold:><:endswitch:><:switch:><:case Allcats:><:include include/sortallkids.tmpl:><:if UnderThreshold allcats:><:switch:><:case Match [article flags] "t":>
+<ul class="tabs"><:iterator begin allcats:>
+<li><a href="#article_<:allcat id:>"><:ifAllcat titleAlias:><:allcat titleAlias:><:or:><:allcat title:><:eif:></a></li>
+<:iterator end allcats:>
+</ul><:endswitch:><:iterator begin allcats:>
+<:moveallcat:><:embed allcat:><:iterator separator allcats:><:iterator end allcats:><:or UnderThreshold:>
 <div class="children">
   <ul><:iterator begin allcats:>
     <li<:ifAllcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllcat thumbImage:>
       <a href="<:url allcat:>" class="thumbnail"><:thumbnail allcat:></a><:or:><:eif:>
       <a href="<:url allcat:>" class="title"><:allcat title:></a><:include admin/adminmenu/allcat_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Allcat summary:>
       <p class="summary"><:allcat summary:></p><:case Allcat summaryLength:>
-      <p class="summary"><:summary allcat:></p><:endswitch:>
+      <p class="summary"><:summary allcat [allcat summaryLength]:></p><:endswitch:>
     </li><:iterator end allcats:>
   </ul>
-</div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Stepparents:>
+</div><:eif UnderThreshold:><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Stepparents:>
 <div class="relatedsections">
   <p><strong>Related sections:</strong></p>
   <ul><:iterator begin stepparents:>

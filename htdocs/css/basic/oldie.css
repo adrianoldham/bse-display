@@ -5,7 +5,7 @@
 }
 
 #container {
-	width: 910px; /* width not honoured on "body" */
+	width: 960px; /* width not honoured on "body" */
 	margin: 0 auto;
 	text-align: left;
 	float: none; /* de-float */
@@ -13,11 +13,11 @@
 }
 
 #main {
-	width: 501px; /* includes 40px of padding */
+	width: 551px; /* includes 40px of padding */
 }
 
 #main .article, #main .article .article {
-	width: 461px; /* includes 20px padding */
+	width: 511px; /* includes 20px padding */
 }
 
 #sidebarR .article {
