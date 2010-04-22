@@ -45,8 +45,9 @@
   </thead>
   <tbody>
     <:iterator begin items:><tr class="item"> 
-      <td class="col1">
-        <a href="<:product link:>"><:item title:></a> <!--#UNSUPPORTED HERE :options:--><:if And [item description] [cfg shop product_description 1]:>
+      <td class="col1"><:ifEq [item productId] -1:>
+        <:item title:><:or:>
+        <a href="<:product link:>"><:item title:></a><:eif:> <:ifOptions:><:options:><:or:><:eif:> <:if And [item description] [cfg shop product_description 1]:>
         <div class="i_description"><:item description:></div><:or And:><:eif And:>
       </td>
       <td class="col2"><:item units:> &times;</td>
