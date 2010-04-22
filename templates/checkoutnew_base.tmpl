@@ -22,16 +22,17 @@
 </table>
 <div class="totals">
   <:switch:>
-  <:case Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
-  <p class="freight"><span>Freight:</span> <:ifOverseas:>To be quoted<:or:><:if Freight:><:cfg shop currency "$":><:money freight:><:or Freight:><:cfg freight zero_value "None":><:eif Freight:><:eif:></p>
   <:case Eq [cfg shop shipping] 0:>
+  <:case Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
+  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p>
   <:case Shipping_cost:>
   <p class="freight"><span>(<:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>):</span> <:cfg shop currency "$":><:money shipping_cost:></p>
+  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:money total:></p>
   <:case Eq [shipping_name] contact:>
   <p class="freight"><span>(Shipping charges to be quoted later):</span> <:cfg shop currency "$":>X.XX</p>
+  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p>
   <:case default:>
   <:endswitch:>
-  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:money total:></p>
 </div><:if Cfg "site users" nopassword:><:or Cfg:>
 <p class="alert">
   <:if User:>This purchase will be added to the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;_t=orders&amp;r=<:dyntarget shop:>%3Fcheckout=1"><b>order history</b></a> in your account. You can maintain the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>shipping</b></a> and <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;_t=billing&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>billing</b></a> details in your user <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>account manager</b></a>.
@@ -82,7 +83,14 @@
     </tr>
     <tr>
       <th><label for="delivCountry"><:cfg shop display_delivCountry "Country":>:</label></th>
-      <td><input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry:>" /> *</td>
+      <td><:if Cfgsection "country selector":>
+        <select name="delivCountry" id="delivCountry" onchange="this.form.checkupdate.click();">
+          <option value="">Please select a country</option>
+          <:iterator begin dyncfgsection "country selector" sort=key:>
+          <option value="<:uc [dyncfgentry key]:>"<:if Eq [old delivCountry] [uc [dyncfgentry key]]:> selected="selected"<:or Eq:><:eif Eq:>><:dyncfgentry value:></option>
+          <:iterator end dyncfgsection:>
+        </select><:or Cfgsection:>
+        <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry:>" /><:eif Cfgsection:> *</td>
       <td><:error_img delivCountry:></td>
     </tr>
     <tr>
@@ -207,7 +215,7 @@
   <:include include/custom/checkout_custom.tmpl optional:><:include include/checkout_custom.tmpl optional:>
   <p class="buttons">
     <input type="submit" value="Purchase now" name="a_order" accesskey="p" title="AccessKey = p" />
-    <input type="submit" value="Update" name="checkupdate" accesskey="u" title="AccessKey = u"<:ifAjax:> style="display: none;"<:or:><:eif:> />
+    <input type="submit" value="Update" name="checkupdate" accesskey="u" title="AccessKey = u" />
     <input type="submit" value="Go back" name="cart" accesskey="b" title="AccessKey = b" />
   </p>
 </form>

@@ -78,28 +78,19 @@
       <td class="col2"><:item units:> &times;</td>
       <td class="col3"><:cfg shop currency "$":><:money item retailPrice:></td>
     </tr><:iterator end items:>
-<:if Shipping_cost:>
-    <tr class="item"> 
-      <td class="col1">
-        Shipping charges (for <:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>)
-      </td>
-      <td class="col2"></td>
-      <td class="col3"><:cfg shop currency "$":><:money shipping_cost:></td>
-    </tr>
-<:or Shipping_cost:><:eif Shipping_cost:>
-<:if Eq [order shipping_name] ^contact$:>
-    <tr class="item"> 
-      <td class="col1">
-        Shipping charges to be determined later
-      </td>
-      <td class="col2"></td>
-      <td class="col3"><:cfg shop currency "$":>X.XX</td>
-    </tr>
-<:or Eq:><:eif Eq:>
   </tbody>
 </table>
-<div class="totals"><:if Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
-  <p class="freight"><span>Freight:</span> <:if Order shipping_cost:><:cfg shop currency "$":><:money order shipping_cost:><:or Order:><:ifOverseas:>To be quoted<:or:><:cfg freight zero_value "None":><:eif:><:eif Order:></p><:or Or:><:eif Or:>  
+<div class="totals">
+  <:switch:>
+  <:case Eq [cfg shop shipping] 0:>
+  <:case Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
+  <p class="freight"><span>Freight:</span> <:ifOverseas:>To be quoted<:or:><:if Freight:><:cfg shop currency "$":><:money freight:><:or Freight:><:cfg freight zero_value "None":><:eif Freight:><:eif:></p>
+  <:case Shipping_cost:>
+  <p class="freight"><span>(<:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>):</span> <:cfg shop currency "$":><:money shipping_cost:></p>
+  <:case Eq [order shipping_name] ^contact$:>
+  <p class="freight"><span>(Shipping charges to be quoted later):</span> <:cfg shop currency "$":>X.XX</p>
+  <:case default:>
+  <:endswitch:>
   <p class="total"><span>Total:</span> <:cfg shop currency "$":><:money order total:></p>
 </div><:if Cfg tryandbyte aufreight:><:if Overseas:>
 <p><b>We will contact you with a quote for shipping cost</b></p><:or Overseas:><:ifFreeShippingCart:>
