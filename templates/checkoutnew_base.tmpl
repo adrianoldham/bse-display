@@ -24,15 +24,14 @@
   <:switch:>
   <:case Eq [cfg shop shipping] 0:>
   <:case Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
-  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p>
+  <p class="freight"><span>Freight:</span> <:ifOverseas:>To be quoted<:or:><:if Freight:><:cfg shop currency "$":><:money freight:><:or Freight:><:cfg freight zero_value "None":><:eif Freight:><:eif:></p>
   <:case Shipping_cost:>
   <p class="freight"><span>(<:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>):</span> <:cfg shop currency "$":><:money shipping_cost:></p>
-  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:money total:></p>
   <:case Eq [shipping_name] contact:>
   <p class="freight"><span>(Shipping charges to be quoted later):</span> <:cfg shop currency "$":>X.XX</p>
-  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p>
   <:case default:>
   <:endswitch:>
+  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:money total:></p>
 </div><:if Cfg "site users" nopassword:><:or Cfg:>
 <p class="alert">
   <:if User:>This purchase will be added to the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;_t=orders&amp;r=<:dyntarget shop:>%3Fcheckout=1"><b>order history</b></a> in your account. You can maintain the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>shipping</b></a> and <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;_t=billing&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>billing</b></a> details in your user <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>account manager</b></a>.
