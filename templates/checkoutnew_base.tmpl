@@ -37,7 +37,7 @@
   <:if User:>This purchase will be added to the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;_t=orders&amp;r=<:dyntarget shop:>%3Fcheckout=1"><b>order history</b></a> in your account. You can maintain the <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>shipping</b></a> and <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_opts=1&amp;_t=billing&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>billing</b></a> details in your user <a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>account manager</b></a>.
   <:or User:>If you wish to track the status of your order you must <:if Or [cfg "site users" user_register]:>either <a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_register=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>Register</b></a> or <:or Or:><:eif Or:><a href="<:cfg site secureurl:>/cgi-bin/user.pl?show_logon=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>"><b>Logon</b></a> before you continue with this purchase.<:eif User:>
 </p><:eif Cfg:>
-<form action="<:dyntarget shop:>" method="post">
+<form action="<:dyntarget shop:>" method="post" name="checkoutnew">
   <h2>Shipping Details:</h2>
   <table border="0" cellspacing="0" cellpadding="0">
     <tr>
