@@ -52,8 +52,7 @@
     <li<:ifDynallcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynallcat thumbImage:>
       <a href="<:url dynallcat:>" class="thumbnail"><:thumbnail dynallcat:></a><:or:><:eif:>
       <a href="<:url dynallcat:>" class="title"><:dynallcat title:></a><:include admin/adminmenu/dynallcat_mini.tmpl:><:switch:><:case Dynallcat summary:>
-      <p class="summary"><:dynallcat summary:></p><:case Dynallcat summaryLength:>
-      <p class="summary"><:summary dynallcat:></p><:endswitch:>
+      <p class="summary"><:dynallcat summary:></p><:endswitch:>
     </li><:iterator end dynallcats:>
   </ul>
 </div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Dynstepparents:>
