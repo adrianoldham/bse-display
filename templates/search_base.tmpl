@@ -10,7 +10,7 @@
         <input type="text" id="search_query" name="q" size="40" title="Enter search terms" value="<:ifTerms:><:terms:><:or:>Enter search terms<:eif:>" />
         <input type="submit" id="search_submit" name="submit" accesskey="s" title="AccessKey = s" value="Search" />
       </td>
-    </tr>
+    </tr><:if Cfg search options:>
     <tr>
       <th>&nbsp;</th>
       <td colspan="3">
@@ -33,7 +33,7 @@
           <option value="ae" <:dateSelected ae:>>Archives</option>
         </select>
       </td>
-    </tr>
+    </tr><:or Cfg:><:eif Cfg:>
   </table>
 </form>
 <div id="search_results">
