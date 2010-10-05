@@ -24,16 +24,13 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" /><:or:><:eif:><:ajax includes:>
 <link rel="stylesheet" type="text/css" media="screen" title="screen" href="/css/<:cfg theme name:>custom.css" />
 <link rel="stylesheet" type="text/css" media="print" href="/css/<:cfg theme name:>print.css" />
-<!--[if lt IE 6]>
-<link rel="stylesheet" type="text/css" title="screen" href="/css/<:cfg theme name:>oldie.css" />
-<![endif]-->
 </head>
 <body class="s<:section id:> p<:article parentid:> a<:article id:> l<:article level:>">
 <p class="hidden"><a href="#main" accesskey="S">Skip to main content</a>.</p>
 <div id="wrapper">
   <div id="container">
     <div id="header">
-      <h1><a href="<:cfg site url:>/" title="<:cfg site name |h:>" accesskey="1"><:cfg site name |h:></a></h1>
+      <h1><a href="<:iterator begin inlines 1:><:url inline:><:iterator end inlines:>" title="<:cfg site name |h:>" accesskey="1"><:cfg site name |h:></a></h1>
       <div id="nav">
         <h1 class="hidden">Main Menu</h1>
         <ul class="lev1">
@@ -45,10 +42,10 @@
     </div>
     <div id="content">
       <div id="columns">
-        <div id="sidebarL"><:if Allkids_of 3 filter: [menu] == 0 && [listed] != 2 :>
-          <h1 class="hidden">Shop Menu</h1>
+        <div id="sidebarL"><:if Allkids_of section filter: [menu] == 0 && [listed] != 2 :>
+          <h1 class="hidden">Section Menu</h1>
           <ul class="lev1">
-          <:iterator begin allkids_of 3 filter: [menu] == 0 && [listed] != 2 :><li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
+          <:iterator begin allkids_of section filter: [menu] == 0 && [listed] != 2 :><li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
           <:iterator end allkids_of:>
           </ul><:or Allkids_of:><:eif Allkids_of:><:switch:><:case Imagen imgleft:>
           <p class="imgleft"><:imagen imgleft:></p><:case Gimage imgleft:>
@@ -64,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div id="footer"><span class="left"><:iterator begin allkids_of -1 filter: [menu] == 3 && [listed] != 2 :><a href="<:url ofallkid:>" class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a> | <:iterator separator allkids_of:><:iterator end allkids_of:><a href="<:cfg site url:>/cgi-bin/search.pl" class="search <:ifMatch [article title] Search:>hilite<:or:><:eif:>" accesskey="4">Search</a></span> <span class="right"><span class="sitename"><:cfg site name |h:></span> &copy;1989-<:today "%Y":> - Site by <a href="http://www.visualthought.com.au/" title="Design, templates and coding by visual thought communication">vtc</a></span></div>
+    <div id="footer"><span class="left"><:iterator begin allkids_of -1 filter: [menu] == 3 && [listed] != 2 :><a href="<:url ofallkid:>" class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a> | <:iterator separator allkids_of:><:iterator end allkids_of:><a href="<:cfg site url:>/cgi-bin/search.pl" class="search <:ifMatch [article title] Search:>hilite<:or:><:eif:>" accesskey="4">Search</a></span> <span class="right"><span class="sitename"><:cfg site name |h:></span> &copy;<:today "%Y":> <span class="credit">- Site by <a href="http://www.visualthought.com.au/" title="Design, templates and coding by visual thought communication">vtc</a></span></span></div>
   </div>
 </div>
 <!--
