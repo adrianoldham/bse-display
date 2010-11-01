@@ -60,6 +60,8 @@ Item                                       Code         Qty     Price   Extended
              <:cfg shop display_cardType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
 :><:ifEq [order paymentType] "1" :>The customer will pay by cheque.<:or:><:eif
 :><:ifEq [order paymentType] "2" :>Please contact the customer to make arrangements for payment.<:or:><:eif
+:><:ifEq [order paymentType] "4" :>Payment received from PayPal:
+             Transaction No.: <:order paypal_tran_id:><:or:><:eif
 :><:ifEq [order paymentType] "10":>The customer will pay by electronic funds transfer.<:or:><:eif
 :><:if Cfg tryandbyte aufreight:><:if Order customInt1:>
 

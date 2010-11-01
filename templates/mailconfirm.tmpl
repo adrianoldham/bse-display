@@ -62,6 +62,8 @@ Item                                       Code         Qty     Price   Extended
              <:cfg shop address3:>
              <:cfg shop address4:><:or:><:eif
 :><:ifEq [order paymentType] "2":>We will contact you to make arrangements for payment.<:or:><:eif
+:><:ifEq [order paymentType] "4":>Your payment has been processed through PayPal:
+             Transaction No.: <:order paypal_tran_id:><:or:><:eif
 :><:ifEq [order paymentType] "10":>Please transfer the funds to:
 
              Name      : <:cfg shop accountname:>

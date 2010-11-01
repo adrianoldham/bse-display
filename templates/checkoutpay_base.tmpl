@@ -121,10 +121,10 @@
       </table>
     </dd>
     <:or Payments:><:eif Payments:>
-    <:if CallMePayments:>
-    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="2" <:checkedIfFirstCallMe:> />
-    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="2" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact me for billing details</label></dt>
-    <:or CallMePayments:><:eif CallMePayments:>
+    <:if PayPalPayments:>
+    <dt class="paypal"><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType4" value="4" <:checkedIfFirstPayPal:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="4" /><:eif MultPaymentTypes:> <label for="paymentType4"><img src="https://www.paypal.com/en_AU/i/logo/PayPal_mark_37x23.gif" alt="PayPal" />The safer, easier way to pay.</label></dt>
+    <:or PayPalPayments:><:eif PayPalPayments:>
     <:include include/custom/payment_type_checkout.tmpl optional:><:include include/payment_type_checkout.tmpl optional:>
   </dl>
   </fieldset>

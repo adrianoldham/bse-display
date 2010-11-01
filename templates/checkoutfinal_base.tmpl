@@ -59,6 +59,9 @@
 <:if CallMePayment:>
 <p>We will contact you to make arrangements for payment.</p>
 <:or CallMePayment:><:eif CallMePayment:>
+<:if PayPalPayment:>
+<p>Your payment has been processed through PayPal.<br />Transaction Id: <:order paypal_tran_id:>.</p>
+<:or PayPalPayment:><:eif PayPalPayment:>
 <:include include/custom/payment_type_checkoutfinal.tmpl optional:>
 <table class="items">
   <caption>Selected Order Items</caption>

@@ -1124,6 +1124,16 @@ img {
 	margin-bottom: -3px;
 }
 
+.shop dt.paypal {
+	font-size:11px;
+	font-family: Arial, Verdana;
+}
+
+.shop dt.paypal img {
+	margin-right:7px;
+	vertical-align: middle;
+}
+
 /* @end */
 
 /* @end */
