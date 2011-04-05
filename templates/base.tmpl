@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<:cfg site language en:>" xml:lang="<:cfg site language en:>">
 <head>
-<title><:switch:><:case ifEq [param title] "FORMTITLE":><:formcfg title:><:case Param title:><:param title |h:><:case article pageTitle:><:article pageTitle:><:case default:><:article title:><:endswitch:> - <:cfg site name |h:></title>
+<title><:switch:><:case Eq [param title] "FORMTITLE":><:formcfg title:><:case Param title:><:param title |h:><:case article pageTitle:><:article pageTitle:><:case default:><:article title:><:endswitch:> - <:cfg site name |h:></title>
 <meta http-equiv="Content-Type" content="<:cfg site format text/html:>; charset=<:cfg html charset iso-8859-1:>" />
 <meta name="robots" content="<:cfg site robots all:>" /><:if Article release:>
 <meta name="author" content="<:article author:>" />
@@ -34,7 +34,13 @@
       <div id="nav">
         <h1 class="hidden">Main Menu</h1>
         <ul class="lev1">
-          <:iterator begin allkids_of -1 filter: [menu] == 0 && [listed] != 2 :><li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
+          <:iterator begin allkids_of -1 filter: [menu] == 0 && [listed] != 2 :><li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:or:><:eif:>"><:switch:><:case Ofallkid link:><a href="<:url ofallkid:>" class="i1"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a><:case default:><span class="i1"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 1:><:case And [ifAllkids_of2 ofallkid filter: [listed] != 2 ]:>
+            <ul class="lev2">
+              <:iterator begin allkids_of2 ofallkid filter: [listed] != 2 :><li class="i2 e<:ofallkid2_number:><:ifEq [article id] [ofallkid2 id]:> focus<:or:><:eif:><:ifAncestor ofallkid2:> hilite<:or:><:eif:><:ifFirstOfallkid2:> first<:or:><:eif:><:ifLastOfallkid2:> last<:or:><:eif:><:ifAllkids_of3 ofallkid2 filter: [listed] != 2 :> parent<:or:><:eif:>"><:switch:><:case Ofallkid2 link:><a href="<:url ofallkid2:>"><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></a><:case default:><span><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 2:><:case And [ifAllkids_of3 ofallkid2 filter: [listed] != 2 ]:>
+              <:endswitch:></li><:iterator separator allkids_of2:>
+              <:iterator end allkids_of2:>
+            </ul>
+          <:endswitch:></li><:iterator separator allkids_of:>
           <:iterator end allkids_of:>
           <li class="search<:ifMatch [article title] Search:> hilite<:or:><:eif:>"><a href="<:cfg site url:>/cgi-bin/search.pl" accesskey="4">Search</a></li>
         </ul>
@@ -42,7 +48,7 @@
     </div>
     <div id="content">
       <div id="columns">
-        <div id="sidebarL"><:if Allkids_of section filter: [menu] == 0 && [listed] != 2 :>
+        <div id="sidebarL" class="sidebar left"><:if Allkids_of section filter: [menu] == 0 && [listed] != 2 :>
           <h1 class="hidden">Section Menu</h1>
           <ul class="lev1">
           <:iterator begin allkids_of section filter: [menu] == 0 && [listed] != 2 :><li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:or:><:eif:>"><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:>
@@ -51,17 +57,29 @@
           <p class="imgleft"><:imagen imgleft:></p><:case Gimage imgleft:>
           <p class="imgleft"><:gimage imgleft:></p><:endswitch:>
         </div>
-        <div id="sidebarR">
+        <div id="sidebarR" class="sidebar right">
           <:embed 4:><:switch:><:case Imagen imgright:>
           <p class="imgright"><:imagen imgright:></p><:case Gimage imgright:>
-          <p class="imgright"><:gimage imgright:></p><:endswitch:>
+          <p class="imgright"><:gimage imgright:></p><:endswitch:><:switch:><:case Allkids_of [article id] filter: [flags] =~ /s/ :>
+          <:iterator begin allkids_of [article id] filter: [flags] =~ /s/ :><:move_ofallkid:><:embed ofallkid:>
+          <:iterator end allkids_of:>
+          <:case default:><:endswitch:>
         </div>
         <div id="main">
           <:wrap here:>
         </div>
       </div>
     </div>
-    <div id="footer"><span class="left"><:iterator begin allkids_of -1 filter: [menu] == 3 && [listed] != 2 :><a href="<:url ofallkid:>" class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a> | <:iterator separator allkids_of:><:iterator end allkids_of:><a href="<:cfg site url:>/cgi-bin/search.pl" class="search <:ifMatch [article title] Search:>hilite<:or:><:eif:>" accesskey="4">Search</a></span> <span class="right"><span class="sitename"><:cfg site name |h:></span> &copy;<:today "%Y":> <span class="credit">- Site by <a href="http://www.visualthought.com.au/" title="Design, templates and coding by visual thought communication">vtc</a></span></span></div>
+    <div id="footer">
+      <ul class="left"><:iterator begin allkids_of -1 filter: [menu] == 3 && [listed] != 2 :>
+        <li><a href="<:url ofallkid:>" class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator separator allkids_of:><:iterator end allkids_of:>
+        <li><a href="<:cfg site url:>/cgi-bin/search.pl" class="search <:ifMatch [article title] Search:>hilite<:or:><:eif:>" accesskey="4">Search</a></li>
+      </ul>
+      <ul class="right">
+        <li class="sitename"><span><:cfg site name |h:></span> &copy;<:today "%Y":></li>
+        <li class="credit"><span>Site by <a href="http://www.visualthought.com.au/" title="Design, templates and coding by visual thought communication">vtc</a></span></li>
+      </ul>
+    </div>
   </div>
 </div>
 <!--
@@ -70,9 +88,11 @@
   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script type="text/javascript">
-  var pageTracker = _gat._getTracker("XX-000000-0");
-  pageTracker._initData();
-  pageTracker._trackPageview();
+  try {
+    var pageTracker = _gat._getTracker("XX-000000-0");
+    pageTracker._trackPageview();
+  }
+  catch(err) {}
 </script>
 //-->
 </body>
