@@ -27,7 +27,7 @@
       </td>
       <td class="col1"><:case Cfg "thumb geometries" product_list:>
       <td class="thumbnail"><:switch:><:case Or [ifVimages allprod named /thumbnail/] [ifVimages allprod numbered 1]:>
-        <a href="<:url allprod:>" class="thumbnail" title="<:allprod title:>" rel="<:sthumbimage allprod product_tooltip thumbnail,1 src:>&amp;d=<:sthumbimage allprod product_tooltip thumbnail,1 width:>,<:sthumbimage allprod product_tooltip thumbnail,1 height:>"><:sthumbimage allprod product_list thumbnail,1:></a><:case Gimage product_placeholder:>
+        <a href="<:url allprod:>" class="thumbnail" title="<:allprod title:>" rel="<:sthumbimage allprod product_tooltip thumbnail,1 src:><:ifAdmin:>&amp;<:or:>?<:eif:>d=<:sthumbimage allprod product_tooltip thumbnail,1 width:>,<:sthumbimage allprod product_tooltip thumbnail,1 height:>"><:sthumbimage allprod product_list thumbnail,1:></a><:case Gimage product_placeholder:>
         <a href="<:url allprod:>" class="thumbnail" title="<:allprod title:>"><:gthumbimage product_list product_placeholder:></a><:case Gimage placeholder:>
         <a href="<:url allprod:>" class="thumbnail" title="<:allprod title:>"><:gthumbimage product_list placeholder:></a><:endswitch:>
       </td>
@@ -38,7 +38,7 @@
         <div class="summary"><:allprod summary:></div><:case Allprod summaryLength:>
         <div class="summary"><:summary allprod [allprod summaryLength]:></div><:endswitch:>
       </td>
-      <td class="col2"><:ifAnyProductOptions allprod:><:or:><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" tabindex="<:allprod_number:>" /><:eif:></td>
+      <td class="col2"><:switch:><:case AnyProductOptions allprod:><:case Allprod retailPrice:><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" <:ifEmbedded:><:or:>tabindex="<:allprod_number:>" <:eif:>/><:case default:><:endswitch:></td>
       <td class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></td>
       <td class="col4"><:switch:><:case AnyProductOptions allprod:><a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/allprod_mini.tmpl:></td>
     </tr><:iterator end allprods:>

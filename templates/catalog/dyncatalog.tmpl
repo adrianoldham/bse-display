@@ -36,7 +36,7 @@
         <div class="description"><:dynallprod description:></div><:endswitch:><:switch:><:case Cfg shop hide_product_summary:><:case Dynallprod summary:>
         <div class="summary"><:dynallprod summary:></div><:endswitch:>
       </td>
-      <td class="col2"><:ifDynAnyProductOptions dynallprod:><:or:><input type="text" id="qty<:dynallprod id:>" name="qty<:dynallprod id:>" size="2" tabindex="<:dynallprod_number:>" /><:eif:></td>
+      <td class="col2"><:switch:><:case DynAnyProductOptions dynallprod:><:case Dynallprod retailPrice:><input type="text" name="qty<:dynallprod id:>" id="qty<:dynallprod id:>" size="2" <:ifEmbedded:><:or:>tabindex="<:dynallprod_number:>" <:eif:>/><:case default:><:endswitch:></td>
       <td class="col3"><:ifDynallprod retailPrice:><:cfg shop currency "$":><:money dynallprod retailPrice:><:or:>NA<:eif:></td>
       <td class="col4"><:switch:><:case DynAnyProductOptions dynallprod:><a href="<:url dynallprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Dynallprod retailPrice:><input type="image" name="a_addsingle<:dynallprod id:>" id="a_addsingle<:dynallprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/dynallprod_mini.tmpl:></td>
     </tr><:iterator end dynallprods:>
