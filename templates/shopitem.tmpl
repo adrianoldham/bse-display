@@ -4,8 +4,7 @@
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Product retailPrice:>
-<div class="buynow">
-<form id="add_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
+<form id="add_form_<:article id:>" action="/cgi-bin/shop.pl" method="post" class="buynow">
   <input type="hidden" name="id" value="<:product id:>" />
   <input type="hidden" name="r" value="<:url top:>" /><:if Options:>
   <table>
@@ -15,24 +14,22 @@
       <:iterator end options:>
     </tr>
   </table><:or Options:><:eif Options:><:ifProduct leadTime:> 
-  <p class="leadTime"><label>Usually ships in:</label> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></p><:or:><:eif:><:ifProduct product_code:>
-  <p class="pcode"><label>Product Code:</label> <:product product_code:></p><:or:><:eif:>
+  <p><label>Usually ships in:</label> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></p><:or:><:eif:><:ifProduct product_code:>
+  <p><label>Product Code:</label> <:product product_code:></p><:or:><:eif:>
   <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:money product retailPrice:></span> (inc GST)</p>
-  <p class="buy"><:ifProduct listed:>
-    <label for="qty<:article id:>">Qty:</label> <input type="text" id="qty<:article id:>" name="quantity" value="1" size="2" />
+  <p><:ifProduct listed:>
+    <label for="qty<:article id:>">Quantity:</label> <input type="text" id="qty<:article id:>" name="quantity" value="1" size="2" />
     <input type="submit" id="add<:article id:>" name="add" value="Add to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" class="shop_addshopitem" />
     <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" /><:or:>
-    This product is currenty not available for sale<:eif:>
+    This product is currently not available for sale<:eif:>
   </p>
 </form>
-</div><:or Product:>
-<div class="price">
-  <form name="notifyme" method="post" action="/cgi-bin/interest.pl">
-    <b>Coming soon!</b> <input type="hidden" name="product" value="<:product title:>" />
-    <p>To register your interest in this product and receive notification when it becomes available, please enter and submit your email address below.</p>
-    <b>Email:</b> <input type="text" name="email" size="40" /> <input type="submit" name="Submit" value="Register my interest" />
-  </form>
-</div><:eif Product:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
+<:endswitch:><:switch:><:case Or [ifEq [product retailPrice] 0] [ifMatch [product flags] "i"]:>
+<form name="notifyme" method="post" action="/cgi-bin/interest.pl" class="buynow">
+  <b>Register your interest</b> <input type="hidden" name="product" value="<:product title:>" />
+  <p>To register your interest in this product and receive notification when it becomes available, please enter and submit your email address below.</p>
+  <label>Email: <input type="text" name="email" size="40" title="Enter your email address" class="required" /></label> <input type="submit" name="Submit" value="Register now" />
+</form><:endswitch:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
 <p><b>This product qualifies for free shipping if purchased before <:date product customDate1:></b></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
