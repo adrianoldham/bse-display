@@ -22,8 +22,8 @@
 <meta name="VTC.generator" content="BSE codebase <:release:>" />
 <meta name="VTC.release" content="<:include include/release.tmpl:>" /><:ifCfg rss enabled:>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" /><:or:><:eif:><:ajax includes:>
-<link rel="stylesheet" type="text/css" media="screen" title="screen" href="/css/<:cfg theme name:>custom.css" />
-<link rel="stylesheet" type="text/css" media="print" href="/css/<:cfg theme name:>print.css" />
+<link rel="stylesheet" type="text/css" media="screen" title="screen" href="/css/screen.css" />
+<link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
 </head>
 <body class="s<:section id:> p<:article parentid:> a<:article id:> l<:article level:>">
 <p class="hidden"><a href="#main" accesskey="S">Skip to main content</a>.</p>
@@ -34,7 +34,7 @@
       <div id="nav">
         <h1 class="hidden">Main Menu</h1>
         <ul class="lev1">
-          <:iterator begin allkids_of -1 filter: [menu] == 0 && [listed] != 2 :><li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:or:><:eif:>"><:switch:><:case Ofallkid link:><a href="<:url ofallkid:>" class="i1"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a><:case default:><span class="i1"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 1:><:case And [ifAllkids_of2 ofallkid filter: [listed] != 2 ]:>
+          <:iterator begin allkids_of -1 filter: [menu] == 0 && [listed] != 2 :><li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:or:><:eif:>"><:switch:><:case Ofallkid link:><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a><:case default:><span><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 1:><:case And [ifAllkids_of2 ofallkid filter: [listed] != 2 ]:>
             <ul class="lev2">
               <:iterator begin allkids_of2 ofallkid filter: [listed] != 2 :><li class="i2 e<:ofallkid2_number:><:ifEq [article id] [ofallkid2 id]:> focus<:or:><:eif:><:ifAncestor ofallkid2:> hilite<:or:><:eif:><:ifFirstOfallkid2:> first<:or:><:eif:><:ifLastOfallkid2:> last<:or:><:eif:><:ifAllkids_of3 ofallkid2 filter: [listed] != 2 :> parent<:or:><:eif:>"><:switch:><:case Ofallkid2 link:><a href="<:url ofallkid2:>"><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></a><:case default:><span><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 2:><:case And [ifAllkids_of3 ofallkid2 filter: [listed] != 2 ]:>
               <:endswitch:></li><:iterator separator allkids_of2:>
