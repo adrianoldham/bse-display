@@ -5,16 +5,16 @@
   <input type="hidden" name="admin" value="<:admin_search:>" />
   <table>
     <tr>
-      <th><label for="q">Keywords:</label></th>
+      <th><label for="search_q">Keywords:</label></th>
       <td colspan="3"> 
-        <input type="text" id="search_query" name="q" size="40" title="Enter search terms" value="<:ifTerms:><:terms:><:or:>Enter search terms<:eif:>" />
+        <input type="text" id="search_q" name="q" size="40" title="Enter search terms" value="<:ifTerms:><:terms:><:or:>Enter search terms<:eif:>" class="required" />
         <input type="submit" id="search_submit" name="submit" accesskey="s" title="AccessKey = s" value="Search" />
       </td>
     </tr><:if Cfg search options:>
     <tr>
       <th>&nbsp;</th>
       <td colspan="3">
-        <input type="checkbox" id="m" name="match_all" value="1" <:ifCgi match_all:>checked="checked" <:or:><:eif:>/> <label for="m">Match <em>all</em> search terms</label>
+        <input type="checkbox" id="search_match_all" name="match_all" value="1" <:ifCgi match_all:>checked="checked" <:or:><:eif:>/> <label for="search_match_all">Match <em>all</em> search terms</label>
       </td>
     </tr>
     <tr>
