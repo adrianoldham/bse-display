@@ -8,7 +8,7 @@
     <div class="input query">
       <label for="search_q">Keywords:</label>
       <input type="text" id="search_q" name="q" size="40" title="Enter your search terms" value="<:terms:>" class="required" />
-    </div><:if Cfg search options 1:>
+    </div><:if Cfg search options:>
     <div class="checkbox match">
       <label for="search_match_all"><input type="checkbox" id="search_match_all" name="match_all" value="1" <:ifCgi match_all:>checked="checked" <:or:><:eif:>/> <span class="checkbox">Match <em>all</em> search terms</span></label>
     </div>
