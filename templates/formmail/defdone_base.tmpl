@@ -1,21 +1,29 @@
-<:wrap formmail/formbase.tmpl nomessage=>"1":>
-<:bodytext formcfg done_body "Thank you. This information was successfully sent.":>
-<table>
-  <:iterator begin fields:><:if Eq [field htmltype] "header":><tr>
-    <td colspan="3"><h2><:field description:></h2></td>
-  </tr><:or Eq:>
-  <:if Match [field htmltype] "hidden":><:or Match:><tr>
-    <th align="left" valign="top"><:field description:>:</th>
+<:wrap formmail/formbase.tmpl nomessage=>"1":><:ifFormcfg body:>
+<:bodytext formcfg done_body "Thank you. This information was successfully sent.":><:or:><:eif:>
+<:iterator begin fields:>
+  <:switch:>
+  <!-- Start special case fields //-->
+  <:case Match [field htmltype] "^hidden$":>
+  <:case Match [field htmltype] "^h[123]$" |x:><:switch:><:case Eq [field_number] "1":><:case default:></table><:endswitch:> 
+  <<:field htmltype:> class="<:field class:>"><:field description:></<:field htmltype:>>  
+  <:case Match [field htmltype] "^fieldset$":><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><:case Eq [field_number] "1":><:case default:></table><:endswitch:>
+  <table class="<:field name:> <:field class:>">
+    <caption><:field description:></caption>  
+  <:case default:><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><table><:case Match [previous_field htmltype] "^fieldset$":><:case Eq [field_number] "1":><table><:case default:><:endswitch:>
+  <tr>
+    <th><:field description:></th>
     <td>
-      <:switch:>
-      <:case Eq [field htmltype] "textarea":><:dynreplace [field value] "
+    <:switch:>
+    <!-- Start standard fields //-->    
+    <:case Match [field htmltype] "^textarea$":><:dynreplace [field value] "
 " "<br />" g :>
-      <:case Eq [field htmltype] "password":>****************
-      <:case Field values:><:iterator begin values:><!--<:value id:>: --><:value name:><:iterator separator values:><br />
+    <:case Match [field htmltype] "^password$":>********
+    <:case Field values:><:iterator begin values:><!--<:value id:>: --><:value name:><:iterator separator values:><br />
       <:iterator end values:>
-      <:case default:>
-      <:field value:>
-      <:endswitch:>
+    <:case default:><:field value:>
+    <:endswitch:>
     </td>
-  </tr><:eif Match:><:eif Eq:><:iterator separator fields:>
-<:iterator end fields:></table>
+  </tr>
+  <:endswitch:>
+<:iterator end fields:>
+</table>

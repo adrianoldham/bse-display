@@ -2,7 +2,7 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article"><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
@@ -13,7 +13,7 @@
     <li<:ifDynallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynallkid thumbImage:>
       <a href="<:url dynallkid:>" class="thumbnail"><:thumbnail dynallkid:></a><:or:><:eif:>
       <a href="<:url dynallkid:>" class="title"><:dynallkid title:></a><:include admin/adminmenu/dynallkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Dynallkid summary:>
-      <span class="summary"><:dynallkid summary:></span><:endswitch:>
+      <p class="summary"><:dynallkid summary:></p><:endswitch:>
     </li><:iterator end dynallkids:>
   </ul>
 </div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Dynstepparents:>

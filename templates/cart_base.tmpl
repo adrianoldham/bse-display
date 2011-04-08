@@ -2,12 +2,12 @@
 <p><b>Contains</b> - <:dyncarttotalunits:> item<:if Eq [dyncarttotalunits] "1":><:or Eq:>s<:eif Eq:></p>
 <form action="<:dyntarget shop:>" method="post">
 <table class="items">
-  <caption>Selected Order Items</caption><:ifTotal:>
+  <caption>Order items</caption><:ifTotal:>
   <thead>
     <tr> 
-      <th class="col1">Item:</th>
-      <th class="col2">Qty:</th>
-      <th class="col3">Price:</th>
+      <th class="col1">Item</th>
+      <th class="col2">Qty</th>
+      <th class="col3">Price</th>
       <th>&nbsp;</th>
     </tr>
   </thead><:or:><:eif:>
@@ -17,10 +17,11 @@
         <a href="<:item link:>" class="title"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
         <div class="i_description"><:item description:></div><:or And:><:eif And:>
       </td>
-      <td class="col2">
-        <:if Match [item generator] "Seminar":><input type="hidden" name="quantity_<:index:>" value="<:item units:>" /><:ifTotal:><:item units:><:or:><:eif:><:or Match:><input type="text" name="quantity_<:index:>" size="2" value="<:item units:>" /><:eif Match:>
+      <td class="col2"><:if Match [item generator] "Seminar":>
+        <input type="hidden" name="quantity_<:index:>" value="<:item units:>" /><:ifTotal:><:item units:><:or:><:eif:><:or Match:>
+        <input type="text" name="quantity_<:index:>" size="2" value="<:item units:>" /><:eif Match:>
       </td>
-      <td class="col3"><:if Item retailPrice:><:cfg shop currency "$":><:money item retailPrice:><:or Item:><:eif Item:></td>
+      <td class="col3"><:if Item retailPrice:><:cfg shop currency "$":><:number money [item retailPrice]:><:or Item:><:eif Item:></td>
       <td class="col4"><input type="image" name="delete_<:index:>" id="delete_<:index:>" src="/images/basic/store/buttons/delete.gif" title="Remove this item" /></td>
     </tr><:iterator end items:><:or Count:>
     <tr> 
@@ -28,10 +29,11 @@
     </tr><:eif Count:>
   </tbody>
 </table><:if Count:><:if Total:>
-<div class="totals"><p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p></div><:or Total:><:eif Total:>
+<div class="totals"><p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:number money [total]:> <abbr><:cfg shop currency_code "AUD":></abbr></p></div><:or Total:><:eif Total:>
 <p class="buttons">
   <:if Total:><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
-  <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" /><:or Total:>
+  <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" />
+  <input type="submit" name="a_emptycart" value="Empty cart" /><:or Total:>
   <input type="submit" name="a_order" value="Checkout now" accesskey="c" title="AccessKey = c" /><:eif Total:>
 </p><:if Total:><:or Total:>
 <input type="hidden" name="delivFirstName" id="delivFirstName" value="<:user name1:>" /> 

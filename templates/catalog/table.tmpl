@@ -1,8 +1,8 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<div id="article_<:article id:>" class="article shop"><:switch:><:case Match [article flags] "T":>
+<div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
@@ -20,7 +20,7 @@
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <p class="summary"><:allprod description:></p><:or And:><:eif And:>
         <div class="details">
-          <p class="price"><:ifAllprod retailPrice:><:cfg shop currency "$":><:money allprod retailPrice:><:or:>NA<:eif:></p>
+          <p class="price"><:ifAllprod retailPrice:><:cfg shop currency "$":><:number money [allprod retailPrice]:><:or:>NA<:eif:></p>
           <p class="options"><:switch:><:case AnyProductOptions allprod:><a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="hidden" id="qty<:allprod id:>" name="qty<:allprod id:>" value="" /><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:></p>
         </div>
       </td><:iterator end allprods:><:if Arithmetic [allprod_count] % [cfg "product table" cols 3]:><:if Cfg "product table" colspan:>

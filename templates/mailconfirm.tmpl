@@ -1,6 +1,11 @@
-<:uc [cfg site name]:> SHOP ADMINISTRATION
+<:uc [cfg entity name [cfg site name]]:><:ifCfg entity abn:>
+ABN: <:cfg entity abn:><:or:><:eif:>
 
-Order No.    : <:order id |%06d:>
+--------------------------------------------------------------------------------
+                                   TAX INVOICE
+--------------------------------------------------------------------------------
+
+Invoice No.  : <:order id |%06d:>
 Order Date   : <:date "%d/%m/%Y" order orderDate:><:ifOrder userId:>
 Username     : <:order userId:><:or:><:eif:><:ifOrder affiliate_code:>
 Referrer     : <:order affiliate_code:><:or:><:eif:><:ifOrder purchase_order:>
@@ -43,8 +48,10 @@ Item                                       Code         Qty     Price   Extended
 <:or Or:><:eif Or
 :>                                                               Total: <:order total |m10:>
 <:ifOrder gst
-:>                                                                 GST: <:order gst |m10:><:or:><:eif
+:>                                                                 GST: <:order gst |m10:><:or
+:>                                                                 GST: <:arithmetic [order total] - ([order total] / (1 + [cfg shop gst_rate 10] / 100)) |m10:><:eif
 :>
+
 <:if Eq [order paymentType] "0":><:if Order ccOnline
 :>Your credit card payment was processed online:
 
@@ -62,7 +69,8 @@ Item                                       Code         Qty     Price   Extended
              <:cfg shop address3:>
              <:cfg shop address4:><:or:><:eif
 :><:ifEq [order paymentType] "2":>We will contact you to make arrangements for payment.<:or:><:eif
-:><:ifEq [order paymentType] "4":>Your payment has been processed through PayPal:
+:><:ifEq [order paymentType] "4":>Your payment was processed through PayPal:
+
              Transaction No.: <:order paypal_tran_id:><:or:><:eif
 :><:ifEq [order paymentType] "10":>Please transfer the funds to:
 
@@ -76,8 +84,6 @@ We will contact you to quote the shipping costs.<:or Order:><:ifFreeShippingCart
 
 This order qualifies for free shipping within Australia.<:or:><:eif:><:eif Order:><:or Cfg:><:eif Cfg:><:if Order instructions:>
 
-<:with begin wrap 80:>Instruction: <:order instructions:><:with end wrap:><:or Order:><:eif Order:>
+<:with begin wrap 80:>Instructions: <:order instructions:><:with end wrap:><:or Order:><:eif Order:>
 
---------------------------------------------------------------------------------
-                             WEB ORDER RECEIPT ONLY
 --------------------------------------------------------------------------------

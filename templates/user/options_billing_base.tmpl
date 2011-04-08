@@ -1,116 +1,89 @@
-<:wrap user/userbase.tmpl title=>"User Services" :><:if Partial_logon:><:or Partial_logon:>
-<:include include/usernav.tmpl:><:eif Partial_logon:>
-<table border="0" cellpadding="5" cellspacing="1">
-  <tr>
-    <td><img src="/images/<:cfg theme name:>user/card.gif" width="32" height="32" border="0" alt="Your Billing Details" /></td>
-    <td width="100%">
-      <h2>Your billing details</h2>
-    </td>
-  </tr>
-</table><:if Partial_logon:>
-<p>When your account was created, not all of the required details were entered.  Please provide at least the fields marked as required to complete your account activation.</p><:or Partial_logon:>
-<:include include/usermessage.tmpl:><:eif Partial_logon:>
-<form action="/cgi-bin/user.pl" method="post">
+<:wrap user/userbase.tmpl subtitle=>"My billing details" userpage=>"billing" :>
+<h2><:param subtitle |h:></h2>
+<form action="<:dyntarget user:>" method="post" class="siteuser">
 <:if Cfg "site users" nopassword:>
 <input type="hidden" name="u" value="<:user id:>" />
 <input type="hidden" name="p" value="<:user password:>" />
-<input type="hidden" name="r" value="<:script:>?userpage=<:user password:>&amp;u=<:user id:>&amp;message=User+billing+details+saved+successfully" />
-<:or Cfg:><:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:script:>?userpage=1&amp;message=User+billing+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
+<input type="hidden" name="r" value="<:dyntarget user:>?userpage=<:user password:>&amp;u=<:user id:>&amp;message=User+billing+details+saved+successfully" />
+<:or Cfg:><:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:dyntarget user:>?userpage=1&amp;message=User+billing+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
 <input type="hidden" name="_t" value="billing" />
-<table border="0" cellpadding="1" cellspacing="1">
-  <tr> 
-    <th nowrap="nowrap" align="left">First Name:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billFirstName" value="<:last billFirstName:>" size="40" maxlength="127" tabindex="1" /> <:ifRequired billFirstName:>*<:or:><:eif:></td>
-    <td nowrap="nowrap"><:error_img billFirstName:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Last Name:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billLastName" value="<:last billLastName:>" size="40" maxlength="127" tabindex="2" /> <:ifRequired billLastName:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billLastName:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Organisation:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="billOrganization" value="<:last billOrganization:>" size="40" maxlength="127" tabindex="9" /><:ifRequired billOrganization:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billOrganization:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Address:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billStreet" value="<:last billStreet:>" size="40" maxlength="127" tabindex="3" /> <:ifRequired billStreet:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billStreet:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Address 2:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billStreet2" value="<:last billStreet2:>" size="40" maxlength="127" tabindex="3" /> <:ifRequired billStreet2:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billStreet2:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Suburb:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billSuburb" value="<:last billSuburb:>" size="40" maxlength="127" tabindex="4" /> <:ifRequired billSuburb:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billSuburb:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">State:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billState" value="<:last billState:>" size="8" maxlength="40" tabindex="5" /> <:ifRequired billState:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"> <:error_img billState:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Postcode:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billPostCode" value="<:last billPostCode:>" size="8" maxlength="40" tabindex="6" /> <:ifRequired billPostCode:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"> <:error_img billPostCode:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Country:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billCountry" value="<:last billCountry:>" size="32" maxlength="127" tabindex="7" /> <:ifRequired billCountry:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billCountry:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Telephone:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billTelephone" value="<:last billTelephone:>" size="32" maxlength="80" tabindex="8" /> <:ifRequired billTelephone:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billTelephone:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Facsimile:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billFacsimile" value="<:last billFacsimile:>" size="32" maxlength="80" tabindex="9" /> <:ifRequired billFacsimile:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billFacsimile:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Mobile:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billMobile" value="<:last billMobile:>" size="32" maxlength="80" tabindex="9" /> <:ifRequired billMobile:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billMobile:></td>
-  </tr>
-  <!--//<tr> 
-    <th nowrap="nowrap" align="left">Email:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="billEmail" value="<:last billEmail:>" size="32" maxlength="80" tabindex="10" /> <:ifRequired billEmail:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img billEmail:></td>
-  </tr>//-->
-  <tr> 
-    <td height="20" colspan="3" align="left" valign="bottom" nowrap="nowrap">* indicates required fields</td>
-  </tr>
-</table>
-<p align="right"><input type="submit" name="saveopts" value="Save changes" class="user-buttons" accesskey="s" title="AccessKey = s" tabindex="11" /></p>
+  <fieldset class="name">
+    <legend>Name</legend>
+    <div class="input name1<:ifError_img billFirstName:> error<:or:><:eif:>">
+      <label for="billFirstName"><:error_img billFirstName:> <:cfg "site users" display_name1 "First Name":>:</label>
+      <input type="text" name="billFirstName" id="billFirstName" size="40" value="<:old billFirstName user billFirstName:>" title="<:cfg "site users" display_name1 "First Name":>" class="input<:ifError_img billFirstName:> error<:or:><:eif:>" />
+    </div>
+    <div class="input name2<:ifError_img billLastName:> error<:or:><:eif:>">
+      <label for="billLastName"><:error_img billLastName:> <:cfg "site users" display_name2 "Last Name":>:</label>
+      <input type="text" name="billLastName" id="billLastName" size="40" value="<:old billLastName user billLastName:>" title="<:cfg "site users" display_name2 "Last Name":>" class="input<:ifError_img billLastName:> error<:or:><:eif:>" />
+    </div>
+  </fieldset>
+
+  <fieldset class="company">
+    <legend>Company</legend>
+    <div class="input organization<:ifError_img billOrganization:> error<:or:><:eif:>">
+      <label for="billOrganization"><:error_img billOrganization:> <:cfg "site users" display_organization "Organisation":>:</label>
+      <input type="text" name="billOrganization" id="billOrganization" size="40" value="<:old billOrganization user billOrganization:>" title="<:cfg "site users" display_organization "Organisation":>" class="input<:ifError_img billOrganization:> error<:or:><:eif:>" />
+    </div>
+    <!--<div class="input billTitle<:ifError_img billTitle:> error<:or:><:eif:>">
+      <label for="billTitle"><:error_img billTitle:> <:cfg "site users" display_title "Title":>:<:ifRequired billTitle:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="billTitle" id="billTitle" size="40" value="<:old billTitle:>" title="<:cfg "site users" display_title "Title":>" class="input<:ifRequired billTitle:> required<:or:><:eif:><:ifError_img billTitle:> error<:or:><:eif:>" />
+    </div>//-->
+  </fieldset>
+
+  <fieldset class="address">
+    <legend>Address</legend>
+    <div class="input address<:ifError_img billStreet:> error<:or:><:eif:>">
+      <label for="billStreet"><:error_img billStreet:> <:cfg "site users" display_address "Address":>:</label>
+      <input type="text" name="billStreet" id="billStreet" size="40" value="<:old billStreet user billStreet:>" title="<:cfg "site users" display_address "Address":>" class="input<:ifError_img billStreet:> error<:or:><:eif:>" />
+    </div>
+    <div class="input delivStreet2<:ifError_img billStreet2:> error<:or:><:eif:>">
+      <label for="billStreet2"><:error_img billStreet2:> <:cfg "site users" display_delivStreet2 "Address 2":>:</label>
+      <input type="text" name="billStreet2" id="billStreet2" size="40" value="<:last billStreet2:>" title="<:cfg "site users" display_delivStreet2 "Address 2":>" class="input<:ifError_img billStreet2:> error<:or:><:eif:>" />
+    </div>
+    <div class="input city<:ifError_img billSuburb:> error<:or:><:eif:>">
+      <label for="billSuburb"><:error_img billSuburb:> <:cfg "site users" display_city "Suburb":>:</label>
+      <input type="text" name="billSuburb" id="billSuburb" size="40" value="<:old billSuburb user billSuburb:>" title="<:cfg "site users" display_city "Suburb":>" class="input<:ifError_img billSuburb:> error<:or:><:eif:>" />
+    </div>
+    <div class="input state<:ifError_img billState:> error<:or:><:eif:>">
+      <label for="billState"><:error_img billState:> <:cfg "site users" display_state "State":>:</label>
+      <input type="text" name="billState" id="billState" size="10" value="<:old billState user billState:>" title="<:cfg "site users" display_state "State":>" class="input<:ifError_img billState:> error<:or:><:eif:>" />
+    </div>
+    <div class="input postcode<:ifError_img billPostCode:> error<:or:><:eif:>">
+      <label for="billPostCode"><:error_img billPostCode:> <:cfg "site users" display_postcode "Postcode":>:</label>
+      <input type="text" name="billPostCode" id="billPostCode" size="10" value="<:old billPostCode user billPostCode:>" title="<:cfg "site users" display_postcode "Postcode":>" class="input<:ifError_img billPostCode:> error<:or:><:eif:>" />
+    </div>
+    <div class="input country<:ifError_img billCountry:> error<:or:><:eif:>">
+      <label for="billCountry"><:error_img billCountry:> <:cfg "site users" display_country "Country":>:</label><:if Cfgsection "country selector":>
+      <select name="billCountry" id="billCountry" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="select<:ifError_img billCountry:> error<:or:><:eif:>">
+        <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
+        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old billCountry user billCountry] [uc [dyncfgentry key]]] [ifEq [old billCountry user billCountry] [uc [dyncfgentry value]]]:> selected="selected"<:or Or:><:eif Or:>><:dyncfgentry value:></option>
+        <:iterator end dyncfgsection:>
+      </select><:or Cfgsection:>
+      <input type="text" name="billCountry" id="billCountry" size="20" value="<:old billCountry user billCountry:>" title="<:cfg "site users" display_country "Country":>" class="select<:ifError_img billCountry:> error<:or:><:eif:>" /><:eif Cfgsection:> 
+    </div>
+  </fieldset>
+
+  <fieldset class="contact">
+    <legend>Contact</legend>
+    <div class="input telephone<:ifError_img billTelephone:> error<:or:><:eif:>">
+      <label for="telephone"><:error_img billTelephone:> <:cfg "site users" display_telephone "Telephone":>:</label>
+      <input type="text" name="billTelephone" id="billTelephone" size="20" value="<:old billTelephone user billTelephone:>" title="<:cfg "site users" display_telephone "Telephone":>" class="input<:ifError_img billTelephone:> error<:or:><:eif:>" />
+    </div>
+    <div class="input facsimile<:ifError_img billFacsimile:> error<:or:><:eif:>">
+      <label for="billFacsimile"><:error_img billFacsimile:> <:cfg "site users" display_facsimile "Facsimile":>:</label>
+      <input type="text" name="billFacsimile" id="billFacsimile" size="20" value="<:old billFacsimile user billFacsimile:>" title="<:cfg "site users" display_facsimile "Facsimile":>" class="input<:ifError_img billFacsimile:> error<:or:><:eif:>" />
+    </div>
+    <div class="input delivMobile<:ifError_img billMobile:> error<:or:><:eif:>">
+      <label for="billMobile"><:error_img billMobile:> <:cfg "site users" display_delivMobile "Mobile":>:</label>
+      <input type="text" name="billMobile" id="billMobile" size="20" value="<:old billMobile user billMobile:>" title="<:cfg "site users" display_delivMobile "Mobile":>" class="input<:ifError_img billMobile:> error<:or:><:eif:>" />
+    </div>
+    <!--<div class="input email<:ifError_img billEmail:> error<:or:><:eif:>">
+      <label for="billEmail"><:error_img billEmail:> <:cfg "site users" display_email "Email Address":>:</label>
+      <input type="text" name="billEmail" id="billEmail" size="40" value="<:old billEmail user billEmail:>" title="<:cfg "site users" display_email "Email Address":>" class="input<:ifError_img billEmail:> error<:or:><:eif:>" />
+    </div>//-->
+  </fieldset>
+<:include include/custom/user_options_billiing_custom.tmpl optional:>
+  <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>
+  <p class="buttons"><input type="submit" name="saveopts" value="Save changes" accesskey="s" title="AccessKey = s" /></p>
 </form>

@@ -1,29 +1,47 @@
-<:wrap user/userbase.tmpl title=>"User Services" :>
-<:include include/usernav.tmpl:>
-<table border="0" cellpadding="5" cellspacing="1">
-  <tr>
-    <td><img src="/images/<:cfg theme name:>user/files.gif" width="32" height="32" border="0" alt="File Manager" /></td>
-    <td width="100%">
-      <h2>File manager</h2>
-    </td>
-  </tr>
-</table>
-<:include include/usermessage.tmpl:>
-<div id="orders"><:if Userfiles:> 
+<:wrap user/userbase.tmpl subtitle=>"Personal files" userpage=>"files" :>
+<:if Userfiles:>
+  <h2><:param subtitle |h:></h2>
   <table class="items orders">
+    <caption>Files available</caption>
+    <thead>
+      <tr>
+        <th class="col1">Filename/Title</th>
+        <th class="col2">Date</th>
+        <!--<th class="col3">Title:</th>//-->
+        <th class="col3">Size</th>
+      </tr>
+    </thead>
+    <tbody><:iterator begin userfiles sort: -modwhen:>
+      <tr class="item">
+        <td class="col1"><a href="<:userfile url:>" title="<:userfile title:>"><!--<:ifUserfile title:><:userfile title:><:or:><:userfile display_name:><:eif:>//--><:userfile display_name:></a></td>
+        <td class="col2"><:date userfile modwhen:></td>
+        <!--<td><:userfile title:></td>//-->
+        <td class="col3"><:kb userfile size_in_bytes:>b</td>
+      </tr><:iterator separator userfiles:>
+      <:iterator end userfiles:>
+    </tbody>
+  </table><:or Userfiles:><:eif Userfiles:>
+<:if Paidfiles:>
+<h2>Purchased files</h2>
+<table class="items orders">
+  <caption>Files available</caption>
+  <thead>
     <tr>
-      <th>Title/Name</th>
-      <th>Date</th>
-      <!--<th>Title</th>-->
-      <th>Size</th>
-    </tr><:iterator begin userfiles sort: -modwhen:>
-    <tr>
-      <td width="100%"><a href="<:userfile url:>"><:ifUserfile title:><:userfile title:><:or:><:userfile display_name:><:eif:></a></td>
-      <td nowrap="nowrap"><:date "%d/%m/%Y" userfile modwhen:></td>
-      <!--<td><:userfile title:></td>-->
-      <td><:kb userfile size_in_bytes:></td>
-    </tr><:iterator separator userfiles:>
-    <:iterator end userfiles:>
-  </table><:or Userfiles:>
-  <p class="noitems">You have no files available yet.</p><:eif Userfiles:>
-</div>
+      <th class="col1">Filename/Title</th>
+      <th class="col2">Date</th>
+      <!--<th class="col3">Name</th>//-->
+      <th class="col3">Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <:iterator begin paidfiles sort: -modwhen:>
+    <tr class="item">
+      <td class="col1"><a href="<:paidfile url:>" title="<:paidfile description:>"><!--<:ifPaidfile title:><:paidfile description:><:or:><:paidfile displayName:><:eif:>//--><:paidfile displayName:></a></td>
+      <td class="col2"><:date paidfile whenUploaded:></td>
+      <!--<td class="col3"><:paidfile displayName:></td>//-->
+      <td class="col3"><:kb paidfile sizeInBytes:>b</td>
+    </tr>
+    <:iterator end paidfiles:>
+  </tbody>
+</table>
+<:or Paidfiles:><:eif Paidfiles:>

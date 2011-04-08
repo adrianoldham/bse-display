@@ -2,7 +2,7 @@
 <p><b>Thank you <:ifOrder billFirstName:><:order billFirstName:><:or:><:order delivFirstName:><:eif:>, your order number is: <:order id |%06d:></b></p>
 <p>Please refer to your order number when making enquiries regarding this purchase.</p>
 <p>Confirmation of this order has been emailed to: <a href="mailto:<:order emailAddress:>"><:order emailAddress:></a></p>
-<:if CCPayment:>
+<:if Payment CC:>
 <dl>
   <dt><:if Order ccOnline:>Your credit card payment was processed online<:or Order:>Your credit card will be debited at time of shipping<:eif Order:>:</dt>
   <dd>
@@ -20,8 +20,8 @@
     </table>
   </dd>
 </dl>
-<:or CCPayment:><:eif CCPayment:>
-<:if ChequePayment:>
+<:or Payment:><:eif Payment:>
+<:if Payment Cheque:>
 <dl>
   <dt>Please send a cheque to:</dt>
   <dd>
@@ -33,7 +33,7 @@
     </address>
   </dd>
 </dl>
-<:or ChequePayment:><:eif ChequePayment:>
+<:or Payment:><:eif Payment:>
 <:if Payment DirectDeposit:>
 <dl>
   <dt>Please transfer the funds to:</dt>
@@ -41,7 +41,7 @@
     <table>
       <caption>Electronic Fund Transfer Details</caption>
       <tr>
-        <th>Name:</th><td><:cfg shop accountname:></td>
+        <th>Name:</th><td><:cfg shop accountname |h:></td>
       </tr>
       <tr>
         <th>BSB:</th><td><:cfg shop bsb:></td>
@@ -56,20 +56,35 @@
   </dd>
 </dl>
 <:or Payment:><:eif Payment:>
-<:if CallMePayment:>
+<:if Payment CallMe:>
 <p>We will contact you to make arrangements for payment.</p>
-<:or CallMePayment:><:eif CallMePayment:>
-<:if PayPalPayment:>
-<p>Your payment has been processed through PayPal.<br />Transaction Id: <:order paypal_tran_id:>.</p>
-<:or PayPalPayment:><:eif PayPalPayment:>
+<:or Payment:><:eif Payment:>
+<:if Payment PayPal:>
+<dl>
+  <dt>Your payment was processed through PayPal:</dt>
+  <dd>
+    <table>
+      <caption>PayPal Details</caption>
+      <tr>
+        <th>Transaction Id:</th><td><:order paypal_tran_id:></td>
+      </tr>
+    </table>
+  </dd>
+</dl>
+<:or Payment:><:eif Payment:>
 <:include include/custom/payment_type_checkoutfinal.tmpl optional:>
+<:if Cfg "site users" nopassword:><:or Cfg:>
+<p class="alert">
+  <:if User:>This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user:>?userpage=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">account manager</a>.
+  <:or User:>To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user:>?show_register=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user:>?show_logon=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">Logon</a> before you continue with this purchase.<:eif User:>
+</p><:eif Cfg:>
 <table class="items">
-  <caption>Selected Order Items</caption>
+  <caption>Order items</caption>
   <thead>
     <tr> 
-      <th class="col1">Item:</th>
-      <th class="col2">Qty:</th>
-      <th class="col3">Price:</th>
+      <th class="col1">Item</th>
+      <th class="col2">Qty</th>
+      <th class="col3">Price</th>
     </tr>
   </thead>
   <tbody><:iterator begin items:>
@@ -79,7 +94,7 @@
         <div class="i_description"><:item description:></div><:or And:><:eif And:>
       </td>
       <td class="col2"><:item units:> &times;</td>
-      <td class="col3"><:cfg shop currency "$":><:money item retailPrice:></td>
+      <td class="col3"><:cfg shop currency "$":><:number money [item retailPrice]:></td>
     </tr><:iterator end items:>
   </tbody>
 </table>
@@ -87,14 +102,37 @@
   <:switch:>
   <:case Eq [cfg shop shipping] 0:>
   <:case Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
-  <p class="freight"><span>Freight:</span> <:ifOverseas:>To be quoted<:or:><:if Freight:><:cfg shop currency "$":><:money freight:><:or Freight:><:cfg freight zero_value "None":><:eif Freight:><:eif:></p>
+  <p class="freight"><span>Freight:</span> <:ifOverseas:>To be quoted<:or:><:if Freight:><:cfg shop currency "$":><:number money [freight]:><:or Freight:><:cfg freight zero_value "None":><:eif Freight:><:eif:></p>
   <:case Shipping_cost:>
-  <p class="freight"><span>(<:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>):</span> <:cfg shop currency "$":><:money shipping_cost:></p>
+  <p class="freight"><span>(<:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>):</span> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
   <:case Eq [order shipping_name] contact:>
-  <p class="freight"><span>(Shipping charges to be quoted later):</span> <:cfg shop currency "$":>X.XX</p>
+  <p class="freight"><span>(Shipping charges to be quoted later):</span> <:cfg shop currency "$":>TBA</p>
   <:case default:>
   <:endswitch:>
-  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:money order total:></p>
+  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:number money [order total]:> <abbr><:cfg shop currency_code "AUD":></abbr></p>
 </div><:if Cfg tryandbyte aufreight:><:if Overseas:>
 <p><b>We will contact you with a quote for shipping cost</b></p><:or Overseas:><:ifFreeShippingCart:>
 <p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:>
+<:if Orderpaidfiles:>
+<h2>Download files</h2>
+<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:dyntarget user:>?userpage=1&amp;_t=files">File downloads</a> section of your account.</p>
+<table class="items orders">
+  <caption>Files available</caption>
+  <thead>
+    <tr>
+      <th class="col1">Filename/Title</th>
+      <th class="col2">Date</th>
+      <th class="col3">Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <:iterator begin orderpaidfiles sort: -modwhen:>
+    <tr class="item">
+      <td class="col1"><a href="<:orderpaidfile url:>" title="<:orderpaidfile description:>"><:orderpaidfile displayName:></a></td>
+      <td class="col2"><:date orderpaidfile whenUploaded:></td>
+      <td class="col3"><:kb orderpaidfile sizeInBytes:>b</td>
+    </tr>
+    <:iterator end orderpaidfiles:>
+  </tbody>
+</table>
+<:or Orderpaidfiles:><:eif Orderpaidfiles:>

@@ -2,18 +2,20 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article"><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
 </div><:or Or:><:eif Or:>
-<ul class="sitemap"><:iterator begin children_of -1 filter: [listed] != 2 :>
-  <li><a href="<:url ofchild:>" title="<:ofchild title:>"><b><:ifOfchild titleAlias:><:ofchild titleAlias:><:or:><:ofchild title:><:eif:></b></a><:if Allkids_of ofchild filter: [listed] != 2 :>
-    <ul><:iterator begin allkids_of ofchild filter: [listed] != 2 :>
-      <:embed ofallkid include/lowmap.tmpl 10:><:iterator end allkids_of:>
+<ul class="sitemap"><:iterator begin children_of -1:>
+  <li class="i<:ofchild level:><:ifFirstOfchild:> first<:or:><:eif:><:ifLastOfchild:> last<:or:><:eif:><:ifAllkids_of ofchild:> parent<:or:><:eif:>"><:switch:><:case Ofchild link:>
+    <a href="<:url ofchild:>"><:ifOfchild titleAlias:><:ofchild titleAlias:><:or:><:ofchild title:><:eif:></a><:case default:>
+    <span><:ifOfchild titleAlias:><:ofchild titleAlias:><:or:><:ofchild title:><:eif:></span><:endswitch:><:if Allkids_of ofchild:>
+    <ul><:iterator begin allkids_of ofchild:>
+      <:embed ofallkid include/lowmap.tmpl 3:><:iterator end allkids_of:>
     </ul>
   <:or Allkids_of:><:eif Allkids_of:></li><:iterator separator children_of:><:iterator end children_of:>
-  <li><a href="/cgi-bin/search.pl"><b>Search</b></a></li>
+  <li><a href="/cgi-bin/search.pl">Search</a></li>
 </ul>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->

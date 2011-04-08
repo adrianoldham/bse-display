@@ -1,4 +1,6 @@
-<:if User:><p><b>Hello <:ifUser name1:><:user name1:> <:user name2:> (<:user userId:>)<:or:><:user userId:><:eif:></b></p>
-<p><span style="color: #999999;"><:if Or [cfg custom user_auth] [cfg "site users" nopassword]:><:or Or:>Last logged in: <:date user previousLogon:><br /><:eif Or:>
-    Registered since: <:date user whenRegistered:></span></p>
+<:if User:>
+<p>Hello 
+<b><:user name1:> <:user name2:></b> <a href="<:script:>">(<:user userId:>)</a><:if Or [cfg "site users" nopassword] [cfg custom user_auth]:><:or Or:>
+<span class="right"><a href="<:script:>?logoff=1">(Logout)</a></span><:eif Or:>
+</p>
 <:or User:><:eif User:>

@@ -1,5 +1,9 @@
 <:uc [cfg site name]:> SHOP ADMINISTRATION
 
+--------------------------------------------------------------------------------
+                                    WEB ORDER
+--------------------------------------------------------------------------------
+
 Order No.    : <:order id |%06d:>
 Order Date   : <:date "%d/%m/%Y" order orderDate:><:ifOrder userId:>
 Username     : <:order userId:><:or:><:eif:><:ifOrder affiliate_code:>
@@ -43,8 +47,10 @@ Item                                       Code         Qty     Price   Extended
 <:or Or:><:eif Or
 :>                                                               Total: <:order total |m10:>
 <:ifOrder gst
-:>                                                                 GST: <:order gst |m10:><:or:><:eif
+:>                                                                 GST: <:order gst |m10:><:or
+:>                                                                 GST: <:arithmetic [order total] - ([order total] / (1 + [cfg shop gst_rate 10] / 100)) |m10:><:eif
 :>
+
 <:if Eq [order paymentType] "0":><:if Order ccOnline
 :>This credit card payment was processed online:
 
@@ -60,7 +66,8 @@ Item                                       Code         Qty     Price   Extended
              <:cfg shop display_cardType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
 :><:ifEq [order paymentType] "1" :>The customer will pay by cheque.<:or:><:eif
 :><:ifEq [order paymentType] "2" :>Please contact the customer to make arrangements for payment.<:or:><:eif
-:><:ifEq [order paymentType] "4" :>Payment received from PayPal:
+:><:ifEq [order paymentType] "4" :>Payment was processed through PayPal:
+
              Transaction No.: <:order paypal_tran_id:><:or:><:eif
 :><:ifEq [order paymentType] "10":>The customer will pay by electronic funds transfer.<:or:><:eif
 :><:if Cfg tryandbyte aufreight:><:if Order customInt1:>
@@ -69,8 +76,6 @@ Please contact the customer to quote the shipping costs.<:or Order:><:ifFreeShip
 
 This order qualifies for free shipping within Australia.<:or:><:eif:><:eif Order:><:or Cfg:><:eif Cfg:><:if Order instructions:>
 
-<:with begin wrap 80:>Instruction: <:order instructions:><:with end wrap:><:or Order:><:eif Order:>
+<:with begin wrap 80:>Instructions: <:order instructions:><:with end wrap:><:or Order:><:eif Order:>
 
---------------------------------------------------------------------------------
-                                    WEB ORDER
 --------------------------------------------------------------------------------

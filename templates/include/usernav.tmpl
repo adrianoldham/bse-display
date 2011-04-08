@@ -1,49 +1,12 @@
-<table border="0" cellspacing="1" cellpadding="5">
-  <tr>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><img src="/images/<:cfg theme name:>user/home_sml.gif" width="19" height="19" border="0" title="Your account manager" alt="Your account manager" /></a></th>
-  <:if Cfg "site users" nopassword:><:or Cfg:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=password"><img src="/images/<:cfg theme name:>user/lock_sml.gif" width="19" height="19" border="0" title="Password manager" alt="Password manager" /></a></th>
-    <:eif Cfg:>
-  <:if Cfg subscriptions enabled 0:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs"><img src="/images/<:cfg theme name:>user/subs_sml.gif" width="19" height="19" border="0" title="Email manager" alt="Email manager" /></a></th>
-    <:or Cfg:><:eif Cfg:>
-  <:if Cfg "site users" nopassword:><:or Cfg:>
-    <:ifCfg affiliate enabled 0:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=affiliate"><img src="/images/<:cfg theme name:>user/affiliate_sml.gif" width="19" height="19" border="0" title="Your affiliate page" alt="Your affiliate page" /></a></th>
-    <:or:><:eif:>
-  <:eif Cfg:>
-  <:if Cfg "site users" nopassword:><:or Cfg:>
-    <:ifCfg subscr enabled 0:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=subs"><img src="/images/<:cfg theme name:>user/subscr_sml.gif" width="19" height="19" border="0" title="Your subscriptions" alt="Your subscriptions" /></a></th>
-    <:or:><:eif:>
-  <:eif Cfg:>
-  <:if Cfg "site users" nopassword:><:or Cfg:>
-    <:ifCfg seminars enabled 0:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=soa"><img src="/images/<:cfg theme name:>user/calendar_sml.gif" width="19" height="19" border="0" title="Your seminars" alt="Your seminars" /></a></th>
-    <:or:><:eif:>
-  <:eif Cfg:>
-  <:if Cfg "site users" nopassword:><:or Cfg:>
-    <:ifCfg shop enabled:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=orders"><img src="/images/<:cfg theme name:>user/dollar_sml.gif" width="19" height="19" border="0" title="Your orders" alt="Your orders" /></a></th>
-    <:or:><:eif:><:eif Cfg:>
-  <:if Cfg "site users" nopassword:><:or Cfg:>
-    <:ifCfg shop enabled:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=wishlist"><img src="/images/<:cfg theme name:>user/wishlist_sml.gif" width="19" height="19" border="0" title="Your wishlist" alt="Your wishlist" /></a></th>
-    <:or:><:eif:><:eif Cfg:>
-    <:ifCfg "site users" files 1:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?userpage=1&amp;_t=files"><img src="/images/<:cfg theme name:>user/files_sml.gif" width="19" height="19" border="0" title="File manager" alt="File manager" /></a></th>
-    <:or:><:eif:>
-  <:if Cfg "site users" nopassword:><:or Cfg:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><img src="/images/<:cfg theme name:>user/user_sml.gif" width="19" height="19" border="0" title="Your contact details" alt="Your contact details" /></a></th>
-    <:ifCfg shop enabled:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=billing"><img src="/images/<:cfg theme name:>user/card_sml.gif" width="19" height="19" border="0" title="Your billing details" alt="Your billing details" /></a></th>
-    <:or:><:eif:>
-  <:eif Cfg:>
-    <:ifCfg shop enabled:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/shop.pl"><img src="/images/<:cfg theme name:>user/cart_sml.gif" width="19" height="19" border="0" title="Your shopping <:cfg shop cart_name cart:>" alt="Your shopping <:cfg shop cart_name cart:>" /></a></th>
-    <:or:><:eif:>
-  <:if Or [cfg "site users" nopassword] [cfg custom user_auth]:><:or Or:>
-    <th align="left" nowrap="nowrap"><a href="/cgi-bin/user.pl?logoff=1"><img src="/images/<:cfg theme name:>user/cross_sml.gif" width="19" height="19" border="0" title="Logout now" alt="Logout now" /></a></th>
-  <:eif Or:>
-  </tr>
-</table>
+<ul class="tabs">
+<li<:ifMatch [param userpage] "home":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account summary</a></li>
+<li<:ifMatch [param userpage] "account":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?show_opts=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account details</a></li><:switch:><:case Cfg shop enabled:><:if Cfg "site user" billing:>
+<li<:ifMatch [param userpage] "billing":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=billing">Billing details</a></li><:or Cfg:><:eif Cfg:><:if Orders:>
+<li<:ifMatch [param userpage] "orders":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=orders">Order history</a></li><:or Orders:><:eif Orders:><:if Wishlist:>
+<li<:ifMatch [param userpage] "wishlist":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=wishlist">Wishlist items</a></li><:or Wishlist:><:eif Wishlist:><:if Cfg affiliate enabled:>
+<li<:ifMatch [param userpage] "affiliate":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=affiliate">Affiliate details</a></li><:or Cfg:><:eif Cfg:><:if Cfg subscr enabled:>
+<li<:ifMatch [param userpage] "subs":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=subs">Subscriptions</a></li><:or Cfg:><:eif Cfg:><:if Cfg seminars enabled:>
+<li<:ifMatch [param userpage] "soa":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=soa">Seminar bookings</a></li><:or Cfg:><:eif Cfg:><:endswitch:><:if Or [ifUserfiles] [ifPaidfiles]:>
+<li<:ifMatch [param userpage] "files":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=files">File downloads</a></li><:or Or:><:eif Or:><:if Cfg subscriptions enabled :>
+<li<:ifMatch [param userpage] "subs":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?show_opts=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs">Newsletters</a></li><:or Cfg:><:eif Cfg:>
+</ul>

@@ -1,131 +1,135 @@
-<:wrap user/userbase.tmpl title=>"User Services" :><:if Partial_logon:><:or Partial_logon:>
-<:include include/usernav.tmpl:><:eif Partial_logon:>
-<table border="0" cellpadding="5" cellspacing="1">
-  <tr>
-    <td><img src="/images/<:cfg theme name:>user/user.gif" width="32" height="32" border="0" alt="Your Contact Details" /></td>
-    <td width="100%">
-      <h2>Your contact details</h2>
-    </td>
-  </tr>
-</table><:if Partial_logon:>
-<p>When your account was created, not all of the required details were entered.  Please provide at least the fields marked as required to complete your account activation.</p><:or Partial_logon:>
-<:include include/usermessage.tmpl:><:eif Partial_logon:>
-<form action="/cgi-bin/user.pl" method="post">
+<:wrap user/userbase.tmpl subtitle=>"Account details" userpage=>"account" :>
+<h2><:param subtitle |h:></h2>
+<form action="<:dyntarget user:>" method="post" class="siteuser">
 <:if Cfg "site users" nopassword:>
 <input type="hidden" name="u" value="<:user id:>" />
 <input type="hidden" name="p" value="<:user password:>" />
-<input type="hidden" name="r" value="<:script:>?userpage=<:user password:>&amp;u=<:user id:>&amp;message=User+contact+details+saved+successfully" />
-<:or Cfg:><:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:script:>?userpage=1&amp;message=User+contact+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
-<table border="0" cellpadding="1" cellspacing="1">
-  <tr>
-    <th nowrap="nowrap" align="left">First Name:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="name1" value="<:last name1:>" size="40" maxlength="127" tabindex="1" /><:ifRequired name1:>*<:or:><:eif:></td>
-    <td nowrap="nowrap"><:error_img name1:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Last Name:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="name2" value="<:last name2:>" size="40" maxlength="127" tabindex="2" /><:ifRequired name2:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img name2:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Title:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="title" value="<:last title:>" size="40" maxlength="127" tabindex="3" /><:ifRequired title:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img title:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Organisation:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="organization" value="<:last organization:>" size="40" maxlength="127" tabindex="4" /><:ifRequired organization:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img organization:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Address:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="address" value="<:last address:>" size="40" maxlength="127" tabindex="5" /><:ifRequired address:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img address:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Address 2:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="delivStreet2" value="<:last delivStreet2:>" size="40" maxlength="127" tabindex="5" /><:ifRequired delivStreet2:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img delivStreet2:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Suburb:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="city" value="<:last city:>" size="40" maxlength="127" tabindex="6" /><:ifRequired city:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img city:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">State:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="state" value="<:last state:>" size="8" maxlength="40" tabindex="7" /><:ifRequired state:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img state:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Postcode:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="postcode" value="<:last postcode:>" size="8" maxlength="40" tabindex="8" /><:ifRequired postcode:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img postcode:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Country:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="country" value="<:last country:>" size="32" maxlength="127" tabindex="9" /><:ifRequired country:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img country:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Telephone:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="telephone" value="<:last telephone:>" size="32" maxlength="80" tabindex="10" /><:ifRequired telephone:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img telephone:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Facsimile:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="facsimile" value="<:last facsimile:>" size="32" maxlength="80" tabindex="11" /><:ifRequired facsimile:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img facsimile:></td>
-  </tr>
-  <tr>
-    <th nowrap="nowrap" align="left">Mobile:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="delivMobile" value="<:last delivMobile:>" size="32" maxlength="80" tabindex="11" /><:ifRequired delivMobile:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img delivMobile:></td>
-  </tr>
-  <tr> 
-    <th nowrap="nowrap" align="left">Email:</th>
-    <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="email" value="<:last email:>" size="32" maxlength="255" tabindex="12" />*</td>
-    <td nowrap="nowrap"><:error_img email:></td>
-  </tr>
-<:if Cfg "site users" nopassword:>
-  <tr>
-    <th nowrap="nowrap" align="left">Confirm Email:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="confirmemail" value="<:old confirmemail:>" size="32" maxlength="255" tabindex="13" />
-    </td>
-    <td nowrap="nowrap"><:error_img confirmemail:></td>
-  </tr>
-<:or Cfg:><:eif Cfg:>
+<input type="hidden" name="r" value="<:dyntarget user:>?userpage=<:user password:>&amp;u=<:user id:>&amp;message=User+account+details+saved+successfully" />
+<:or Cfg:><:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:dyntarget user:>?userpage=1&amp;message=User+account+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
+  <fieldset class="account">
+    <legend>Account</legend>
+    <div class="input old_password<:ifError_img old_password:> error<:or:><:eif:>">
+      <label for="old_password"><:error_img old_password:> <:cfg "site users" display_old_password "Old Password":>:</label>
+      <input type="password" name="old_password" id="old_password" size="40" value="<:old old_password:>" title="<:cfg "site users" display_old_password "Old Password":>" class="input<:ifError_img old_password:> error<:or:><:eif:>" />
+    </div>
+    <div class="input password<:ifError_img password:> error<:or:><:eif:>">
+      <label for="password"><:error_img password:> <:cfg "site users" display_new_password "New Password":>:</label>
+      <input type="password" name="password" id="password" size="40" value="<:old password:>" title="<:cfg "site users" display_new_password "New Password":>" class="input<:ifError_img password:> error<:or:><:eif:>" />
+    </div>
+    <div class="input confirm_password<:ifError_img confirm_password:> error<:or:><:eif:>">
+      <label for="confirm_password"><:error_img confirm_password:> <:cfg "site users" display_confirm_password "Confirm Password":>:</label>
+      <input type="password" name="confirm_password" id="confirm_password" size="40" value="<:old confirm_password:>" title="<:cfg "site users" display_confirm_new_password "Confirm Password":>" class="input<:ifError_img confirm_password:> error<:or:><:eif:>" />
+    </div>
+    <div class="input email<:ifError_img email:> error<:or:><:eif:>">
+      <label for="email"><:error_img email:> <:cfg "site users" display_email "Email Address":>: <span class="required">*</span></label>
+      <input type="text" name="email" id="email" size="40" value="<:old email user email:>" title="<:cfg "site users" display_email "Email Address":>" class="input required<:ifError_img email:> error<:or:><:eif:>" />
+    </div>
+    <:if Cfg "site users" nopassword:>
+    <div class="input confirmemail<:ifError_img confirmemail:> error<:or:><:eif:>">
+      <label for="confirmemail"><:error_img confirmemail:> <:cfg "site users" display_confirmemail "Confirm Email":>:</label>
+      <input type="text" name="confirmemail" id="confirmemail" size="40" value="<:old confirmemail:>" title="<:cfg "site users" display_confirmemail "Confirm Email":>" class="input<:ifError_img confirmemail:> error<:or:><:eif:>" />
+    </div>
+    <:or Cfg:>
+    <:eif Cfg:>
+  </fieldset>
+
+<:if Subscriptions:>
+  <fieldset class="newsletter">
+    <input type="hidden" name="checkedsubs" value="1" />
+    <legend>Newsletter</legend>
+    <:iterator begin subscriptions:>
+    <div class="checkbox">
+      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /><:subscription name:>
+        <a href="<:dyntarget user:>?subinfo=1&amp;id=<:subscription id:>" target="_blank">(info)</a>
+      </label>
+    </div>
+    <:iterator end subscriptions:>
+    <input type="hidden" name="saveTextOnlyMail" value="1" /> 
+    <div class="select textOnlyMail<:ifError_img textOnlyMail:> error<:or:><:eif:>">
+      <label for="textOnlyMail"><:cfg "site users" display_textOnlyMail "Email Format":>:</label>
+      <select name="textOnlyMail" id="textOnlyMail" title="display_textOnlyMail">
+        <option value=""<:ifOld textOnlyMail user textOnlyMail:><:or:>selected="selected"<:eif:>>HTML</option>
+        <option value="1"<:ifOld textOnlyMail user textOnlyMail:> selected="selected"<:or:><:eif:>>Plain Text</option>
+      </select>
+    </div>
+    <p class="small">Confirmation will be sent to your email address.</p>
+  </fieldset>
+<:or Subscriptions:><:eif Subscriptions:>
+
+  <fieldset class="name">
+    <legend>Name</legend>
+    <div class="input name1<:ifError_img name1:> error<:or:><:eif:>">
+      <label for="name1"><:error_img name1:> <:cfg "site users" display_name1 "First Name":>:<:ifRequired name1:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="name1" id="name1" size="40" value="<:last name1:>" title="<:cfg "site users" display_name1 "First Name":>" class="input<:ifRequired name1:> required<:or:><:eif:><:ifError_img name1:> error<:or:><:eif:>" />
+    </div>
+    <div class="input name2<:ifError_img name2:> error<:or:><:eif:>">
+      <label for="name2"><:error_img name2:> <:cfg "site users" display_name2 "Last Name":>:<:ifRequired name2:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="name2" id="name2" size="40" value="<:last name2:>" title="<:cfg "site users" display_name2 "Last Name":>" class="input<:ifRequired name2:> required<:or:><:eif:><:ifError_img name2:> error<:or:><:eif:>" />
+    </div>
+  </fieldset>
+
+
+  <fieldset class="company">
+    <legend>Company</legend>
+    <div class="input organization<:ifError_img organization:> error<:or:><:eif:>">
+      <label for="organization"><:error_img organization:> <:cfg "site users" display_organization "Organisation":>:<:ifRequired organization:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="organization" id="organization" size="40" value="<:old organization user organization:>" title="<:cfg "site users" display_organization "Organisation":>" class="input<:ifRequired organization:> required<:or:><:eif:><:ifError_img organization:> error<:or:><:eif:>" />
+    </div>
+    <div class="input title<:ifError_img title:> error<:or:><:eif:>">
+      <label for="title"><:error_img confirm_password:> <:cfg "site users" display_title "Title / Role":>:<:ifRequired title:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="title" id="title" size="40" value="<:old title user title:>" title="<:cfg "site users" display_title "Title":>" class="input<:ifRequired title:> required<:or:><:eif:><:ifError_img title:> error<:or:><:eif:>" />
+    </div>
+  </fieldset>
+
+  <fieldset class="address">
+    <legend>Address</legend>
+    <div class="input address<:ifError_img address:> error<:or:><:eif:>">
+      <label for="address"><:error_img address:> <:cfg "site users" display_address "Address":>:<:ifRequired address:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="address" id="address" size="40" value="<:old address user address:>" title="<:cfg "site users" display_address "Organisation":>" class="input<:ifRequired address:> required<:or:><:eif:><:ifError_img address:> error<:or:><:eif:>" />
+    </div>
+    <div class="input delivStreet2<:ifError_img delivStreet2:> error<:or:><:eif:>">
+      <label for="delivStreet2"><:error_img delivStreet2:> <:cfg "site users" display_delivStreet2 "Address 2":>:<:ifRequired delivStreet2:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="delivStreet2" id="delivStreet2" size="40" value="<:last delivStreet2:>" title="<:cfg "site users" display_delivStreet2 "Address 2":>" class="input<:ifRequired delivStreet2:> required<:or:><:eif:><:ifError_img delivStreet2:> error<:or:><:eif:>" />
+    </div>
+    <div class="input city<:ifError_img addrecityss:> error<:or:><:eif:>">
+      <label for="city"><:error_img city:> <:cfg "site users" display_city "Suburb":>:<:ifRequired city:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="city" id="city" size="40" value="<:old city user city:>" title="<:cfg "site users" display_city "Suburb":>" class="input<:ifRequired city:> required<:or:><:eif:><:ifError_img city:> error<:or:><:eif:>" />
+    </div>
+    <div class="input state<:ifError_img state:> error<:or:><:eif:>">
+      <label for="state"><:error_img state:> <:cfg "site users" display_state "State":>:<:ifRequired state:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="state" id="state" size="10" value="<:old state user state:>" title="<:cfg "site users" display_state "State":>" class="input<:ifRequired state:> required<:or:><:eif:><:ifError_img state:> error<:or:><:eif:>" />
+    </div>
+    <div class="input postcode<:ifError_img postcode:> error<:or:><:eif:>">
+      <label for="postcode"><:error_img postcode:> <:cfg "site users" display_postcode "Postcode":>:<:ifRequired postcode:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="postcode" id="postcode" size="10" value="<:old postcode user postcode:>" title="<:cfg "site users" display_postcode "Postcode":>" class="input<:ifRequired postcode:> required<:or:><:eif:><:ifError_img postcode:> error<:or:><:eif:>" />
+    </div>
+    <div class="input country<:ifError_img country:> error<:or:><:eif:>">
+      <label for="country"><:error_img country:> <:cfg "site users" display_country "Country":>:<:ifRequired country:> <span class="required">*</span><:or:><:eif:></label><:if Cfgsection "country selector":>
+      <select name="country" id="country" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="select <:ifRequired userid:> required<:or:><:eif:><:ifError_img country:> error<:or:><:eif:>">
+        <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
+        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old country user country] [uc [dyncfgentry key]]] [ifEq [old country user country] [uc [dyncfgentry value]]]:> selected="selected"<:or Or:><:eif Or:>><:dyncfgentry value:></option>
+        <:iterator end dyncfgsection:>
+      </select><:or Cfgsection:>
+      <input type="text" name="country" id="country" size="40" value="<:old country user country:>" title="<:cfg "site users" display_country "Country":>" class="select <:ifRequired country:> required<:or:><:eif:><:ifError_img country:> error<:or:><:eif:>" /><:eif Cfgsection:> 
+    </div>
+  </fieldset>
+
+  <fieldset class="contact">
+    <legend>Contact</legend>
+    <div class="input telephone<:ifError_img telephone:> error<:or:><:eif:>">
+      <label for="telephone"><:error_img telephone:> <:cfg "site users" display_telephone "Telephone":>:<:ifRequired telephone:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="telephone" id="telephone" size="20" value="<:old telephone user telephone:>" title="<:cfg "site users" display_telephone "Telephone":>" class="input<:ifRequired telephone:> required<:or:><:eif:><:ifError_img telephone:> error<:or:><:eif:>" />
+    </div>
+    <div class="input facsimile<:ifError_img facsimile:> error<:or:><:eif:>">
+      <label for="facsimile"><:error_img facsimile:> <:cfg "site users" display_facsimile "Facsimile":>:<:ifRequired facsimile:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="facsimile" id="facsimile" size="20" value="<:old facsimile user facsimile:>" title="<:cfg "site users" display_facsimile "Facsimile":>" class="input<:ifRequired facsimile:> required<:or:><:eif:><:ifError_img facsimile:> error<:or:><:eif:>" />
+    </div>
+    <div class="input delivMobile<:ifError_img delivMobile:> error<:or:><:eif:>">
+      <label for="delivMobile"><:error_img delivMobile:> <:cfg "site users" display_delivMobile "Mobile":>:<:ifRequired delivMobile:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="delivMobile" id="delivMobile" size="20" value="<:old delivMobile user delivMobile:>" title="<:cfg "site users" display_delivMobile "Mobile":>" class="input<:ifRequired delivMobile:> required<:or:><:eif:><:ifError_img delivMobile:> error<:or:><:eif:>" />
+    </div>
+  </fieldset>
 <:include include/custom/user_options_custom.tmpl optional:>
-  <tr>
-    <td height="20" colspan="3" align="left" valign="bottom" nowrap="nowrap">* indicates required fields</td>
-  </tr>
-</table>
-<p align="right"><input type="submit" name="saveopts" value="Save changes" class="user-buttons" accesskey="s" title="AccessKey = s" tabindex="100" /></p>
+  <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>
+  <p class="buttons"><input type="submit" name="saveopts" value="Save changes" accesskey="s" title="AccessKey = s" /></p>
 </form>

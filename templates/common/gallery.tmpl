@@ -2,37 +2,25 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article"><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:if Images named /(?<!_lrg)$/ :><:switch:><:case Cfg popimage table:>
-<table class="gallery">
-  <tr><:iterator begin images named /(?<!_lrg)$/ :><:if Arithmetic [image_index] && [image_index] % [cfg popimage cols 3] == 0:>
-  </tr>
-  <tr><:or Arithmetic:><:eif Arithmetic:>
-    <td<:ifArithmetic [image_index] && [image_number] % [cfg popimage cols 3] == 0:> class="row_end"<:or:><:eif:>><:if Imagen [concatenate [image - name] _lrg]:>
-      <a href="/cgi-bin/image.pl?id=<:article id:>&amp;imid=<:imagen [concatenate [image - name] _lrg] id:>" onclick="return bse_popup_image(<:article id:>, <:imagen [concatenate [image - name] _lrg] id:>, <:imagen [concatenate [image - name] _lrg] width:>, <:imagen [concatenate [image - name] _lrg] height:>, '')" target="bse_image"><:image:></a><:or Imagen:>
-      <:image:><:eif Imagen:><:if And [cfg popimage caption 1] [image - alt]:>
-      <p><:image - alt:></p><:or And:><:eif And:>
-    </td><:iterator separator images:><:iterator end images:><:if Cfg popimage colspan 1:><:if Arithmetic [ifImages named /(?<!_lrg)$/ ] % [cfg popimage cols 3]:>
-    <td class="row_end" colspan="<:arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_lrg)$/ ] % [cfg popimage cols 3]) :>">&nbsp;</td><:or Arithmetic:><:eif Arithmetic:><:or Cfg:><:if Arithmetic [ifImages named /(?<!_lrg)$/ ] % [cfg popimage cols 3]:><:iterator begin strepeats [arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_lrg)$/ ] % [cfg popimage cols 3] )]:>
-    <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:or:><:eif:>>&nbsp;</td><:iterator end strepeats:><:or Arithmetic:><:eif Arithmetic:><:eif Cfg:>
-  </tr>
-</table><:case default:>
-<ul class="gallery"><:iterator begin images named /(?<!_lrg)$/ :>
-  <li<:ifArithmetic [image_index] && [image_number] % [cfg popimage cols 3] == 0:> class="row_end"<:or:><:eif:>><:if Imagen [concatenate [image - name] _lrg]:>
-    <a href="/cgi-bin/image.pl?id=<:article id:>&amp;imid=<:imagen [concatenate [image - name] _lrg] id:>" onclick="return bse_popup_image(<:article id:>, <:imagen [concatenate [image - name] _lrg] id:>, <:imagen [concatenate [image - name] _lrg] width:>, <:imagen [concatenate [image - name] _lrg] height:>, '')" title="<:imagen [concatenate [image - name] _lrg] alt:>" target="bse_image"><:image:></a><:or Imagen:>
-    <:image:><:eif Imagen:><:if And [cfg popimage caption 1] [image - alt]:>
-    <p><:image - alt:></p><:or And:><:eif And:>
-  </li><:iterator separator images:><:iterator end images:>
-</ul><:endswitch:><:or Images:><:eif Images:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
+</div><:or Or:><:eif Or:><:if Images named /(?<!_hide)$/ :>
+<div id="gallery_full">
+  <:thumbimage gallery_full 1:>
+</div>
+<div id="gallery">
+  <ul class="container"><:iterator begin images named /(?<!_hide)$/ :>
+    <li class="e<:image_number:><:ifFirstImage:> first<:or:><:eif:><:ifLastImage:> last<:or:><:eif:>"><a href="<:thumbimage gallery_full - src:>" title="<:image - alt:>"><:thumbimage gallery -:></a></li><:iterator end images:>
+  </ul>
+</div><:or Images:><:eif Images:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
 <:movestepkid:><:embed allkid:><:iterator end allkids:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids:><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids:>
     <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllkid thumbImage:>
       <a href="<:url allkid:>" class="thumbnail"><:thumbnail allkid:></a><:or:><:eif:>
-      <a href="<:url allkid:>" class="title"><:allkid title:></a><:include admin/adminmenu/allkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Allkid summary:>
+      <a href="<:url allkid:>" class="childtitle"><:allkid title:></a><:include admin/adminmenu/allkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Allkid summary:>
       <p class="summary"><:allkid summary:></p><:case Allkid summaryLength:>
       <p class="summary"><:summary allkid:></p><:endswitch:>
     </li><:iterator end allkids:>

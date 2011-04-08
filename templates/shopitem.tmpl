@@ -2,9 +2,9 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article product"><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Product retailPrice:>
-<form id="add_form_<:article id:>" action="/cgi-bin/shop.pl" method="post" class="buynow">
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:switch:><:case Product retailPrice:>
+<form id="add_form_<:article id:>" action="<:cfg site secureurl:>/cgi-bin/shop.pl" method="post" class="buynow">
   <input type="hidden" name="id" value="<:product id:>" />
   <input type="hidden" name="r" value="<:url top:>" /><:if Options:>
   <table>
@@ -16,11 +16,18 @@
   </table><:or Options:><:eif Options:><:ifProduct leadTime:> 
   <p><label>Usually ships in:</label> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></p><:or:><:eif:><:ifProduct product_code:>
   <p><label>Product Code:</label> <:product product_code:></p><:or:><:eif:>
-  <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:money product retailPrice:></span> (inc GST)</p>
+  <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:number money [product retailPrice]:></span> (inc GST)</p>
   <p><:ifProduct listed:>
     <label for="qty<:article id:>">Quantity:</label> <input type="text" id="qty<:article id:>" name="quantity" value="1" size="2" />
     <input type="submit" id="add<:article id:>" name="add" value="Add to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" class="shop_addshopitem" />
-    <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" /><:or:>
+    <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" /><:if Dynamic:><:if User:><:if InWishlist:>
+<p><a href="<:dyntarget nuser wishlistdel product_id [dynarticle id] r [url dynarticle] :>">Remove from my wishlist</a></p>
+<:or InWishlist:>
+<p><a href="<:dyntarget nuser wishlistadd product_id [dynarticle id] r [url dynarticle] :>">Add to my wishlist</a></p>
+<:eif InWishlist:>
+<:or User:><:eif User:><:or Dynamic:>
+<p><a href="<:cfg site secureurl:>/cgi-bin/nuser.pl/user?a_wishlistadd=1&amp;product_id=<:product id:>&amp;r=<:url product |U:>">Add to my wishlist</a></p>
+<:eif Dynamic:><:or:>
     This product is currently not available for sale<:eif:>
   </p>
 </form>

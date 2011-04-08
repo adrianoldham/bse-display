@@ -1,8 +1,9 @@
-<:wrap base.tmpl:>
-<div id="user" class="article user">
+<:wrap base.tmpl title=>"Account Manager" :>
+<div class="article user shop <:param userpage:>">
 <h1 class="pagetitle"><:param title |h:></h1><:switch:><:case Param nomessage:>
-<:case Match [script] "aza":><:ifMsg:><p id="message" class="error"><:msg:></p><:or:><:eif:>
-<:case Match [script] "user":><:ifMessage:><p id="message" class="error"><:message:></p><:or:><:eif:>
+<:case Match [script] "user":><:ifMessage:><p id="error" class="error"><:message:></p><:or:><:eif:>
 <:case default:><:endswitch:>
+<:include include/usermessage.tmpl:>
+<:include include/usernav.tmpl:>
 <:wrap here:>
 </div>

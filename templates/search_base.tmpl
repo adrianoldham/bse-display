@@ -1,40 +1,36 @@
 <:wrap base.tmpl title=>"Search" :>
-<div id="search" class="article search">
+<div class="article search">
 <h1 class="pagetitle"><:param title |h:></h1>
-<form id="search_form" method="post" action="/cgi-bin/search.pl">
+<form id="search_form" method="post" action="<:script:>">
   <input type="hidden" name="admin" value="<:admin_search:>" />
-  <table>
-    <tr>
-      <th><label for="search_q">Keywords:</label></th>
-      <td colspan="3"> 
-        <input type="text" id="search_q" name="q" size="40" title="Enter search terms" value="<:ifTerms:><:terms:><:or:>Enter search terms<:eif:>" class="required" />
-        <input type="submit" id="search_submit" name="submit" accesskey="s" title="AccessKey = s" value="Search" />
-      </td>
-    </tr><:if Cfg search options:>
-    <tr>
-      <th>&nbsp;</th>
-      <td colspan="3">
-        <input type="checkbox" id="search_match_all" name="match_all" value="1" <:ifCgi match_all:>checked="checked" <:or:><:eif:>/> <label for="search_match_all">Match <em>all</em> search terms</label>
-      </td>
-    </tr>
-    <tr>
-      <th><label for="s">Search:</label></th>
-      <td><:list:></td>
-      <th><label for="d">Date:</label></th>
-      <td>
-        <select name="d" id="d">
-          <option value="ar" <:dateSelected ar:>>All Current</option>
-          <option value="m7" <:dateSelected m7:>>Modified within last 7 days</option>
-          <option value="m30" <:dateSelected m30:>>Modified within last 30 days</option>
-          <option value="r1" <:dateSelected r1:>>Released Today</option>
-          <option value="r7" <:dateSelected r7:>>Released within last 7 days</option>
-          <option value="e7" <:dateSelected e7:>>Archived within last 7 days</option>
-          <option value="e30" <:dateSelected e30:>>Archived within last 30 days</option>
-          <option value="ae" <:dateSelected ae:>>Archives</option>
-        </select>
-      </td>
-    </tr><:or Cfg:><:eif Cfg:>
-  </table>
+  <fieldset>
+    <legend>Search</legend>
+    <div class="input query">
+      <label for="search_q">Keywords:</label>
+      <input type="text" id="search_q" name="q" size="40" title="Enter your search terms" value="<:terms:>" class="required" />
+    </div><:if Cfg search options 1:>
+    <div class="checkbox match">
+      <label for="search_match_all"><input type="checkbox" id="search_match_all" name="match_all" value="1" <:ifCgi match_all:>checked="checked" <:or:><:eif:>/> <span class="checkbox">Match <em>all</em> search terms</span></label>
+    </div>
+    <div class="select section">
+      <label for="s">Search:</label>
+      <:list:>
+    </div>
+    <div class="select date">
+      <label for="search_d">Date:</label>
+      <select id="search_d" name="d">
+        <option value="ar" <:dateSelected ar:>>All Current</option>
+        <option value="m7" <:dateSelected m7:>>Modified within last 7 days</option>
+        <option value="m30" <:dateSelected m30:>>Modified within last 30 days</option>
+        <option value="r1" <:dateSelected r1:>>Released Today</option>
+        <option value="r7" <:dateSelected r7:>>Released within last 7 days</option>
+        <option value="e7" <:dateSelected e7:>>Archived within last 7 days</option>
+        <option value="e30" <:dateSelected e30:>>Archived within last 30 days</option>
+        <option value="ae" <:dateSelected ae:>>Archives</option>
+      </select>
+    </div><:or Cfg:><:eif Cfg:>
+    <p class="buttons"><button type="submit" id="search_submit" name="submit" accesskey="s" title="AccessKey = s">Search</button></p>
+  </fieldset>
 </form>
 <div id="search_results">
 <:include include/search_results.tmpl:>

@@ -2,7 +2,7 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:><:if Dynamic:>
 <div id="article_<:article id:>" class="article"><:if User:><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:>
   <p><a href="<:cfg site secureurl:>/cgi-bin/user.pl"><:user name1:> <:user name2:> - (<:user userId:>)</a></p><:or User:>
   <form action="<:cfg site secureurl:>/cgi-bin/user.pl" method="post">

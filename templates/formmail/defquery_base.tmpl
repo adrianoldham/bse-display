@@ -1,40 +1,83 @@
-<:wrap formmail/formbase.tmpl:>
-<form action="<:script:>" method="post"<:ifFormHasFileFields:> enctype="multipart/form-data"<:or:><:eif:>>
-<input type="hidden" name="form" value="<:id:>" /><:ifCgi r:>
-<input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:><:ifFormcfg spam_check_field:>
-<input type="hidden" name="<:formcfg spam_check_field:>" value="" /><:or:><:eif:><:iterator begin fields:><:if Eq [field htmltype] "hidden":>
-<input type="hidden" name="<:field name:>" value="<:old [field name] field default:>" /><:or Eq:><:eif Eq:><:iterator end fields:><:ifFormcfg body:>
-<:bodytext formcfg body "Information sent via this form will not be shared with other organisations.":><:or:><:eif:>
-<table>
-  <:iterator begin fields:>
-  <:if Eq [field htmltype] "header":><tr>
-    <td colspan="2">
-      <h2><:field description:></h2>
-      <input type="hidden" name="<:field name:>" value="<:field description:>" />
-    </td></tr><:or Eq:>
-  <:if Match [field htmltype] "hidden":><:or Match:><tr class="<:ifFirstField:>first <:or:><:eif:><:ifLastField:>last <:or:><:eif:><:switch:><:case Eq [field htmltype] "bodytext":>bodytext<:case Eq [field htmltype] "textarea":>textarea<:case Eq [field htmltype] "password":>password<:case Eq [field htmltype] "select":>select<:case Eq [field htmltype] "multiselect":>multiselect<:case Eq [field htmltype] "check":>checkbox<:case Eq [field htmltype] "radio":>radio<:case default:>input<:endswitch:><:ifField required:> required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:><:ifField class:> <:field class:><:or:><:eif:> <:field name:>"<:ifField help:> title="<:field help:>"<:or:><:eif:>>
-    <:if Field hidelabel:><:or Field:><th><label for="<:field name:>"><:error_img [field name]:> <:field description:>: <:ifField required:><span class="required">*</span><:or:><:eif:></label></th><:eif Field:>
-    <td<:ifField hidelabel:> colspan="2"<:or:><:eif:>>
-      <:switch:><:case Eq [field htmltype] "textarea":><textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>" ><:old [field name] field default:></textarea> <:ifField notes:><:field notes:><:or:><:eif:>
-      <:case Eq [field htmltype] "password":><input type="password" name="<:field name:>" id="<:field name:>" value="<:old [field name]:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:>/> <:ifField notes:><:field notes:><:or:><:eif:>
-      <:case Eq [field htmltype] "select":><:values_select:> <:ifField notes:><:field notes:><:or:><:eif:>
-      <:case Eq [field htmltype] "multiselect":><select name="<:field name:>" id="<:field name:>" size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple">
-        <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:or:><:eif:>><:value name:></option>
-      <:iterator end values:></select> <:ifField notes:><:field notes:><:or:><:eif:>
-      <:case Eq [field htmltype] "radio":><fieldset id="<:field name:>"><:iterator begin values:><input type="radio" name="<:field name:>" value="<:value id:>" id="<:field name:>_<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <label for="<:field name:>_<:value id:>"><:value name:></label> <:ifField notes:><:field notes:><:or:><:eif:>
-      <:iterator separator values:><br /><:iterator end values:></fieldset>
-      <:case Eq [field htmltype] "check":><fieldset id="<:field name:>"><:iterator begin values:><input type="checkbox" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <label for="<:field name:>_<:value id:>"><:value name:></label> <:ifField notes:><:field notes:><:or:><:eif:>
-      <:iterator separator values:><br /><:iterator end values:></fieldset>
-      <:case Eq [field htmltype] "file":><input type="file" name="<:field name:>" id="<:field name:>" value="" /> <:ifField notes:><:field notes:><:or:><:eif:>
-      <:case default:><input type="text" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>/> <:ifField notes:><:field notes:><:or:><:eif:><:endswitch:>
-    </td>
-  </tr><:eif Match:><:eif Eq:><:iterator separator fields:>
-<:iterator end fields:><:if Recaptcha:>
-  <tr>
-    <th><:formcfg recaptcha_description "Anti-spam verification":>:</th>
-    <td><:recaptcha:></td>
-  </tr><:or Recaptcha:><:eif Recaptcha:>
-</table>
+<:wrap formmail/formbase.tmpl:><:ifFormcfg body:>
+<:bodytext formcfg body:><:or:><:eif:>
+<form action="<:script:>" method="post"<:ifFormHasFileFields:> enctype="multipart/form-data"<:or:><:eif:> class="<:id:> <:formcfg class:>">
+  <input type="hidden" name="form" value="<:id:>" /><:ifCgi r:>
+  <input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:><:ifFormcfg spam_check_field:>
+  <input type="hidden" name="<:formcfg spam_check_field:>" value="" /><:or:><:eif:>
+<:iterator begin fields:>
+  <:switch:>
+  <!-- Start special case fields //-->
+  <:case Match [field htmltype] "^hidden$":>
+  <input type="hidden" name="<:field name:>" value="<:old [field name] field default:>" />
+  <:case Match [field htmltype] "^h[123]$" |x:><:switch:><:case Eq [field_number] "1":><:case default:></fieldset><:endswitch:> 
+  <<:field htmltype:> class="<:field class:>"><:field description:></<:field htmltype:>>
+  <input type="hidden" name="<:field name:>" value="<:field description:>" /><:if Field intro:>
+  <:bodytext field intro:><:or Field:><:eif Field:>
+
+  <:case Match [field htmltype] "^fieldset$":><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><:case Eq [field_number] "1":><:case default:></fieldset><:endswitch:>
+  <fieldset class="group <:field name:> <:field class:>">
+    <legend><:field description:></legend>
+    <input type="hidden" name="<:field name:>" value="<:field description:>" /><:if Field intro:>
+    <:bodytext field intro:><:or Field:><:eif Field:>  
+  
+  <:case default:><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><fieldset><:case Match [previous_field htmltype] "^fieldset$":><:case Eq [field_number] "1":><fieldset><:case default:><:endswitch:>
+  <div class="<:ifFirstField:>first <:or:><:eif:><:ifLastField:>last <:or:><:eif:><:switch:><:case Field htmltype:><:field htmltype:><:case default:>input<:endswitch:><:ifField required:> required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:><:ifField class:> <:field class:><:or:><:eif:> <:field name:>"><:switch:><:case Match [field htmltype] "^(checkbox|radio)$" |x:><:case Field hidelabel:><:case default:>
+    <label for="<:field name:>"><:error_img [field name]:> <:field description:>:<:ifField required:> <span class="required">*</span><:or:><:eif:></label><:endswitch:><:if Field intro:>
+    <:bodytext field intro:><:or Field:><:eif Field:>
+
+    <:switch:>
+    <!-- Start standard fields //-->
+    <:case Match [field htmltype] "^bodytext$":>
+    <:bodytext field bodytext:>
+    
+    <:case Match [field htmltype] "^textarea$":>
+    <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>" class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
+    
+    <:case Match [field htmltype] "^select$":>
+    <select name="<:field name:>" id="<:field name:>" class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
+      <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:or:><:eif:>><:value name:></option>
+      <:iterator end values:>
+    </select>
+    
+    <:case Match [field htmltype] "^multiselect$":>
+    <select name="<:field name:>" id="<:field name:>" size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple" class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>"  title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
+      <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:or:><:eif:>><:value name:></option>
+      <:iterator end values:>
+    </select>
+    
+    <:case Match [field htmltype] "^radio$":>
+    <fieldset id="<:field name:>"><:ifField hidelabel:><:or:>
+      <legend><:field description:></legend><:eif:>
+      <:iterator begin values:><label for="<:field name:>_<:value id:>"><input type="radio" name="<:field name:>" value="<:value id:>" id="<:field name:>_<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <span class="radio"><:value name:></span></label><:iterator separator values:>
+      <:iterator end values:>
+    </fieldset>
+    
+    <:case Match [field htmltype] "^checkbox$":>
+    <fieldset id="<:field name:>"><:ifField hidelabel:><:or:>
+      <legend><:field description:></legend><:eif:>
+      <:iterator begin values:><label for="<:field name:>_<:value id:>"><input type="checkbox" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <span class="checkbox"><:value name:></span></label><:iterator separator values:>
+      <:iterator end values:>
+    </fieldset>
+    
+    <:case Match [field htmltype] "^file$":>
+    <input type="file" name="<:field name:>" id="<:field name:>" value="" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
+
+    <:case Match [field htmltype] "^password$":>
+    <input type="password" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
+        
+    <:case default:>
+    <input type="text" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
+    <:endswitch:>
+    
+    <:if Field notes:>
+    <span class="notes"><:field notes:></span><:or Field:><:eif Field:>
+  </div>
+  <:endswitch:>
+<:iterator end fields:>
+  <:if Recaptcha:>
+  <label><:formcfg recaptcha_description "Anti-spam verification":>:</label>
+  <:recaptcha:><:or Recaptcha:><:eif Recaptcha:>
+</fieldset>
 <p><span class="required">* Required.</span> <:formcfg required_text "Please provide information for all marked fields.":></p>
-<p><input type="submit" name="a_send" value="<:formcfg submit "Submit Form":>" /></p>
+<p class="buttons"><input type="submit" name="a_send" value="<:formcfg submit "Submit Form":>" class="submit" /></p>
 </form>

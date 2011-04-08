@@ -1,6 +1,6 @@
 <:wrap base.tmpl:>
-<div id="checkout" class="article shop">
-<h1 class="pagetitle"><:param title |h:></h1>
-<:ifMsg:><p id="message" class="error"><:msg:></p><:or:><:eif:>
+<div id="checkout" class="article shop checkout">
+<h1 class="pagetitle"><:param title |h:></h1><:ifMsg:>
+<p id="error" class="error"><:msg:></p><:or:><:eif:>
 <:wrap here:>
 </div>

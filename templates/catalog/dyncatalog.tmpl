@@ -2,7 +2,7 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
@@ -10,12 +10,12 @@
 <form id="add_multiple_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <table class="items">
-  <caption>Select Order Items</caption>
+  <caption>Select Items</caption>
   <thead>
     <tr>
-      <th class="col1" colspan="2">Item:</th>
-      <th class="col2">Qty:</th>
-      <th class="col3">Price:</th>
+      <th class="col1" colspan="2">Item</th>
+      <th class="col2">Qty</th>
+      <th class="col3">Price</th>
       <th class="col4">&nbsp;</th>
     </tr>
   </thead>
@@ -37,7 +37,7 @@
         <div class="summary"><:dynallprod summary:></div><:endswitch:>
       </td>
       <td class="col2"><:switch:><:case DynAnyProductOptions dynallprod:><:case Dynallprod retailPrice:><input type="text" name="qty<:dynallprod id:>" id="qty<:dynallprod id:>" size="2" <:ifEmbedded:><:or:>tabindex="<:dynallprod_number:>" <:eif:>/><:case default:><:endswitch:></td>
-      <td class="col3"><:ifDynallprod retailPrice:><:cfg shop currency "$":><:money dynallprod retailPrice:><:or:>NA<:eif:></td>
+      <td class="col3"><:ifDynallprod retailPrice:><:cfg shop currency "$":><:number money [dynallprod retailPrice]:><:or:>NA<:eif:></td>
       <td class="col4"><:switch:><:case DynAnyProductOptions dynallprod:><a href="<:url dynallprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Dynallprod retailPrice:><input type="image" name="a_addsingle<:dynallprod id:>" id="a_addsingle<:dynallprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/dynallprod_mini.tmpl:></td>
     </tr><:iterator end dynallprods:>
   </tbody>

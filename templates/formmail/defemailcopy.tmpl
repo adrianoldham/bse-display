@@ -1,7 +1,5 @@
 <:uc [cfg site name]:> - <:uc [formcfg subject]:>
-<:if User:>
-Submitted by: <:user userId:> (<:user email:>)
-<:or User:><:eif User:><:iterator begin fields:><:if Field value:><:switch:>
+<:iterator begin fields:><:if Field value:><:switch:>
 <:case Match [field htmltype] "^h[123]$" |x:>
 ================================================================================
 <:uc [field description]:>
