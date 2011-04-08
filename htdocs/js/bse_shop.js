@@ -71,7 +71,4 @@ document.observe("dom:loaded", function() {
   $$('.shop_addmultiple').each(function(e){e.onclick=function(){return add_multiple_handler(e.id.match(/\d+$/)[0])}});
   $$('.shop_addsingle').each(function(e){e.onclick=function(){return add_single_handler(e.id.match(/\d+$/)[0])}});
   $$('.shop_addshopitem').each(function(e){e.onclick=function(){return add_shopitem_handler(e.id.match(/\d+$/)[0])}});
-  if(bse_debug) {
-    window.alert("bse_shop loaded");
-  }
 });

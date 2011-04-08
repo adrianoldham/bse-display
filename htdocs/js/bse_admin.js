@@ -87,10 +87,7 @@ function add_edit_button(e,id,reset) {
 
 document.observe("dom:loaded", function() {
   if($('bse_edit_mode')) {
-    $$('div.article[id] > h1.pagetitle[id]', 'div.article[id] > h1.embedtitle[id]').each(function(e){ return title_editor(e.id.match(/\d+$/)[0]) });
+    $$('div.article[id] > h1.pagetitle[id]', 'div.article[id] > h2.embedtitle[id]').each(function(e){ return title_editor(e.id.match(/\d+$/)[0]) });
     $$('div.article[id] > div.body[id]').each(function(e){ return body_editor(e.id.match(/\d+$/)[0])});
-    if(bse_debug) {
-      window.alert("bse_admin loaded");
-    }
   }
 })
