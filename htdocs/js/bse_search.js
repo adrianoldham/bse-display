@@ -3,7 +3,7 @@
 document.observe("dom:loaded", search_init);
 
 function search_init() {
-    if ($('search')) {
+    if ($('search_form')) {
         new Form.Observer($('search_form'), 1.5, do_search);
         $('search_submit').onclick = do_search;
     }
