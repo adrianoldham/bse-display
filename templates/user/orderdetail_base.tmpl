@@ -142,20 +142,20 @@ Purchase Order: <:order purchase_order:><:or:><:eif:></h2>
   <:iterator begin items:><tr> 
     <td width="100%"><:item title:></td>
     <td align="center" nowrap="nowrap"><:item units:></td>
-    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:money item price:></td>
-    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:arithmetic d2:(([item price]/100) * [item units]):></td>
+    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:number money [item price]:></td>
+    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:number money [arithmetic ([item price] * [item units])]:></td>
   </tr><:iterator separator items:><:iterator end items:>
   <:ifOrder shipping_cost:><tr> 
     <td colspan="3" align="right" width="100%"><b>Freight:</b></td>
-    <td align="right" nowrap="nowrap"><b><:cfg shop currency "$":><:money order shipping_cost:></b></td>
+    <td align="right" nowrap="nowrap"><b><:cfg shop currency "$":><:number money [order shipping_cost]:></b></td>
   </tr><:or:><:eif:>
   <tr> 
     <td colspan="3" align="right" width="100%"><b>Total:</b></td>
-    <td align="right" nowrap="nowrap"><b><:cfg shop currency "$":><:money order total:></b></td>
+    <td align="right" nowrap="nowrap"><b><:cfg shop currency "$":><:number money [order total]:></b></td>
   </tr>
   <tr> 
     <td colspan="3" align="right" width="100%"> <small>(Included)</small> GST:</td>
-    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:money order gst:></td>
+    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:number money [order gst]:></td>
   </tr>
 </table>
 <br />
@@ -169,7 +169,7 @@ Purchase Order: <:order purchase_order:><:or:><:eif:></h2>
   <tr>
     <td nowrap="nowrap" width="33%" align="center"><:order ccReceipt:></td>
     <td nowrap="nowrap" width="33%" align="center"><:ifMatch [order whenFilled] "0000-00-00 00:00:00":>Processing<:or:><:date "%d/%m/%Y" order whenFilled:><:eif:></td>
-    <td nowrap="nowrap" width="33%" align="center"><:cfg shop currency "$":><:money order total:></td>
+    <td nowrap="nowrap" width="33%" align="center"><:cfg shop currency "$":><:number money [order total]:></td>
   </tr>
 </table><:or Order:><:eif Order:>
 <p><b><:cfg site entity_name [cfg shop address1] |h:><:ifCfg site entity_abn:> - ABN: <:cfg site entity_abn |h:><:or:><:eif:></b><br />
