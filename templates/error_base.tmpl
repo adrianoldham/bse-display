@@ -1,2 +1,5 @@
-<:wrap base.tmpl:>
-<p class="error"><:error:></p>
+<:wrap base.tmpl title=>"Oops, something went wrong" :>
+<div class="article">
+<h1 class="pagetitle"><:param title |h:></h1>
+<p id="message" class="error"><:error:></p>
+</div>
