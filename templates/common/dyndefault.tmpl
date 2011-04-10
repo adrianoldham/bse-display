@@ -7,14 +7,14 @@
 <div id="body_<:article id:>" class="body">
 <:body:>
 </div><:or Or:><:eif Or:><:if Dynamic:><:switch:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:>
-<:case Dynallkids:><:include include/sortallkids.tmpl:>
+<:case Dynallkids_of dynarticle filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
-  <ul><:iterator begin dynallkids:>
-    <li<:ifDynallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynallkid thumbImage:>
-      <a href="<:url dynallkid:>" class="thumbnail"><:thumbnail dynallkid:></a><:or:><:eif:>
-      <a href="<:url dynallkid:>" class="title"><:dynallkid title:></a><:include admin/adminmenu/dynallkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Dynallkid summary:>
-      <p class="summary"><:dynallkid summary:></p><:endswitch:>
-    </li><:iterator end dynallkids:>
+  <ul><:iterator begin dynallkids_of dynarticle filter: [flags] !~ /s/ :>
+    <li<:ifDynofallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynofallkid thumbImage:>
+      <a href="<:url dynofallkid:>" class="thumbnail"><:thumbnail dynofallkid:></a><:or:><:eif:>
+      <a href="<:url dynofallkid:>" class="title"><:dynofallkid title:></a><:include admin/adminmenu/dynofallkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Dynofallkid summary:>
+      <p class="summary"><:dynofallkid summary:></p><:endswitch:>
+    </li><:iterator end dynallkids_of:>
   </ul>
 </div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Dynstepparents:>
 <div class="relatedsections">
@@ -22,16 +22,16 @@
   <ul><:iterator begin dynstepparents:>
     <li><a href="<:url dynstepparent:>"><:dynstepparent title:></a></li><:iterator end dynstepparents:>
   </ul>
-</div><:or Dynstepparents:><:eif Dynstepparents:><:eif Or:><:or Dynamic:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
-<:movestepkid:><:embed allkid:><:iterator end allkids:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids:><:include include/sortallkids.tmpl:>
+</div><:or Dynstepparents:><:eif Dynstepparents:><:eif Or:><:or Dynamic:><:switch:><:case And [ifAllkids_of article filter: [flags] !~ /s/ ] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
+<:move_ofallkid:><:embed ofallkid:><:iterator end allkids_of:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids_of article filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
-  <ul><:iterator begin allkids:>
-    <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllkid thumbImage:>
-      <a href="<:url allkid:>" class="thumbnail"><:thumbnail allkid:></a><:or:><:eif:>
-      <a href="<:url allkid:>" class="title"><:allkid title:></a><:include admin/adminmenu/allkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Allkid summary:>
-      <p class="summary"><:allkid summary:></p><:case Allkid summaryLength:><!-- summary tag is not currently supported in dynamic iterators -->
-      <p class="summary"><:summary allkid:></p><:endswitch:>
-    </li><:iterator end allkids:>
+  <ul><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
+    <li<:ifOfallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifOfallkid thumbImage:>
+      <a href="<:url ofallkid:>" class="thumbnail"><:thumbnail ofallkid:></a><:or:><:eif:>
+      <a href="<:url ofallkid:>" class="title"><:ofallkid title:></a><:include admin/adminmenu/ofallkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Ofallkid summary:>
+      <p class="summary"><:ofallkid summary:></p><:case Ofallkid summaryLength:><!-- summary tag is not currently supported in dynamic iterators -->
+      <p class="summary"><:summary ofallkid:></p><:endswitch:>
+    </li><:iterator end allkids_of:>
   </ul>
 </div><:endswitch:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Stepparents:>
 <div class="relatedsections">

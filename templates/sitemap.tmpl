@@ -8,10 +8,10 @@
 <:body:>
 </div><:or Or:><:eif Or:>
 <ul class="sitemap"><:iterator begin children_of -1:>
-  <li class="i<:ofchild level:><:ifFirstOfchild:> first<:or:><:eif:><:ifLastOfchild:> last<:or:><:eif:><:ifAllkids_of ofchild:> parent<:or:><:eif:>"><:switch:><:case Ofchild link:>
+  <li class="i<:ofchild level:><:ifFirstOfchild:> first<:or:><:eif:><:ifLastOfchild:> last<:or:><:eif:><:ifAllkids_of ofchild filter: [flags] !~ /s/ :> parent<:or:><:eif:>"><:switch:><:case Ofchild link:>
     <a href="<:url ofchild:>"><:ifOfchild titleAlias:><:ofchild titleAlias:><:or:><:ofchild title:><:eif:></a><:case default:>
-    <span><:ifOfchild titleAlias:><:ofchild titleAlias:><:or:><:ofchild title:><:eif:></span><:endswitch:><:if Allkids_of ofchild:>
-    <ul><:iterator begin allkids_of ofchild:>
+    <span><:ifOfchild titleAlias:><:ofchild titleAlias:><:or:><:ofchild title:><:eif:></span><:endswitch:><:if Allkids_of ofchild filter: [flags] !~ /s/ :>
+    <ul><:iterator begin allkids_of ofchild filter: [flags] !~ /s/ :>
       <:embed ofallkid include/lowmap.tmpl 3:><:iterator end allkids_of:>
     </ul>
   <:or Allkids_of:><:eif Allkids_of:></li><:iterator separator children_of:><:iterator end children_of:>

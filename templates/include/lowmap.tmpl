@@ -1,8 +1,8 @@
 This template is used for generating the sitemap.
 <:embed start:><li class="i<:article level:>"><:switch:><:case Article link:>
 <a href="<:url article:>"><:ifArticle titleAlias:><:article titleAlias:><:or:><:article title:><:eif:></a><:case default:>
-<span><:ifArticle titleAlias:><:article titleAlias:><:or:><:article title:><:eif:></span><:endswitch:><:if CanEmbed:><:if Allkids_of article:>
-  <ul><:iterator begin allkids_of article:>
+<span><:ifArticle titleAlias:><:article titleAlias:><:or:><:article title:><:eif:></span><:endswitch:><:if CanEmbed:><:if Allkids_of article filter: [flags] !~ /s/ :>
+  <ul><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
     <:embed ofallkid include/lowmap.tmpl:><:iterator separator allkids_of:><:iterator end allkids_of:>
   </ul><:or Allkids_of:><:eif Allkids_of:><:or CanEmbed:>
 <:eif CanEmbed:></li><:embed end:>

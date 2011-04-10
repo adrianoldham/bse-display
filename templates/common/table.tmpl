@@ -6,20 +6,20 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
-<:movestepkid:><:embed allkid:><:iterator end allkids:><:case Allkids:><:include include/sortallkids.tmpl:>
+</div><:or Or:><:eif Or:><:switch:><:case And [ifAllkids_of article filter: [flags] !~ /s/ ] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
+<:move_ofallkid:><:embed ofallkid:><:iterator end allkids_of:><:case Allkids_of article filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div class="children">
   <table>
-    <tr><:iterator begin allkids:><:if Arithmetic [allkid_index] && [allkid_index] % [cfg "article table" cols 3] == 0:>
+    <tr><:iterator begin allkids_of article filter: [flags] !~ /s/ :><:if Arithmetic [ofallkid_index] && [ofallkid_index] % [cfg "article table" cols 3] == 0:>
     </tr>
     <tr><:or Arithmetic:><:eif Arithmetic:>
-      <td<:ifArithmetic [allkid_number] && [allkid_number] % [cfg "article table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:include admin/adminmenu/allkid_mini.tmpl:>
-        <a href="<:url allkid:>" class="thumbnail"><:switch:><:case Allkid thumbImage:><:thumbnail allkid:><:case default:><:sthumbimage allkid article_table thumbnail,1:><:endswitch:></a>
-        <a href="<:url allkid:>" class="title"><:allkid title:></a><:switch:><:case Cfg basic hide_child_summary:><:case Allkid summary:>
-        <p class="summary"><:allkid summary:></p><:case Allkid summaryLength:>
-        <p class="summary"><:summary allkid:></p><:endswitch:>
-      </td><:iterator end allkids:><:if Arithmetic [allkid_count] % [cfg "article table" cols 3]:><:if Cfg "article table" colspan:>
-      <td class="row_end" colspan="<:arithmetic [cfg "article table" cols 3] - ( [allkid_count] % [cfg "article table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "article table" cols 3] - ( [allkid_count] % [cfg "article table" cols 3] )]:>
+      <td<:ifArithmetic [ofallkid_number] && [ofallkid_number] % [cfg "article table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:include admin/adminmenu/ofallkid_mini.tmpl:>
+        <a href="<:url ofallkid:>" class="thumbnail"><:switch:><:case Ofallkid thumbImage:><:thumbnail ofallkid:><:case default:><:sthumbimage ofallkid article_table thumbnail,1:><:endswitch:></a>
+        <a href="<:url ofallkid:>" class="title"><:ofallkid title:></a><:switch:><:case Cfg basic hide_child_summary:><:case Ofallkid summary:>
+        <p class="summary"><:ofallkid summary:></p><:case Ofallkid summaryLength:>
+        <p class="summary"><:summary ofallkid:></p><:endswitch:>
+      </td><:iterator end allkids_of:><:if Arithmetic [ofallkid_count] % [cfg "article table" cols 3]:><:if Cfg "article table" colspan:>
+      <td class="row_end" colspan="<:arithmetic [cfg "article table" cols 3] - ( [ofallkid_count] % [cfg "article table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "article table" cols 3] - ( [ofallkid_count] % [cfg "article table" cols 3] )]:>
       <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:or:><:eif:>>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:or Arithmetic:><:eif Arithmetic:>
     </tr>
   </table>
