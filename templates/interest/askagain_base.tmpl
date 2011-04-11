@@ -1,29 +1,14 @@
-<:wrap base.tmpl:>
-<form method="post" action="/cgi-bin/interest.pl">
-<:ifCgi product:><input type="hidden" name="product" value="<:cgi product |h:>"><:or:><:eif:>
-<:ifCgi product_id:><input type="hidden" name="product_id" value="<:cgi product_id |h:>"><:or:><:eif:>
-<div align="center">
-<table width="350">
-  <tr> 
-    <th colspan="2" align="center"> 
-      <h3>Error</h3>
-    </th>
-  </tr>
-  <tr>
-    <td colspan="2"><:msg:></td>
-  </tr>
-  <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-  <tr>
-    <th>Email:</th>
-    <td><input type="text" name="email" size="40" value="<:cgi email |h:>" /></td>
-  </tr>
-  <tr> 
-    <td colspan="2" align="right"> 
-      <input type="submit" value="Register interest" />
-    </td>
-  </tr>
-</table>
-</div>
+<:wrap interest/interestbase.tmpl title=>"Oops! Please try again" :>
+<form method="post" action="/cgi-bin/interest.pl" class="siteuser"><:ifCgi product:>
+  <input type="hidden" name="product" value="<:cgi product |h:>" /><:or:><:eif:><:ifCgi product_id:>
+  <input type="hidden" name="product_id" value="<:cgi product_id |h:>" /><:or:><:eif:>
+  <fieldset class="group">
+    <legend>Register your interest</legend>
+    <p>Receive email notification when this item becomes available.</p>
+    <div class="input">
+      <label for="interest_email">Email:</label>
+      <input type="text" name="email" id="interest_email" value="<:cgi email |h:>" size="38" title="Enter your email address" class="error required" />
+    </div>
+  </fieldset>
+  <p class="buttons"><input type="submit" name="submit" value="Register now" class="button" /></p>
 </form>

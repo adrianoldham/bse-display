@@ -32,11 +32,7 @@
   </p>
 </form>
 <:endswitch:><:switch:><:case Or [ifEq [product retailPrice] 0] [ifMatch [product flags] "i"]:>
-<form name="notifyme" method="post" action="/cgi-bin/interest.pl" class="buynow">
-  <b>Register your interest</b> <input type="hidden" name="product" value="<:product title:>" />
-  <p>To register your interest in this product and receive notification when it becomes available, please enter and submit your email address below.</p>
-  <label>Email: <input type="text" name="email" size="40" title="Enter your email address" class="required" /></label> <input type="submit" name="Submit" value="Register now" />
-</form><:endswitch:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
+<:include interest/register.tmpl:><:endswitch:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
 <p><b>This product qualifies for free shipping if purchased before <:date product customDate1:></b></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>

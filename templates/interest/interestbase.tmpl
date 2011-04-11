@@ -1,0 +1,6 @@
+<:wrap base.tmpl:>
+<div class="article interest">
+<h1 class="pagetitle"><:param title |h:></h1><:switch:><:case Param nomessage:><:case Msg:>
+<p id="message" class="error"><:msg:></p><:case default:><:endswitch:>
+<:wrap here:>
+</div>

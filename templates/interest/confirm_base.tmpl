@@ -1,16 +1,3 @@
-<:wrap base.tmpl:>
-<div align="center">
-<table width="350">
-  <tr> 
-    <th align="center"> 
-      <h3>Confirmation</h3>
-    </th>
-  </tr>
-  <tr> 
-    <td> 
-      The <:cfg site name |h:> shop manager has been notified of your interest<:ifProduct:> in product "<:product |h:>"<:or:><:eif:>.
-      <p>When this product becomes available you will be notified at the following email address: <b><:email |h:></b>.</p>
-    </td>
-  </tr>
-</table>
-</div>
+<:wrap interest/interestbase.tmpl title=>"Thank you for your interest" nomessage=>"1" :>
+<p>Your interest <:ifProduct:> in &quot;<:product |h:>&quot;<:or:><:eif:> has been registered.</p>
+<p>When this item becomes available, you will be notified by email at the following address: <strong><:email |h:></strong></p>
