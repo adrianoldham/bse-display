@@ -1,5 +1,6 @@
-<:if Eq [article id] 1:><:or Eq:><ul id="crumbs"><:if Ancestor 1:><:or Ancestor:><:iterator begin inlines 1:>
-  <li class="home"><a href="<:url inline:>" title="<:inline title:>"><:ifInline titleAlias:><:inline titleAlias:><:or:><:inline title:><:eif:></a></li><:iterator end inlines:><:eif Ancestor:><:iterator begin crumbs:>
-  <li<:ifEq [crumb id] 1:> class="home"<:or:><:eif:>><:switch:><:case Crumb link:><a href="<:url crumb:>" title="<:crumb title:>"><:ifCrumb titleAlias:><:crumb titleAlias:><:or:><:crumb title:><:eif:></a><:case default:><span><:ifCrumb titleAlias:><:crumb titleAlias:><:or:><:crumb title:><:eif:></span><:endswitch:></li><:iterator end crumbs:>
-  <li class="focus hilite"><span><:switch:><:case ifEq [param title] "FORMTITLE":><:formcfg title:><:case Param title:><:param title |h:><:case article titleAlias:><:article titleAlias:><:case default:><:article title:><:endswitch:></span></li>
+<:if Eq [article id] 1:><:or Eq:><h2 class="hidden">Crumb Trail</h2>
+<ul id="crumbs"><:if Ancestor 1:><:or Ancestor:><:iterator begin inlines 1:>
+  <li><a href="<:url inline:>" title="<:inline title:>"><:ifInline titleAlias:><:inline titleAlias:><:or:><:inline title:><:eif:></a></li><:iterator end inlines:><:eif Ancestor:><:iterator begin crumbs:>
+  <li><:switch:><:case Crumb link:><a href="<:url crumb:>" title="<:crumb title:>"><:ifCrumb titleAlias:><:crumb titleAlias:><:or:><:crumb title:><:eif:></a><:case default:><span><:ifCrumb titleAlias:><:crumb titleAlias:><:or:><:crumb title:><:eif:></span><:endswitch:></li><:iterator end crumbs:>
+  <li class="focus hilite"><span><:switch:><:case Eq [param title] "FORMTITLE":><:formcfg title:><:case Param title:><:param title |h:><:case article titleAlias:><:article titleAlias:><:case default:><:article title:><:endswitch:></span></li>
 </ul><:eif Eq:>
