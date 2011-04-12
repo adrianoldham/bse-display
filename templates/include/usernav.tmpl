@@ -1,12 +1,12 @@
 <ul class="tabs">
-<li<:ifMatch [param userpage] "home":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account summary</a></li>
-<li<:ifMatch [param userpage] "account":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?show_opts=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account details</a></li><:switch:><:case Cfg shop enabled:><:if Cfg "site user" billing:>
-<li<:ifMatch [param userpage] "billing":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=billing">Billing details</a></li><:or Cfg:><:eif Cfg:><:if Orders:>
-<li<:ifMatch [param userpage] "orders":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=orders">Order history</a></li><:or Orders:><:eif Orders:><:if Wishlist:>
-<li<:ifMatch [param userpage] "wishlist":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=wishlist">Wishlist items</a></li><:or Wishlist:><:eif Wishlist:><:if Cfg affiliate enabled:>
-<li<:ifMatch [param userpage] "affiliate":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?show_opts=1&amp;_t=affiliate">Affiliate details</a></li><:or Cfg:><:eif Cfg:><:if Cfg subscr enabled:>
-<li<:ifMatch [param userpage] "subs":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=subs">Subscriptions</a></li><:or Cfg:><:eif Cfg:><:if Cfg seminars enabled:>
-<li<:ifMatch [param userpage] "soa":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=soa">Seminar bookings</a></li><:or Cfg:><:eif Cfg:><:endswitch:><:if Or [ifUserfiles] [ifPaidfiles]:>
-<li<:ifMatch [param userpage] "files":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?userpage=1&amp;_t=files">File downloads</a></li><:or Or:><:eif Or:><:if Cfg subscriptions enabled :>
-<li<:ifMatch [param userpage] "subs":> class="focus"<:or:><:eif:>><a href="/cgi-bin/user.pl?show_opts=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs">Newsletters</a></li><:or Cfg:><:eif Cfg:>
+<li<:ifMatch [param userpage] "home":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account summary</a></li>
+<li<:ifMatch [param userpage] "account":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?show_opts=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account details</a></li><:switch:><:case Cfg shop enabled:><:if Cfg "site user" billing:>
+<li<:ifMatch [param userpage] "billing":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?show_opts=1&amp;_t=billing">Billing details</a></li><:or Cfg:><:eif Cfg:><:if Orders:>
+<li<:ifMatch [param userpage] "orders":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=1&amp;_t=orders">Order history</a></li><:or Orders:><:eif Orders:><:if Wishlist:>
+<li<:ifMatch [param userpage] "wishlist":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=1&amp;_t=wishlist">Wishlist items</a></li><:or Wishlist:><:eif Wishlist:><:if Cfg affiliate enabled:>
+<li<:ifMatch [param userpage] "affiliate":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?show_opts=1&amp;_t=affiliate">Affiliate details</a></li><:or Cfg:><:eif Cfg:><:if Cfg subscr enabled:>
+<li<:ifMatch [param userpage] "subs":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=1&amp;_t=subs">Subscriptions</a></li><:or Cfg:><:eif Cfg:><:if Cfg seminars enabled:>
+<li<:ifMatch [param userpage] "soa":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=1&amp;_t=soa">Seminar bookings</a></li><:or Cfg:><:eif Cfg:><:endswitch:><:if Or [ifUserfiles] [ifPaidfiles]:>
+<li<:ifMatch [param userpage] "files":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=1&amp;_t=files">File downloads</a></li><:or Or:><:eif Or:><:if Cfg subscriptions enabled :>
+<li<:ifMatch [param userpage] "subs":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?show_opts=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>&amp;_t=subs">Newsletters</a></li><:or Cfg:><:eif Cfg:>
 </ul>
