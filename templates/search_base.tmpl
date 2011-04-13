@@ -5,18 +5,21 @@
   <input type="hidden" name="admin" value="<:admin_search:>" />
   <fieldset>
     <legend>Search</legend>
-    <div class="input query">
+    <div class="input">
       <label for="search_q">Keywords:</label>
-      <input type="text" id="search_q" name="q" size="40" title="Enter your search terms" value="<:terms:>" class="required" />
-    </div><:if Cfg search options:>
-    <div class="checkbox match">
-      <label for="search_match_all"><input type="checkbox" id="search_match_all" name="match_all" value="1" <:ifCgi match_all:>checked="checked" <:or:><:eif:>/> <span class="checkbox">Match <em>all</em> search terms</span></label>
+      <input type="text" id="search_q" name="q" size="38" title="Enter your search terms" value="<:terms:>" class="required" />
     </div>
-    <div class="select section">
-      <label for="s">Search:</label>
+  </fieldset><:if Cfg search options:>
+  <fieldset>
+    <legend>Options</legend>
+    <div class="checkbox">
+      <label for="search_match_all"><input type="checkbox" id="search_match_all" name="match_all" value="1"<:ifCgi match_all:> checked="checked"<:or:><:eif:> /> <span class="checkbox">Match <em>all</em> search terms</span></label>
+    </div>
+    <div class="select">
+      <label for="search_s">Search:</label>
       <:list:>
     </div>
-    <div class="select date">
+    <div class="select">
       <label for="search_d">Date:</label>
       <select id="search_d" name="d">
         <option value="ar" <:dateSelected ar:>>All Current</option>
@@ -28,9 +31,9 @@
         <option value="e30" <:dateSelected e30:>>Archived within last 30 days</option>
         <option value="ae" <:dateSelected ae:>>Archives</option>
       </select>
-    </div><:or Cfg:><:eif Cfg:>
-    <p class="buttons"><button type="submit" id="search_submit" name="submit" accesskey="s" title="AccessKey = s">Search</button></p>
-  </fieldset>
+    </div>
+  </fieldset><:or Cfg:><:eif Cfg:>
+  <p class="buttons"><button type="submit" id="search_submit" name="submit" accesskey="s" title="AccessKey = s">Search</button></p>
 </form>
 <div id="search_results">
 <:include include/search_results.tmpl:>
