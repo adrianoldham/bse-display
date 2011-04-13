@@ -15,7 +15,7 @@
     <ul class="search_files"><:iterator begin matchfiles:>
       <li>
         <span>File <:matchfile id:>:</span><:if Or [ifUser] [ifEq [matchfile requireUser] "0"]:>
-        <a href="/cgi-bin/user.pl?download_file=1&amp;file=<:matchfile id:>" title="Uploaded: <:date matchfile whenUploaded:> Size: <:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB"><:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:></a><:or Or:><:ifMatchfile description:>
+        <a href="<:dyntarget user:>?download_file=1&amp;file=<:matchfile id:>" title="Uploaded: <:date matchfile whenUploaded:> Size: <:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB"><:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:></a><:or Or:><:ifMatchfile description:>
         <:matchfile description:><:or:><:matchfile displayName:><:eif:><:eif Or:><:ifMatchfile notes_matched:>
         <div><:matchfile notes_excerpt:></div><:or:><:eif:>
       </li><:iterator end matchfiles:>
