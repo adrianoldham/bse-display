@@ -11,15 +11,15 @@ function search_init() {
 };
 
 function do_search() {
-  var query = $('search_q').value;
-  var title = $('search_q').title;
-  if (query != title && query != '') {
-    $('search_form').request({
-      parameters: { embed: '1'},
-      onComplete: function(transport) { 
-        $('search_results').innerHTML = transport.responseText;
-      }
-    });
-  }
-  return false;
+    var query = $('search_q').value;
+    var title = $('search_q').title;
+    if (query != title && query != '') {
+        $('search_form').request({
+            parameters: { embed: '1'},
+            onComplete: function(transport) {
+            $('search_results').innerHTML = transport.responseText;
+            }
+        });
+    }
+    return false;
 };
