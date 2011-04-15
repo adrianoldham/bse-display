@@ -15,8 +15,7 @@
     <td>
     <:switch:>
     <!-- Start standard fields //-->    
-    <:case Match [field htmltype] "^textarea$":><:dynreplace [field value] "
-" "<br />" g :>
+    <:case Match [field htmltype] "^textarea$":><p><:dynreplace [dynreplace [field value] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
     <:case Match [field htmltype] "^password$":>********
     <:case Field values:><:iterator begin values:><!--<:value id:>: --><:value name:><:iterator separator values:><br />
       <:iterator end values:>
