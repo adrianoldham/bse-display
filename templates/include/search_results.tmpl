@@ -4,7 +4,7 @@
   <dt><span><:resultSeq:>.</span> <:if UserCanSee result:><a href="<:articleurl |h:>"><:highlight_result title:></a><:or UserCanSee:><span><:highlight_result title:></span><:eif UserCanSee:></dt>
   <dd>
     <p><:excerpt:></p>
-    <ul class="search_metadata">
+    <ul class="meta data">
       <li><span>Score:</span> <:result score:>%</li>
       <li><span>Last modified:</span> <:date result lastModified:></li><:if Keywords:>
       <li><span>Keywords:</span> <:keywords:></li><:or Keywords:><:eif Keywords:><:if Author:>
@@ -12,12 +12,12 @@
       <li><span>Page title:</span> <:pageTitle:></li><:or PageTitle:><:eif PageTitle:><:if Product_code:>
       <li><span>Product code:</span> <:product_code:></li><:or Product_code:><:eif Product_code:>
     </ul><:if Matchfiles:>
-    <ul class="search_files"><:iterator begin matchfiles:>
-      <li>
-        <span>File <:matchfile id:>:</span><:if Or [ifUser] [ifEq [matchfile requireUser] "0"]:>
-        <a href="<:dyntarget user:>?download_file=1&amp;file=<:matchfile id:>" title="Uploaded: <:date matchfile whenUploaded:> Size: <:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB"><:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:></a><:or Or:><:ifMatchfile description:>
-        <:matchfile description:><:or:><:matchfile displayName:><:eif:><:eif Or:><:ifMatchfile notes_matched:>
-        <div><:matchfile notes_excerpt:></div><:or:><:eif:>
+    <ul class="meta files"><:iterator begin matchfiles:>
+      <li<:ifMatchfile notes_matched:> class="has-info"<:or:><:eif:>>
+        <span>File <:add [matchfile_index] 1:>:</span><:switch:><:case Matchfile forSale:>
+        <:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:><:case default:>
+        <a href="<:dyntarget user:>?download_file=1&amp;file=<:matchfile id:><:ifMatchfile requireUser:>&amp;r=<:articleurl |h:><:or:><:eif:>" title="Size: <:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB"><:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:></a><:endswitch:><:ifMatchfile notes_matched:>
+        <div><p><:matchfile notes_excerpt:></p></div><:or:><:eif:>
       </li><:iterator end matchfiles:>
     </ul><:or Matchfiles:><:eif Matchfiles:>
   </dd><:iterator end results:>
