@@ -1,35 +1,11 @@
-<:wrap user/userbase.tmpl title=>"Affiliate Home":>
-<table width="100%" border="0" cellspacing="0" cellpadding="10">
-  <tr>
-    <td width="33%"><:ifSiteuser_image photo:>
-<p><img src="<:siteuser_image photo url:>" width="<:siteuser_image photo width:>" height="<:siteuser_image photo height:>" alt="<:siteuser_image photo alt:>" /></p>
-      <:or:><:eif:></td>
-    <td width="33%"><:ifSiteuser_image logo:>
-<p><img src="<:siteuser_image logo url:>" width="<:siteuser_image logo width:>" height="<:siteuser_image logo height:>" alt="<:siteuser_image logo alt:>" /></p>
-      <:or:><:eif:></td>
-    <td width="33%">&nbsp;</td>
-  </tr>
-  <tr valign="top">
-    <th width="33%"><:ifSiteuser customStr1:>
-<:siteuser customStr1:><:or:><:eif:></th>
-    <th width="33%"><:ifSiteuser customStr2:>
-<:siteuser customStr2:><:or:><:eif:></th>
-    <th width="33%"><:ifSiteuser customStr3:>
-<:siteuser customStr3:><:or:><:eif:>
+<:wrap user/pubbase.tmpl title=>"Affiliate Home" nomessage=>"1" :>
+<h2><:ifSiteuser affiliate_name:><:siteuser affiliate_name:><:or:><:siteuser userId:><:eif:>’s public profile</h2>
+<:ifSiteuser_image photo:>
+<p><img src="<:siteuser_image photo url:>" width="<:siteuser_image photo width:>" height="<:siteuser_image photo height:>" alt="<:siteuser_image photo alt:>" /></p><:or:><:eif:>
+      
+<:ifSiteuser_image logo:>
+<p><img src="<:siteuser_image logo url:>" width="<:siteuser_image logo width:>" height="<:siteuser_image logo height:>" alt="<:siteuser_image logo alt:>" /></p><:or:><:eif:>
 
-</th>
-  </tr>
-  <tr valign="top">
-    <td width="33%"><:ifSiteuser customText1:>
-<p><:bodytext siteuser customText1:></p>
-      <:or:><:eif:></td>
-    <td width="33%"><:ifSiteuser customText2:>
-<p><:bodytext siteuser customText2:></p>
-      <:or:><:eif:></td>
-    <td width="33%"><:ifSiteuser customText3:>
-<p><:bodytext siteuser customText3:></p>
-      <:or:><:eif:></td>
-  </tr>
-</table>
-<:ifCfg affiliate remote_affiliate:><p><a href="<:cfg affiliate remote_affiliate:>/cgi-bin/affiliate.pl?a_set=1&amp;id=<:siteuser userId:>">Make a purchase in our other store</a></p>
-<:or:><:eif:><p><a href="<:cfg site url:>/cgi-bin/affiliate.pl?a_set=1&amp;id=<:siteuser userId:>">Make a purchase in our store</a></p>
+<:ifCfg affiliate remote_affiliate:>
+<p><a href="<:cfg affiliate remote_affiliate:>/cgi-bin/affiliate.pl?a_set=1&amp;id=<:siteuser userId:>">Make a purchase in our store</a></p><:or:>
+<p><a href="<:cfg site url:>/cgi-bin/affiliate.pl?a_set=1&amp;id=<:siteuser userId:>">Make a purchase in our store</a></p><:eif:>
