@@ -49,7 +49,7 @@
     <input type="hidden" name="saveTextOnlyMail" value="1" /> 
     <div class="select textOnlyMail<:ifError_img textOnlyMail:> error<:or:><:eif:>">
       <label for="textOnlyMail"><:cfg "site users" display_textOnlyMail "Email Format":>:</label>
-      <select name="textOnlyMail" id="textOnlyMail" title="display_textOnlyMail">
+      <select name="textOnlyMail" id="textOnlyMail" title="<:cfg "site users" display_textOnlyMail "Email Format":>">
         <option value=""<:ifOld textOnlyMail:><:or:>selected="selected"<:eif:>>HTML</option>
         <option value="1"<:ifOld textOnlyMail:> selected="selected"<:or:><:eif:>>Plain Text</option>
       </select>
