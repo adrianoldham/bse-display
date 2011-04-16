@@ -7,11 +7,11 @@
     <legend>Account</legend>
     <div class="input userid<:ifError_img userid:> error<:or:><:eif:>">
       <label for="userid"><:error_img userid:> <:cfg "site users" display_userid "Username":>: <span class="required">*</span></label>
-      <input type="text" name="userid" id="userid" size="34" value="<:old userid:>" title="<:cfg "site users" display_userid "Username":>" class="input required<:ifError_img userid:> error<:or:><:eif:>" />
+      <input type="text" name="userid" id="userid" size="34" value="<:old userid:>" title="<:cfg "site users" display_userid "Username":>" class="required<:ifError_img userid:> error<:or:><:eif:>" />
     </div>
     <div class="input password<:ifError_img password:> error<:or:><:eif:>">
       <label for="password"><:error_img password:> <:cfg "site users" display_password "Password":>: <span class="required">*</span></label>
-      <input type="password" name="password" id="password" size="34" value="<:old password:>" title="<:cfg "site users" display_password "Password":>" class="input required<:ifError_img password:> error<:or:><:eif:>" />
+      <input type="password" name="password" id="password" size="34" value="<:old password:>" title="<:cfg "site users" display_password "Password":>" class="required<:ifError_img password:> error<:or:><:eif:>" />
     </div>
   </fieldset>
   <p class="buttons group"><input type="submit" name="logon" value="Login now" accesskey="l" title="AccessKey = l" /></p>
