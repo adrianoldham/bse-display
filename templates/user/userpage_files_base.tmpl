@@ -1,7 +1,7 @@
 <:wrap user/userbase.tmpl subtitle=>"Personal files" userpage=>"files" :>
 <:if Userfiles:>
   <h2><:param subtitle |h:></h2>
-  <table class="items orders">
+  <table class="items files">
     <caption>Files available</caption>
     <thead>
       <tr>
@@ -23,7 +23,7 @@
   </table><:or Userfiles:><:eif Userfiles:>
 <:if Paidfiles:>
 <h2>Purchased files</h2>
-<table class="items orders">
+<table class="items files">
   <caption>Files available</caption>
   <thead>
     <tr>
