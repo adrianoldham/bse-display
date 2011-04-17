@@ -31,7 +31,7 @@
     <:bodytext field bodytext:>
     
     <:case Match [field htmltype] "^textarea$":>
-    <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>" class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
+    <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>" class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
     
     <:case Match [field htmltype] "^select$":>
     <select name="<:field name:>" id="<:field name:>" class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
@@ -63,10 +63,10 @@
     <input type="file" name="<:field name:>" id="<:field name:>" value="" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
 
     <:case Match [field htmltype] "^password$":>
-    <input type="password" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
+    <input type="password" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
         
     <:case default:>
-    <input type="text" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 32:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
+    <input type="text" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
     <:endswitch:>
     
     <:if Field notes:>
