@@ -1,6 +1,6 @@
 <ul class="tabs">
 <li<:ifMatch [param userpage] "home":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account summary</a></li>
-<li<:ifMatch [param userpage] "account":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?show_opts=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account details</a></li><:switch:><:case Cfg shop enabled:><:if Cfg "site user" billing:>
+<li<:ifMatch [param userpage] "account":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?show_opts=<:if Cfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or Cfg:>1<:eif Cfg:>">Account details</a></li><:switch:><:case Cfg shop enabled:><:if Cfg "site users" billing:>
 <li<:ifMatch [param userpage] "billing":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?show_opts=1&amp;_t=billing">Billing details</a></li><:or Cfg:><:eif Cfg:><:if Orders:>
 <li<:ifMatch [param userpage] "orders":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=1&amp;_t=orders">Order history</a></li><:or Orders:><:eif Orders:><:if Wishlist:>
 <li<:ifMatch [param userpage] "wishlist":> class="focus"<:or:><:eif:>><a href="<:dyntarget user:>?userpage=1&amp;_t=wishlist">Wishlist items</a></li><:or Wishlist:><:eif Wishlist:><:if Cfg affiliate enabled:>
