@@ -1,16 +1,27 @@
-<:wrap base.tmpl:> 
-<p><:ifWuser 
-  name1:><:wuser name1:><:or:><:wuser userId:><:eif:>'s Wishlist</p>
-<:if Uwishlist:>
-<table>
-<:iterator begin uwishlist:>
-<tr>
-  <td><:dthumbimage uwishlistentry search search,1:></td>
-  <td><a href="<:url uwishlistentry:>"><:uwishlistentry title:></a></td>
-</tr>
-<:iterator end uwishlist:>
+<:wrap user/pubbase.tmpl title=>"Public Wishlist" nomessage=>"1" :>
+<p><:ifWuser name1:><:wuser name1:><:or:><:wuser userId:><:eif:>’s wishlist contains <:uwishlistentry_count:> items</p>
+<table class="items wishlist">
+  <caption>Wishlist items</caption><:if Uwishlist:>
+  <thead>
+    <tr> 
+      <th class="col1">Item</th>
+      <th class="col3">Price</th>
+      <th class="col4">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody><:iterator begin uwishlist:>
+    <tr id="item_<:uwishlistentry id:>" class="item"> 
+      <td class="col1">
+        <a href="<:url uwishlistentry:>" class="item"><:uwishlistentry title:></a><:if And [uwishlistentry description] [cfg shop product_description 1]:>
+        <div class="i_description"><:uwishlistentry description:></div><:or And:><:eif And:>
+      </td>
+      <td class="col3"><:if Uwishlistentry retailPrice:><:cfg shop currency "$":><:number money [uwishlistentry retailPrice]:><:or Uwishlistentry:><:eif Uwishlistentry:></td>
+      <td class="col4">
+        <:ifUwishlistentry retailPrice:><input type="hidden" id="qty<:uwishlistentry id:>" name="qty<:uwishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:uwishlistentry id:>" id="a_addsingle<:uwishlistentry id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:or:><:eif:>
+      </td>
+    </tr><:iterator end uwishlist:>
+  </tbody><:or Uwishlist:>
+  <tr class="item"> 
+    <td colspan="4" class="noitems"><:ifWuser name1:><:wuser name1:><:or:><:wuser userId:><:eif:>’s wishlist is empty</td>
+  </tr><:eif Uwishlist:>
 </table>
-<:or Uwishlist:>
-<p><:ifWuser 
-  name1:><:wuser name1:><:or:><:wuser userId:><:eif:>'s wishlist is empty.</p>
-<:eif Uwishlist:>
