@@ -24,7 +24,7 @@
       <td class="col3"><:if Item retailPrice:><:cfg shop currency "$":><:number money [item retailPrice]:><:or Item:><:eif Item:></td>
       <td class="col4"><input type="image" name="delete_<:index:>" id="delete_<:index:>" src="/images/basic/store/buttons/delete.gif" title="Remove this item" /></td>
     </tr><:iterator end items:><:or Count:>
-    <tr> 
+    <tr class="item"> 
       <td colspan="4" class="noitems">Your shopping <:cfg shop cart_name cart:> is empty</td>
     </tr><:eif Count:>
   </tbody>
