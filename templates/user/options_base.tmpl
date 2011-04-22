@@ -56,18 +56,37 @@
   </fieldset>
 <:or Subscriptions:><:eif Subscriptions:>
 
+<:if Filecats:>
+  <fieldset class="notifications">
+    <input type="hidden" name="save_file_subs" value="1" />
+    <legend>Notifications</legend>
+    <:iterator begin filecats:>
+    <div class="checkbox">
+      <label><input type="checkbox" name="file_subscriptions" value="<:filecat id:>"<:ifFilecat subscribed:> checked="checked"<:or:><:eif:> /><:filecat name:></label>
+    </div>
+    <:iterator end filecats:>
+    <input type="hidden" name="saveTextOnlyMail" value="1" /> 
+    <div class="select textOnlyMail<:ifError_img textOnlyMail:> error<:or:><:eif:>">
+      <label for="textOnlyMail"><:cfg "site users" display_textOnlyMail "Email Format":>:</label>
+      <select name="textOnlyMail" id="textOnlyMail" title="<:cfg "site users" display_textOnlyMail "Email Format":>">
+        <option value=""<:ifOld textOnlyMail user textOnlyMail:><:or:>selected="selected"<:eif:>>HTML</option>
+        <option value="1"<:ifOld textOnlyMail user textOnlyMail:> selected="selected"<:or:><:eif:>>Plain Text</option>
+      </select>
+    </div>
+  </fieldset>
+<:or Filecats:><:eif Filecats:>
+
   <fieldset class="name">
     <legend>Name</legend>
     <div class="input name1<:ifError_img name1:> error<:or:><:eif:>">
       <label for="name1"><:error_img name1:> <:cfg "site users" display_name1 "First Name":>:<:ifRequired name1:> <span class="required">*</span><:or:><:eif:></label>
-      <input type="text" name="name1" id="name1" size="40" value="<:last name1:>" title="<:cfg "site users" display_name1 "First Name":>" class="<:ifRequired name1:>required<:or:><:eif:><:ifError_img name1:> error<:or:><:eif:>" />
+      <input type="text" name="name1" id="name1" size="40" value="<:old name1 user name1:>" title="<:cfg "site users" display_name1 "First Name":>" class="<:ifRequired name1:>required<:or:><:eif:><:ifError_img name1:> error<:or:><:eif:>" />
     </div>
     <div class="input name2<:ifError_img name2:> error<:or:><:eif:>">
       <label for="name2"><:error_img name2:> <:cfg "site users" display_name2 "Last Name":>:<:ifRequired name2:> <span class="required">*</span><:or:><:eif:></label>
-      <input type="text" name="name2" id="name2" size="40" value="<:last name2:>" title="<:cfg "site users" display_name2 "Last Name":>" class="<:ifRequired name2:>required<:or:><:eif:><:ifError_img name2:> error<:or:><:eif:>" />
+      <input type="text" name="name2" id="name2" size="40" value="<:old name2 user name2:>" title="<:cfg "site users" display_name2 "Last Name":>" class="<:ifRequired name2:>required<:or:><:eif:><:ifError_img name2:> error<:or:><:eif:>" />
     </div>
   </fieldset>
-
 
   <fieldset class="company">
     <legend>Company</legend>
@@ -89,7 +108,7 @@
     </div>
     <div class="input delivStreet2<:ifError_img delivStreet2:> error<:or:><:eif:>">
       <label for="delivStreet2"><:error_img delivStreet2:> <:cfg "site users" display_delivStreet2 "Address 2":>:<:ifRequired delivStreet2:> <span class="required">*</span><:or:><:eif:></label>
-      <input type="text" name="delivStreet2" id="delivStreet2" size="40" value="<:last delivStreet2:>" title="<:cfg "site users" display_delivStreet2 "Address 2":>" class="<:ifRequired delivStreet2:>required<:or:><:eif:><:ifError_img delivStreet2:> error<:or:><:eif:>" />
+      <input type="text" name="delivStreet2" id="delivStreet2" size="40" value="<:old delivStreet2 user delivStreet2:>" title="<:cfg "site users" display_delivStreet2 "Address 2":>" class="<:ifRequired delivStreet2:>required<:or:><:eif:><:ifError_img delivStreet2:> error<:or:><:eif:>" />
     </div>
     <div class="input city<:ifError_img addrecityss:> error<:or:><:eif:>">
       <label for="city"><:error_img city:> <:cfg "site users" display_city "Suburb":>:<:ifRequired city:> <span class="required">*</span><:or:><:eif:></label>
@@ -105,7 +124,7 @@
     </div>
     <div class="input country<:ifError_img country:> error<:or:><:eif:>">
       <label for="country"><:error_img country:> <:cfg "site users" display_country "Country":>:<:ifRequired country:> <span class="required">*</span><:or:><:eif:></label><:if Cfgsection "country selector":>
-      <select name="country" id="country" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="<:ifRequired userid:>required<:or:><:eif:><:ifError_img country:> error<:or:><:eif:>">
+      <select name="country" id="country" title="<:cfg "site users" display_country "Country":>" class="<:ifRequired userid:>required<:or:><:eif:><:ifError_img country:> error<:or:><:eif:>">
         <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
         <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old country user country] [uc [dyncfgentry key]]] [ifEq [old country user country] [uc [dyncfgentry value]]]:> selected="selected"<:or Or:><:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
