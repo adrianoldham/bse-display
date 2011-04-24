@@ -147,8 +147,8 @@
     <:or Payments:><:eif Payments:>
     <:if HaveSaleFiles:><:or HaveSaleFiles:><:eif HaveSaleFiles:>
     <:include include/custom/payment_type_checkout.tmpl optional:><:include include/payment_type_checkout.tmpl optional:>
-  </fieldset>
-  <:if MultPaymentTypes:><p class="small">* Select your preferred payment method</p><:or MultPaymentTypes:><:eif MultPaymentTypes:>
+  </fieldset><:if MultPaymentTypes:>
+  <p>Please select your preferred payment method</p><:or MultPaymentTypes:><:eif MultPaymentTypes:>
   <p class="buttons">
     <input type="submit" value="Purchase now" name="payment" accesskey="p" title="AccessKey = p" />
     <input type="submit" value="Go back" name="checkout" accesskey="b" title="AccessKey = b" />
