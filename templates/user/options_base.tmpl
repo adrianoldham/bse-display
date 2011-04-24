@@ -31,6 +31,14 @@
     </div>
     <:or Cfg:>
     <:eif Cfg:>
+    <input type="hidden" name="saveTextOnlyMail" value="1" /> 
+    <div class="select textOnlyMail<:ifError_img textOnlyMail:> error<:or:><:eif:>">
+      <label for="textOnlyMail"><:cfg "site users" display_textOnlyMail "Preferred Email Format":>:</label>
+      <select name="textOnlyMail" id="textOnlyMail" title="<:cfg "site users" display_textOnlyMail "Preferred Email Format":>">
+        <option value=""<:ifOld textOnlyMail user textOnlyMail:><:or:>selected="selected"<:eif:>>HTML Email (when available)</option>
+        <option value="1"<:ifOld textOnlyMail user textOnlyMail:> selected="selected"<:or:><:eif:>>Plain Text Email (only)</option>
+      </select>
+    </div>
   </fieldset>
 
 <:if Subscriptions:>
@@ -44,35 +52,20 @@
       </label>
     </div>
     <:iterator end subscriptions:>
-    <input type="hidden" name="saveTextOnlyMail" value="1" /> 
-    <div class="select textOnlyMail<:ifError_img textOnlyMail:> error<:or:><:eif:>">
-      <label for="textOnlyMail"><:cfg "site users" display_textOnlyMail "Email Format":>:</label>
-      <select name="textOnlyMail" id="textOnlyMail" title="<:cfg "site users" display_textOnlyMail "Email Format":>">
-        <option value=""<:ifOld textOnlyMail user textOnlyMail:><:or:>selected="selected"<:eif:>>HTML</option>
-        <option value="1"<:ifOld textOnlyMail user textOnlyMail:> selected="selected"<:or:><:eif:>>Plain Text</option>
-      </select>
-    </div>
     <small>Confirmation will be sent to your email address.</small>
   </fieldset>
 <:or Subscriptions:><:eif Subscriptions:>
 
 <:if Filecats:>
-  <fieldset class="notifications">
+  <fieldset class="notification">
     <input type="hidden" name="save_file_subs" value="1" />
-    <legend>Notifications</legend>
+    <legend>File Notification</legend>
     <:iterator begin filecats:>
     <div class="checkbox">
       <label><input type="checkbox" name="file_subscriptions" value="<:filecat id:>"<:ifFilecat subscribed:> checked="checked"<:or:><:eif:> /><:filecat name:></label>
     </div>
     <:iterator end filecats:>
-    <input type="hidden" name="saveTextOnlyMail" value="1" /> 
-    <div class="select textOnlyMail<:ifError_img textOnlyMail:> error<:or:><:eif:>">
-      <label for="textOnlyMail"><:cfg "site users" display_textOnlyMail "Email Format":>:</label>
-      <select name="textOnlyMail" id="textOnlyMail" title="<:cfg "site users" display_textOnlyMail "Email Format":>">
-        <option value=""<:ifOld textOnlyMail user textOnlyMail:><:or:>selected="selected"<:eif:>>HTML</option>
-        <option value="1"<:ifOld textOnlyMail user textOnlyMail:> selected="selected"<:or:><:eif:>>Plain Text</option>
-      </select>
-    </div>
+    <small>Receive email notification when file downloads are added to your account in the selected categories.</small>
   </fieldset>
 <:or Filecats:><:eif Filecats:>
 
