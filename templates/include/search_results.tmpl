@@ -16,7 +16,7 @@
       <li<:ifMatchfile notes_matched:> class="has-info"<:or:><:eif:>>
         <span>File <:add [matchfile_index] 1:>:</span><:switch:><:case Matchfile forSale:>
         <:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:><:case default:>
-        <a href="<:dyntarget user:>?download_file=1&amp;file=<:matchfile id:><:ifMatchfile requireUser:>&amp;r=<:articleurl |h:><:or:><:eif:>" title="Size: <:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB"><:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:></a><:endswitch:><:ifMatchfile notes_matched:>
+        <a href="<:dyntarget user download_file file [matchfile id] r [articleurl] :>" title="Size: <:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB"><:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:></a><:endswitch:><:ifMatchfile notes_matched:>
         <div><p><:matchfile notes_excerpt:></p></div><:or:><:eif:>
       </li><:iterator end matchfiles:>
     </ul><:or Matchfiles:><:eif Matchfiles:>

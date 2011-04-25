@@ -7,5 +7,5 @@
 <p><img src="<:siteuser_image logo url:>" width="<:siteuser_image logo width:>" height="<:siteuser_image logo height:>" alt="<:siteuser_image logo alt:>" /></p><:or:><:eif:>
 
 <:ifCfg affiliate remote_affiliate:>
-<p><a href="<:cfg affiliate remote_affiliate:>/cgi-bin/affiliate.pl?a_set=1&amp;id=<:siteuser userId:>">Make a purchase in our store</a></p><:or:>
-<p><a href="<:cfg site url:>/cgi-bin/affiliate.pl?a_set=1&amp;id=<:siteuser userId:>">Make a purchase in our store</a></p><:eif:>
+<p><a href="<:cfg affiliate remote_affiliate:><:dyntarget affiliate set id [siteuser userId] :>">Make a purchase in our store</a></p><:or:>
+<p><a href="<:cfg site url:><:dyntarget affiliate set id [siteuser userId] :>">Make a purchase in our store</a></p><:eif:>

@@ -15,7 +15,7 @@
     <:iterator begin orders:><tr class="item">
       <td class="col1">
         <!--<a href="<:dyntarget user:>?a_orderdetail=1&amp;id=<:order id:>" target="_blank"><:order id |%06d:></a>//-->
-        <a href="<:dyntarget user:>?userpage=1&amp;_t=orders&amp;id=<:order id:>"><:order id |%06d:></a>
+        <a href="<:dyntarget user userpage _t orders id [order id] :>"><:order id |%06d:></a>
       </td>
       <td class="col2"><:date order orderDate:></td>
       <td class="col3"><:switch:><:case Order complete:>Completed<:case Order filled:>Filled<:case Order paidFor:>Paid<:case default:>Processing<:endswitch:></td>

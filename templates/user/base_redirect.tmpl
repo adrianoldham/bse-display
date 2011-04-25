@@ -1,12 +1,15 @@
 <:wrap user/pubbase.tmpl title=>"You are leaving [cfg site name |h]" :>
 <p>The link you are about to follow is provided as convenient reference only, the linked page is not necessarily affiliated with or managed by <:cfg site name |h:>.  User discretion is advised.</p>
-<form action="<:script:>/redirect" class="redirect siteuser"><:ifOr [ifMatch [text] [targeturl]] [cfg redirect hide_link_text]:>
+<form action="<:dyntarget redirect:>" class="redirect siteuser"><:ifOr [ifMatch [text] [targeturl]] [cfg redirect hide_link_text]:>
   <p><:dynreplace [targeturl] "((?:&[^;]*;|[^&]){60}).*" $1...:><:or:>
   <h2><:text:></h2>
   <p><:dynreplace [targeturl] "((?:&[^;]*;|[^&]){60}).*" $1...:></p><:eif:>
-<input type="hidden" name="targeturl" value="<:targeturl:>" />
-<input type="hidden" name="urlhash" value="<:urlhash:>" />
-<input type="hidden" name="referer" value="<:referer:>" />
-<input type="hidden" name="referhash" value="<:referhash:>" />
-<p class="buttons"><input type="submit" name="a_doit" value="Proceed" tabindex="1" accesskey="p" title="AccessKey = p" /> <input type="submit" name="a_cancel" value="Cancel" tabindex="2" accesskey="." title="AccessKey = ." /></p>
+  <input type="hidden" name="targeturl" value="<:targeturl:>" />
+  <input type="hidden" name="urlhash" value="<:urlhash:>" />
+  <input type="hidden" name="referer" value="<:referer:>" />
+  <input type="hidden" name="referhash" value="<:referhash:>" />
+  <p class="buttons">
+    <input type="submit" name="a_doit" value="Proceed" tabindex="1" accesskey="p" title="AccessKey = p" />
+    <input type="submit" name="a_cancel" value="Cancel" tabindex="2" accesskey="." title="AccessKey = ." />
+  </p>
 </form>

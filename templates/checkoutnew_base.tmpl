@@ -31,11 +31,12 @@
   <:case default:>
   <:endswitch:>
   <p class="total"><span>Total:</span> <:cfg shop currency "$":><:number money [total]:> <abbr><:cfg shop currency_code "AUD":></abbr></p>
-</div><:if Cfg "site users" nopassword:><:or Cfg:>
+</div><:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
 <p class="alert">
-  <:if User:>This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user:>?userpage=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">account manager</a>.
-  <:or User:>To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user:>?show_register=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user:>?show_logon=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">Logon</a> before you continue with this purchase.<:eif User:>
-</p><:eif Cfg:>
+  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user userpage:>">account manager</a>.
+</p><:or User:>
+<p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop checkout need_billing [cgi need_billing]] :>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop checkout need_billing [cgi need_billing]] :>">Logon</a> before you continue with this purchase.
+</p><:eif User:><:eif Cfg:>
 <form action="<:dyntarget shop:>" method="post" class="siteuser">
   <h2>Shipping Details</h2>
   <fieldset class="name">
@@ -190,8 +191,10 @@
     </div>
   </fieldset>
   <:or Cgi:>
-  <p><input type="checkbox" name="need_billing" id="need_billing" onclick="this.form.checkupdate.click()" />
-    <label for="need_billing">Billing details different to shipping</label></p>
+  <p>
+    <input type="checkbox" name="need_billing" id="need_billing" onclick="this.form.checkupdate.click()" />
+    <label for="need_billing">Billing details different to shipping</label>
+  </p>
   <:eif Cgi:>
   <:if Cfg affiliate enabled:>
   <h2>Affiliate Details</h2>
@@ -199,7 +202,8 @@
     <legend>Referrer</legend>
     <div class="input affiliate_code<:ifError_img affiliate_code:> error<:or:><:eif:>">
       <label for="affiliate_code"><:error_img affiliate_code:> <:cfg "site users" display_affiliate_code "Referrer Code":>:</label><:if Affiliate_code:>
-      <a href="<:cfg site secureurl:>/cgi-bin/affiliate.pl?lo=<:affiliate_code:>"><:affiliate_code:></a><input type="hidden" name="affiliate_code" value="<:affiliate_code:>" /><:or Affiliate_code:>
+      <a href="<:dyntarget affiliate:>?lo=<:affiliate_code:>"><:affiliate_code:></a>
+      <input type="hidden" name="affiliate_code" value="<:affiliate_code:>" /><:or Affiliate_code:>
       <input type="text" name="affiliate_code" id="affiliate_code" size="20" value="<:old affiliate_code:>" title="<:cfg "site users" display_affiliate_code "Referrer Id":>" class="<:ifError_img affiliate_code:>error<:or:><:eif:>" /><:eif Affiliate_code:>
     </div>
   </fieldset>

@@ -2,7 +2,7 @@
 <:include include/usermessage.tmpl:>
 <form name="register_form" method="post" action="<:dyntarget user:>" class="siteuser"><:ifCgi r:>
   <input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:><:if User:>
-  <p class="alert">You are already logged on as <a href="<:dyntarget user:>"><:user userId:></a>, if this is not you, please <a href="<:dyntarget user:>?logoff=1">logout now</a>.</p><:or User:><:eif User:>
+  <p class="alert">You are already logged on as <a href="<:dyntarget user:>"><:user userId:></a>, if this is not you, please <a href="<:dyntarget user logoff:>">logout now</a>.</p><:or User:><:eif User:>
 
   <fieldset class="account">
     <legend>Account</legend>
@@ -126,6 +126,6 @@
 
 <p class="buttons group"><input type="submit" name="register" value="Signup now" accesskey="r" title="AccessKey = r" /></p>
 </form>
-<p class="group"><span class="left"><a href="<:dyntarget user:>?show_lost_password=1"><:if Cfg "site users" nopassword:>Send your options link<:or Cfg:>Lost your password?<:eif Cfg:></a></span>
+<p class="group"><span class="left"><a href="<:dyntarget user show_lost_password:>"><:if Cfg "site users" nopassword:>Send your options link<:or Cfg:>Lost your password?<:eif Cfg:></a></span>
 <:if Cfg "site users" nopassword:><:or Cfg:>
-<span class="right"><a href="<:dyntarget user:>?show_logon=1<:ifCgi r:>&amp;r=<:cgi r |u:><:or:><:eif:>">Already have an account?</a></span></p><:eif Cfg:>
+<span class="right"><a href="<:dyntarget user show_logon r [cgi r] :>">Already have an account?</a></span></p><:eif Cfg:>

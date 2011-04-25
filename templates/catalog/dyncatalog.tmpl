@@ -7,7 +7,7 @@
 <div id="body_<:article id:>" class="body">
 <:body:>
 </div><:or Or:><:eif Or:><:if Dynamic:><:switch:><:case Dynallprods:><:include include/sortallkids.tmpl:>
-<form id="add_multiple_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
+<form id="add_multiple_form_<:article id:>" action="<:if Dynamic:><:dyntarget shop:><:or Dynamic:><:cfg site secureurl:>/cgi-bin/shop.pl<:eif Dynamic:>" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <table class="items">
   <caption>Select Items</caption>

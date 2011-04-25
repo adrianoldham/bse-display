@@ -33,11 +33,12 @@
   <p class="total"><span>Total:</span> <:cfg shop currency "$":><:number money [total]:> <abbr><:cfg shop currency_code "AUD":></abbr></p>
 </div><:if Cfg tryandbyte aufreight:><:if Overseas:>
 <p><b>We will contact you with a quote for shipping cost</b></p><:or Overseas:><:ifFreeShippingCart:>
-<p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if Cfg "site users" nopassword:><:or Cfg:>
+<p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
 <p class="alert">
-  <:if User:>This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user:>?userpage=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">account manager</a>.
-  <:or User:>To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user:>?show_register=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user:>?show_logon=1&amp;r=<:dyntarget shop:>%3Fcheckout=1<:ifCgi need_billing:>%26need_billing=1<:or:><:eif:>">Logon</a> before you continue with this purchase.<:eif User:>
-</p><:eif Cfg:>
+  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user userpage:>">account manager</a>.
+</p><:or User:>
+<p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop order] :>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop order] :>">Logon</a> before you continue with this purchase.
+</p><:eif User:><:eif Cfg:>
 <form action="<:dyntarget shop:>" method="post" name="checkoutpay">
 <:ifOrder id:><input type="hidden" name="order_id" value="<:order id:>" /><:or:><:eif:>
   <h2>Payment Details</h2>

@@ -1,5 +1,5 @@
 <:wrap interest/interestbase.tmpl title=>"Oops! Please try again" :>
-<form action="/cgi-bin/interest.pl" method="post" class="siteuser"><:ifCgi product:>
+<form action="<:dyntarget interest:>" method="post" class="siteuser"><:ifCgi product:>
   <input type="hidden" name="product" value="<:cgi product |h:>" /><:or:><:eif:><:ifCgi product_id:>
   <input type="hidden" name="product_id" value="<:cgi product_id |h:>" /><:or:><:eif:>
   <fieldset class="group">

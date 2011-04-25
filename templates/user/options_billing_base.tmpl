@@ -1,11 +1,8 @@
 <:wrap user/userbase.tmpl subtitle=>"Billing details" userpage=>"billing" :>
 <h2><:param subtitle |h:></h2>
-<form action="<:dyntarget user:>" method="post" class="siteuser">
-<:if Cfg "site users" nopassword:>
-<input type="hidden" name="u" value="<:user id:>" />
-<input type="hidden" name="p" value="<:user password:>" />
-<input type="hidden" name="r" value="<:dyntarget user:>?userpage=<:user password:>&amp;u=<:user id:>&amp;message=User+billing+details+saved+successfully" />
-<:or Cfg:><:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:dyntarget user:>?userpage=1&amp;message=User+billing+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
+<form action="<:dyntarget user:>" method="post" class="siteuser"><:if Cgi r:>
+<input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:>
+<input type="hidden" name="r" value="<:dyntarget user show_opts _t billing message "User billing details saved successfully":>" /><:eif Cgi:>
 <input type="hidden" name="_t" value="billing" />
   <fieldset class="name">
     <legend>Name</legend>

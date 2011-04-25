@@ -1,11 +1,11 @@
 <:wrap user/userbase.tmpl subtitle=>"Account details" userpage=>"account" :>
 <h2><:param subtitle |h:></h2>
-<form action="<:dyntarget user:>" method="post" class="siteuser">
-<:if Cfg "site users" nopassword:>
+<form action="<:dyntarget user:>" method="post" class="siteuser"><:if Cfg "site users" nopassword:>
 <input type="hidden" name="u" value="<:user id:>" />
 <input type="hidden" name="p" value="<:user password:>" />
-<input type="hidden" name="r" value="<:dyntarget user:>?userpage=<:user password:>&amp;u=<:user id:>&amp;message=User+account+details+saved+successfully" />
-<:or Cfg:><:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:dyntarget user:>?userpage=1&amp;message=User+account+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
+<input type="hidden" name="r" value="<:dyntarget user show_opts [user password] u [user id] message "User account details saved successfully":>" /><:or Cfg:><:if Cgi r:>
+<input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:>
+<input type="hidden" name="r" value="<:dyntarget user show_opts message "User account details saved successfully":>" /><:eif Cgi:><:eif Cfg:>
   <fieldset class="account">
     <legend>Account</legend>
     <:if Cfg "site users" nopassword:><:or Cfg:>

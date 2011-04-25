@@ -2,7 +2,7 @@
 <h2><:param subtitle |h:></h2>
 <form action="<:dyntarget user:>" method="post" enctype="multipart/form-data" class="siteuser"><:if Cgi r:>
 <input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:>
-<input type="hidden" name="r" value="<:dyntarget user:>?userpage=1&amp;message=User+affiliate+details+saved+successfully" /><:eif Cgi:>
+<input type="hidden" name="r" value="<:dyntarget user show_opts _t affiliate message "User affiliate details saved successfully":>" /><:eif Cgi:>
 <input type="hidden" name="_t" value="affiliate" />
 
   <fieldset class="affiliate">
@@ -10,7 +10,7 @@
     <div class="input affiliate_name<:ifError_img affiliate_name:> error<:or:><:eif:>">
       <label for="affiliate_name"><:error_img affiliate_name:> <:cfg "affiliate" display_affiliate_name "Affiliate Name":>:<:ifRequired affiliate_name:> <span class="required">*</span><:or:><:eif:></label>
       <input type="text" name="affiliate_name" id="affiliate_name" size="40" value="<:last affiliate_name:>" title="<:cfg "affiliate" affiliate_name "Affiliate Name":>" class="<:ifRequired affiliate_name:>required<:or:><:eif:><:ifError_img affiliate_name:> error<:or:><:eif:>" />
-      <span class="notes"><a href="<:ifCfg affiliate url:><:cfg affiliate url:><:or:><:cfg site url:><:eif:><:if Cfg affiliate mod_rewrite:><:ifUser affiliate_name:>/<:user affiliate_name:><:or:>/~<:user userId:><:eif:><:or Cfg:>/cgi-bin/affiliate.pl?<:ifUser affiliate_name:>co=<:user affiliate_name:><:or:>lo=<:user userId:><:eif:><:eif Cfg:>">View your public profile</a></span>
+      <small><a href="<:ifCfg affiliate url:><:cfg affiliate url:><:or:><:cfg site url:><:eif:><:if Cfg affiliate mod_rewrite:><:ifUser affiliate_name:>/<:user affiliate_name:><:or:>/~<:user userId:><:eif:><:or Cfg:>/cgi-bin/affiliate.pl?<:ifUser affiliate_name:>co=<:user affiliate_name:><:or:>lo=<:user userId:><:eif:><:eif Cfg:>">View your public profile</a></small>
     </div>
   </fieldset>
   

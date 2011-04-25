@@ -2,4 +2,4 @@
 
 <p class="alert">Your <:if Cfg "site users" nopassword:>options link<:or Cfg:>password<:eif Cfg:> has been emailed to <strong><:user email:></strong>.</p>
 
-<p class="group"><a href="<:dyntarget user:>?userpage=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>">Ready to login?</a></p>
+<p class="group"><a href="<:ifCfg "site users" nopassword:><:dyntarget user userpage [user password] u [user id] :><:or:><:dyntarget user userpage:><:eif:>">Ready to login?</a></p>
