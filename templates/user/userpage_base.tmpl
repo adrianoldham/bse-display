@@ -1,17 +1,17 @@
 <:wrap user/userbase.tmpl subtitle=>"Account summary" userpage=>"home" :>
 <h2><:param subtitle |h:></h2>
-<p>This section contains your personal account details. From here you can 
-<:ifCfg subscriptions enabled:>manage your newsletter subscriptions,<:or:><:eif:>
-<:ifCfg shop enabled:> monitor the current status or purchase history of your orders from our on-line store<:or:><:eif:>
-<:ifOr [cfg shop enabled] [cfg subscriptions enabled]:> and<:or:><:eif:> modify your personal details, for example, your
-<:ifCfg "site users" nopassword:><:or:>password, <:eif:>email and mailing addresses etc.
+<p>
+  This is your account manager. Here you can <:ifCfg subscriptions enabled:>manage your newsletter subscriptions,<:or:><:eif:><:ifCfg shop enabled:> 
+  view your entire purchase history, monitor the current status of an on-line order, manage your wishlist items and<:or:><:eif:>
+  maintain personal details, like email and mailing addresses<:ifCfg "site users" nopassword:><:or:> or simply change your password<:eif:>.
 </p>
-<p><span><:if Or [cfg custom user_auth] [cfg "site users" nopassword]:><:or Or:>
-Last logged in: <:date user previousLogon:><br /><:eif Or:>
-Registered since: <:date user whenRegistered:></span></p>
-<:if Userfiles:><p>You have <:userfile_count:> user file<:ifEq [userfile_count] 1:><:or:>s<:eif:></p><:or Userfiles:><:eif Userfiles:>
-<:if Paidfiles:><p>You have <:paidfile_count:> purchased file<:ifEq [paidfile_count] 1:><:or:>s<:eif:></p><:or Paidfiles:><:eif Paidfiles:>
-<:if Orders:><p>You have <:order_count:> order<:ifEq [order_count] 1:><:or:>s<:eif:></p><:or Orders:><:eif Orders:>
-<:if Wishlist:><p>You have <:wishlistentry_count:> wishlist item<:ifEq [wishlistentry_count] 1:><:or:>s<:eif:></p><:or Wishlist:><:eif Wishlist:>
-<:if Subscriptions:><p>You have <:subscription_count:> subscription<:ifEq [subscription_count] 1:><:or:>s<:eif:></p><:or Subscriptions:><:eif Subscriptions:>
+<ul class="meta"><:if Or [cfg custom user_auth] [cfg "site users" nopassword]:><:or Or:>
+  <li><span>Last logged in:</span> <:date user previousLogon:></li><:eif Or:>
+  <li><span>Registered since:</span> <:date user whenRegistered:></li><:if Userfiles:>
+  <li>You have <:userfile_count:> user file<:ifEq [userfile_count] 1:><:or:>s<:eif:></li><:or Userfiles:><:eif Userfiles:><:if Paidfiles:>
+  <li>You have <:paidfile_count:> purchased file<:ifEq [paidfile_count] 1:><:or:>s<:eif:></li><:or Paidfiles:><:eif Paidfiles:><:if Orders:>
+  <li>You have <:order_count:> order<:ifEq [order_count] 1:><:or:>s<:eif:></li><:or Orders:><:eif Orders:><:if Wishlist:>
+  <li>You have <:wishlistentry_count:> wishlist item<:ifEq [wishlistentry_count] 1:><:or:>s<:eif:></li><:or Wishlist:><:eif Wishlist:><:if Subscriptions:>
+  <li>You have <:subscription_count:> subscription<:ifEq [subscription_count] 1:><:or:>s<:eif:></li><:or Subscriptions:><:eif Subscriptions:>
+</ul>
 <:include include/custom/userpage_custom.tmpl optional:><:include include/userpage_custom.tmpl optional:>
