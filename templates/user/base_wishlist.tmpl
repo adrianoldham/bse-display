@@ -17,7 +17,7 @@
       </td>
       <td class="col3"><:if Uwishlistentry retailPrice:><:cfg shop currency "$":><:number money [uwishlistentry retailPrice]:><:or Uwishlistentry:><:eif Uwishlistentry:></td>
       <td class="col4">
-        <:ifUwishlistentry retailPrice:><input type="hidden" id="qty<:uwishlistentry id:>" name="qty<:uwishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:uwishlistentry id:>" id="a_addsingle<:uwishlistentry id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:or:><:eif:>
+        <!--<:ifUwishlistentry retailPrice:><input type="hidden" id="qty<:uwishlistentry id:>" name="qty<:uwishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:uwishlistentry id:>" id="a_addsingle<:uwishlistentry id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:or:><:eif:>//-->
       </td>
     </tr><:iterator end uwishlist:>
   </tbody><:or Uwishlist:>
