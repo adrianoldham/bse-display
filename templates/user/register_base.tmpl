@@ -30,14 +30,6 @@
       <input type="text" name="confirmemail" id="confirmemail" size="40" value="<:old confirmemail:>" title="<:cfg "site users" display_confirmemail "Confirm Email":>" class="required<:ifError_img confirmemail:> error<:or:><:eif:>" />
     </div>
     <:or Cfg:><:eif Cfg:>
-    <input type="hidden" name="saveTextOnlyMail" value="1" /> 
-    <div class="select textOnlyMail<:ifError_img textOnlyMail:> error<:or:><:eif:>">
-      <label for="textOnlyMail"><:cfg "site users" display_textOnlyMail "Preferred Email Format":>:</label>
-      <select name="textOnlyMail" id="textOnlyMail" title="<:cfg "site users" display_textOnlyMail "Preferred Email Format":>">
-        <option value=""<:ifOld textOnlyMail:><:or:>selected="selected"<:eif:>>HTML Email (when available)</option>
-        <option value="1"<:ifOld textOnlyMail:> selected="selected"<:or:><:eif:>>Plain Text Email (only)</option>
-      </select>
-    </div>
   </fieldset>
 
 <:if Cfg "site users" info_on_register 1:>
