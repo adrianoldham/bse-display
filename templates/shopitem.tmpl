@@ -3,41 +3,41 @@
 <div id="article_<:article id:>" class="article product"><:switch:><:case Match [article flags] "T":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:switch:><:case Product retailPrice:>
-<form id="add_form_<:article id:>" action="<:cfg site secureurl:>/cgi-bin/shop.pl" method="post" class="buynow">
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:switch:><:case Product retailPrice:><:if Product listed:>
+<form id="add_form_<:article id:>" action="<:if Dynamic:><:dyntarget shop:><:or Dynamic:><:cfg site secureurl:>/cgi-bin/shop.pl<:eif Dynamic:>" method="post" class="product">
   <input type="hidden" name="id" value="<:product id:>" />
-  <input type="hidden" name="r" value="<:url top:>" /><:if Options:>
-  <table>
-    <tr><:iterator begin options:>
-      <th valign="middle"><:option desc:>:</th>
-      <td><:option popup:></td><:iterator separator options:>
-      <:iterator end options:>
-    </tr>
-  </table><:or Options:><:eif Options:><:ifProduct leadTime:> 
-  <p><label>Usually ships in:</label> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></p><:or:><:eif:><:ifProduct product_code:>
-  <p><label>Product Code:</label> <:product product_code:></p><:or:><:eif:>
-  <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:number money [product retailPrice]:></span> (inc GST)</p>
-  <p><:ifProduct listed:>
-    <label for="qty<:article id:>">Quantity:</label> <input type="text" id="qty<:article id:>" name="quantity" value="1" size="2" />
-    <input type="submit" id="add<:article id:>" name="add" value="Add to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" class="shop_addshopitem" />
-    <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" /><:if Dynamic:><:if User:><:if InWishlist:>
-<p><a href="<:dyntarget nuser wishlistdel product_id [dynarticle id] r [url dynarticle] :>">Remove from my wishlist</a></p>
-<:or InWishlist:>
-<p><a href="<:dyntarget nuser wishlistadd product_id [dynarticle id] r [url dynarticle] :>">Add to my wishlist</a></p>
-<:eif InWishlist:>
-<:or User:><:eif User:><:or Dynamic:>
-<p><a href="<:cfg site secureurl:>/cgi-bin/nuser.pl/user?a_wishlistadd=1&amp;product_id=<:product id:>&amp;r=<:url product |U:>">Add to my wishlist</a></p>
-<:eif Dynamic:><:or:>
-    This product is currently not available for sale<:eif:>
+  <input type="hidden" name="r" value="<:url top:>" />
+  <fieldset class="group">
+    <legend><:cfg shop currency "$":><:number money [product retailPrice]:> <abbr><:cfg shop currency_code "AUD":></abbr></legend><:if Options:>
+    <:iterator begin options:>
+    <div class="input <:option id:>">
+      <label for="<:option id:>"><:option desc:>:</label>
+      <:option popup:>
+    </div>
+    <:iterator end options:><:or Options:><:eif Options:>
+    <div class="input quantity">
+      <label for="qty<:article id:>">Quantity:</label>
+      <input type="text" name="quantity" id="qty<:article id:>" size="2" value="1" class="required" />
+    </div>
+  </fieldset><:switch:><:case Or [product product_code] [product leadTime]:>
+  <ul class="meta"><:ifProduct product_code:>
+    <li><span>Product Code:</span> <:product product_code:></li><:or:><:eif:><:ifProduct leadTime:> 
+    <li><span>Usually ships in:</span> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></li><:or:><:eif:>
+  </ul><:case default:><:endswitch:>
+  <p class="buttons"><:if Dynamic:><:if InWishlist:>
+    <a href="<:dyntarget nuser wishlistdel product_id [dynarticle id] r [url dynarticle] :>" title="Remove from my wishlist" class="wishlist remove">Remove from my wishlist</a><:or InWishlist:>
+    <a href="<:dyntarget nuser wishlistadd product_id [dynarticle id] r [url dynarticle] :>" title="Add to my wishlist" class="wishlist add">Add to my wishlist</a><:eif InWishlist:><:or Dynamic:><:eif Dynamic:>
+    <input type="submit" name="add" id="add<:article id:>" value="Add to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" />
+    <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" />
   </p>
-</form>
+</form><:or Product:>
+<p class="alert">Sorry! This product is currently not available for sale</p><:eif Product:>
 <:endswitch:><:switch:><:case Or [ifEq [product retailPrice] 0] [ifMatch [product flags] "i"]:>
 <:include interest/register.tmpl:><:endswitch:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
-<p><b>This product qualifies for free shipping if purchased before <:date product customDate1:></b></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [article body] [ifImages]:>
+<p class="alert">This product qualifies for free shipping if purchased before <:date product customDate1:></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
-<p><b>This product qualifies for free shipping if purchased before <:date product customDate1:></b></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [ifStepparents] [ifStepkids]:> 
+</div><:or Or:><:eif Or:><:if Or [ifStepparents] [ifStepkids]:> 
 <div class="relatedsections">
   <p><strong>Related categories:</strong></p>
   <ul><:iterator begin stepparents:>
