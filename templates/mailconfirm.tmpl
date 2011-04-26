@@ -39,13 +39,13 @@ Email        : <:order billEmail:>
 
 Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
-<:iterator begin items:><:item title |40:>   <:item product_code |12:> <:item units |%3d:> <:item price |m9:> <:extended price|m10:><:if Options:>
+<:iterator begin items:><:item title |40:>   <:item product_code |12:> <:item units |%3d:> <:item price |m9:> <:extended price |m10:><:if Options:>
    <:options:><:or Options:><:eif Options:>
 <:iterator separator items:><:iterator end items 
 :>--------------------------------------------------------------------------------
-<:if Or [cfg freight enabled] [cfg tryandbyte aufreight]
-:>                                                             Freight: <:if Order shipping_cost:><:order shipping_cost |m10:><:or Order:><:ifOrder customInt1:>To be quoted<:or:><:eif:>      None<:eif Order:>
-<:or Or:><:eif Or
+<:if Cfg shop shipping
+:>                                                             Freight: <:switch:><:case Order shipping_cost:><:order shipping_cost |m10:><:case Eq [order shipping_name] contact:>       TBA<:case default:>      None<:endswitch:>
+<:or Cfg:><:eif Cfg
 :>                                                               Total: <:order total |m10:>
 <:ifOrder gst
 :>                                                                 GST: <:order gst |m10:><:or

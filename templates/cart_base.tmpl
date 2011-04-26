@@ -15,7 +15,7 @@
     <tr id="item_<:item id:>" class="item"> 
       <td class="col1">
         <a href="<:item link:>" class="title"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="i_description"><:item description:></div><:or And:><:eif And:>
+        <div class="description"><:item description:></div><:or And:><:eif And:>
       </td>
       <td class="col2"><:if Match [item generator] "Seminar":>
         <input type="hidden" name="quantity_<:index:>" value="<:item units:>" /><:ifTotal:><:item units:><:or:><:eif:><:or Match:>
@@ -29,11 +29,13 @@
     </tr><:eif Count:>
   </tbody>
 </table><:if Count:><:if Total:>
-<div class="totals"><p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:number money [total]:> <abbr><:cfg shop currency_code "AUD":></abbr></p></div><:or Total:><:eif Total:>
+<div class="totals">
+  <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Sub total:</label> <:cfg shop currency "$":><:number money [total]:></p>
+</div><:or Total:><:eif Total:>
 <p class="buttons">
   <:if Total:><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
   <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" />
-  <input type="submit" name="a_emptycart" value="Empty cart" /><:or Total:>
+  <input type="submit" name="a_emptycart" value="Empty cart" accesskey="e" title="AccessKey = e" /><:or Total:>
   <input type="submit" name="a_order" value="Checkout now" accesskey="c" title="AccessKey = c" /><:eif Total:>
 </p><:if Total:><:or Total:>
 <input type="hidden" name="delivFirstName" id="delivFirstName" value="<:user name1:>" /> 

@@ -12,7 +12,7 @@
     <tr class="item"> 
       <td class="col1">
         <a href="<:item link:>" class="title"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="i_description"><:item description:></div><:or And:><:eif And:>
+        <div class="description"><:item description:></div><:or And:><:eif And:>
       </td>
       <td class="col2"><:item units:> &times;</td>
       <td class="col3"><:cfg shop currency "$":><:number money [item retailPrice]:></td>
@@ -21,16 +21,13 @@
 </table>
 <div class="totals">
   <:switch:>
-  <:case Eq [cfg shop shipping] 0:>
-  <:case Or [cfg freight enabled] [cfg tryandbyte aufreight]:>
-  <p class="freight"><span>Freight:</span> <:ifOverseas:>To be quoted<:or:><:if Freight:><:cfg shop currency "$":><:number money [freight]:><:or Freight:><:cfg freight zero_value "None":><:eif Freight:><:eif:></p>
   <:case Shipping_cost:>
-  <p class="freight"><span>(<:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>):</span> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
+  <p class="freight"><span>(<:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
   <:case Eq [shipping_name] contact:>
-  <p class="freight"><span>(Shipping charges to be quoted later):</span> <:cfg shop currency "$":>TBA</p>
+  <p class="freight"><span>(<:shipping_method:>)</span> <label>Freight:</label> TBA</p>
   <:case default:>
   <:endswitch:>
-  <p class="total"><span>Total:</span> <:cfg shop currency "$":><:number money [total]:> <abbr><:cfg shop currency_code "AUD":></abbr></p>
+  <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [total]:></p>
 </div><:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
 <p class="alert">
   This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user userpage:>">account manager</a>.
@@ -55,7 +52,11 @@
     <div class="input organization<:ifError_img delivOrganization:> error<:or:><:eif:>">
       <label for="delivOrganization"><:error_img delivOrganization:> <:cfg "site users" display_organization "Organisation":>:</label>
       <input type="text" name="delivOrganization" id="delivOrganization" size="40" value="<:old delivOrganization:>" title="<:cfg "site users" display_organization "Organisation":>" class="<:ifError_img delivOrganization:>error<:or:><:eif:>" />
-    </div>
+    </div><:if Cgi need_billing:><:or Cgi:>
+    <div class="input purchase_order<:ifError_img purchase_order:> error<:or:><:eif:>">
+      <label for="purchase_order"><:error_img purchase_order:> <:cfg "site users" display_purchase_order "Purchase Order":>:</label>
+      <input type="text" name="purchase_order" id="purchase_order" size="40" value="<:old purchase_order:>" title="<:cfg "site users" display_purchase_order "Purchase Order":>" class="<:ifError_img purchase_order:>error<:or:><:eif:>" />
+    </div><:eif Cgi:>
   </fieldset>
   <fieldset class="address">
     <legend>Address</legend>
@@ -106,11 +107,7 @@
     <div class="input email<:ifError_img emailAddress:> error<:or:><:eif:>">
       <label for="emailAddress"><:error_img emailAddress:> <:cfg "site users" display_email "Email":>: <span class="required">*</span></label>
       <input type="text" name="emailAddress" id="emailAddress" size="40" value="<:old emailAddress:>" title="<:cfg "site users" display_email "Email":>" class="required<:ifError_img emailAddress:> error<:or:><:eif:>" />
-    </div><:eif Cgi:><:if Cfg shop shipping:>
-    <div class="input shipping_name<:ifError_img shipping_name:> error<:or:><:eif:>">
-      <label for="shipping_name"><:error_img shipping_name:> <:cfg "site users" display_shipping_name "Shipping Method":>: <span class="required">*</span></label>
-      <:shipping_select:>
-    </div><:or Cfg:><:eif Cfg:>
+    </div><:eif Cgi:>
   </fieldset>
   <fieldset class="message">
     <legend>Message</legend>
@@ -118,7 +115,14 @@
       <label for="instructions"><:error_img instructions:> <:cfg "site users" display_instructions "Instructions":>:</label>
       <textarea name="instructions" id="instructions" cols="40" rows="5" title="<:cfg "site users" display_instructions "Instructions":>" class="<:ifError_img instructions:>error<:or:><:eif:>"><:old instructions:></textarea>
     </div>
-  </fieldset>
+  </fieldset><:if Cfg shop shipping:>
+  <fieldset class="dispatch">
+    <legend>Dispatch</legend>
+    <div class="input shipping_name<:ifError_img shipping_name:> error<:or:><:eif:>">
+      <label for="shipping_name"><:error_img shipping_name:> <:cfg "site users" display_shipping_name "Shipping Method":>: <span class="required">*</span></label>
+      <:shipping_select:>
+    </div>
+  </fieldset><:or Cfg:><:eif Cfg:>
   <:if Cgi need_billing:>
   <h2><input type="checkbox" name="need_billing" id="need_billing" <:ifCgi need_billing:>checked="checked" <:or:><:eif:>onclick="this.form.checkupdate.click()" /> <label for="need_billing">Billing Details</label></h2>
   <fieldset class="name">
@@ -137,6 +141,10 @@
     <div class="input organization<:ifError_img billOrganization:> error<:or:><:eif:>">
       <label for="billOrganization"><:error_img billOrganization:> <:cfg "site users" display_organization "Organisation":>:</label>
       <input type="text" name="billOrganization" id="billOrganization" size="40" value="<:old billOrganization:>" title="<:cfg "site users" display_organization "Organisation":>" class="<:ifError_img billOrganization:>error<:or:><:eif:>" />
+    </div>
+    <div class="input purchase_order<:ifError_img purchase_order:> error<:or:><:eif:>">
+      <label for="purchase_order"><:error_img purchase_order:> <:cfg "site users" display_purchase_order "Purchase Order":>:</label>
+      <input type="text" name="purchase_order" id="purchase_order" size="40" value="<:old purchase_order:>" title="<:cfg "site users" display_purchase_order "Purchase Order":>" class="<:ifError_img purchase_order:>error<:or:><:eif:>" />
     </div>
   </fieldset>
   <fieldset class="address">
