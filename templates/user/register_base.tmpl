@@ -40,8 +40,8 @@
     <legend>Newsletter</legend>
     <:iterator begin subscriptions:>
     <div class="checkbox">
-      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /><:subscription name:>
-        <a href="<:dyntarget user:>?subinfo=1&amp;id=<:subscription id:>" target="_blank">(info)</a>
+      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:>
+        (<a href="<:dyntarget user subinfo id [subscription id] :>" target="_blank">info</a>)
       </label>
     </div>
     <:iterator end subscriptions:>
