@@ -40,8 +40,8 @@
     <legend>Newsletter</legend>
     <:iterator begin subscriptions:>
     <div class="checkbox">
-      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /><:subscription name:>
-        (<a href="<:dyntarget user:>?subinfo=1&amp;id=<:subscription id:>" target="_blank">info</a>)
+      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:>
+        (<a href="<:dyntarget user subinfo id [subscription id] :>" target="_blank">info</a>)
       </label>
     </div>
     <:iterator end subscriptions:>
@@ -55,7 +55,7 @@
     <legend>File Notification</legend>
     <:iterator begin filecats:>
     <div class="checkbox">
-      <label><input type="checkbox" name="file_subscriptions" value="<:filecat id:>"<:ifFilecat subscribed:> checked="checked"<:or:><:eif:> /><:filecat name:></label>
+      <label><input type="checkbox" name="file_subscriptions" value="<:filecat id:>"<:ifFilecat subscribed:> checked="checked"<:or:><:eif:> /> <:filecat name:></label>
     </div>
     <:iterator end filecats:>
     <small>Receive email notification when file downloads are added to your account in the selected categories.</small>
