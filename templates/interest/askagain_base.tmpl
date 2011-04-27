@@ -1,7 +1,8 @@
 <:wrap interest/interestbase.tmpl title=>"Oops! Please try again" :>
-<form action="<:dyntarget interest:>" method="post" class="siteuser"><:ifCgi product:>
-  <input type="hidden" name="product" value="<:cgi product |h:>" /><:or:><:eif:><:ifCgi product_id:>
-  <input type="hidden" name="product_id" value="<:cgi product_id |h:>" /><:or:><:eif:>
+<form action="<:dyntarget interest:>" method="post" class="siteuser">
+  <input type="hidden" name="product" value="<:cgi product |h:>" />
+  <input type="hidden" name="product_id" value="<:cgi product_id |h:>" />
+  <input type="hidden" name="r" value="<:cgi r:>" />
   <fieldset class="group">
     <legend>Register your interest</legend>
     <p>Receive email notification when this item becomes available.</p>
