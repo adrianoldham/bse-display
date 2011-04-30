@@ -10,7 +10,7 @@
     <div class="input affiliate_name<:ifError_img affiliate_name:> error<:or:><:eif:>">
       <label for="affiliate_name"><:error_img affiliate_name:> <:cfg "affiliate" display_affiliate_name "Affiliate Name":>:<:ifRequired affiliate_name:> <span class="required">*</span><:or:><:eif:></label>
       <input type="text" name="affiliate_name" id="affiliate_name" size="40" value="<:last affiliate_name:>" title="<:cfg "affiliate" affiliate_name "Affiliate Name":>" class="<:ifRequired affiliate_name:>required<:or:><:eif:><:ifError_img affiliate_name:> error<:or:><:eif:>" />
-      <small><a href="<:ifCfg affiliate url:><:cfg affiliate url:><:or:><:cfg site url:><:eif:><:if Cfg affiliate mod_rewrite:><:ifUser affiliate_name:>/<:user affiliate_name:><:or:>/~<:user userId:><:eif:><:or Cfg:>/cgi-bin/affiliate.pl?<:ifUser affiliate_name:>co=<:user affiliate_name:><:or:>lo=<:user userId:><:eif:><:eif Cfg:>">View your public profile</a></small>
+      <small><a href="<:if Cfg affiliate mod_rewrite:><:ifCfg affiliate url:><:cfg affiliate url:><:or:><:cfg site url:><:eif:>/affiliate/<:ifUser affiliate_name:>u/<:user affiliate_name:><:or:><:user userId:><:eif:><:or Cfg:><:dyntarget affiliate:>?<:ifUser affiliate_name:>co=<:user affiliate_name:><:or:>lo=<:user userId:><:eif:><:eif Cfg:>">View your public profile</a></small>
     </div>
   </fieldset>
   
@@ -20,7 +20,7 @@
     <:iterator begin imagetemplates:>
     <:if Siteuser_image [imagetemplate id]:>
     <div class="image">
-      <p><:imagetemplate description:>: (<a href='<:dyntarget user:>?saveopts=1&amp;id=<:user id:>&amp;image_<:imagetemplate id:>_delete=1&amp;r=<:dyntarget user:>%3Fshow_opts=1%26id=<:user id:>%26_t=affiliate%26m=Image%2Bdeleted%2Bsuccessfully' onclick="return window.confirm('Are you sure you want to delete this image?')">Delete</a>)</p>
+      <p><:imagetemplate description:>: (<a href="<:dyntarget user saveopts id [user id] [concatenate image_ [imagetemplate id] _delete] 1 r [dyntarget user show_opts _t affiliate message "Image deleted successfully"] :>" onclick="return window.confirm('Are you sure you want to delete this image?')">Delete</a>)</p>
       <img src="<:siteuser_image [imagetemplate id] url:>" width="<:siteuser_image [imagetemplate id] width:>" height="<:siteuser_image [imagetemplate id] height:>" alt="<:siteuser_image [imagetemplate id] alt:>" />
     </div>
     <:or Siteuser_image:>
