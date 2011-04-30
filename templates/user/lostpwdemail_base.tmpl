@@ -25,7 +25,7 @@ ACCOUNT LOGON DETAILS:
   Password: <:user password:>
 
 ACCOUNT LOGON LINK:
-  <:cfg site secureurl:>/cgi-bin/user.pl<:ifCfg "site users" password_link 0:>?logon=1&userid=<:user userId:>&password=<:user password:><:or:><:eif:>
+  <:cfg site secureurl:>/cgi-bin/user.pl
 
 <:eif Cfg:><:ifCfg "extra tags" adminEmail:>Any questions should be directed to: <:cfg "extra tags" adminEmail:>
 
