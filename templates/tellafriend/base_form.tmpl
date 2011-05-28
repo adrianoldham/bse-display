@@ -1,0 +1,43 @@
+<:wrap user/pubbase.tmpl title=>"Tell a Friend" :>
+<p>Share this article with someone you know who may also like it: <a href="<:tarticle link:>"><:tarticle title:></a></p>
+<form action="<:dyntarget tellafriend:>" method="post" class="siteuser">
+<input type="hidden" name="page" value="<:tarticle id:>" />
+<input type="hidden" name="key" value="<:secret:>" />
+<input type="hidden" name="key2" value="" />
+<input type="hidden" name="r" value="<:cgi r:>" />
+
+  <fieldset class="tellafriend left">
+    <legend>To</legend>
+    <div class="input to_name<:ifError_img to_name:> error<:or:><:eif:>">
+      <label for="to_name"><:error_img to_name:> <:cfg "site users" display_to_name "Full Name":>: <span class="required">*</span></label>
+      <input type="text" name="to_name" id="to_name" size="40" maxlength="60" value="<:old to_name:>" title="<:cfg "site users" display_to_name "Full Name":>" class="required<:ifError_img to_name:> error<:or:><:eif:>" />
+    </div>
+    <div class="input to_email<:ifError_img to_email:> error<:or:><:eif:>">
+      <label for="to_email"><:error_img to_email:> <:cfg "site users" display_to_email "Email Address":>: <span class="required">*</span></label>
+      <input type="text" name="to_email" id="to_email" size="40" maxlength="130" value="<:old to_email:>" title="<:cfg "site users" display_to_email "Email Address":>" class="required<:ifError_img to_email:> error<:or:><:eif:>" />
+    </div>
+  </fieldset>
+
+  <fieldset class="tellafriend right">
+    <legend>From</legend>
+    <div class="input from_name<:ifError_img from_name:> error<:or:><:eif:>">
+      <label for="from_name"><:error_img from_name:> <:cfg "site users" display_from_name "Full Name":>: <span class="required">*</span></label>
+      <input type="text" name="from_name" id="from_name" size="40" maxlength="60" value="<:old from_name:>" title="<:cfg "site users" display_from_name "Full Name":>" class="required<:ifError_img from_name:> error<:or:><:eif:>" />
+    </div>
+    <div class="input from_email<:ifError_img from_email:> error<:or:><:eif:>">
+      <label for="from_email"><:error_img from_email:> <:cfg "site users" display_from_email "Email Address":>: <span class="required">*</span></label>
+      <input type="text" name="from_email" id="from_email" size="40" maxlength="130" value="<:old from_email:>" title="<:cfg "site users" display_from_email "Email Address":>" class="required<:ifError_img from_email:> error<:or:><:eif:>" />
+    </div>
+  </fieldset>
+  
+  <fieldset class="tellafriend full">
+    <legend>Message</legend>
+    <div class="input _note<:ifError_img note:> error<:or:><:eif:>">
+      <label for="note"><:error_img note:> <:cfg "site users" display_note "Message":>:</label>
+      <input type="text" name="note" id="note" size="40" maxlength="60" value="<:old note:>" title="<:cfg "site users" display_note "Message":>" class="<:ifError_img note:>error<:or:><:eif:>" />
+    </div>
+  </fieldset>
+
+  <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>
+  <p class="buttons"><input type="submit" name="a_send" value="Share now" accesskey="s" title="AccessKey = s" /></p>
+</form>

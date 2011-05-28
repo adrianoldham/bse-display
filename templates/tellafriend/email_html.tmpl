@@ -1,0 +1,19 @@
+<:wrap email/base.tmpl title=>"Tell a friend" :>
+
+<p>Hi <:to_name |h:>,</p>
+
+<p>Your friend, <a href="mailto:<:from_email |h:>"><:from_name |h:></a> thought you would be interested in one of our articles.</p>
+
+<dl>
+  <dt>Article of Interest:</dt>
+  <dd><a href="<:link |h:>"><:tarticle title |h:></a></dd>
+</dl>
+
+<:ifNote:>
+<dl>
+  <dt>Friend’s Message:</dt>
+  <dd><:note |h:></dd>
+</dl>
+<:or:><:eif:>
+
+<p><small>Requested from this IP: <:sender_ip:></small></p>

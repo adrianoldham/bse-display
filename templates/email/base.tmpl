@@ -1,0 +1,251 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+
+/* reset */
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+/*
+@media only screen and (max-device-width: 480px) {
+    .bse-main {
+		padding: 5px 10px !important;
+    }
+    body {
+    	padding: 10px !important;
+    }
+    div.bse-header h1 {
+    	font-size: 16px !important;
+    }
+    div.bse-main h2 {
+    	font-size: 20px !important;
+    }
+}
+*/
+ 
+html, body, div.bse-wrapper {
+    margin: 0;
+    padding: 0;
+	background-color: #dfdfdf;
+}
+
+div.bse-wrapper {
+    margin: 0;
+    padding: 0 0.75em;
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    text-align: center;
+	overflow: hidden;
+}
+
+div.bse-content {
+    text-align: left;
+    max-width: 60em;
+    min-width: 25em;
+    margin: 2em auto;
+    text-shadow: 0 1px 0 #fff;
+}
+
+div.bse-header h1 {
+    color: #b8b8b8;
+    text-shadow: 0 1px 0 #fff;
+}
+
+div.bse-main {
+    text-align: left;
+    padding: 2.5em 3em 2em;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0.35em 0.75em rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0.35em 0.75em rgba(0,0,0,0.4);
+    box-shadow: 0 0.2em 0.75em rgba(0,0,0,0.4);
+    -webkit-border-radius: 0.75em;
+    -moz-border-radius: 0.75em;
+    border-radius: 0.75em;
+    border: 0.25em solid #fff;
+}
+
+a {
+    text-decoration: underline;
+    color: #15a2cb;
+}
+
+h1, h2, h3, h4 {
+	font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+	color: #15a2cb;
+	margin-top: 2em;
+	margin-bottom: 0.25em;
+	line-height: 1.25;
+	font-weight: normal;
+}
+
+h1 {
+	margin-top: 0;
+	margin-bottom: 0.75em;
+	font-size: 1.75em;
+}
+
+h2 {
+	margin-top: 0;
+	font-size: 2em;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+h4 {
+	font-size: 1em;
+}
+
+h1 + h2 {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
+div.bse-formmail table {
+	width: 100%;
+}
+
+div.bse-formmail table caption {
+	text-align: left;
+	font-size: 1.25em;
+	color: #15a2cb;
+	margin: 0;
+	padding: 1em 0 0.5em 0;
+}
+
+div.bse-formmail table th, div.bse-formmail table td {
+	text-align: left;
+	vertical-align: top;
+	margin: 0;
+	padding: 0.5em 1em;
+	border-style: solid;
+	border-color: #eee #999;
+	border-width: 0.1em 0;
+
+}
+
+div.bse-formmail table th {
+	font-weight: normal;
+	color: #999;
+	text-align: right;
+	white-space: nowrap;
+	border-width: 0.1em 0.25em 0.1em 0;
+	width: 20%;
+}
+
+ul {
+	padding-left: 1.75em;
+	list-style: disc;
+}
+
+ol {
+	padding-left: 2em;
+	list-style: decimal-leading-zero;
+}
+
+p, ul, ol, dl, blockquote, address, table {
+	margin-bottom: 1em;
+	font-style: normal;
+}
+
+small, .small {
+	font-size: 0.9em;
+	color: #999;
+}
+
+dl {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+dt {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+}
+
+dd {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+dd span {
+    font-weight: bold;
+    color: #15a2cb;
+}
+
+p.bse-signature {
+    margin-top: 4em;
+}
+
+p.bse-buttons {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+a.bse-button {
+	margin: 0;
+	padding: 0.5em 1em;
+	color: #555;
+	font-size: 1em;
+	font-weight: bold;
+	line-height: 1.25;
+	text-decoration: none;
+	text-align: center;
+	text-shadow: 0 0.083em 0 rgba(255,255,255,0.75);
+
+	border: 0.083em solid;
+	border-color: #ccc #aaa #999 #ccc;
+	
+	cursor: pointer;
+
+	-webkit-border-radius: 0.25em; 
+	-moz-border-radius: 0.25em;
+	border-radius: 0.25em;
+
+	-webkit-box-shadow: 0 0.1em 0.2em rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 0.1em 0.2em rgba(0,0,0,0.15);
+	box-shadow: 0 0.1em 0.2em rgba(0,0,0,0.15);
+
+	background-color: #ddd; /* Old browsers */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); /* Chrome,Safari4+ */
+}
+
+div.bse-footer p {
+    margin-top: 1em;
+    font-size: 0.85em;
+}
+
+div.bse-footer p, div.bse-footer a {
+    color: #999;
+}
+		
+</style>
+</head>
+<body>
+<div class="bse-wrapper <:param classes:>">
+  <div class="bse-content">
+    <div class="bse-header">
+      <h1><:cfg site name |h:></h1>
+    </div>
+    <div class="bse-main"><:ifParam title:>
+      <h2><:param title |h:></h2><:or:><:eif:>
+      <:wrap here:>
+      <p class="bse-signature">Regards,<br />
+      The team at <em><:cfg site name |h:></em></p>
+    </div>
+    <div class="bse-footer">
+      <p>This email was sent to you by <a href="<:cfg site url:>"><:cfg site name |h:></a>.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
