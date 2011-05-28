@@ -1,9 +1,19 @@
-<html><head><title>Registration email</title></head>
-<body>
-<p>Hi <:user name1 |h:>,</p>
+<:wrap email/base.tmpl title=>"Welcome to your new account" :>
 
-<p>Thank you for registering with <:cfg site name:>.</p>
+<p>Hi <:ifUser name1:><:user name1 |h:><:or:><:user userId |h:><:eif:>,</p>
 
-<p>The <:cfg site name:> team.</p>
-</body>
-</html>
+<p>Thanks for registering a new account on our web site.</p>
+
+<p>You can maintain your account details, such as password, email address, etc, simply login using the following account details.</p>
+
+<dl>
+  <dt>Account Login Details:</dt>
+  <dd><span><:cfg "site users" display_userid "Username":>:</span> <:user userId:><br />
+  <span><:cfg "site users" display_password "Password":>:</span> <:user password:></dd>
+</dl>
+
+<!--<a href="<:cfg site secureurl:>/cgi-bin/user.pl"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
+
+<p class="bse-buttons"><a href="<:cfg site secureurl:>/cgi-bin/user.pl" class="bse-button">Login now</a></p>
+
+<p><small>Registered from this IP: <:host:></small></p>

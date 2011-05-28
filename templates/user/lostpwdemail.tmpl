@@ -6,9 +6,8 @@ Hello <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
 :>We have received a request to send you a reminder of the link used to 
 access your <:cfg site name:> account details.
 
-If you did not make this request, please rest assured that your link is 
-only ever delivered to your account email address for security reasons.  
-No-one else can ever access it.
+If you did not make this request, don’t worry, this reminder email is only ever sent 
+to the email address provided with your account details.
 
 ACCOUNT ACCESS LINK:
   <:cfg site secureurl:>/cgi-bin/user.pl?userpage=<:user password:>&u=<:user id:>
@@ -25,7 +24,7 @@ ACCOUNT LOGON DETAILS:
   Password: <:user password:>
 
 ACCOUNT LOGON LINK:
-  <:cfg site secureurl:>/cgi-bin/user.pl
+  <:cfg site secureurl:>/cgi-bin/user.pl<:ifCfg "site users" password_link 0:>?logon=1&userid=<:user userId:>&password=<:user password:><:or:><:eif:>
 
 <:eif Cfg:><:ifCfg "extra tags" adminEmail:>Any questions should be directed to: <:cfg "extra tags" adminEmail:>
 
@@ -33,4 +32,4 @@ ACCOUNT LOGON LINK:
 The team at <:cfg site name:>
 (<:cfg site url:>)
 
-Request initiated from this IP: <:host:>
+Requested from this IP: <:host:>

@@ -1,0 +1,30 @@
+<:wrap email/base.tmpl title=>"Password reminder" :>
+
+<p>Hi <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,</p>
+
+<:if Cfg "site users" nopassword:><p>We have received a request to send you a reminder of the link used to 
+access your <:cfg site name:> account details.</p>
+
+<p>If you did not make this request, don’t worry, this reminder email is 
+only ever sent to the <a href="mailto:<:user email:>">email address</a> provided with your account details.</p>
+
+<!--<a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=<:user password:>&amp;u=<:user id:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
+
+<p class="bse-buttons"><a href="<:cfg site secureurl:>/cgi-bin/user.pl?userpage=<:user password:>&amp;u=<:user id:>" class="bse-button">Login now</a></p>
+
+<:or Cfg:><p>We have received a request to send you a reminder of your password.</p>
+
+<p>If you did not make this request, don’t worry, this reminder email is 
+only ever sent to the <a href="mailto:<:user email:>">email address</a> provided with your account details.</p>
+
+<dl>
+  <dt>Account Login Details:</dt>
+  <dd><span><:cfg "site users" display_userid "Username":>:</span> <:user userId:><br />
+  <span><:cfg "site users" display_password "Password":>:</span> <:user password:></dd>
+</dl>
+
+<!--<a href="<:cfg site secureurl:>/cgi-bin/user.pl"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
+
+<p class="bse-buttons"><a href="<:cfg site secureurl:>/cgi-bin/user.pl" class="bse-button">Login now</a></p><:eif Cfg:>
+
+<p><small>Requested from this IP: <:host:></small></p>

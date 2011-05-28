@@ -19,7 +19,7 @@ EDIT ACCOUNT DETAILS:
 To modify your account details, such as password, email address, etc, simply 
 open the above link in your web browser.
 
-<:ifCfg "site users" blacklist_on 0:>
+<:ifCfg "site users" blacklist_on:>
 ADD TO BLACKLIST:
   <:cfg site secureurl:>/cgi-bin/user.pl?blacklist=<:user email |u:>
 

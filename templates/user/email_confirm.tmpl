@@ -14,12 +14,12 @@ just open the above link in your web browser.
 
 
 EDIT ACCOUNT DETAILS:
-  <:cfg site secureurl:>/cgi-bin/user.pl<:ifCfg "site users" edit_link_logon:>?show_logon=1&userid=<:user userId:>&password=<:user password:>&logon=1<:or:><:eif:>
+  <:cfg site secureurl:>/cgi-bin/user.pl
 
 To modify your account details, such as password, email address, etc, simply 
 open the above link in your web browser.
 
-<:ifCfg "site users" blacklist_on 0:>
+<:ifCfg "site users" blacklist_on:>
 ADD TO BLACKLIST:
   <:cfg site secureurl:>/cgi-bin/user.pl?blacklist=<:user email |u:>
 
