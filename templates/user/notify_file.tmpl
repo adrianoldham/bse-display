@@ -1,0 +1,19 @@
+<:uc [cfg site name]:> ACCOUNT SERVICES.
+
+Hello <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
+
+There are new files now available for download from your account:
+
+NEW FILES:
+<:iterator begin files:>
+  File: <:file display_name:> (<:kb file size_in_bytes:>bytes)
+  Title: <:file title:>
+  Category: <:file catname:>
+<:iterator end files:>
+
+
+Regards
+The team at <:cfg site name:>
+(<:cfg site url:>)
+
+<:set_subject [concatenate [file_count] " new files waiting"]:>

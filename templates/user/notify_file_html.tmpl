@@ -1,0 +1,17 @@
+<:wrap email/base.tmpl title=>"New files available" :>
+
+<p>Hi <:ifUser name1:><:user name1 |h:><:or:><:user userId |h:><:eif:>,</p>
+
+<p>There are new files now available for download from your account:</p>
+
+<dl>
+<:iterator begin files:>
+  <dt><:file display_name |h:> (<:kb file size_in_bytes:>)</dt>
+  <dd><span>Title:</span> <:file title |h:><br />
+    <span>Category:</span> <:file catname |h:></dd>
+  <:iterator end files:>
+</dl>
+
+<!--<a href="<:cfg site secureurl:>/cgi-bin/user.pl"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
+
+<p class="bse-buttons"><a href="<:cfg site secureurl:>/cgi-bin/user.pl" class="bse-button">Login now</a></p>
