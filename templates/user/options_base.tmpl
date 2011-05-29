@@ -51,7 +51,7 @@
   </fieldset>
 <:or Subscriptions:><:eif Subscriptions:>
 
-<:if Filecats:>
+<:if Cfg "notify files" active:>
   <fieldset class="notification">
     <input type="hidden" name="save_file_subs" value="1" />
     <legend>File Notification</legend>
@@ -62,7 +62,7 @@
     <:iterator end filecats:>
     <small>Receive email notification when file downloads are added to your account in the selected categories.</small>
   </fieldset>
-<:or Filecats:><:eif Filecats:>
+<:or Cfg:><:eif Cfg:>
 <:eif Partial_logon:>
 
   <fieldset class="name">
