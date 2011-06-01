@@ -8,6 +8,6 @@
 <:replace [body] "(<img src=\")/" [concatenate $1 [cfg site url] / ] :>
 <hr> 
 <p><font size="-1">You are receiving this message because you are subscribed to a <:siteName:> newsletter, at <a href="<:cfg site url:>"><:cfg site url:></a>.</font></p>
-<p><font size="-1">If you don't want to receive this newsletter anymore you can <a href="<:cfg site secureurl:>/cgi-bin/user.pl?unsub=<:user confirmSecret:>&u=<:user id:>&s=<:sub id:>">unsubscribe from this newsletter</a> or <a href="<:cfg site secureurl:>/cgi-bin/user.pl?unsub=<:user confirmSecret:>&u=<:user id:>&s=all">unsubscribe from all our newsletters</a>.</font></p>
+<p><font size="-1">If you don't want to receive this newsletter anymore you can <a href="<:target user:>?unsub=<:user confirmSecret:>&u=<:user id:>&s=<:sub id:>">unsubscribe from this newsletter</a> or <a href="<:target user:>?unsub=<:user confirmSecret:>&u=<:user id:>&s=all">unsubscribe from all our newsletters</a>.</font></p>
 </body>
 </html>

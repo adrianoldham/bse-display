@@ -10,7 +10,7 @@ If you did not make this request, don’t worry, this reminder email is only eve
 to the email address provided with your account details.
 
 ACCOUNT ACCESS LINK:
-  <:cfg site secureurl:>/cgi-bin/user.pl?userpage=<:user password:>&u=<:user id:>
+  <:target user:>?userpage=<:user password:>&u=<:user id:>
 
 <:or Cfg:>We have received a request to send you a reminder of your password.
 
@@ -24,7 +24,7 @@ ACCOUNT LOGON DETAILS:
   Password: <:user password:>
 
 ACCOUNT LOGON LINK:
-  <:cfg site secureurl:>/cgi-bin/user.pl<:ifCfg "site users" password_link 0:>?logon=1&userid=<:user userId:>&password=<:user password:><:or:><:eif:>
+  <:target user:><:ifCfg "site users" password_link 0:>?logon=1&userid=<:user userId:>&password=<:user password:><:or:><:eif:>
 
 <:eif Cfg:><:ifCfg "extra tags" adminEmail:>Any questions should be directed to: <:cfg "extra tags" adminEmail:>
 

@@ -8,7 +8,7 @@
 <:body:>
 </div><:or Or:><:eif Or:><:switch:><:case And [ifAllprods] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allprods:>
 <:moveallprod:><:embed allprod:><:iterator end allprods:><:case Allprods:><:include include/sortallkids.tmpl:>
-<form id="add_multiple_form_<:article id:>" action="<:if Dynamic:><:dyntarget shop:><:or Dynamic:><:cfg site secureurl:>/cgi-bin/shop.pl<:eif Dynamic:>" method="post">
+<form id="add_multiple_form_<:article id:>" action="<:target shop:>" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <div class="children">
   <table class="products">

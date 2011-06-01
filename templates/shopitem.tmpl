@@ -4,7 +4,7 @@
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:switch:><:case Product retailPrice:><:if Product listed:>
-<form id="add_form_<:article id:>" action="<:if Dynamic:><:dyntarget shop:><:or Dynamic:><:cfg site secureurl:>/cgi-bin/shop.pl<:eif Dynamic:>" method="post" class="product">
+<form id="add_form_<:article id:>" action="<:target shop:>" method="post" class="product">
   <input type="hidden" name="id" value="<:product id:>" />
   <input type="hidden" name="r" value="<:url top:>" />
   <fieldset class="group">

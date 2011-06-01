@@ -6,7 +6,7 @@ You have registered to receive newsletters from our web site.
 
 
 CONFIRM REGISTRATION:
-  <:cfg site secureurl:>/cgi-bin/user.pl?confirm=<:user confirmSecret:>&u=<:user id:>
+  <:target user:>?confirm=<:user confirmSecret:>&u=<:user id:>
 
 To confirm your registration we send this confirmation request to your 
 registered email address. If you do indeed want to receive our newsletters,
@@ -14,14 +14,14 @@ just open the above link in your web browser.
 
 
 EDIT ACCOUNT DETAILS:
-  <:cfg site secureurl:>/cgi-bin/user.pl?userpage=<:user password:>&u=<:user id:>
+  <:target user:>?userpage=<:user password:>&u=<:user id:>
 
 To modify your account details, such as password, email address, etc, simply 
 open the above link in your web browser.
 
 <:ifCfg "site users" blacklist_on:>
 ADD TO BLACKLIST:
-  <:cfg site secureurl:>/cgi-bin/user.pl?blacklist=<:user email |u:>
+  <:target user:>?blacklist=<:user email |u:>
 
 If you never want to receive any newsletters from our web site you can add 
 your email address to our email blacklist by opening the above link in 
