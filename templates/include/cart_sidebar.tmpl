@@ -1,5 +1,6 @@
 <:if Match [script] "shop":><:ifMsg:><p class="error"><:msg:></p><:or:>
 <:eif:><:or Match:><:eif Match:><:if Dyncart:><div class="article">
+  <form action="<:dyntarget shop:>" method="post">
   <table class="cart">
     <caption>Shopping Cart <span>(Contains <:dyncarttotalunits:> item<:if Eq [dyncarttotalunits] "1":><:or Eq:>s<:eif Eq:>)</span></caption>
     <thead>
@@ -9,15 +10,18 @@
         <th class="col3">Price</th>
       </tr>
     </thead>
-    <tbody>
-      <:iterator begin dyncart:><tr id="cart_item_<:dyncartitem id:>">
+    <tbody><:iterator begin dyncart:>
+      <tr id="cart_item_<:dyncartitem id:>">
         <td class="col1"><a href="<:dyncartitem link:>" title="<:dyncartitem title:>"><:dynreplace [dyncartitem title] "((?:&[^;]*;|[^&]){16}).*" $1...:></a></td>
         <td class="col2"><:dyncartitem units:> &times;</td>
-        <td class="col3"><:cfg shop currency "$":><:money dyncartitem retailPrice:></td>
-      </tr><:iterator separator dyncart:>
-      <:iterator end dyncart:>
+        <td class="col3"><:cfg shop currency "$":><:number money [dyncartitem price]:></td>
+      </tr><:iterator end dyncart:>
     </tbody>
   </table>
-  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money dyncarttotalcost:></p><:if Dyncarttotalcost:>
-  <form action="<:dyntarget shop:>" method="post"><p><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" /> <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" /></p></form><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
+  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:number money [dyncarttotalcost]:></p><:if Dyncarttotalcost:>
+    <p class="buttons">
+      <input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
+      <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" />
+    </p>
+  </form><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
 </div><:or Dyncart:><:eif Dyncart:>

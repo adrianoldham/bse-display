@@ -7,7 +7,7 @@
 <div id="body_<:article id:>" class="body">
 <:body:>
 </div><:or Or:><:eif Or:><:if Dynamic:><:switch:><:case Dynallprods:><:include include/sortallkids.tmpl:>
-<form id="add_multiple_form_<:article id:>" action="<:if Dynamic:><:dyntarget shop:><:or Dynamic:><:cfg site secureurl:>/cgi-bin/shop.pl<:eif Dynamic:>" method="post">
+<form id="add_multiple_form_<:article id:>" action="<:dyntarget shop:>" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <table class="items">
   <caption>Select Items</caption>
@@ -37,7 +37,7 @@
         <div class="summary"><:dynallprod summary:></div><:endswitch:>
       </td>
       <td class="col2"><:switch:><:case DynAnyProductOptions dynallprod:><:case Dynallprod retailPrice:><input type="text" name="qty<:dynallprod id:>" id="qty<:dynallprod id:>" size="2" <:ifEmbedded:><:or:>tabindex="<:dynallprod_number:>" <:eif:>/><:case default:><:endswitch:></td>
-      <td class="col3"><:ifDynallprod retailPrice:><:cfg shop currency "$":><:number money [dynallprod retailPrice]:><:or:>NA<:eif:></td>
+      <td class="col3"><:ifDynallprod retailPrice:><:cfg shop currency "$":><:number money [price dynallprod]:><:or:>NA<:eif:></td>
       <td class="col4"><:switch:><:case DynAnyProductOptions dynallprod:><a href="<:url dynallprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Dynallprod retailPrice:><input type="image" name="a_addsingle<:dynallprod id:>" id="a_addsingle<:dynallprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/dynallprod_mini.tmpl:></td>
     </tr><:iterator end dynallprods:>
   </tbody>
