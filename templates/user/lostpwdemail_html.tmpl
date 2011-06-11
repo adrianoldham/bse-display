@@ -1,30 +1,26 @@
-<:wrap email/base.tmpl title=>"Password reminder" :>
+<:wrap email/base.tmpl title=>"Account recovery" :>
 
 <p>Hi <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,</p>
 
 <:if Cfg "site users" nopassword:><p>We have received a request to send you a reminder of the link used to 
-access your <:cfg site name:> account details.</p>
+access your account details.</p>
 
 <p>If you did not make this request, don’t worry, this reminder email is 
-only ever sent to the <a href="mailto:<:user email:>">email address</a> provided with your account details.</p>
+only ever sent to the <a href="mailto:<:user email:>">email address</a> of the account owner.</p>
 
 <!--<a href="<:target user:>?userpage=<:user password:>&amp;u=<:user id:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
 
 <p class="bse-buttons"><a href="<:target user:>?userpage=<:user password:>&amp;u=<:user id:>" class="bse-button">Login now</a></p>
 
-<:or Cfg:><p>We have received a request to send you a reminder of your password.</p>
+<:or Cfg:><p>We have received a request indicating that you’ve lost or forgotten your password.</p>
 
-<p>If you did not make this request, don’t worry, this reminder email is 
-only ever sent to the <a href="mailto:<:user email:>">email address</a> provided with your account details.</p>
+<p>If you did not make this request, don’t worry, simply ignore this email, a reset link is time limited and only 
+ever sent to the <a href="mailto:<:user email:>">email address</a> of the account owner.</p>
 
-<dl>
-  <dt>Account Login Details:</dt>
-  <dd><span><:cfg "site users" display_userid "Username":>:</span> <:user userId:><br />
-  <span><:cfg "site users" display_password "Password":>:</span> <:user password:></dd>
-</dl>
+<p>This reset link will remain active for <:cfg "lost password" age_limit 7:> day<:ifArithmetic [cfg "lost password" age_limit 7] > 1:>s<:or:><:eif:>.</p>
 
-<!--<a href="<:target user:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
+<!--<a href="<:target user:>/lost/<:user lost_id:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Reset password</td></tr></table></a>//-->
 
-<p class="bse-buttons"><a href="<:target user:>" class="bse-button">Login now</a></p><:eif Cfg:>
+<p class="bse-buttons"><a href="<:target user:>/lost/<:user lost_id:>" class="bse-button">Reset password</a></p><:eif Cfg:>
 
 <p><small>Requested from this IP: <:host:></small></p>

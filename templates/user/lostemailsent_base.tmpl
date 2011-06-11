@@ -1,5 +1,5 @@
-<:wrap user/pubbase.tmpl title=>"Retrieve Password" userpage=>"retrievepassword" :>
+<:wrap user/pubbase.tmpl title=>"Please check your email" userpage=>"lostemailsent" :>
 
-<p class="alert">Your <:if Cfg "site users" nopassword:>options link<:or Cfg:>password<:eif Cfg:> has been emailed to <strong><:user email:></strong>.</p>
+<p class="alert"><:if Cfg "site users" nopassword:>Your account access link<:or Cfg:>Your password reset link<:eif Cfg:> has been emailed to <b><:user email:></b>.</p>
 
-<p class="group"><a href="<:ifCfg "site users" nopassword:><:dyntarget user userpage [user password] u [user id] :><:or:><:dyntarget user userpage:><:eif:>">Ready to login?</a></p>
+<p class="group"><:ifCfg "site users" nopassword:><:or:><a href="<:dyntarget user userpage:>">Ready to login?</a><:eif:></p>
