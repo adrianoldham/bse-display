@@ -8,20 +8,21 @@
       <th class="col1">No.</th>
       <th class="col2">Date</th>
       <th class="col3">Status</th>
+      <th class="col3">Payment</th>
       <th class="col4">Total</th>
     </tr>
   </thead>
-  <tbody>
-    <:iterator begin orders:><tr class="item">
+  <tbody><:iterator begin orders:>
+    <tr class="item">
       <td class="col1">
-        <!--<a href="<:dyntarget user:>?a_orderdetail=1&amp;id=<:order id:>" target="_blank"><:order id |%06d:></a>//-->
-        <a href="<:dyntarget user userpage _t orders id [order id] :>#order_<:order id:>"><:order id |%06d:></a>
+        <a href="<:dyntarget user orderdetail id [order id]:>"><:order id |%06d:></a>
+        <!--<a href="<:dyntarget user userpage _t orders id [order id] :>#order_<:order id:>"><:order id |%06d:></a>//-->
       </td>
       <td class="col2"><:date order orderDate:></td>
-      <td class="col3"><:switch:><:case Order complete:>Completed<:case Order filled:>Filled<:case Order paidFor:>Paid<:case default:>Processing<:endswitch:></td>
+      <td class="col3"><:dyncatmsg [order stage_description_id]:></td>
+      <td class="col3"><span class="<:ifOrder paidFor:>paid<:or:>unpaid<:eif:>"><:ifOrder paidFor:>Paid<:or:>Unpaid<:eif:></span></td>
       <td class="col4"><:cfg shop currency "$":><:number money [order total]:></td>
-    </tr>
-    <:iterator end orders:>
+    </tr><:iterator end orders:>
   </tbody><:or Orders:>
     <tr class="item"> 
       <td colspan="4" class="noitems">You haven’t made any purchases</td>
@@ -30,7 +31,8 @@
 
 <:iterator begin orders:><:switch:><:case Eq [cgi id] [order id]:>
 <!-- BY ORDER ID //-->
-<h2 id="order_<:order id:>">Order details</h2>
+<h2 id="order_<:order id:>">Order summary</h2>
+
 <table class="items">
   <caption>Order <:order id |%06d:> items</caption>
   <thead>
@@ -38,26 +40,27 @@
       <th class="col1">Item</th>
       <th class="col2">Qty</th>
       <th class="col3">Price</th>
+      <th class="col4">Extended</th>
     </tr>
   </thead>
-  <tbody>
-    <:iterator begin items:><tr class="item"> 
+  <tbody><:iterator begin items:>
+    <tr> 
       <td class="col1"><:ifEq [item productId] -1:>
         <:item title:><:or:>
-        <a href="<:url product:>"><:item title:></a><:eif:> <:ifOptions:><:options:><:or:><:eif:> <:if And [item description] [cfg shop product_description 1]:>
-        <div class="description"><:item description:></div><:or And:><:eif And:>
-      </td>
+        <a href="<:url product:>"><:item title:></a><:eif:> <:ifOptions:><span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
+        <div class="description"><:item description:></div><:or And:><:eif And:></td>
       <td class="col2"><:item units:> &times;</td>
       <td class="col3"><:cfg shop currency "$":><:number money [item price]:></td>
-    </tr>
-    <:iterator end items:>
+      <td class="col4"><:cfg shop currency "$":><:number money [arithmetic [item units] * [item price]]:></td>
+    </tr><:iterator end items:>
   </tbody>
 </table>
+
 <div class="totals">
   <:switch:>
   <:case Order shipping_cost:>
   <p class="freight"><span>(<:order shipping_method:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p>
-  <:case Eq [order shipping_name] contact:>
+  <:case Match [order shipping_name] ^contact$:>
   <p class="freight"><span>(<:order shipping_method:>)</span> <label>Freight:</label> TBA</p>
   <:case default:>
   <:endswitch:>

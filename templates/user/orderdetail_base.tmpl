@@ -1,181 +1,252 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Web Order No. <:order id |%06d:></title>
-<style type="text/css">
-<!--
-body {
-	font: 12px Verdana, Arial, Helvetica, sans-serif;
-	background: #fff;
-	color: #000;
-	text-align: center;
-}
-#main {
-	width: 400px;
-	margin: 30px auto;
-	text-align: left;
-}
-a {
-	color: #666;
-	font-weight: bold;
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: underline;
-}
-h1 {
-	color: #666;
-	font-size: 16px;
-}
-h2 {
-	font-size: 14px;
-}
-h3 {
-	font-size: 12px;
-}
-table {
-	font-size: 12px;
-	background: #eee;
-}
-th {
-	color: #fff;
-	background: #999;
-}
-td {
-	background: #fff;
-}
-.table {
-	background: #ccc;
-}
-.th {
-	color: #000;
-	background: #fff;
-}
--->
-</style>
-</head>
-<body>
-<div id="main">
-<h1 title="<:if Order ccStatusText:>Message: <:order ccStatusText:><:or Order:>Tax Invoice No. <:order id |%06d:><:eif Order:>">WEB ORDER - <:uc [cfg site entity_name [cfg shop address1]] |h:></h1>
-<h2>Order #: <:order id |%06d:><br />
-Date: <:date "%d/%m/%Y" order orderDate:><:ifOrder userId:><br />
-User Id: <:order userId:><:or:><:eif:><:ifOrder affiliate_code:><br />
-Referrer: <:order affiliate_code:><:or:><:eif:><:ifOrder purchase_order:><br />
-Purchase Order: <:order purchase_order:><:or:><:eif:></h2>
-<table width="100%" border="0" cellpadding="3" cellspacing="1">
-  <tr> 
-    <th rowspan="<:if And [order delivStreet2] [order delivOrganization]:>5<:or And:><:if Or [order delivStreet2] [order delivOrganization]:>4<:or Or:>3<:eif Or:><:eif And:>" align="left" valign="top" class="th">Shipping:</th>
-    <td width="100%"><:order delivFirstName:> <:order delivLastName:></td>
-  </tr>
-  <:ifOrder delivOrganization:><tr> 
-    <td width="100%"><:order delivOrganization:></td>
-  </tr><:or:><:eif:>
-  <tr> 
-    <td width="100%"><:order delivStreet:></td>
-  </tr>
-  <:ifOrder delivStreet2:><tr> 
-    <td width="100%"><:order delivStreet2:></td>
-  </tr>
-  <:or:><:eif:><tr> 
-    <td width="100%"><:order delivSuburb:> <:order delivState:> <:order delivPostCode:>, <:order delivCountry:></td>
-  </tr>
-  <tr> 
-    <th align="left" class="th">Telephone:</th>
-    <td width="100%"><:order telephone:></td>
-  </tr>
-  <:ifOrder facsimile:><tr> 
-    <th align="left" class="th">Facsimile:</th>
-    <td width="100%"><:order facsimile:></td>
-  </tr><:or:><:eif:>
-  <:ifOrder delivMobile:><tr> 
-    <th align="left" class="th">Mobile:</th>
-    <td width="100%"><:order delivMobile:></td>
-  </tr><:or:><:eif:>
-<:if Order billStreet:>  
-  <tr> 
-    <th rowspan="<:if And [order billStreet2] [order billOrganization]:>5<:or And:><:if Or [order billStreet2] [order billOrganization]:>4<:or Or:>3<:eif Or:><:eif And:>" align="left" valign="top" class="th">Billing:</th>
-    <td width="100%"><:order billFirstName:> <:order billLastName:></td>
-  </tr>
-  <:ifOrder billOrganization:><tr> 
-    <td width="100%"><:order billOrganization:></td>
-  </tr><:or:><:eif:>
-  <tr> 
-    <td width="100%"><:order billStreet:></td>
-  </tr>
-  <:ifOrder billStreet2:><tr> 
-    <td width="100%"><:order billStreet2:></td>
-  </tr>
-  <:or:><:eif:><tr> 
-    <td width="100%"><:order billSuburb:> <:order billState:> <:order billPostCode:>, <:order billCountry:></td>
-  </tr>
-  <tr> 
-    <th align="left" class="th">Telephone:</th>
-    <td width="100%"><:order billTelephone:></td>
-  </tr>
-  <:ifOrder billFacsimile:><tr> 
-    <th align="left" class="th">Facsimile:</th>
-    <td width="100%"><:order billFacsimile:></td>
-  </tr><:or:><:eif:>
-  <:ifOrder billMobile:><tr> 
-    <th align="left" class="th">Mobile:</th>
-    <td width="100%"><:order billMobile:></td>
-  </tr><:or:><:eif:>
-<:or Order:><:eif Order:>  
-  <tr> 
-    <th align="left" class="th">Email:</th>
-    <td width="100%"><:order emailAddress:></td>
-  </tr>
-  <:ifOrder instructions:><tr> 
-    <th align="left" valign="top" class="th">Instructions:</th>
-    <td width="100%"><:order instructions:></td>
-  </tr><:or:><:eif:>
+<:wrap user/userbase.tmpl title=>"Order details" subtitle=>"Order details" userpage=>"orders" :>
+<h2><:param subtitle |h:></h2>
+<p><a href="<:dyntarget user userpage _t orders:>">Back to order history</a></p>
+
+<div class="group">
+<table class="vertical left">
+  <caption>Order details</caption>
+  <tbody>
+    <tr>
+      <th>Order No.:</th>
+      <td><b><:order id |%06d:></b></td>
+    </tr>
+    <tr> 
+      <th>Order Date:</th>
+      <td><:date order orderDate:></td>
+    </tr>
+    <tr>
+      <th>Order Status:</th>
+      <td><:dyncatmsg [order stage_description_id]:></td>
+    </tr><:ifOrder purchase_order:>
+    <tr>
+      <th>Purchase Order:</th>
+      <td><:order purchase_order:></td>
+    </tr><:or:><:eif:><:ifOrder freight_tracking:>
+    <tr>
+      <th>Tracking Code:</th>
+      <td><:order freight_tracking:></td>
+    </tr><:or:><:eif:><:ifOrder shipping_method:>
+    <tr>
+      <th>Shipping Method:</th>
+      <td><:order shipping_method:></td>
+    </tr><:or:><:eif:><!--<:ifOrder userId:>
+    <tr>
+      <th>Username:</th>
+      <td><:order userId:></td>
+    </tr><:or:><:eif:><:ifOrder affiliate_code:>
+    <tr>
+      <th>Referrer:</th>
+      <td><:order affiliate_code:></td>
+    </tr><:or:><:eif:>//-->
+  </tbody>
 </table>
-<br />
-<table width="100%" border="0" cellpadding="3" cellspacing="1" class="table">
-  <tr> 
-    <th width="100%" align="left">Item</th>
-    <th align="center" nowrap="nowrap">Qty</th>
-    <th align="center" nowrap="nowrap">Price</th>
-    <th align="center" nowrap="nowrap">Extended</th>
-  </tr>
-  <:iterator begin items:><tr> 
-    <td width="100%"><:item title:></td>
-    <td align="center" nowrap="nowrap"><:item units:></td>
-    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:number money [item price]:></td>
-    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:number money [arithmetic ([item price] * [item units])]:></td>
-  </tr><:iterator separator items:><:iterator end items:>
-  <:ifOrder shipping_cost:><tr> 
-    <td colspan="3" align="right" width="100%"><b>Freight:</b></td>
-    <td align="right" nowrap="nowrap"><b><:cfg shop currency "$":><:number money [order shipping_cost]:></b></td>
-  </tr><:or:><:eif:>
-  <tr> 
-    <td colspan="3" align="right" width="100%"><b>Total:</b></td>
-    <td align="right" nowrap="nowrap"><b><:cfg shop currency "$":><:number money [order total]:></b></td>
-  </tr>
-  <tr> 
-    <td colspan="3" align="right" width="100%"> <small>(Included)</small> GST:</td>
-    <td align="right" nowrap="nowrap"><:cfg shop currency "$":><:number money [order gst]:></td>
-  </tr>
+
+<table class="vertical right">
+  <caption>Payment details <span class="<:ifOrder paidFor:>paid<:or:>unpaid<:eif:>"><:ifOrder paidFor:>Paid<:or:>Unpaid<:eif:></span></caption>
+  <tbody>
+   <tr>
+      <th>Payment Method:</th><:switch:>
+      <:case Eq [order paymentType] "0":>
+      <td><b>Credit Card</b></td>
+    </tr>
+    <:if Order ccOnline:><tr>
+      <th>Receipt No.:</th>
+      <td><:order ccReceipt:></td>
+    </tr>
+    <:or Order:><:eif Order:><tr>
+      <th><:cfg shop display_cardHolder "Name on Card":>:</th>
+      <td><:order ccName:></td>
+    </tr>
+    <tr>
+      <th><:cfg shop display_cardType "Card Type":>:</th>
+      <td><:order ccType:></td>
+    </tr>
+      <:case Eq [order paymentType] "1":>
+      <td><b>Cheque</b></td>
+    </tr>
+    <tr>
+      <th>Payee:</th>
+      <td>
+        <b><:cfg shop address1 |h:></b>
+      </td>
+    </tr>
+    <tr>
+      <th>Address:</th>
+      <td>
+        <:cfg shop address2 |h:><br />
+        <:cfg shop address3 |h:><br />
+        <:cfg shop address4 |h:>
+      </td>
+    </tr>
+      <:case Eq [order paymentType] "10":>
+      <td><b>EFT</b></td>
+    </tr>
+    <tr>
+      <th>Name:</th>
+      <td><:cfg shop accountname |h:></td>
+    </tr>
+    <tr>
+      <th>BSB:</th>
+      <td><:cfg shop bsb:></td>
+    </tr>
+    <tr>
+      <th>Account:</th>
+      <td><:cfg shop accountno:></td>
+    </tr>
+    <tr>
+      <th>Reference:</th>
+      <td><:order id |%06d:></td>
+    </tr>
+      <:case Eq [order paymentType] "2":>
+      <td><b>Contact</b></td>
+    </tr>
+      <:case Eq [order paymentType] "4":>
+      <td><b>PayPal</b></td>
+    </tr>
+    <tr>
+      <th>Transaction Id:</th>
+      <td><:order paypal_tran_id:></td>
+    </tr>
+      <:case default:>
+      <td><b>None</b></td>
+    </tr>
+    <:endswitch:>
+  </tbody>
 </table>
-<br />
-<:if Order paidFor:>
-<table width="100%" border="0" cellpadding="3" cellspacing="1" class="table">
-  <tr>
-    <th>Receipt</th>
-    <th>Date Fulfilled</th>
-    <th>Amount</th>
-  </tr>
-  <tr>
-    <td nowrap="nowrap" width="33%" align="center"><:order ccReceipt:></td>
-    <td nowrap="nowrap" width="33%" align="center"><:ifMatch [order whenFilled] "0000-00-00 00:00:00":>Processing<:or:><:date "%d/%m/%Y" order whenFilled:><:eif:></td>
-    <td nowrap="nowrap" width="33%" align="center"><:cfg shop currency "$":><:number money [order total]:></td>
-  </tr>
-</table><:or Order:><:eif Order:>
-<p><b><:cfg site entity_name [cfg shop address1] |h:><:ifCfg site entity_abn:> - ABN: <:cfg site entity_abn |h:><:or:><:eif:></b><br />
-<:cfg site entity_address [cfg shop address2] |h:><br />
-<:cfg site entity_address2 [cfg shop address3] |h:><br />
-<:cfg site entity_phone [cfg shop address4] |h:></p>
 </div>
-</body>
-</html>
+
+<table class="items">
+  <caption>Order items</caption>
+  <thead>
+    <tr> 
+      <th class="col1">Item</th>
+      <th class="col2">Qty</th>
+      <th class="col3">Price</th>
+      <th class="col4">Extended</th><!--//-->
+    </tr>
+  </thead>
+  <tbody><:iterator begin items:>
+    <tr> 
+      <td class="col1"><:ifEq [item productId] -1:>
+        <:item title:><:or:>
+        <a href="<:product link:>"><:item title:></a><:eif:> <:ifOptions:><span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
+        <div class="description"><:item description:></div><:or And:><:eif And:></td>
+      <td class="col2"><:item units:> &times;</td>
+      <td class="col3"><:cfg shop currency "$":><:number money [item price]:></td>
+      <td class="col4"><:cfg shop currency "$":><:number money [extended price]:></td><!--//-->
+    </tr><:iterator end items:>
+  </tbody>
+</table>
+
+<div class="totals">
+  <:switch:>
+  <:case Order shipping_cost:>
+  <p class="freight"><span>(<:order shipping_method:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p>
+  <:case Match [order shipping_name] ^contact$:>
+  <p class="freight"><span>(<:order shipping_method:>)</span> <label>Freight:</label> TBA</p>
+  <:case default:>
+  <:endswitch:>
+  <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [order total]:></p>
+</div>
+
+<div class="group">
+<table class="vertical left">
+  <caption>Shipping details</caption>
+  <tbody>
+    <tr> 
+      <th>Name:</th>
+      <td><b><:order delivFirstName:> <:order delivLastName:></b></td>
+    </tr>
+    <tr>
+      <th>Address:</th>
+      <td><:ifOrder delivOrganization:>
+        <:order delivOrganization:><br /><:or:><:eif:>
+        <:order delivStreet:><br /><:ifOrder delivStreet2:>
+        <:order delivStreet2:><br /><:or:><:eif:>
+        <:order delivSuburb:> <:order delivState:> <:order delivPostCode:><br /><:ifCfgsection "country selector":>
+        <:cfg "country selector" [order delivCountry]:><:or:><:order delivCountry:><:eif:>
+      </td>
+    </tr>
+    <tr> 
+      <th><:cfg "site users" display_telephone "Telephone":>:</th>
+      <td><:order telephone:></td>
+    </tr>
+    <:ifOrder facsimile:><tr> 
+      <th><:cfg "site users" display_facsimile "Facsimile":>:</th>
+      <td><:order facsimile:></td>
+    </tr><:or:><:eif:>
+    <:ifOrder delivMobile:><tr> 
+      <th><:cfg "site users" display_delivMobile "Mobile":>:</th>
+      <td><:order delivMobile:></td>
+    </tr><:or:><:eif:>
+    <:ifOrder billStreet:><:or:><tr>
+      <th><:cfg "site users" display_email "Email":>:</th>
+      <td><:order emailAddress:></td>
+    </tr><:eif:>
+    <!--<:ifOrder instructions:><tr> 
+      <th>Instructions:</th>
+      <td><:order instructions:></td>
+    </tr><:or:><:eif:>//-->
+  </tbody>
+</table>
+
+<:if Order billStreet:>
+<table class="vertical right">
+  <caption>Billing details</caption>
+  <tbody>
+    <tr> 
+      <th>Name:</th>
+      <td><b><:order billFirstName:> <:order billLastName:></b></td>
+    </tr>
+    <tr>
+      <th>Address:</th>
+      <td><:ifOrder billOrganization:>
+        <:order billOrganization:><br /><:or:><:eif:>
+        <:order billStreet:><br /><:ifOrder billStreet2:>
+        <:order billStreet2:><br /><:or:><:eif:>
+        <:order billSuburb:> <:order billState:> <:order billPostCode:><br /><:ifCfgsection "country selector":>
+        <:cfg "country selector" [order billCountry]:><:or:><:order billCountry:><:eif:>
+      </td>
+    </tr>
+    <:ifOrder billTelephone:><tr> 
+      <th><:cfg "site users" display_telephone "Telephone":>:</th>
+      <td><:order billTelephone:></td>
+    </tr><:or:><:eif:>
+    <:ifOrder billFacsimile:><tr> 
+      <th><:cfg "site users" display_facsimile "Facsimile":>:</th>
+      <td><:order billFacsimile:></td>
+    </tr><:or:><:eif:>
+    <:ifOrder billMobile:><tr> 
+      <th><:cfg "site users" display_delivMobile "Mobile":>:</th>
+      <td><:order billMobile:></td>
+    </tr><:or:><:eif:>
+    <tr> 
+      <th><:cfg "site users" display_email "Email":>:</th>
+      <td><:order emailAddress:></td>
+    </tr>
+  </tbody>
+</table>
+<:or Order:><:eif Order:>
+</div>
+
+<:if Orderfiles:>
+<h3>Download files</h3>
+<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:dyntarget user userpage _t files:>">File downloads</a> section of your account.</p>
+<table class="items">
+  <caption>Files available</caption>
+  <thead>
+    <tr>
+      <th class="col1">Filename/Title</th>
+      <th class="col2">Date</th>
+      <th class="col3">Size</th>
+    </tr>
+  </thead>
+  <tbody><:iterator begin orderfiles sort: -modwhen:>
+    <tr>
+      <td class="col1"><:ifFileAvail:><a href="<:orderfile url:>" title="<:orderfile description:>"><:orderfile displayName:></a><:or:><span><:orderfile displayName:></span><:eif:></td>
+      <td class="col2"><:date orderfile whenUploaded:></td>
+      <td class="col3"><:kb orderfile sizeInBytes:>b</td>
+    </tr><:iterator end orderfiles:>
+  </tbody>
+</table>
+<:or Orderfiles:><:eif Orderfiles:>
