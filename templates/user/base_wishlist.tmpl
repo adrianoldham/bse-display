@@ -4,24 +4,24 @@
   <caption>Wishlist items</caption><:if Uwishlist:>
   <thead>
     <tr> 
-      <th class="col1">Item</th>
-      <th class="col3">Price</th>
-      <th class="col4">&nbsp;</th>
+      <th class="item">Item</th>
+      <th class="price">Price</th>
+      <th class="action">Action</th>
     </tr>
   </thead>
   <tbody><:iterator begin uwishlist:>
-    <tr id="item_<:uwishlistentry id:>" class="item"> 
-      <td class="col1">
-        <a href="<:url uwishlistentry:>" class="item"><:uwishlistentry title:></a><:if And [uwishlistentry description] [cfg shop product_description 1]:>
-        <div class="i_description"><:uwishlistentry description:></div><:or And:><:eif And:>
+    <tr id="item_<:uwishlistentry id:>"> 
+      <td class="item">
+        <a href="<:url uwishlistentry:>"><:uwishlistentry title:></a><:if And [uwishlistentry description] [cfg shop product_description 1]:>
+        <div class="description"><:uwishlistentry description:></div><:or And:><:eif And:>
       </td>
-      <td class="col3"><:if Uwishlistentry retailPrice:><:cfg shop currency "$":><:number money [uwishlistentry retailPrice]:><:or Uwishlistentry:><:eif Uwishlistentry:></td>
-      <td class="col4">
-        <!--<:ifUwishlistentry retailPrice:><input type="hidden" id="qty<:uwishlistentry id:>" name="qty<:uwishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:uwishlistentry id:>" id="a_addsingle<:uwishlistentry id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:or:><:eif:>//-->
+      <td class="price"><:if Price uwishlistentry:><:cfg shop currency "$":><:number money [price uwishlistentry]:><:or Price:>NA<:eif Price:></td>
+      <td class="action">
+        <!--<:ifPrice uwishlistentry:><input type="hidden" id="qty<:uwishlistentry id:>" name="qty<:uwishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:uwishlistentry id:>" id="a_addsingle<:uwishlistentry id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:or:><:eif:>//-->
       </td>
     </tr><:iterator end uwishlist:>
   </tbody><:or Uwishlist:>
-  <tr class="item"> 
+  <tr> 
     <td colspan="4" class="noitems"><:ifWuser name1:><:wuser name1:><:or:><:wuser userId:><:eif:>’s wishlist is empty</td>
   </tr><:eif Uwishlist:>
 </table>

@@ -7,27 +7,27 @@
   <caption>Wishlist items</caption><:if Wishlist:>
   <thead>
     <tr> 
-      <th class="col1">Item</th>
-      <th class="col3">Price</th>
-      <th class="col4">&nbsp;</th>
+      <th class="item">Item</th>
+      <th class="price">Price</th>
+      <th class="action">Action</th>
     </tr>
   </thead>
   <tbody><:iterator begin wishlist:>
-    <tr id="item_<:wishlistentry id:>" class="item"> 
-      <td class="col1">
-        <a href="<:url wishlistentry:>" class="item"><:wishlistentry title:></a><:if And [wishlistentry description] [cfg shop product_description 1]:>
-        <div class="i_description"><:wishlistentry description:></div><:or And:><:eif And:>
+    <tr id="item_<:wishlistentry id:>"> 
+      <td class="item">
+        <a href="<:url wishlistentry:>"><:wishlistentry title:></a><:if And [wishlistentry description] [cfg shop product_description 1]:>
+        <div class="description"><:wishlistentry description:></div><:or And:><:eif And:>
       </td>
-      <td class="col3"><:if Wishlistentry retailPrice:><:cfg shop currency "$":><:number money [wishlistentry retailPrice]:><:or Wishlistentry:><:eif Wishlistentry:></td>
-      <td class="col4">
+      <td class="price"><:if Price wishlistentry :><:cfg shop currency "$":><:number money [price wishlistentry]:><:or Price:>NA<:eif Price:></td>
+      <td class="action">
         <:ifFirstWishlistentry:><img src="/images/trans_pixel.gif" width="17" height="13" alt="Disabled" border="0" /><:or:><a href="<:dyntarget nuser wishlistup product_id [wishlistentry id]:>"><img src="/images/basic/store/buttons/move_up.gif" title="Move item up" border="0" /></a><:eif:>
         <:ifLastWishlistentry:><img src="/images/trans_pixel.gif" width="17" height="13" alt="Disabled" border="0" /><:or:><a href="<:dyntarget nuser wishlistdown product_id [wishlistentry id]:>"><img src="/images/basic/store/buttons/move_down.gif" title="Move item down" border="0" /></a><:eif:>
-        <!--<:ifWishlistentry retailPrice:><input type="hidden" id="qty<:wishlistentry id:>" name="qty<:wishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:wishlistentry id:>" id="a_addsingle<:wishlistentry id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:or:><:eif:>//-->
+        <!--<:ifPrice wishlistentry:><input type="hidden" id="qty<:wishlistentry id:>" name="qty<:wishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:wishlistentry id:>" id="a_addsingle<:wishlistentry id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:or:><:eif:>//-->
         <a href="<:dyntarget nuser wishlistdel product_id [wishlistentry id]:>"><img src="/images/basic/store/buttons/delete.gif" title="Remove this item" border="0" /></a>
       </td>
     </tr><:iterator end wishlist:>
   </tbody><:or Wishlist:>
-    <tr class="item"> 
+    <tr> 
       <td colspan="4" class="noitems">Your wishlist is empty</td>
     </tr><:eif Wishlist:>
 </table>

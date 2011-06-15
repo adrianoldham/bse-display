@@ -119,21 +119,21 @@
   <caption>Order items</caption>
   <thead>
     <tr> 
-      <th class="col1">Item</th>
-      <th class="col2">Qty</th>
-      <th class="col3">Price</th>
-      <th class="col4">Extended</th><!--//-->
+      <th class="item">Item</th>
+      <th class="quantity">Qty</th>
+      <th class="price">Price</th>
+      <th class="extended">Extended</th>
     </tr>
   </thead>
   <tbody><:iterator begin items:>
     <tr> 
-      <td class="col1"><:ifEq [item productId] -1:>
+      <td class="item"><:ifEq [item productId] -1:>
         <:item title:><:or:>
         <a href="<:product link:>"><:item title:></a><:eif:> <:ifOptions:><span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
         <div class="description"><:item description:></div><:or And:><:eif And:></td>
-      <td class="col2"><:item units:> &times;</td>
-      <td class="col3"><:cfg shop currency "$":><:number money [item price]:></td>
-      <td class="col4"><:cfg shop currency "$":><:number money [extended price]:></td><!--//-->
+      <td class="quantity"><:item units:> &times;</td>
+      <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
+      <td class="extended"><:cfg shop currency "$":><:number money [extended price]:></td>
     </tr><:iterator end items:>
   </tbody>
 </table>
@@ -232,20 +232,20 @@
 <:if Orderfiles:>
 <h3>Download files</h3>
 <p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:dyntarget user userpage _t files:>">File downloads</a> section of your account.</p>
-<table class="items">
+<table class="items files">
   <caption>Files available</caption>
   <thead>
     <tr>
-      <th class="col1">Filename/Title</th>
-      <th class="col2">Date</th>
-      <th class="col3">Size</th>
+      <th class="item file">Filename/Title</th>
+      <th class="date">Date</th>
+      <th class="size">Size</th>
     </tr>
   </thead>
   <tbody><:iterator begin orderfiles sort: -modwhen:>
     <tr>
-      <td class="col1"><:ifFileAvail:><a href="<:orderfile url:>" title="<:orderfile description:>"><:orderfile displayName:></a><:or:><span><:orderfile displayName:></span><:eif:></td>
-      <td class="col2"><:date orderfile whenUploaded:></td>
-      <td class="col3"><:kb orderfile sizeInBytes:>b</td>
+      <td class="item file"><:ifFileAvail:><a href="<:orderfile url:>" title="<:orderfile description:>"><:orderfile displayName:></a><:or:><span><:orderfile displayName:></span><:eif:></td>
+      <td class="date"><:date orderfile whenUploaded:></td>
+      <td class="size"><:kb orderfile sizeInBytes:>b</td>
     </tr><:iterator end orderfiles:>
   </tbody>
 </table>

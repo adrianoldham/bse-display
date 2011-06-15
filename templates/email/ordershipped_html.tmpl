@@ -35,19 +35,19 @@
 <table class="items group">
   <caption>Order items</caption>
   <thead>
-    <tr>
-      <th>Item</th>
-      <th>Qty</th>
-      <th>Price</th>
-      <th>Extended</th>
+    <tr> 
+      <th class="item">Item</th>
+      <th class="quantity">Qty</th>
+      <th class="price">Price</th>
+      <th class="extended">Extended</th>
     </tr>
   </thead>
   <tbody><:iterator begin items:>
     <tr>
-      <td><:item title |h:><:if Options:> <span><:options:></span><:or:><:eif:></td>
-      <td><:item units:> &times;</td>
-      <td><:cfg shop currency "$":><:number money [item price]:></td>
-      <td><:cfg shop currency "$":><:number money [extended price]:></td>
+      <td class="item"><:item title |h:><:if Options:> <span><:options:></span><:or:><:eif:></td>
+      <td class="quantity"><:item units:> &times;</td>
+      <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
+      <td class="extended"><:cfg shop currency "$":><:number money [extended price]:></td>
     </tr><:iterator end items:>
   </tbody>
 </table>
