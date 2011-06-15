@@ -6,6 +6,7 @@
       <th class="col1">Item</th>
       <th class="col2">Qty</th>
       <th class="col3">Price</th>
+      <th class="col4">Extended</th>
     </tr>
   </thead>
   <tbody><:iterator begin items:>
@@ -16,6 +17,7 @@
       </td>
       <td class="col2"><:item units:> &times;</td>
       <td class="col3"><:cfg shop currency "$":><:number money [item price]:></td>
+      <td class="col4"><:cfg shop currency "$":><:number money [arithmetic [item units] * [item price]]:></td>
     </tr><:iterator end items:>
   </tbody>
 </table>
@@ -23,7 +25,7 @@
   <:switch:>
   <:case Shipping_cost:>
   <p class="freight"><span>(<:shipping_method:><:if delivery_in:>, delivery in <:delivery_in:> days<:or delivery_in:><:eif delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
-  <:case Eq [order shipping_name] contact:>
+  <:case Match [order shipping_name] ^contact$:>
   <p class="freight"><span>(<:shipping_method:>)</span> <label>Freight:</label> TBA</p>
   <:case default:>
   <:endswitch:>
@@ -138,9 +140,9 @@
     </dl>
     <:or Payments:><:eif Payments:>
     <:if Payments CallMe:>
-    <dl class="paymentType3">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType3" value="<:paymentTypeId CallMe:>" <:checkedPayment CallMe:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="<:paymentTypeId CallMe:>" /><:eif MultPaymentTypes:> <label for="paymentType3">Contact Me</label></dt>
+    <dl class="paymentType2">
+      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="<:paymentTypeId CallMe:>" <:checkedPayment CallMe:> />
+      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="<:paymentTypeId CallMe:>" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact Me</label></dt>
       <dd>We will contact you to make arrangements for payment.</dd>
     </dl>
     <:or Payments:><:eif Payments:>
