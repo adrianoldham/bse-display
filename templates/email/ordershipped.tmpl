@@ -1,0 +1,39 @@
+<:uc [cfg site name]:> ACCOUNT SERVICES.
+
+Hello <:order delivFirstName:>,
+
+Your order has been shipped<:ifMatch [order shipping_name] ^contact$:><:or:> via <:order shipping_method |h:><:eif:>.
+
+ORDER DETAILS:
+
+  Order No.       : <:order id |%06d:>
+  Order Date      : <:date order orderDate:><:ifOrder purchase_order:>
+  Purchase Order  : <:order purchase_order:><:or:><:eif:><:ifOrder freight_tracking:>
+  Tracking Code   : <:order freight_tracking:><:or:><:eif:>
+  Shipping Method : <:order shipping_method:>
+
+
+Item                                                    Qty     Price   Extended
+--------------------------------------------------------------------------------
+<:iterator begin items:><:item title |55:>  <:item units |%3d:> <:item price |m9:> <:extended price |m10:><:ifOptions:>
+   <:options:><:or:><:eif:>
+<:iterator end items 
+:>--------------------------------------------------------------------------------
+<:if Cfg shop shipping
+:>                                                             Freight: <:switch:><:case Order shipping_cost:><:order shipping_cost |m10:><:case Match [order shipping_name] ^contact$
+:>       TBA<:case default
+:>      None<:endswitch:>
+<:or Cfg:><:eif Cfg
+:>                                                               Total: <:order total |m10:><:ifOrder userId:>
+
+This order is available in your account manager, you can track the status of 
+purchases in your order history.
+
+ACCOUNT LOGON LINK:
+  <:target user:>
+<:or:><:eif:>
+
+
+Regards
+The team at <:cfg site name:>
+(<:cfg site url:>)

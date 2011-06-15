@@ -1,0 +1,65 @@
+<:wrap email/base.tmpl title=>"Order shipped" :>
+
+<p>Hi <:order delivFirstName |h:>,</p>
+
+<p>Your order has been shipped<:ifMatch [order shipping_name] ^contact$:><:or:> via <:order shipping_method |h:><:eif:>.</p>
+
+<div class="group">
+<table class="vertical left">
+  <caption>Order details</caption>
+  <tbody>
+    <tr>
+      <th>Order No.:</th>
+      <td><b><:order id |%06d:></b></td>
+    </tr>
+    <tr> 
+      <th>Order Date:</th>
+      <td><:date order orderDate:></td>
+    </tr><:ifOrder purchase_order:>
+    <tr>
+      <th>Purchase Order:</th>
+      <td><:order purchase_order |h:></td>
+    </tr><:or:><:eif:><:ifOrder freight_tracking:>
+    <tr>
+      <th>Tracking Code:</th>
+      <td><:order freight_tracking |h:></td>
+    </tr><:or:><:eif:><:ifOrder shipping_method:>
+    <tr>
+      <th>Shipping Method:</th>
+      <td><:order shipping_method |h:></td>
+    </tr><:or:><:eif:>
+  </tbody>
+</table>
+</div>
+
+<table class="items group">
+  <caption>Order items</caption>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Qty</th>
+      <th>Price</th>
+      <th>Extended</th>
+    </tr>
+  </thead>
+  <tbody><:iterator begin items:>
+    <tr>
+      <td><:item title |h:><:if Options:> <span><:options:></span><:or:><:eif:></td>
+      <td><:item units:> &times;</td>
+      <td><:cfg shop currency "$":><:number money [item price]:></td>
+      <td><:cfg shop currency "$":><:number money [extended price]:></td>
+    </tr><:iterator end items:>
+  </tbody>
+</table>
+
+<div class="totals">
+  <:if Order shipping_cost:>
+  <p class="freight"><span>(<:order shipping_method:>) </span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p><:or Order:><:eif Order:>
+  <p class="total"><abbr><:cfg shop currency_code "AUD":> </abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [order total]:></p>
+</div>
+
+<:ifOrder userId:>
+<p>This order is available in your <a href="<:target user:>">account manager</a>, you can track the status of purchases in your order history.</p>
+
+<!--<a href="<:target user:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
+<p class="bse-buttons"><a href="<:target user:>" class="bse-button">Login now</a></p><:or:><:eif:>

@@ -23,7 +23,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     }
 }
 */
- 
+
+/* @group layout */
+
 html, body, div.bse-wrapper {
     margin: 0;
     padding: 0;
@@ -67,6 +69,10 @@ div.bse-main {
     border: 0.25em solid #fff;
 }
 
+/* @end */
+
+/* @group generic */
+
 a {
     text-decoration: underline;
     color: #15a2cb;
@@ -79,6 +85,7 @@ h1, h2, h3, h4 {
 	margin-bottom: 0.25em;
 	line-height: 1.25;
 	font-weight: normal;
+	clear: both;
 }
 
 h1 {
@@ -103,38 +110,6 @@ h4 {
 h1 + h2 {
     margin-top: 0;
     margin-bottom: 1.5em;
-}
-
-div.bse-formmail table {
-	width: 100%;
-}
-
-div.bse-formmail table caption {
-	text-align: left;
-	font-size: 1.25em;
-	color: #15a2cb;
-	margin: 0;
-	padding: 1em 0 0.5em 0;
-}
-
-div.bse-formmail table th, div.bse-formmail table td {
-	text-align: left;
-	vertical-align: top;
-	margin: 0;
-	padding: 0.5em 1em;
-	border-style: solid;
-	border-color: #eee #999;
-	border-width: 0.1em 0;
-
-}
-
-div.bse-formmail table th {
-	font-weight: normal;
-	color: #999;
-	text-align: right;
-	white-space: nowrap;
-	border-width: 0.1em 0.25em 0.1em 0;
-	width: 20%;
 }
 
 ul {
@@ -177,6 +152,206 @@ dd span {
     font-weight: bold;
     color: #15a2cb;
 }
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.group {
+    overflow: hidden;
+    margin-bottom: 3em;
+    /*border: 1px solid #ccc;
+    border-radius: 0.5em;
+    padding: 0 0.5em;*/
+}
+
+.group table {
+	margin-bottom: 0;
+}
+
+.paid, .unpaid {
+	float: left;
+	margin-right: 0.5em;
+	margin-top: -0.1em;
+	padding: 0.1em 0.5em;
+	background-color: #c03;
+	color: #fff !important;
+	text-shadow: none;
+	border-radius: 0.35em;
+}
+
+.paid {
+	background-color: green;
+}
+
+/* @end */
+
+/* @group formmail */
+
+div.bse-formmail table {
+	width: 100%;
+}
+
+div.bse-formmail table caption {
+	text-align: left;
+	font-size: 1.25em;
+	color: #15a2cb;
+	margin: 0;
+	padding: 1em 0 0.5em 0;
+}
+
+div.bse-formmail table th, div.bse-formmail table td {
+	text-align: left;
+	vertical-align: top;
+	margin: 0;
+	padding: 0.5em 1em;
+	border-style: solid;
+	border-color: #eee #999;
+	border-width: 0.1em 0;
+
+}
+
+div.bse-formmail table th {
+	font-weight: normal;
+	color: #999;
+	text-align: right;
+	white-space: nowrap;
+	border-width: 0.1em 0.25em 0.1em 0;
+	width: 20%;
+}
+
+/* @end */
+
+/* @group items */
+
+table.items {
+	border: 1px solid #ccc;
+	border-width: 1px 0;
+	width: 100%;
+}
+
+table.items caption {
+	font-weight: bold;
+	text-align: left;
+	padding: 0.5em 0;
+	color: #666;
+}
+
+table.items th {
+	border-bottom: 2px solid #ccc;
+	padding: 0.5em;
+	font-size: 0.9em;
+	color: #666;
+}
+
+table.items td {
+	border-bottom: 1px solid #ddd;
+	padding: 0.75em 0.5em;
+}
+
+table.items th, table.items td {
+	width: 70%;
+	text-align: left;
+}
+
+table.items th+th, table.items td+td {
+	width: auto;
+	text-align: right;
+	white-space: nowrap;
+}
+
+table.items td+td+td {
+	font-weight: bold;
+	color: #15a2cb;
+}
+
+table.items td+td+td+td {
+	color: inherit;
+}
+
+table.items span {
+	color: #999;
+}
+
+/* @end */
+
+
+/* @group totals */
+
+div.totals {
+	border-bottom: 2px solid #ccc;
+	text-align: right;
+	margin-bottom: 3em;
+	padding: 0 0.5em 1em 0.5em;
+}
+
+div.totals p {
+	margin: 0;
+	font-weight: bold;
+	line-height: 1;
+}
+
+div.totals p.freight {
+	margin-bottom: 0.75em;
+	font-size: 1.1em;
+}
+
+div.totals p.total {
+	margin-bottom: 0;
+	font-size: 1.75em;
+	color: #be0f54; /* wine */
+}
+
+div.totals span, div.totals label, div.totals abbr {
+	color: #999;
+}
+
+div.totals span, div.totals abbr {
+	color: #ccc;
+	font-weight: normal;
+}
+
+/* @end */
+
+/* @group vertical table */
+
+table.vertical.left, table.vertical.right {
+	width: 49%;
+}
+
+table.vertical caption {
+	font-weight: bold;
+	text-align: left;
+	padding: 0.5em 0;
+	color: #666;
+}
+
+table.vertical th, table.vertical td {
+	font-size: 0.85em;
+	padding: 0.35em 1em;
+}
+
+table.vertical th {
+	padding-right: 1em;
+	text-align: right;
+	border-right: 0.25em solid #ccc;
+	color: #999;
+	width: 30%;
+	white-space: nowrap;
+}
+
+table.vertical td {
+	padding-left: 1em;
+	width: 70%;
+}
+
+/* @end */
+
+/* @group footer */
 
 p.bse-signature {
     margin-top: 4em;
@@ -223,7 +398,9 @@ div.bse-footer p {
 div.bse-footer p, div.bse-footer a {
     color: #999;
 }
-		
+
+/* @end */
+
 </style>
 </head>
 <body>
