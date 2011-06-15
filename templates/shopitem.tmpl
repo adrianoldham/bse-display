@@ -8,7 +8,7 @@
   <input type="hidden" name="id" value="<:product id:>" />
   <input type="hidden" name="r" value="<:url top:>" />
   <fieldset class="group">
-    <legend><:cfg shop currency "$":><:if Dynamic:><:number money [price dynarticle]:> <:ifPrice dynarticle discountpc:><em><:price dynarticle discountpc:>% Off</em><:or:><:eif:><:or Dynamic:><:number money [product retailPrice]:><:eif Dynamic:> <abbr><:cfg shop currency_code "AUD":></abbr></legend><:if Options:>
+    <legend><:cfg shop currency "$":><:if Dynamic:><:number money [price dynarticle]:> <abbr><:cfg shop currency_code "AUD":></abbr><:ifPrice dynarticle discountpc:> <em><:price dynarticle discountpc:>% Off</em><:or:><:eif:><:or Dynamic:><:number money [product retailPrice]:> <abbr><:cfg shop currency_code "AUD":></abbr><:eif Dynamic:></legend><:if Options:>
     <:iterator begin options:>
     <div class="input <:option id:>">
       <label for="<:option id:>"><:option desc:>:</label>
