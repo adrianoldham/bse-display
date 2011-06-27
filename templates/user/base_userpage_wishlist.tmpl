@@ -18,7 +18,7 @@
         <a href="<:url wishlistentry:>"><:wishlistentry title:></a><:if And [wishlistentry description] [cfg shop product_description 1]:>
         <div class="description"><:wishlistentry description:></div><:or And:><:eif And:>
       </td>
-      <td class="price"><:ifPrice wishlistentry :><:cfg shop currency "$":><:number money [price wishlistentry]:><:or:>NA<:eif:></td>
+      <td class="price"><:ifPrice wishlistentry:><:cfg shop currency "$":><:number money [price wishlistentry]:><:or:>NA<:eif:></td>
       <td class="action">
         <span class="widgets arrows">
           <:ifFirstWishlistentry:><img src="/images/trans_pixel.gif" width="17" height="13" alt="Disabled" border="0" /><:or:><a href="<:dyntarget nuser wishlistup product_id [wishlistentry id]:>"><img src="/images/basic/store/buttons/move_up.gif" title="Move item up" border="0" /></a><:eif:>
