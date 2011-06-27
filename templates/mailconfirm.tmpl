@@ -2,11 +2,11 @@
 ABN: <:cfg entity abn:><:or:><:eif:>
 
 --------------------------------------------------------------------------------
-                                   TAX INVOICE
+                                 ORDER RECEIPT
 --------------------------------------------------------------------------------
 
-Invoice No.  : <:order id |%06d:>
-Order Date   : <:date "%d/%m/%Y" order orderDate:><:ifOrder userId:>
+Order No.    : <:order id |%06d:>
+Order Date   : <:date order orderDate:><:ifOrder userId:>
 Username     : <:order userId:><:or:><:eif:><:ifOrder affiliate_code:>
 Referrer     : <:order affiliate_code:><:or:><:eif:><:ifOrder purchase_order:>
 Purchase No. : <:order purchase_order:><:or:><:eif:>
@@ -39,12 +39,14 @@ Email        : <:order billEmail:>
 
 Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
-<:iterator begin items:><:item title |40:>   <:item product_code |12:> <:item units |%3d:> <:item price |m9:> <:extended price |m10:><:if Options:>
-   <:options:><:or Options:><:eif Options:>
-<:iterator separator items:><:iterator end items 
+<:iterator begin items:><:item title |40:>   <:item product_code |12:> <:item units |%3d:> <:item price |m9:> <:extended price |m10:><:ifOptions:>
+   <:options:><:or:><:eif:>
+<:iterator end items 
 :>--------------------------------------------------------------------------------
 <:if Cfg shop shipping
-:>                                                             Freight: <:switch:><:case Order shipping_cost:><:order shipping_cost |m10:><:case Eq [order shipping_name] contact:>       TBA<:case default:>      None<:endswitch:>
+:>                                                             Freight: <:switch:><:case Order shipping_cost:><:order shipping_cost |m10:><:case Match [order shipping_name] ^contact$
+:>       TBA<:case default
+:>      None<:endswitch:>
 <:or Cfg:><:eif Cfg
 :>                                                               Total: <:order total |m10:>
 <:ifOrder gst
@@ -52,14 +54,14 @@ Item                                       Code         Qty     Price   Extended
 :>                                                                 GST: <:arithmetic [order total] - ([order total] / (1 + [cfg shop gst_rate 10] / 100)) |m10:><:eif
 :>
 
-<:if Eq [order paymentType] "0":><:if Order ccOnline
+<:if Eq [order paymentType] "0":><:ifOrder ccOnline
 :>Your credit card payment was processed online:
 
              Receipt No.  : <:order ccReceipt:>
-<:or Order
+<:or
 :>Your credit card will be debited at time of shipping:
 
-<:eif Order
+<:eif
 :>             <:cfg shop display_cardHolder "Name on Card" |12:> : <:order ccName:><:ifOrder ccType:>
              <:cfg shop display_cardType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
 :><:ifEq [order paymentType] "1":>Please send a cheque to:
@@ -82,8 +84,20 @@ Item                                       Code         Qty     Price   Extended
 
 We will contact you to quote the shipping costs.<:or Order:><:ifFreeShippingCart:>
 
-This order qualifies for free shipping within Australia.<:or:><:eif:><:eif Order:><:or Cfg:><:eif Cfg:><:if Order instructions:>
+This order qualifies for free shipping within Australia.<:or:><:eif:><:eif Order:><:or Cfg:><:eif Cfg:><:ifOrder instructions:>
 
-<:with begin wrap 80:>Instructions: <:order instructions:><:with end wrap:><:or Order:><:eif Order:>
+<:with begin wrap 80:>Instructions: <:order instructions:><:with end wrap:><:or:><:eif:><:ifOrder userId:>
 
+This order is available in your account manager, you can track the status of 
+purchases in your order history.
+
+ORDER STATUS LINK:
+  <:target user orderdetail id [order id]:>
+<:or:>
+
+You can review details of this order and track its status online.
+
+ORDER STATUS LINK:
+  <:target user oda id [order randomId]:>
+<:eif:>
 --------------------------------------------------------------------------------
