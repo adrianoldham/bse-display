@@ -1,82 +1,124 @@
-<:wrap shopbase.tmpl title=>"Thank you for shopping" :>
-<p><b>Thank you <:ifOrder billFirstName:><:order billFirstName:><:or:><:order delivFirstName:><:eif:>, your order number is: <:order id |%06d:></b></p>
-<p>Please refer to your order number when making enquiries regarding this purchase.</p>
-<p>Confirmation of this order has been emailed to: <a href="mailto:<:order emailAddress:>"><:order emailAddress:></a></p>
-<:if Payment CC:>
-<dl>
-  <dt><:if Order ccOnline:>Your credit card payment was processed online<:or Order:>Your credit card will be debited at time of shipping<:eif Order:>:</dt>
-  <dd>
-    <table>
-      <caption>Credit Card Details</caption>
-      <:if Order ccOnline:><tr>
-        <th>Receipt No.:</th><td><:order ccReceipt:></td>
-      </tr>
-      <:or Order:><:eif Order:><tr>
-        <th><:cfg shop display_cardHolder "Name on Card":>:</th><td><:order ccName:></td>
-      </tr>
-      <tr>
-        <th><:cfg shop display_cardType "Card Type":>:</th><td><:order ccType:></td>
-      </tr>
-    </table>
-  </dd>
-</dl>
-<:or Payment:><:eif Payment:>
-<:if Payment Cheque:>
-<dl>
-  <dt>Please send a cheque to:</dt>
-  <dd>
-    <address>
-      <b><:cfg shop address1 |h:></b><br />
-      <:cfg shop address2 |h:><br />
-      <:cfg shop address3 |h:><br />
-      <:cfg shop address4 |h:>
-    </address>
-  </dd>
-</dl>
-<:or Payment:><:eif Payment:>
-<:if Payment DirectDeposit:>
-<dl>
-  <dt>Please transfer the funds to:</dt>
-  <dd>
-    <table>
-      <caption>Electronic Fund Transfer Details</caption>
-      <tr>
-        <th>Name:</th><td><:cfg shop accountname |h:></td>
-      </tr>
-      <tr>
-        <th>BSB:</th><td><:cfg shop bsb:></td>
-      </tr>
-      <tr>
-        <th>Account:</th><td><:cfg shop accountno:></td>
-      </tr>
-      <tr>
-        <th>Reference:</th><td><:order id |%06d:></td>
-      </tr>
-    </table>
-  </dd>
-</dl>
-<:or Payment:><:eif Payment:>
-<:if Payment CallMe:>
-<p>We will contact you to make arrangements for payment.</p>
-<:or Payment:><:eif Payment:>
-<:if Payment PayPal:>
-<dl>
-  <dt>Your payment was processed through PayPal:</dt>
-  <dd>
-    <table>
-      <caption>PayPal Details</caption>
-      <tr>
-        <th>Transaction Id:</th><td><:order paypal_tran_id:></td>
-      </tr>
-    </table>
-  </dd>
-</dl>
-<:or Payment:><:eif Payment:>
-<:include include/custom/payment_type_checkoutfinal.tmpl optional:>
+<:wrap shopbase.tmpl title=>"Thank you for shopping" subtitle=>"Order receipt" :>
 <:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
 <p class="alert">
   This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user userpage:>">account manager</a>.
 </p><:or User:><:eif User:><:eif Cfg:>
+
+<h2><:param subtitle |h:></h2>
+
+<div class="group">
+<table class="vertical left">
+  <caption>Order details</caption>
+  <tbody>
+    <tr>
+      <th>Order No.:</th>
+      <td><b><:order id |%06d:></b></td>
+    </tr>
+    <tr> 
+      <th>Order Date:</th>
+      <td><:date order orderDate:></td>
+    </tr>
+    <!--<tr>
+      <th>Order Status:</th>
+      <td><:dyncatmsg [order stage_description_id]:></td>
+    </tr>//--><:ifOrder purchase_order:>
+    <tr>
+      <th>Purchase Order:</th>
+      <td><:order purchase_order:></td>
+    </tr><:or:><:eif:><:ifOrder freight_tracking:>
+    <tr>
+      <th>Tracking Code:</th>
+      <td><:order freight_tracking:></td>
+    </tr><:or:><:eif:><:ifOrder shipping_method:>
+    <tr>
+      <th>Shipping Method:</th>
+      <td><:order shipping_method:></td>
+    </tr><:or:><:eif:><!--<:ifOrder userId:>
+    <tr>
+      <th>Username:</th>
+      <td><:order userId:></td>
+    </tr><:or:><:eif:><:ifOrder affiliate_code:>
+    <tr>
+      <th>Referrer:</th>
+      <td><:order affiliate_code:></td>
+    </tr><:or:><:eif:>//-->
+  </tbody>
+</table>
+
+<table class="vertical right">
+  <caption>Payment details <span class="<:ifOrder paidFor:>paid<:or:>unpaid<:eif:>"><:ifOrder paidFor:>Paid<:or:>Unpaid<:eif:></span></caption>
+  <tbody>
+   <tr>
+      <th>Payment Method:</th><:switch:>
+      <:case Eq [order paymentType] "0":>
+      <td><b>Credit Card</b></td>
+    </tr>
+    <:if Order ccOnline:><tr>
+      <th>Receipt No.:</th>
+      <td><:order ccReceipt:></td>
+    </tr>
+    <:or Order:><:eif Order:><tr>
+      <th><:cfg shop display_cardHolder "Name on Card":>:</th>
+      <td><:order ccName:></td>
+    </tr>
+    <tr>
+      <th><:cfg shop display_cardType "Card Type":>:</th>
+      <td><:order ccType:></td>
+    </tr>
+      <:case Eq [order paymentType] "1":>
+      <td><b>Cheque</b></td>
+    </tr>
+    <tr>
+      <th>Payee:</th>
+      <td>
+        <b><:cfg shop address1 |h:></b>
+      </td>
+    </tr>
+    <tr>
+      <th>Address:</th>
+      <td>
+        <:cfg shop address2 |h:><br />
+        <:cfg shop address3 |h:><br />
+        <:cfg shop address4 |h:>
+      </td>
+    </tr>
+      <:case Eq [order paymentType] "10":>
+      <td><b>EFT</b></td>
+    </tr>
+    <tr>
+      <th>Name:</th>
+      <td><:cfg shop accountname |h:></td>
+    </tr>
+    <tr>
+      <th>BSB:</th>
+      <td><:cfg shop bsb:></td>
+    </tr>
+    <tr>
+      <th>Account:</th>
+      <td><:cfg shop accountno:></td>
+    </tr>
+    <tr>
+      <th>Reference:</th>
+      <td><:order id |%06d:></td>
+    </tr>
+      <:case Eq [order paymentType] "2":>
+      <td><b>Contact</b></td>
+    </tr>
+      <:case Eq [order paymentType] "4":>
+      <td><b>PayPal</b></td>
+    </tr>
+    <tr>
+      <th>Transaction Id:</th>
+      <td><:order paypal_tran_id:></td>
+    </tr>
+      <:case default:>
+      <td><b>None</b></td>
+    </tr>
+    <:endswitch:>
+  </tbody>
+</table>
+</div>
+
 <table class="items">
   <caption>Order items</caption>
   <thead>
@@ -111,9 +153,91 @@
 </div><:if Cfg tryandbyte aufreight:><:if Overseas:>
 <p><b>We will contact you with a quote for shipping cost</b></p><:or Overseas:><:ifFreeShippingCart:>
 <p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:>
+
+<div class="group">
+<table class="vertical left">
+  <caption>Shipping details</caption>
+  <tbody>
+    <tr> 
+      <th>Name:</th>
+      <td><b><:order delivFirstName:> <:order delivLastName:></b></td>
+    </tr>
+    <tr>
+      <th>Address:</th>
+      <td><:ifOrder delivOrganization:>
+        <:order delivOrganization:><br /><:or:><:eif:>
+        <:order delivStreet:><br /><:ifOrder delivStreet2:>
+        <:order delivStreet2:><br /><:or:><:eif:>
+        <:order delivSuburb:> <:order delivState:> <:order delivPostCode:><br /><:ifCfgsection "country selector":>
+        <:cfg "country selector" [order delivCountry]:><:or:><:order delivCountry:><:eif:>
+      </td>
+    </tr>
+    <tr> 
+      <th><:cfg "site users" display_telephone "Telephone":>:</th>
+      <td><:order telephone:></td>
+    </tr>
+    <:ifOrder facsimile:><tr> 
+      <th><:cfg "site users" display_facsimile "Facsimile":>:</th>
+      <td><:order facsimile:></td>
+    </tr><:or:><:eif:>
+    <:ifOrder delivMobile:><tr> 
+      <th><:cfg "site users" display_delivMobile "Mobile":>:</th>
+      <td><:order delivMobile:></td>
+    </tr><:or:><:eif:>
+    <:ifOrder billStreet:><:or:><tr>
+      <th><:cfg "site users" display_email "Email":>:</th>
+      <td><:order emailAddress:></td>
+    </tr><:eif:>
+    <:ifOrder instructions:><tr> 
+      <th>Instructions:</th>
+      <td><:order instructions:></td>
+    </tr><:or:><:eif:><!--//-->
+  </tbody>
+</table>
+
+<:if Order billStreet:>
+<table class="vertical right">
+  <caption>Billing details</caption>
+  <tbody>
+    <tr> 
+      <th>Name:</th>
+      <td><b><:order billFirstName:> <:order billLastName:></b></td>
+    </tr>
+    <tr>
+      <th>Address:</th>
+      <td><:ifOrder billOrganization:>
+        <:order billOrganization:><br /><:or:><:eif:>
+        <:order billStreet:><br /><:ifOrder billStreet2:>
+        <:order billStreet2:><br /><:or:><:eif:>
+        <:order billSuburb:> <:order billState:> <:order billPostCode:><br /><:ifCfgsection "country selector":>
+        <:cfg "country selector" [order billCountry]:><:or:><:order billCountry:><:eif:>
+      </td>
+    </tr>
+    <:ifOrder billTelephone:><tr> 
+      <th><:cfg "site users" display_telephone "Telephone":>:</th>
+      <td><:order billTelephone:></td>
+    </tr><:or:><:eif:>
+    <:ifOrder billFacsimile:><tr> 
+      <th><:cfg "site users" display_facsimile "Facsimile":>:</th>
+      <td><:order billFacsimile:></td>
+    </tr><:or:><:eif:>
+    <:ifOrder billMobile:><tr> 
+      <th><:cfg "site users" display_delivMobile "Mobile":>:</th>
+      <td><:order billMobile:></td>
+    </tr><:or:><:eif:>
+    <tr> 
+      <th><:cfg "site users" display_email "Email":>:</th>
+      <td><:order emailAddress:></td>
+    </tr>
+  </tbody>
+</table>
+<:or Order:><:eif Order:>
+</div>
+
+
 <:if Orderpaidfiles:>
 <h2>Download files</h2>
-<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:dyntarget user userpage _t files:>">File downloads</a> section of your account.</p>
+<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:dyntarget user userpage _t files:>">file downloads</a> section of your account.</p>
 <table class="items files">
   <caption>Files available</caption>
   <thead>
