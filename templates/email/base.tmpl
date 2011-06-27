@@ -1,39 +1,22 @@
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css" media="all">
 
-/* reset */
+/* @group reset */
 
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
-/*
-@media only screen and (max-device-width: 480px) {
-    .bse-main {
-		padding: 5px 10px !important;
-    }
-    body {
-    	padding: 10px !important;
-    }
-    div.bse-header h1 {
-    	font-size: 16px !important;
-    }
-    div.bse-main h2 {
-    	font-size: 20px !important;
-    }
-}
-*/
+/* @end */
 
 /* @group layout */
 
 html, body, div.bse-wrapper {
-    margin: 0;
-    padding: 0;
 	background-color: #dfdfdf;
 }
 
 div.bse-wrapper {
-    margin: 0;
     padding: 0 0.75em;
     font-family: Arial, Helvetica, Verdana, sans-serif;
     font-size: 14px;
@@ -49,6 +32,9 @@ div.bse-content {
     min-width: 25em;
     margin: 2em auto;
     text-shadow: 0 1px 0 #fff;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 div.bse-header h1 {
@@ -79,7 +65,7 @@ a {
 }
 
 h1, h2, h3, h4 {
-	font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+	font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 	color: #15a2cb;
 	margin-top: 2em;
 	margin-bottom: 0.25em;
@@ -166,7 +152,7 @@ dd span {
     margin-bottom: 3em;
     /*border: 1px solid #ccc;
     border-radius: 0.5em;
-    padding: 0 0.5em;*/
+    padding: 0 0.5em 0.5em;*/
 }
 
 .group table {
@@ -190,43 +176,7 @@ dd span {
 
 /* @end */
 
-/* @group formmail */
-
-div.bse-formmail table {
-	width: 100%;
-}
-
-div.bse-formmail table caption {
-	text-align: left;
-	font-size: 1.25em;
-	color: #15a2cb;
-	margin: 0;
-	padding: 1em 0 0.5em 0;
-}
-
-div.bse-formmail table th, div.bse-formmail table td {
-	text-align: left;
-	vertical-align: top;
-	margin: 0;
-	padding: 0.5em 1em;
-	border-style: solid;
-	border-color: #eee #999;
-	border-width: 0.1em 0;
-
-}
-
-div.bse-formmail table th {
-	font-weight: normal;
-	color: #999;
-	text-align: right;
-	white-space: nowrap;
-	border-width: 0.1em 0.25em 0.1em 0;
-	width: 20%;
-}
-
-/* @end */
-
-/* @group items */
+/* @group items table */
 
 table.items {
 	border: 1px solid #ccc;
@@ -245,7 +195,7 @@ table.items th {
 	border-bottom: 2px solid #ccc;
 	padding: 0.5em;
 	font-size: 0.9em;
-	color: #666;
+	color: #999;
 }
 
 table.items td {
@@ -254,22 +204,22 @@ table.items td {
 }
 
 table.items th, table.items td {
-	width: 70%;
+	width: auto;
 	text-align: left;
 }
 
 table.items th+th, table.items td+td {
-	width: auto;
+	width: 10%;
 	text-align: right;
 	white-space: nowrap;
 }
 
-table.items td+td+td {
+table.items td.price, table.items td.extended, table.files td.size {
 	font-weight: bold;
 	color: #15a2cb;
 }
 
-table.items td+td+td+td {
+table.items td.extended {
 	color: inherit;
 }
 
@@ -278,7 +228,6 @@ table.items span {
 }
 
 /* @end */
-
 
 /* @group totals */
 
@@ -317,10 +266,53 @@ div.totals span, div.totals abbr {
 
 /* @end */
 
+/* @group formmail table */
+
+div.bse-formmail table {
+	width: 100%;
+}
+
+div.bse-formmail table caption {
+	text-align: left;
+	font-size: 1.25em;
+	color: #15a2cb;
+	margin: 0;
+	padding: 1em 0 0.5em 0;
+}
+
+div.bse-formmail table th, div.bse-formmail table td {
+	text-align: left;
+	vertical-align: top;
+	margin: 0;
+	padding: 0.5em 1em;
+	border-style: solid;
+	border-color: #eee #999;
+	border-width: 0.1em 0;
+
+}
+
+div.bse-formmail table th {
+	font-weight: normal;
+	color: #999;
+	text-align: right;
+	white-space: nowrap;
+	border-width: 0.1em 0.25em 0.1em 0;
+	width: 20%;
+}
+
+/* @end */
+
 /* @group vertical table */
+
+table.vertical {
+	width: 99%;
+	margin: 0 0.25%;
+}
 
 table.vertical.left, table.vertical.right {
 	width: 49%;
+	margin: 0 0.25%;
+	float: left;
 }
 
 table.vertical caption {
@@ -402,6 +394,98 @@ div.bse-footer p, div.bse-footer a {
 /* @end */
 
 </style>
+
+<style type="text/css" media="not unknown">
+
+/* @group all non-inlineable */
+
+@media all {
+    a.bse-button {
+    	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)) !important; /* Chrome,Safari4+ */
+    	background-image: -webkit-linear-gradient(top, #fff, #ccc) !important; /* Chrome10+,Safari5.1+ */
+    	background-image: -moz-linear-gradient(top, #fff, #ccc) !important; /* FF3.6+ */
+    	background-image: -ms-linear-gradient(top, #fff, #ccc) !important; /* IE10+ */
+    	background-image: -o-linear-gradient(top, #fff, #ccc) !important; /* Opera11.10+ */
+    	background-image: linear-gradient(top, #fff, #ccc) !important; /* W3C */
+    	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#cccccc'); /* IE7+ */
+    }
+}
+
+/* @end */
+
+/* @group mobile media */
+
+@media screen and (max-width: 768px) {
+    div.bse-wrapper {
+    	font-size: 13px !important;
+    }
+    div.bse-main {
+        padding: 1.5em 2em 1em !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    div.bse-wrapper {
+        padding: 0 0.5em !important;
+    	font-size: 13px !important;
+    }
+    div.bse-header h1 {
+    	font-size: 1.5em !important;
+    }
+    div.bse-main {
+		padding: 0.75em 1.25em 0.5em !important;
+    }
+    div.bse-main h2 {
+    	font-size: 1.75em !important;
+    }
+    div.bse-main h3 {
+    	font-size: 1.25em !important;
+    }
+    table.vertical {
+        width: 100% !important;
+    }
+    table.vertical + table.vertical {
+        margin-top: 1.5em !important;
+    }
+    table.items .code, table.items .extended, table.items .date {
+        display: none !important;
+    }
+    table.items span {
+    	display: block !important;
+    	font-size: 0.85em !important;
+    }
+    div.totals span {
+    	display: none !important;
+    }
+}
+
+/* @end */
+
+/* @group print media */
+
+@media print {
+    html, body, div.bse-wrapper {
+        background-color: #fff !important;
+    }
+    
+    div.bse-main {
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+        -webkit-border-radius: none !important;
+        -moz-border-radius: none !important;
+        border-radius: none !important;
+        border: none !important;
+    }
+    
+    p.bse-buttons {
+        display: none;
+    }
+}
+
+/* @end */
+
+</style>
 </head>
 <body>
 <div class="bse-wrapper <:param classes:>">
@@ -422,7 +506,3 @@ div.bse-footer p, div.bse-footer a {
 </div>
 </body>
 </html>
-
-
-
-
