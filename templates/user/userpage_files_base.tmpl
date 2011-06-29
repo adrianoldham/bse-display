@@ -5,18 +5,16 @@
     <caption>Files available</caption>
     <thead>
       <tr>
-        <th class="col1">Filename/Title</th>
-        <th class="col2">Date</th>
-        <!--<th class="col3">Title:</th>//-->
-        <th class="col3">Size</th>
+        <th class="item file">Filename/Title</th>
+        <th class="date">Date</th>
+        <th class="size">Size</th>
       </tr>
     </thead>
     <tbody><:iterator begin userfiles sort: -modwhen:>
-      <tr class="item">
-        <td class="col1"><a href="<:userfile url:>" title="<:userfile title:>"><!--<:ifUserfile title:><:userfile title:><:or:><:userfile display_name:><:eif:>//--><:userfile display_name:></a></td>
-        <td class="col2"><:date userfile modwhen:></td>
-        <!--<td><:userfile title:></td>//-->
-        <td class="col3"><:kb userfile size_in_bytes:>b</td>
+      <tr>
+        <td class="item file"><a href="<:userfile url:>" title="<:userfile title:>"><!--<:ifUserfile title:><:userfile title:><:or:><:userfile display_name:><:eif:>//--><:userfile display_name:></a></td>
+        <td class="date"><:date userfile modwhen:></td>
+        <td class="size"><:kb userfile size_in_bytes:>b</td>
       </tr><:iterator separator userfiles:>
       <:iterator end userfiles:>
     </tbody>
@@ -27,21 +25,17 @@
   <caption>Files available</caption>
   <thead>
     <tr>
-      <th class="col1">Filename/Title</th>
-      <th class="col2">Date</th>
-      <!--<th class="col3">Name</th>//-->
-      <th class="col3">Size</th>
+      <th class="item file">Filename/Title</th>
+      <th class="date">Date</th>
+      <th class="size">Size</th>
     </tr>
   </thead>
-  <tbody>
-    <:iterator begin paidfiles sort: -modwhen:>
-    <tr class="item">
-      <td class="col1"><a href="<:paidfile url:>" title="<:paidfile description:>"><!--<:ifPaidfile title:><:paidfile description:><:or:><:paidfile displayName:><:eif:>//--><:paidfile displayName:></a></td>
-      <td class="col2"><:date paidfile whenUploaded:></td>
-      <!--<td class="col3"><:paidfile displayName:></td>//-->
-      <td class="col3"><:kb paidfile sizeInBytes:>b</td>
-    </tr>
-    <:iterator end paidfiles:>
+  <tbody><:iterator begin paidfiles sort: -modwhen:>
+    <tr>
+      <td class="item file"><a href="<:paidfile url:>" title="<:paidfile description:>"><!--<:ifPaidfile description:><:paidfile description:><:or:><:paidfile displayName:><:eif:>//--><:paidfile displayName:></a></td>
+      <td class="date"><:date paidfile whenUploaded:></td>
+      <td class="size"><:kb paidfile sizeInBytes:>b</td>
+    </tr><:iterator end paidfiles:>
   </tbody>
 </table>
 <:or Paidfiles:><:eif Paidfiles:>
