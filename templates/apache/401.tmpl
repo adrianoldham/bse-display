@@ -1,0 +1,10 @@
+<:wrap apache/errorbase.tmpl title=>"Sorry! Authorisation required" :>
+<div id="article_error" class="article">
+<h1 id="title_error" class="pagetitle"><:param title:> <!--#echo var='REDIRECT_STATUS' --></h1>
+<div id="body_error" class="body">
+<p>The address you attempted to access does not allow public access.  You must sucessfully login to access this area of the site.</p>
+<div class="note">
+<p>If you are having trouble logging in, please notify our <a href="mailto:<!--#echo var='SERVER_ADMIN' -->?subject=<:param title:> [<!--#echo var='REDIRECT_STATUS' -->] on <!--#echo var='SERVER_NAME' -->&amp;body=Requested address: <!--#echo var='REQUEST_URI' --> and Referring address: <!--#echo var='HTTP_REFERER' -->">webmaster</a>, please include the address of the page you requested and any information that may assist in troubleshooting your access problem.</p>
+</div>
+</div>
+</div>
