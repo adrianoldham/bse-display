@@ -1,5 +1,5 @@
 <:wrap user/userbase.tmpl subtitle=>"Personal files" userpage=>"files" :>
-<:if Userfiles:>
+  <:if Userfiles:>
   <h2><:param subtitle |h:></h2>
   <table class="items files">
     <caption>Files available</caption>
@@ -19,23 +19,22 @@
       <:iterator end userfiles:>
     </tbody>
   </table><:or Userfiles:><:eif Userfiles:>
-<:if Paidfiles:>
-<h2>Purchased files</h2>
-<table class="items files">
-  <caption>Files available</caption>
-  <thead>
-    <tr>
-      <th class="item file">Filename/Title</th>
-      <th class="date">Date</th>
-      <th class="size">Size</th>
-    </tr>
-  </thead>
-  <tbody><:iterator begin paidfiles sort: -modwhen:>
-    <tr>
-      <td class="item file"><a href="<:paidfile url:>" title="<:paidfile description:>"><!--<:ifPaidfile description:><:paidfile description:><:or:><:paidfile displayName:><:eif:>//--><:paidfile displayName:></a></td>
-      <td class="date"><:date paidfile whenUploaded:></td>
-      <td class="size"><:kb paidfile sizeInBytes:>b</td>
-    </tr><:iterator end paidfiles:>
-  </tbody>
-</table>
-<:or Paidfiles:><:eif Paidfiles:>
+  <:if Paidfiles:>
+  <h2>Purchased files</h2>
+  <table class="items files">
+    <caption>Files available</caption>
+    <thead>
+      <tr>
+        <th class="item file">Filename/Title</th>
+        <th class="date">Date</th>
+        <th class="size">Size</th>
+      </tr>
+    </thead>
+    <tbody><:iterator begin paidfiles sort: -modwhen:>
+      <tr>
+        <td class="item file"><a href="<:paidfile url:>" title="<:paidfile description:>"><!--<:ifPaidfile description:><:paidfile description:><:or:><:paidfile displayName:><:eif:>//--><:paidfile displayName:></a></td>
+        <td class="date"><:date paidfile whenUploaded:></td>
+        <td class="size"><:kb paidfile sizeInBytes:>b</td>
+      </tr><:iterator end paidfiles:>
+    </tbody>
+  </table><:or Paidfiles:><:eif Paidfiles:>
