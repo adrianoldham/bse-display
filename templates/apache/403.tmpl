@@ -3,9 +3,8 @@
 <h1 id="title_error" class="pagetitle"><:param title:> <!--#echo var='REDIRECT_STATUS' --></h1>
 <div id="body_error" class="body">
 <p>The address you attempted to access does not allow public access.  You may find what you are looking for elsewhere on the site, here are some useful places to start:</p>
-<ul>
-<li><a href="/index.html">home</a></li>
-<li><a href="/sitemap.html">sitemap</a></li>
+<ul><:iterator begin inlines 1 6:>
+<li><a href="<:url inline:>"><:switch:><case [inline titleAlias]:><:lc [inline titleAlias]:><:case default:><:lc [inline title]:><:endswitch:></a></li><:iterator end inlines:>
 <li><a href="/cgi-bin/search.pl">search</a></li>
 </ul>
 <div class="note">
