@@ -1,6 +1,6 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "T":>
+<div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "t":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
@@ -63,7 +63,7 @@
   </ul>
 </div><:or Dynstepparents:><:eif Dynstepparents:><:eif Or:><:or Dynamic:>
 <!-- STATIC CONTENT -->
-<p>This template requires dynamic mode</p><:eif Dynamic:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "H"]:><:or Or:>
+<p>This template requires dynamic mode</p><:eif Dynamic:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->

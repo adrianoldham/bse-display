@@ -1,6 +1,6 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<div id="article_<:article id:>" class="article"><:switch:><:case Match [article flags] "T":>
+<div id="article_<:article id:>" class="article"><:switch:><:case Match [article flags] "t":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
@@ -15,7 +15,7 @@
     <li class="e<:image_number:><:ifFirstImage:> first<:or:><:eif:><:ifLastImage:> last<:or:><:eif:>"><a href="<:thumbimage gallery_full - src:>" title="<:image - alt:>"><:thumbimage gallery -:></a></li><:iterator end images:>
   </ul>
 </div><:or Images:><:eif Images:><:switch:><:case And [ifAllkids_of article filter: [flags] !~ /s/ ] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
-<:move_ofallkid:><:embed ofallkid:><:iterator end allkids_of:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids_of article filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
+<:move_ofallkid:><:embed ofallkid:><:iterator end allkids_of:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "l"]:><:case Allkids_of article filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
     <li<:ifOfallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifOfallkid thumbImage:>
@@ -31,7 +31,7 @@
   <ul><:iterator begin stepparents:>
     <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator end stepparents:>
   </ul>
-</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "H"]:><:or Or:>
+</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->

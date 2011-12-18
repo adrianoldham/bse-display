@@ -4,7 +4,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<:iterator begin children_of -1 filter: [flags] !~ /G/ :><:if AccessControlled ofchild:><:or AccessControlled:>
+<:iterator begin children_of -1 filter: [flags] !~ /g/ :><:if AccessControlled ofchild:><:or AccessControlled:>
 <url>
   <loc><:url ofchild:></loc>
   <priority><:switch:><:case Eq [ofchild id] 1:>1.0<:case Eq [ofchild level] 1:>0.8<:case default:>0.5<:endswitch:></priority>

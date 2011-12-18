@@ -1,6 +1,6 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "T":>
+<div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "t":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
@@ -49,7 +49,7 @@
   <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" class="button" />
 </p>
 </form><:eif UnderThreshold:><:endswitch:><:switch:><:case And [ifAllcats] [ifUnderThreshold allcats]:><:include include/sortallkids.tmpl:><:iterator begin allcats:>
-<:moveallcat:><:embed allcat:><:iterator end allcats:><:case Match [catalog flags] "L":><:case Allcats:><:include include/sortallkids.tmpl:>
+<:moveallcat:><:embed allcat:><:iterator end allcats:><:case Match [catalog flags] "l":><:case Allcats:><:include include/sortallkids.tmpl:>
 <div class="children">
   <ul><:iterator begin allcats:>
     <li<:ifAllcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllcat thumbImage:>
@@ -65,7 +65,7 @@
   <ul><:iterator begin stepparents:>
     <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator end stepparents:>
   </ul>
-</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "H"]:><:or Or:>
+</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
