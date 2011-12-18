@@ -34,7 +34,10 @@ Shipping     : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOr
                <:order delivStreet2:><:or:><:eif:>
                <:order delivSuburb:> <:order delivPostCode:> <:order delivState:>
                <:order delivCountry:>
-Telephone    : <:order telephone:><:ifOrder instructions:>
+Telephone    : <:order telephone:><:ifOrder delivMobile:>
+Facsimile    : <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
+Mobile       : <:order delivMobile:><:or:><:eif:><:ifOrder emailAddress:>
+Email        : <:order emailAddress:><:or:><:eif:><:ifOrder instructions:>
 
 <:with begin wrap 80:>Instructions : <:order instructions:><:with end wrap:><:or:><:eif:><:ifOrder userId:>
 

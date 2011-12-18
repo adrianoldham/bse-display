@@ -13,29 +13,29 @@ Purchase No. : <:order purchase_order:><:or:><:eif:>
 
 --------------------------------------------------------------------------------
 
+Billing      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
+               <:order billOrganization:><:or:><:eif:>
+               <:order billStreet:><:ifOrder billStreet2:>
+               <:order billStreet2:><:or:><:eif:>
+               <:order billSuburb:> <:order billPostCode:> <:order billState:>
+               <:order billCountry:><:ifOrder billTelephone:>
+Telephone    : <:order billTelephone:><:or:><:eif:><:ifOrder billFacsimile:>
+Facsimile    : <:order billFacsimile:><:or:><:eif:><:ifOrder billMobile:>
+Mobile       : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
+Email        : <:order billEmail:><:or:><:eif:>
+<:if Order delivStreet:>
+
 Shipping     : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
                <:order delivOrganization:><:or:><:eif:>
                <:order delivStreet:><:ifOrder delivStreet2:>
                <:order delivStreet2:><:or:><:eif:>
                <:order delivSuburb:> <:order delivPostCode:> <:order delivState:>
-               <:order delivCountry:>
-Telephone    : <:order telephone:><:ifOrder facsimile:>
+               <:order delivCountry:><:ifOrder telephone:>
+Telephone    : <:order telephone:><:or:><:eif:><:ifOrder facsimile:>
 Facsimile    : <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
-Mobile       : <:order delivMobile:><:or:><:eif:>
-Email        : <:order emailAddress:>
-<:if Order billStreet:>
-Billing      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
-               <:order billOrganization:><:or:><:eif:>
-               <:order billStreet:><:ifOrder delivStreet2:>
-               <:order billStreet2:><:or:><:eif:>
-               <:order billSuburb:> <:order billPostCode:> <:order billState:>
-               <:order billCountry:>
-<:or Order:><:eif Order:><:ifOrder billTelephone
-:>Telephone    : <:order billTelephone:><:or:><:eif:><:ifOrder billFacsimile:>
-Facsimile    : <:order billFacsimile:><:or:><:eif:><:ifOrder billMobile:>
-Mobile       : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
-Email        : <:order billEmail:>
-<:or:><:eif:>
+Mobile       : <:order delivMobile:><:or:><:eif:><:ifOrder emailAddress:>
+Email        : <:order emailAddress:><:or:><:eif:>
+<:or Order:><:eif Order:>
 
 Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
@@ -62,22 +62,28 @@ Item                                       Code         Qty     Price   Extended
 :>Your credit card will be debited at time of shipping:
 
 <:eif
-:>             <:cfg shop display_cardHolder "Name on Card" |12:> : <:order ccName:><:ifOrder ccType:>
-             <:cfg shop display_cardType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
-:><:ifEq [order paymentType] "1":>Please send a cheque to:
+:>             <:cfg shop display_ccName "Name on Card" |12:> : <:order ccName:><:ifOrder ccPAN:>
+             <:cfg shop display_ccPAN "Card Number" |12:> : **** **** **** <:order ccPAN:><:or:><:eif:><:ifOrder ccType:>
+             <:cfg shop display_ccType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
+:><:ifEq [order paymentType] "1"
+:>Please send a cheque to:
 
              <:uc [cfg shop address1]:>
              <:cfg shop address2:>
              <:cfg shop address3:>
              <:cfg shop address4:><:or:><:eif
-:><:ifEq [order paymentType] "2":>We will contact you to make arrangements for payment.<:or:><:eif
-:><:ifEq [order paymentType] "4":>Your payment was processed through PayPal:
+:><:ifEq [order paymentType] "2"
+:>We will contact you to make arrangements for payment.<:or:><:eif
+:><:ifEq [order paymentType] "4"
+:>Your payment was processed through PayPal:
 
              Transaction No.: <:order paypal_tran_id:><:or:><:eif
-:><:ifEq [order paymentType] "10":>Please transfer the funds to:
+:><:ifEq [order paymentType] "10"
+:>Please transfer the funds to:
 
              Name      : <:cfg shop accountname:>
-             BSB       : <:cfg shop bsb:>
+             BSB       : <:cfg shop bsb:><:ifCfg shop swiftcode:>
+             SWIFT     : <:cfg shop swiftcode |h:><:or:><:eif:>
              Account   : <:cfg shop accountno:>
              Reference : <:order id |%06d:><:or:><:eif
 :><:if Cfg tryandbyte aufreight:><:if Order customInt1:>

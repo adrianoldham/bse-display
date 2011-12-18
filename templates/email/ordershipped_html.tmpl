@@ -12,7 +12,7 @@
       <th>Order No.:</th>
       <td><b><:order id |%06d:></b></td>
     </tr>
-    <tr> 
+    <tr>
       <th>Order Date:</th>
       <td><:date order orderDate:></td>
     </tr><:ifOrder purchase_order:>
@@ -35,7 +35,7 @@
 <table class="items">
   <caption>Order items</caption>
   <thead>
-    <tr> 
+    <tr>
       <th class="item">Item</th>
       <th class="code">Code</th>
       <th class="quantity">Qty</th>
@@ -64,7 +64,7 @@
 <table class="vertical left">
   <caption>Shipping details</caption>
   <tbody>
-    <tr> 
+    <tr>
       <th>Name:</th>
       <td><b><:order delivFirstName |h:> <:order delivLastName |h:></b></td>
     </tr>
@@ -78,23 +78,23 @@
         <:cfg "country selector" [order delivCountry] |h:><:or:><:order delivCountry:><:eif:>
       </td>
     </tr>
-    <!--<tr> 
+    <tr>
       <th><:cfg "site users" display_telephone "Telephone" |h:>:</th>
       <td><:order telephone |h:></td>
     </tr>
-    <:ifOrder facsimile:><tr> 
+    <:ifOrder facsimile:><tr>
       <th><:cfg "site users" display_facsimile "Facsimile" |h:>:</th>
       <td><:order facsimile |h:></td>
     </tr><:or:><:eif:>
-    <:ifOrder delivMobile:><tr> 
-      <th><:cfg "site users" display_delivMobile "Mobile" |h:>:</th>
+    <:ifOrder delivMobile:><tr>
+      <th><:cfg "site users" display_mobile "Mobile" |h:>:</th>
       <td><:order delivMobile |h:></td>
     </tr><:or:><:eif:>
-    <:ifOrder billStreet:><:or:><tr>
-      <th><:cfg "site users" display_email "Email" |h:>:</th>
+    <:ifOrder emailAddress:><:or:><tr>
+      <th><:cfg "site users" display_email "Email Address" |h:>:</th>
       <td><:order emailAddress |h:></td>
-    </tr><:eif:>//-->
-    <:ifOrder instructions:><tr> 
+    </tr><:eif:>
+    <:ifOrder instructions:><tr>
       <th>Instructions:</th>
       <td><:order instructions |h:></td>
     </tr><:or:><:eif:>

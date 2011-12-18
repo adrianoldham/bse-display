@@ -12,29 +12,29 @@ Purchase No. : <:order purchase_order:><:or:><:eif:>
 
 --------------------------------------------------------------------------------
 
+Billing      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
+               <:order billOrganization:><:or:><:eif:>
+               <:order billStreet:><:ifOrder billStreet2:>
+               <:order billStreet2:><:or:><:eif:>
+               <:order billSuburb:> <:order billPostCode:> <:order billState:>
+               <:order billCountry:><:ifOrder billTelephone:>
+Telephone    : <:order billTelephone:><:or:><:eif:><:ifOrder billFacsimile:>
+Facsimile    : <:order billFacsimile:><:or:><:eif:><:ifOrder billMobile:>
+Mobile       : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
+Email        : <:order billEmail:><:or:><:eif:>
+<:if Order delivStreet:>
+
 Shipping     : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
                <:order delivOrganization:><:or:><:eif:>
                <:order delivStreet:><:ifOrder delivStreet2:>
                <:order delivStreet2:><:or:><:eif:>
                <:order delivSuburb:> <:order delivPostCode:> <:order delivState:>
-               <:order delivCountry:>
-Telephone    : <:order telephone:><:ifOrder facsimile:>
+               <:order delivCountry:><:ifOrder telephone:>
+Telephone    : <:order telephone:><:or:><:eif:><:ifOrder facsimile:>
 Facsimile    : <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
-Mobile       : <:order delivMobile:><:or:><:eif:>
-Email        : <:order emailAddress:>
-<:if Order billStreet:>
-Billing      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
-               <:order billOrganization:><:or:><:eif:>
-               <:order billStreet:><:ifOrder delivStreet2:>
-               <:order billStreet2:><:or:><:eif:>
-               <:order billSuburb:> <:order billPostCode:> <:order billState:>
-               <:order billCountry:>
-<:or Order:><:eif Order:><:ifOrder billTelephone
-:>Telephone    : <:order billTelephone:><:or:><:eif:><:ifOrder billFacsimile:>
-Facsimile    : <:order billFacsimile:><:or:><:eif:><:ifOrder billMobile:>
-Mobile       : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
-Email        : <:order billEmail:>
-<:or:><:eif:>
+Mobile       : <:order delivMobile:><:or:><:eif:><:ifOrder emailAddress:>
+Email        : <:order emailAddress:><:or:><:eif:>
+<:or Order:><:eif Order:>
 
 Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
@@ -64,11 +64,15 @@ Item                                       Code         Qty     Price   Extended
              <:cfg shop display_cardExpiry "Expiry Date" |12:> : <:cardExpiry:>
              <:cfg shop display_cardVerify "CVV2" |12:> : <:cardVerify:>
 <:eif Order
-:>             <:cfg shop display_cardHolder "Name on Card" |12:> : <:order ccName:><:ifOrder ccType:>
-             <:cfg shop display_cardType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
-:><:ifEq [order paymentType] "1" :>The customer will pay by cheque.<:or:><:eif
-:><:ifEq [order paymentType] "2" :>Please contact the customer to make arrangements for payment.<:or:><:eif
-:><:ifEq [order paymentType] "4" :>Payment was processed through PayPal:
+:>             <:cfg shop display_ccName "Name on Card" |12:> : <:order ccName:><:ifOrder ccPAN:>
+             <:cfg shop display_ccPAN "Card Number" |12:> : **** **** **** <:order ccPAN:><:or:><:eif:><:ifOrder ccType:>
+             <:cfg shop display_ccType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
+:><:ifEq [order paymentType] "1" 
+:>The customer will pay by cheque.<:or:><:eif
+:><:ifEq [order paymentType] "2" 
+:>Please contact the customer to make arrangements for payment.<:or:><:eif
+:><:ifEq [order paymentType] "4" 
+:>Payment was processed through PayPal:
 
              Transaction No.: <:order paypal_tran_id:><:or:><:eif
 :><:ifEq [order paymentType] "10":>The customer will pay by electronic funds transfer.<:or:><:eif

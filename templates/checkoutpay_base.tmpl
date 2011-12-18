@@ -2,7 +2,7 @@
 <table class="items">
   <caption>Order items</caption>
   <thead>
-    <tr> 
+    <tr>
       <th class="item">Item</th>
       <th class="quantity">Qty</th>
       <th class="price">Price</th>
@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody><:iterator begin items:>
-    <tr> 
+    <tr>
       <td class="item">
         <a href="<:item link:>" class="title"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
         <div class="description"><:item description:></div><:or And:><:eif And:>
@@ -50,9 +50,9 @@
         <table>
           <caption>Account Details</caption>
           <tr>
-            <th><label for="cardHolder"><:cfg shop display_cardHolder "Name on Card":>:</label></th>
-            <td><input type="text" name="cardHolder" id="cardHolder" size="40" value="<:old cardHolder:>" /></td>
-            <td><:error_img cardHolder:></td>
+            <th><label for="ccName"><:cfg shop display_ccName "Name on Card":>:</label></th>
+            <td><input type="text" name="ccName" id="ccName" size="40" value="<:old ccName:>" /></td>
+            <td><:error_img ccName:></td>
           </tr>
           <tr>
             <th><label for="cardNumber"><:cfg shop display_cardNumber "Card Number":>:</label></th>
@@ -67,22 +67,22 @@
             <td><:error_img cardExpiry:></td>
           </tr>
           <tr>
-            <th><label for="cardType"><:cfg shop display_cardType "Card Type":>:</label></th>
+            <th><label for="ccType"><:cfg shop display_ccType "Card Type":>:</label></th>
             <td>
-              <select name="cardType" id="cardType">
+              <select name="ccType" id="ccType">
                 <option value="" selected="selected">Select card type</option>
-                <:if Cfgsection "payment cardType":>
-                <:iterator begin dyncfgsection "payment cardType" sort=key:>
-                <option value="<:dyncfgentry value:>"<:if Eq [old cardType] [dyncfgentry value]:> selected="selected"<:or Eq:><:eif Eq:>><:dyncfgentry value:></option>
+                <:if Cfgsection "payment ccType":>
+                <:iterator begin dyncfgsection "payment ccType" sort=key:>
+                <option value="<:dyncfgentry value:>"<:if Eq [old ccType] [dyncfgentry value]:> selected="selected"<:or Eq:><:eif Eq:>><:dyncfgentry value:></option>
                 <:iterator end dyncfgsection:>
                 <:or Cfgsection:>
-                <option value="Visa"<:ifEq [cgi cardType] "Visa":> selected="selected"<:or:><:eif:>>Visa</option>
-                <option value="Mastercard"<:ifEq [cgi cardType] "Mastercard":> selected="selected"<:or:><:eif:>>Mastercard</option>
-                <option value="American Express"<:ifEq [cgi cardType] "American Express":> selected="selected"<:or:><:eif:>>American Express</option>
+                <option value="Visa"<:ifEq [cgi ccType] "Visa":> selected="selected"<:or:><:eif:>>Visa</option>
+                <option value="Mastercard"<:ifEq [cgi ccType] "Mastercard":> selected="selected"<:or:><:eif:>>Mastercard</option>
+                <option value="American Express"<:ifEq [cgi ccType] "American Express":> selected="selected"<:or:><:eif:>>American Express</option>
                 <:eif Cfgsection:>
               </select>
             </td>
-            <td><:error_img cardType:></td>
+            <td><:error_img ccType:></td>
           </tr>
         </table>
       </dd>
@@ -123,16 +123,24 @@
         <table>
           <caption>Account Details</caption>
           <tr>
-            <th>Name:</th><td><:cfg shop accountname |h:></td>
+            <th>Name:</th>
+            <td><:cfg shop accountname |h:></td>
           </tr>
           <tr>
-            <th>BSB:</th><td><:cfg shop bsb:></td>
+            <th>BSB:</th>
+            <td><:cfg shop bsb |h:></td>
+          </tr><:ifCfg shop swiftcode:>
+          <tr>
+            <th>SWIFT Code:</th>
+            <td><:cfg shop swiftcode |h:></td>
+          </tr><:or:><:eif:>
+          <tr>
+            <th>Account:</th>
+            <td><:cfg shop accountno |h:></td>
           </tr>
           <tr>
-            <th>Account:</th><td><:cfg shop accountno:></td>
-          </tr>
-          <tr>
-            <th>Reference:</th><td>&lt;Your order number&gt;</td>
+            <th>Reference:</th>
+            <td>&lt;Your order number&gt;</td>
           </tr>
         </table>
         <p class="small">Your order will be processed when payment transfer is confirmed.</p>
