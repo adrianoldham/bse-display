@@ -1,7 +1,7 @@
 <:wrap user/pubbase.tmpl title=>"Change Password" userpage=>"lostprompt" :>
 <:include include/usermessage.tmpl:>
-<form action="<:dyntarget user:>" method="post" class="siteuser"><:if User:> 
-  <p class="alert">You are already logged in as <a href="<:dyntarget user:>"><:user userId:></a>, if this is not you, please <a href="<:dyntarget user logoff:>">logout now</a>.</p><:or User:><:eif User:><:if Cgi r:>
+<form action="<:target user:>" method="post" class="siteuser"><:if User:> 
+  <p class="alert">You are already logged in as <a href="<:target user:>"><:user userId:></a>, if this is not you, please <a href="<:target user logoff:>">logout now</a>.</p><:or User:><:eif User:><:if Cgi r:>
   <input type="hidden" name="r" value="<:cgi r:>" /><:or Cgi:><:eif Cgi:>
   <input type="hidden" name="id" value="<:lostid:>" />
   <fieldset class="password">
@@ -21,6 +21,6 @@
   <p class="buttons group"><input type="submit" name="a_lost_save" value="Save changes" accesskey="s" title="AccessKey = s" /></p>
 </form>
 <p class="group">
-  <span class="left"><a href="<:dyntarget user show_logon:>">Found your password?</a></span><:if Cfg "site users" user_register:>
+  <span class="left"><a href="<:target user show_logon:>">Found your password?</a></span><:if Cfg "site users" user_register:>
   <span class="right"><a href="<:dyntarget user show_register r [cgi r] :>">Need an account?</a></span><:or Cfg:><:eif Cfg:>
 </p>

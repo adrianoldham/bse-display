@@ -2,4 +2,4 @@
 
 <p class="alert"><:if Cfg "site users" nopassword:>Your account access link<:or Cfg:>Your password reset link<:eif Cfg:> has been emailed to <b><:user email:></b>.</p>
 
-<p class="group"><:ifCfg "site users" nopassword:><:or:><a href="<:dyntarget user userpage:>">Ready to login?</a><:eif:></p>
+<p class="group"><:ifCfg "site users" nopassword:><:or:><a href="<:target user userpage:>">Ready to login?</a><:eif:></p>

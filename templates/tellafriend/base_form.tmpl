@@ -1,6 +1,6 @@
 <:wrap user/pubbase.tmpl title=>"Tell a Friend" :>
 <p>Share this article with someone you know who may also like it: <a href="<:tarticle link:>"><:tarticle title:></a></p>
-<form action="<:dyntarget tellafriend:>" method="post" class="siteuser">
+<form action="<:target tellafriend:>" method="post" class="siteuser">
 <input type="hidden" name="page" value="<:tarticle id:>" />
 <input type="hidden" name="key" value="<:secret:>" />
 <input type="hidden" name="key2" value="" />

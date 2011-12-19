@@ -34,11 +34,11 @@
 <p><b>We will contact you with a quote for shipping cost</b></p><:or Overseas:><:ifFreeShippingCart:>
 <p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
 <p class="alert">
-  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user userpage:>">account manager</a>.
+  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:target user userpage:>">account manager</a>.
 </p><:or User:>
 <p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop order] :>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop order] :>">Logon</a> before you continue with this purchase.
 </p><:eif User:><:eif Cfg:>
-<form action="<:dyntarget shop:>" method="post" name="checkoutpay">
+<form action="<:target shop:>" method="post" name="checkoutpay">
 <:ifOrder id:><input type="hidden" name="order_id" value="<:order id:>" /><:or:><:eif:>
   <h2>Payment Details</h2>
   <fieldset>

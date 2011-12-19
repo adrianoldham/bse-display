@@ -1,6 +1,6 @@
 <:wrap shopbase.tmpl title=>"Shopping Cart" :>
 <p><b>Contains</b> - <:dyncarttotalunits:> item<:if Eq [dyncarttotalunits] "1":><:or Eq:>s<:eif Eq:></p>
-<form action="<:dyntarget shop:>" method="post">
+<form action="<:target shop:>" method="post">
 <table class="items">
   <caption>Order items</caption><:ifTotal:>
   <thead>
@@ -36,8 +36,8 @@
 </div><:or Total:><:eif Total:>
 <p class="buttons">
   <:if Total:><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
-  <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" />
-  <!--<input type="submit" name="a_emptycart" value="Empty cart" accesskey="e" title="AccessKey = e" />//--><:or Total:>
+  <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" /><:ifCfg shop emptycart:>
+  <input type="submit" name="a_emptycart" value="Empty cart" accesskey="e" title="AccessKey = e" /><:or:><:eif:><:or Total:>
   <input type="submit" name="a_order" value="Checkout now" accesskey="c" title="AccessKey = c" /><:eif Total:>
 </p><:if Total:><:or Total:>
 <input type="hidden" name="delivFirstName" id="delivFirstName" value="<:user name1:>" /> 

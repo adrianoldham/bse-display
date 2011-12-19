@@ -10,7 +10,7 @@
 </table>
 <:include include/usermessage.tmpl:>
 <:if Subscriptions:>
-<form action="/cgi-bin/user.pl" method="post">
+<form action="<:target user:>" method="post">
 <:if Cfg "site users" nopassword:>
 <input type="hidden" name="u" value="<:user id:>" />
 <input type="hidden" name="p" value="<:user password:>" />

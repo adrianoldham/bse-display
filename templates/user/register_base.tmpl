@@ -1,8 +1,8 @@
 <:wrap user/pubbase.tmpl title=>"Account Signup" userpage=>"register" :>
 <:include include/usermessage.tmpl:>
-<form name="register_form" method="post" action="<:dyntarget user:>" class="siteuser"><:ifCgi r:>
+<form name="register_form" method="post" action="<:target user:>" class="siteuser"><:ifCgi r:>
   <input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:><:if User:>
-  <p class="alert">You are already logged on as <a href="<:dyntarget user:>"><:user userId:></a>, if this is not you, please <a href="<:dyntarget user logoff:>">logout now</a>.</p><:or User:><:eif User:>
+  <p class="alert">You are already logged on as <a href="<:target user:>"><:user userId:></a>, if this is not you, please <a href="<:target user logoff:>">logout now</a>.</p><:or User:><:eif User:>
 
   <fieldset class="account">
     <legend>Account</legend>
@@ -41,7 +41,7 @@
     <:iterator begin subscriptions:>
     <div class="checkbox">
       <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:>
-        (<a href="<:dyntarget user subinfo id [subscription id] :>" target="_blank">info</a>)
+        (<a href="<:target user subinfo id [subscription id] :>" target="_blank">info</a>)
       </label>
     </div>
     <:iterator end subscriptions:>
@@ -126,6 +126,6 @@
 
 <p class="buttons group"><input type="submit" name="register" value="Signup now" accesskey="s" title="AccessKey = s" /></p>
 </form>
-<p class="group"><span class="left"><a href="<:dyntarget user show_lost_password:>"><:if Cfg "site users" nopassword:>Send your options link<:or Cfg:>Lost your password?<:eif Cfg:></a></span>
+<p class="group"><span class="left"><a href="<:target user show_lost_password:>"><:if Cfg "site users" nopassword:>Send your options link<:or Cfg:>Lost your password?<:eif Cfg:></a></span>
 <:if Cfg "site users" nopassword:><:or Cfg:>
 <span class="right"><a href="<:dyntarget user show_logon r [cgi r] :>">Already have an account?</a></span></p><:eif Cfg:>

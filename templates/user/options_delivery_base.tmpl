@@ -1,8 +1,8 @@
 <:wrap user/userbase.tmpl subtitle=>"Shipping details" userpage=>"delivery" :>
 <h2><:param subtitle |h:></h2>
-<form action="<:dyntarget user:>" method="post" class="siteuser"><:if Cgi r:>
+<form action="<:target user:>" method="post" class="siteuser"><:if Cgi r:>
 <input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:>
-<input type="hidden" name="r" value="<:dyntarget user show_opts _t delivery message "User shipping details saved successfully":>" /><:eif Cgi:>
+<input type="hidden" name="r" value="<:target user show_opts _t delivery message "User shipping details saved successfully":>" /><:eif Cgi:>
 <input type="hidden" name="_t" value="delivery" />
   <fieldset class="name">
     <legend>Name</legend>

@@ -1,7 +1,7 @@
 <:wrap shopbase.tmpl title=>"Thank you for shopping" subtitle=>"Order receipt" :>
 <:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
 <p class="alert">
-  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user userpage:>">account manager</a>.
+  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:target user userpage:>">account manager</a>.
 </p><:or User:><:eif User:><:eif Cfg:>
 
 <h2><:param subtitle |h:></h2>
@@ -241,7 +241,7 @@
 
 <:if Orderpaidfiles:>
 <h2>Download files</h2>
-<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:dyntarget user userpage _t files:>">file downloads</a> section of your account.</p>
+<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:target user userpage _t files:>">file downloads</a> section of your account.</p>
 <table class="items files">
   <caption>Files available</caption>
   <thead>

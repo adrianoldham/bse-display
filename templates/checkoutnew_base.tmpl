@@ -32,11 +32,11 @@
   <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [total]:></p>
 </div><:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
 <p class="alert">
-  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:dyntarget user userpage:>">account manager</a>.
+  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:target user userpage:>">account manager</a>.
 </p><:or User:>
 <p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop checkout need_delivery [old need_delivery]] :>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop checkout need_delivery [old need_delivery]] :>">Logon</a> before you continue with this purchase.
 </p><:eif User:><:eif Cfg:>
-<form action="<:dyntarget shop:>" method="post" class="siteuser">
+<form action="<:target shop:>" method="post" class="siteuser">
   <h2>Billing Details</h2>
   <fieldset class="name">
     <legend>Name</legend>
@@ -125,7 +125,7 @@
       <:shipping_select:>
     </div>
     <div class="checkbox need_delivery<:ifError_img need_delivery:> error<:or:><:eif:>">
-      <label><input type="checkbox" name="need_delivery" <:ifNeedDelivery:> checked="checked"<:or:><:eif:> onclick="this.form.checkupdate.click()" /> Shipping details different to billing</label>
+      <label><input type="checkbox" name="need_delivery" <:ifNeedDelivery:> checked="checked"<:or:><:eif:> onchange="this.form.checkupdate.click()" /> Shipping details different to billing</label>
     </div>
   </fieldset><:or Cfg:><:eif Cfg:>
   <:if NeedDelivery:>
@@ -206,7 +206,7 @@
     <legend>Referrer</legend>
     <div class="input affiliate_code<:ifError_img affiliate_code:> error<:or:><:eif:>">
       <label for="affiliate_code"><:error_img affiliate_code:><:cfg "site users" display_affiliate_code "Referrer Code":>:</label><:if Affiliate_code:>
-      <a href="<:dyntarget affiliate:>?lo=<:affiliate_code:>"><:affiliate_code:></a>
+      <a href="<:target affiliate:>?lo=<:affiliate_code:>"><:affiliate_code:></a>
       <input type="hidden" name="affiliate_code" value="<:affiliate_code:>" /><:or Affiliate_code:>
       <input type="text" name="affiliate_code" id="affiliate_code" size="20" value="<:old affiliate_code:>" title="<:cfg "site users" display_affiliate_code "Referrer Id":>" class="<:ifError_img affiliate_code:>error<:or:><:eif:>" /><:eif Affiliate_code:>
     </div>

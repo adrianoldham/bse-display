@@ -15,8 +15,8 @@
   <tbody><:iterator begin orders:>
     <tr>
       <td class="item number">
-        <a href="<:dyntarget user orderdetail id [order id] :>"><:order id |%06d:></a>
-        <!--<a href="<:dyntarget user userpage _t orders id [order id] :>#order_<:order id:>"><:order id |%06d:></a>//-->
+        <a href="<:target user orderdetail id [order id] :>"><:order id |%06d:></a>
+        <!--<a href="<:target user userpage _t orders id [order id] :>#order_<:order id:>"><:order id |%06d:></a>//-->
       </td>
       <td class="date"><:date order orderDate:></td>
       <td class="status"><:dyncatmsg [order stage_description_id]:></td>
