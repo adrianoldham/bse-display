@@ -46,7 +46,7 @@
   <input type="submit" id="addmultiple<:article id:>" name="a_addmultiple" value="Add items to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" class="shop_addmultiple" />
   <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" />
 </p>
-</form><:endswitch:><:switch:><:case Dynallcats:><:include include/sortallkids.tmpl:>
+</form><:endswitch:><:switch:><:case Or [cfg base hide_child_list] [ifMatch [catalog flags] "l"]:><:case Dynallcats:><:include include/sortallkids.tmpl:>
 <div class="children">
   <ul><:iterator begin dynallcats:>
     <li<:ifDynallcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynallcat thumbImage:>

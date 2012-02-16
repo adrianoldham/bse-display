@@ -49,7 +49,7 @@
   <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" class="button" />
 </p>
 </form><:eif UnderThreshold:><:endswitch:><:switch:><:case And [ifAllcats] [ifUnderThreshold allcats]:><:include include/sortallkids.tmpl:><:iterator begin allcats:>
-<:moveallcat:><:embed allcat:><:iterator end allcats:><:case Match [catalog flags] "l":><:case Allcats:><:include include/sortallkids.tmpl:>
+<:moveallcat:><:embed allcat:><:iterator end allcats:><:case Or [cfg base hide_child_list] [ifMatch [catalog flags] "l"]:><:case Allcats:><:include include/sortallkids.tmpl:>
 <div class="children">
   <ul><:iterator begin allcats:>
     <li<:ifAllcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllcat thumbImage:>
