@@ -6,7 +6,7 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:switch:><:case Product retailPrice:><:if Product listed:>
 <form id="add_form_<:article id:>" action="<:target shop:>" method="post" class="product">
   <input type="hidden" name="id" value="<:product id:>" />
-  <input type="hidden" name="r" value="<:url top:>" />
+  <input type="hidden" name="r" value="<:cfg shop add_refresh [url top] :>" />
   <fieldset class="group">
     <legend><:cfg shop currency "$":><:if Dynamic:><:number money [price dynarticle]:> <abbr><:cfg shop currency_code "AUD":></abbr><:ifPrice dynarticle discountpc:> <em><:price dynarticle discountpc:>% Off</em><:or:><:eif:><:or Dynamic:><:number money [product retailPrice]:> <abbr><:cfg shop currency_code "AUD":></abbr><:eif Dynamic:></legend><:if Options:>
     <:iterator begin options:>
