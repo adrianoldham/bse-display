@@ -24,9 +24,11 @@
       <td class="total"><:cfg shop currency "$":><:number money [order total]:></td>
     </tr><:iterator end orders:>
   </tbody><:or Orders:>
+  <tbody>
     <tr> 
-      <td colspan="4" class="noitems">You haven’t made any purchases</td>
-    </tr><:eif Orders:>
+      <td colspan="4" class="noitems">You haven’t purchased anything</td>
+    </tr>
+  </tbody><:eif Orders:>
 </table>
 
 <:iterator begin orders:><:switch:><:case Eq [cgi id] [order id]:>
