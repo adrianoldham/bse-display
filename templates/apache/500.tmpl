@@ -4,7 +4,7 @@
 <div id="body_error" class="body">
 <p>The request you attempted had a critical problem resulting in a server error, we apologise for the inconvenience.  Assuming anything works right now, you may like to browse elsewhere on the site, here are some useful places to start:</p>
 <ul><:iterator begin inlines 1 6:>
-<li><a href="<:url inline:>"><:switch:><case [inline titleAlias]:><:lc [inline titleAlias]:><:case default:><:lc [inline title]:><:endswitch:></a></li><:iterator end inlines:>
+<li><a href="<:url inline:>"><:switch:><:case [inline titleAlias]:><:lc [inline titleAlias]:><:case default:><:lc [inline title]:><:endswitch:></a></li><:iterator end inlines:>
 <li><a href="<:target search:>">search</a></li>
 </ul>
 <div class="note">
