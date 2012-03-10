@@ -1,20 +1,24 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:><:if Dynamic:>
-<div id="article_<:article id:>" class="article"><:if User:><:switch:><:case Match [article flags] "T":>
+<div id="article_<:article id:>" class="article logon"><:if User:><:switch:><:case Match [article flags] "t":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:>
-  <p><a href="<:cfg site secureurl:>/cgi-bin/user.pl"><:user name1:> <:user name2:> - (<:user userId:>)</a></p><:or User:>
-  <form action="<:cfg site secureurl:>/cgi-bin/user.pl" method="post">
+  <p><a href="<:target user:>"><:user name1:> <:user name2:> - (<:user userId:>)</a></p><:or User:>
+  <form id="quicklogon_form" action="<:target user:>" method="post">
     <input type="hidden" name="r" value="<:url top:>" />
-    <table class="logon">
-      <caption><:article title:></caption>
-      <tbody>
-        <tr><th><label for="userid"><:cfg "site users" userid_description "Username":>:</label></th><td><input type="text" id="userid" name="userid" value="<:old userid:>" /></td></tr>
-        <tr><th><label for="password">Password:</label></th><td><input type="password" id="password" name="password" value="<:old password:>" /></td></tr>
-      </tbody>
-    </table>
-    <p>
+    <fieldset class="logon">
+      <legend><:article title:></legend>
+      <div class="input userid">
+        <label for="quicklogon_userid"><:cfg "site users" display_userid "Username":>:</label>
+        <input type="text" name="userid" id="quicklogon_userid" size="20" value="<:last userid:>" title="<:cfg "site users" display_userid "Username":>" class="required" />
+      </div>
+      <div class="input password">
+        <label for="quicklogon_password"><:cfg "site users" display_password "Password":>:</label>
+        <input type="password" name="password" id="quicklogon_password" size="20" value="<:last password:>" title="<:cfg "site users" display_password "Password":>" class="required" />
+      </div>
+    </fieldset>
+    <p class="buttons">
       <input type="submit" name="logon" value="Logon" accesskey="l" title="AccessKey = l" />
       <input type="submit" name="show_register" value="Register" accesskey="r" title="AccessKey = r" />
     </p>

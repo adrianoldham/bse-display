@@ -9,20 +9,19 @@
         <th class="col3">Price</th>
       </tr>
     </thead>
-    <tbody>
-      <:iterator begin wishlist:><tr id="wishlist_item_<:wishlistentry id:>">
+    <tbody><:iterator begin wishlist:>
+      <tr id="wishlist_item_<:wishlistentry id:>">
         <td class="col1"><a href="<:url wishlistentry:>" title="<:wishlistentry title:>"><:dynreplace [wishlistentry title] "((?:&[^;]*;|[^&]){16}).*" $1...:></a></td>
-        <td class="col3"><:cfg shop currency "$":><:money wishlistentry retailPrice:></td>
-      </tr><:iterator separator wishlist:>
-      <:iterator end wishlist:>
+        <td class="col3"><:cfg shop currency "$":><:number money [wishlistentry price]:></td>
+      </tr><:iterator end wishlist:>
     </tbody>
   </table>
-  <form action="<:cfg site secureurl:>/cgi-bin/user.pl" method="post"><p><input type="hidden" name="_t" value="wishlist" /><input type="submit" name="wishlistview" value="View wishlist" accesskey="w" title="AccessKey = w" /></p></form>
-</div><:or Wishlist:><:eif Wishlist:><:or User:><:if Admin:>
-<div id="article_<:article id:>" class="article"><:switch:><:case Match [article flags] "T":>
-<h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:>
-</div><:or Admin:><:eif Admin:><:eif User:><:or Dynamic:><:eif Dynamic:>
+  <form action="<:target user:>" method="post">
+    <p class="buttons">
+      <input type="hidden" name="_t" value="wishlist" />
+      <input type="submit" name="wishlistview" value="View wishlist" accesskey="w" title="AccessKey = w" />
+    </p>
+  </form>
+</div><:or Wishlist:><:eif Wishlist:><:or User:><:eif User:><:or Dynamic:><:eif Dynamic:>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>

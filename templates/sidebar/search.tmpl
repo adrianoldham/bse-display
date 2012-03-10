@@ -1,15 +1,15 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<div id="search_menu">
-  <form id="search_menu_form" method="get" action="/cgi-bin/search.pl">
-    <fieldset>
-      <label for="search_menu_query"><:article title:></label>
-      <input type="text" id="search_menu_query" name="q" size="20" title="Enter search terms" value="Enter search terms" />
-      <input type="hidden" id="search_menu_date" name="d" value="ar" />
-      <input type="submit" id="search_menu_submit" name="search_menu_submit" value="Go" accesskey="s" title="AccessKey = s" />
-    </fieldset>
-  </form>
-  <div id="search_menu_results"></div>
-</div>
+<form id="quicksearch_form" action="<:target search:>" method="post">
+  <fieldset>
+    <legend><:article title:></legend>
+    <div class="input">
+      <label for="quicksearch_q">Keywords:</label>
+      <input type="text" name="q" id="quicksearch_q" size="20" title="Enter search terms" value="Enter search terms" class="required" />
+    </div>
+  </fieldset>
+  <p class="buttons"><input type="submit" name="quicksearch_submit" id="quicksearch_submit" value="Search" accesskey="s" title="AccessKey = s" /></p>
+</form>
+<div id="quicksearch_results"></div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>

@@ -2,11 +2,6 @@
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:><:if Dynamic:>
 <div id="cart_sidebar">
   <:include include/cart_sidebar.tmpl:>
-</div><:if Admin:><:if Dyncart:><:or Dyncart:>
-<div id="article_<:article id:>" class="article"><:switch:><:case Match [article flags] "T":>
-<h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:>
-</div><:eif Dyncart:><:or Admin:><:eif Admin:><:or Dynamic:><:eif Dynamic:>
+</div><:or Dynamic:><:eif Dynamic:>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>
