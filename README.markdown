@@ -4,7 +4,7 @@ The aim of the **bse-display** project is to produce a modern standards complian
 
 ## Requirements
 
-The **bse-display** is designed for use in web browsers supporting _XHTML_, _HTML5_, _CSS_ and _Javascript_.  The **bse-display** is specifically tested in: [Safari](http://www.apple.com/safari), [Chrome](http://www.google.com/chrome), [Firefox](http://www.firefox.com/), [Opera](http://www.opera.com/) and of course supports IE7 or better, however specific version support for any browser is technically goverened by the technologies and methods used to customise the templates for each bespoke installation.
+The **bse-display** is designed for use in web browsers supporting _XHTML_, _HTML5_, _CSS_ and _Javascript_.  The **bse-display** is specifically tested in: [Safari](http://www.apple.com/safari), [Chrome](http://www.google.com/chrome), [Firefox](http://www.firefox.com/), [Opera](http://www.opera.com/) and of course supports IE7 or better, however specific version support for any browser is technically governed by the technologies and methods used to customise the templates for each bespoke installation.
 
 ## Dependancies
 
