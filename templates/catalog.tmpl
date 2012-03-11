@@ -40,7 +40,7 @@
       </td>
       <td class="col2"><:switch:><:case AnyProductOptions allprod:><:case Allprod retailPrice:><input type="text" name="qty<:allprod id:>" id="qty<:allprod id:>" size="2" <:ifEmbedded:><:or:>tabindex="<:allprod_number:>" <:eif:>/><:case default:><:endswitch:></td>
       <td class="col3"><:ifAllprod retailPrice:><:cfg shop currency "$":><:number money [allprod retailPrice]:><:or:>NA<:eif:></td>
-      <td class="col4"><:switch:><:case AnyProductOptions allprod:><a href="<:url allprod:>" title="View this item"><img src="/images/basic/store/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/images/basic/store/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/allprod_mini.tmpl:></td>
+      <td class="col4"><:switch:><:case AnyProductOptions allprod:><a href="<:url allprod:>" title="View this item"><img src="/bse-display/images/buttons/add.gif" /></a><:case Allprod retailPrice:><input type="image" name="a_addsingle<:allprod id:>" id="a_addsingle<:allprod id:>" src="/bse-display/images/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:endswitch:><:include admin/adminmenu/allprod_mini.tmpl:></td>
     </tr><:iterator end allprods:>
   </tbody>
 </table>

@@ -1,10 +1,10 @@
 //  Attach dependant JS scripts
 
-document.write('<script type="text/javascript" src="/js/bse_admin.js"></script>');
-document.write('<script type="text/javascript" src="/js/bse_search.js"></script>');
+document.write('<script type="text/javascript" src="/js/bse-display/admin.js"></script>');
+document.write('<script type="text/javascript" src="/js/bse-display/search.js"></script>');
 
 /*
-document.write('<script type="text/javascript" src="/js/bse_shop.js"></script>');
+document.write('<script type="text/javascript" src="/js/bse-display/shop.js"></script>');
 */
 
 
