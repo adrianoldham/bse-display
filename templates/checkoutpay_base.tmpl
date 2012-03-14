@@ -50,26 +50,23 @@
         <table>
           <caption>Account Details</caption>
           <tr>
-            <th><label for="ccName"><:cfg shop display_ccName "Name on Card":>:</label></th>
-            <td><input type="text" name="ccName" id="ccName" size="40" value="<:old ccName:>" /></td>
-            <td><:error_img ccName:></td>
+            <th><label for="ccName"><:cfg shop display_ccName "Name on Card":>:<:error_img ccName:></label></th>
+            <td><input type="text" name="ccName" id="ccName" size="40" value="<:old ccName:>" class="<:ifError_img ccName:>error<:or:><:eif:>" /></td>
           </tr>
           <tr>
-            <th><label for="cardNumber"><:cfg shop display_cardNumber "Card Number":>:</label></th>
-            <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" />
-              <label for="cardVerify"><:cfg shop display_cardVerify "CVV":>:</label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" /> <:help cvv2 CVV:>
+            <th><label for="cardNumber"><:cfg shop display_cardNumber "Card Number":>:<:error_img cardNumber:></label></th>
+            <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" class="<:ifError_img cardNumber:>error<:or:><:eif:>" />
+              <label for="cardVerify"><:cfg shop display_cardVerify "CVV":>:<:error_img cardVerify:></label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" class="<:ifError_img cardVerify:>error<:or:><:eif:>" /> <:help cvv2 CVV:>
             </td>
-            <td><:error_img cardNumber:> <:error_img cardVerify:></td>
           </tr>
           <tr>
-            <th><label for="cardExpiry"><:cfg shop display_cardExpiry "Expiry Date":>:</label></th>
-            <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" /> <span class="small">(MM/YY)</span></td>
-            <td><:error_img cardExpiry:></td>
+            <th><label for="cardExpiry"><:cfg shop display_cardExpiry "Expiry Date":>:<:error_img cardExpiry:></label></th>
+            <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" class="<:ifError_img cardExpiry:>error<:or:><:eif:>" /> <span class="small">(MM/YY)</span></td>
           </tr>
           <tr>
-            <th><label for="ccType"><:cfg shop display_ccType "Card Type":>:</label></th>
+            <th><label for="ccType"><:cfg shop display_ccType "Card Type":>:<:error_img ccType:></label></th>
             <td>
-              <select name="ccType" id="ccType">
+              <select name="ccType" id="ccType" class="<:ifError_img ccType:>error<:or:><:eif:>">
                 <option value="" selected="selected">Select card type</option>
                 <:if Cfgsection "payment ccType":>
                 <:iterator begin dyncfgsection "payment ccType" sort=key:>
@@ -82,7 +79,6 @@
                 <:eif Cfgsection:>
               </select>
             </td>
-            <td><:error_img ccType:></td>
           </tr>
         </table>
       </dd>

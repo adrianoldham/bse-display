@@ -318,11 +318,12 @@ select.clean {
 input.error,
 textarea.error,
 select.error,
-.error select {
+.error > select {
     color: #750 !important;
     border-color: #fc0 !important;
     border-top-color: #d8ad00 !important;
-    background: lightyellow url(/bse-display/images/icons/error.png) no-repeat 99% 0.083em !important;
+    background-color: lightyellow !important;
+    /*background: lightyellow url(/bse-display/images/icons/error.png) no-repeat 99% 0.083em !important; only useful when not displaying labels */
     -moz-background-size: 1.5em;
     background-size: 1.5em;
 }
@@ -342,8 +343,6 @@ form.error button[type=submit] {
 }
 
 fieldset {
-    /*margin-bottom: 1em;
-    padding: 0.5em 0;*/
     color: #666;
 }
 
@@ -355,8 +354,6 @@ form > fieldset > legend {
 }
 
 fieldset div {
-    /*width: 100%;
-    float: left;*/
     margin-bottom: 0.5em;
 }
 
@@ -366,29 +363,20 @@ fieldset div label {
 }
 
 label img {
-    display: block;
-    float: left;
-    margin-right: 0.25em;
+    margin: -0.35em 0.25em 0;
+    vertical-align: middle;
 }
 
 fieldset th label,
 fieldset td label {
     font-weight: bold;
-    padding-right: 0.25em;
+    padding: 0 0.25em;
 }
 
 fieldset small {
     display: block;
     margin-top: 0.5em;
 }
-
-/*input[type=text],
-input[type=password],
-input[type=file],
-select,
-textarea {
-    width: 97.8%;
-}*/
 
 form p,
 form p.buttons {
