@@ -42,15 +42,15 @@
 </p><:if Total:><:or Total:>
 <input type="hidden" name="delivFirstName" id="delivFirstName" value="<:user name1:>" /> 
 <input type="hidden" name="delivLastName" id="delivLastName" value="<:user name2:>" /> 
-<input type="hidden" name="delivStreet" id="delivStreet" value="<:user address:>" />
-<input type="hidden" name="delivStreet2" id="delivStreet2" value="<:user delivStreet2:>" />
-<input type="hidden" name="delivSuburb" id="delivSuburb" value="<:user city:>" />
+<input type="hidden" name="delivStreet" id="delivStreet" value="<:user street:>" />
+<input type="hidden" name="delivStreet2" id="delivStreet2" value="<:user sreet2:>" />
+<input type="hidden" name="delivSuburb" id="delivSuburb" value="<:user suburb:>" />
 <input type="hidden" name="delivPostCode" id="delivPostCode" value="<:user postcode:>" />
 <input type="hidden" name="delivState" id="delivState" value="<:user state:>" /> 
 <input type="hidden" name="delivCountry" id="delivCountry" value="<:user country:>" /> 
 <input type="hidden" name="telephone" id="telephone" value="<:user telephone:>" />
 <input type="hidden" name="facsimile" id="facsimile" value="<:user facsimile:>" />
-<input type="hidden" name="delivMobile" id="delivMobile" value="<:user delivMobile:>" />
+<input type="hidden" name="delivMobile" id="mobile" value="<:user mobile:>" />
 <input type="hidden" name="emailAddress" id="emailAddress" value="<:user email:>" /><:eif Total:><:or Count:><:eif Count:>
 </form><:if Cfg tryandbyte aufreight:><:ifFreeShippingCart:>
 <p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:or Cfg:><:eif Cfg:>
