@@ -1,0 +1,70 @@
+<:wrap base.tmpl classes=>"catalog", no_sidebar=>"1" :><:embed start:><:if Embedded:><:admin article_mini:>
+<p>This template uses dynamic “tags” and cannot be embedded</p><:or Embedded:><:admin:><:eif Embedded:><:embed end:>
+<div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "t":>
+<h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
+<div id="body_<:article id:>" class="body">
+<:body:>
+</div><:or Or:><:eif Or:><:if Dynamic:><:iterator begin dynallprods tags: [lcgi tags] paged:pp=20 :><:iterator end dynallprods:><:if Eq [dynallprods_pagecount] 1:><:or Eq:>
+<ul class="pagination">
+  <li><span>Pages: (<:dynallprods_pagecount:>)</span>
+    <ul>
+      <li><:ifDynallprods_prevpage:>
+        <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_prevpage:>&amp;tags=<:lcgi tags |u:>&amp;pp=<:dynallprods_perpage:>">&lt;</a><:or:>
+        <span>&lt;</span><:eif:>
+      </li><:iterator begin dynallprods_pagec:>
+      <li><:if Dynallprod_pagec current:>
+        <span><:dynallprod_pagec page:></span><:or Dynallprod_pagec:>
+        <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprod_pagec page:>&amp;tags=<:lcgi tags |u:>&amp;pp=<:dynallprods_perpage:>"><:dynallprod_pagec page:></a><:eif Dynallprod_pagec:>
+      </li><:iterator end dynallprods_pagec:>
+      <li><:ifDynallprods_nextpage:>
+        <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_nextpage:>&amp;tags=<:lcgi tags |u:>&amp;pp=<:dynallprods_perpage:>">&gt;</a><:or:>
+        <span>&gt;</span><:eif:>
+      </li>
+    </ul>
+  </li>
+</ul><:eif Eq:><:if Dyntags [lcgi tags]:>
+<p class="clear">Selected:</p>
+<ul class="meta selected"><:iterator begin dyntags [lcgi tags]:>
+  <li>
+    <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:deltag [dyntag name] [lcgi tags] |u:>&amp;pp=<:dynallprods_perpage:>" class="remove"><:dyntag val:> <b>&times;</b></a>
+  </li><:iterator end dyntags:>
+</ul><:or Dyntags:><:eif Dyntags:><:if Dynunused_tagcats dynallprods tags: [lcgi tags]:>
+<p class="clear">Refine search (<:dynallprod_totalcount:> products found):</p>
+<ul class="meta unused categories"><:iterator begin dynunused_tagcats dynallprods onlyone tags: [lcgi tags]:><:ifDynunused_tagcat nocat:><:or:>
+  <li>
+    <span><:dynunused_tagcat name:></span><:iterator begin dynunused_tags:>
+    <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:lcgi tags |u:>/<:dynunused_tag name |u:>&amp;pp=<:dynallprods_perpage:>"><:dynunused_tag val:></a> (<:dynunused_tag count:>)<:iterator separator dynunused_tags:>, <:iterator end dynunused_tags:>
+  </li><:eif:><:iterator end dynunused_tagcats:>
+</ul>
+<ul class="meta unused"><:iterator begin dynunused_tagcats dynallprods tags: [lcgi tags]:><:ifDynunused_tagcat nocat:><:iterator begin dynunused_tags:>
+  <li>
+    <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:lcgi tags |u:>/<:dynunused_tag name |u:>&amp;pp=<:dynallprods_perpage:>"><:dynunused_tag val:></a> (<:dynunused_tag count:>)
+  </li><:iterator end dynunused_tags:><:or:><:eif:><:iterator end dynunused_tagcats:>
+</ul><:or Dynunused_tagcats:><:eif Dynunused_tagcats:><:switch:><:case dynallprod_count tags: [lcgi tags] paged:pp=20 :>
+<form method="post" action="<:target shop:>">
+  <input type="hidden" name="r" value="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:lcgi tags |u:>&amp;pp=<:dynallprods_perpage:>" />
+  <div id="products_<:article id:>" class="grid"><:iterator begin dynallprods tags: [lcgi tags] paged:pp=20 :>
+    <div class="product">
+      <a href="<:url dynallprod:>" class="thumbnail">
+        <:dthumbimage dynallprod product_grid hero,1 :><:ifPrice dynallprod discountpc:>
+        <em class="discount">&minus;<:price dynallprod discountpc:>%</em><:or:><:eif:>
+      </a>
+      <div class="detail">
+        <h2><a href="<:url dynallprod:>"><:dynallprod title:></a></h2><:ifTagIn "New" [dynallprod tags]:>
+        <span class="new">New</span><:or:><:eif:><:ifPrice dynallprod:>
+        <span class="price"><:cfg shop currency "$":><:number money [price dynallprod]:></span><:or:><:eif:>
+        <span class="buttons"><:if DynAnyProductOptions dynallprod:><:or DynAnyProductOptions:>
+          <a href="<:dyntarget shop add id [dynallprod id]:>&amp;r=<:url dynarticle |u:><:cond [ifMatch [url dynarticle] "\?"] %26 %3F:>tags=<:lcgi tags |u:>%26p=<:dynallprods_page:>" class="round button add">Add to cart</a><:eif DynAnyProductOptions:>
+          <a href="<:url dynallprod:>" class="round button view">View details</a>
+        </span>
+      </div><:include admin/adminmenu/dynallprod_mini.tmpl:>
+    </div><:iterator end dynallprods:>
+  </div>
+</form><:case default:>
+<p class="alert">No matches</p><:endswitch:><:or Dynamic:>
+<!-- STATIC CONTENT -->
+<p>This template requires dynamic mode</p><:eif Dynamic:>
+</div>
+
