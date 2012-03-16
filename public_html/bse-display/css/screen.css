@@ -296,7 +296,7 @@ textarea {
 }
 
 fieldset *:focus {
-    border-color: #f60 !important;
+    border-color: #0399d4 !important;
     border-color: rgba(3,153,212,0.75) !important;
 
     -webkit-box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.2), 0 0 0.25em rgba(3,153,212,0.75);
@@ -517,7 +517,7 @@ input[type=button]:active {
     text-decoration: none !important;
     color: #7f7863; /* dark stone */
 
-    border:  0.083em solid #b4aa8c;
+    border: 0.083em solid #b4aa8c;
     -webkit-border-radius: 0.25em;
     -moz-border-radius: 0.25em;
     border-radius: 0.25em;
@@ -763,7 +763,9 @@ div.grid {
     background-image: none;
 }
 
-#nav ul li.focus a, #nav ul li a:hover, #nav ul li.hilite a {
+#nav ul li.focus a,
+#nav ul li a:hover,
+#nav ul li.hilite a {
     background-color: #f60;
 }
 
@@ -1058,7 +1060,7 @@ ul#crumbs li a {
 }
 
 ul#crumbs li:after {
-    content: "  > ";
+    content: " > ";
     font-weight: bold;
     color: rgb(180,172,141);
 }
@@ -1163,13 +1165,6 @@ div.article > h2:first-child {
     border-bottom: 0.083em solid #bbb;
 }
 
-div.sidebar div.article > h2:first-child {
-    font-size: 2.25em;
-    font-weight: normal !important;
-    color: #be0f54; /* wine */
-    border-color: #be0f54; /* wine */
-}
-
 div.children,
 div.children ul {
     width: 100%;
@@ -1181,6 +1176,13 @@ div.sidebar div.article {
     margin-bottom: 1.75em;
     color: #666;
     font-size: 0.9em;
+}
+
+div.sidebar div.article > h2:first-child {
+    font-size: 2.25em;
+    font-weight: normal !important;
+    color: #be0f54; /* wine */
+    border-color: #be0f54; /* wine */
 }
 
 /* @end */
@@ -2062,6 +2064,8 @@ table.subscriptions td.expires {
     color: #ccc;
 }
 
+/* @end */
+
 /* @group vertical table */
 
 table.vertical.left,
@@ -2128,8 +2132,6 @@ td .unpaid {
     -moz-border-radius: 0.5em;
     border-radius: 0.5em;
 }
-
-/* @end */
 
 /* @end */
 
