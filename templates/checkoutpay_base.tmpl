@@ -147,7 +147,7 @@
     <dl class="paymentType2">
       <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="<:paymentTypeId CallMe:>" <:checkedPayment CallMe:> />
       <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="<:paymentTypeId CallMe:>" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact Me</label></dt>
-      <dd>We will contact you to make arrangements for payment.</dd>
+      <dd><p>We will contact you to make arrangements for payment.</p></dd>
     </dl>
     <:or Payments:><:eif Payments:>
     <:if HaveSaleFiles:><:or HaveSaleFiles:><:eif HaveSaleFiles:>
