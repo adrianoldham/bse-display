@@ -117,7 +117,7 @@
       <label for="instructions"><:error_img instructions:><:cfg "site users" display_instructions "Instructions":>:</label>
       <textarea name="instructions" id="instructions" cols="40" rows="5" title="<:cfg "site users" display_instructions "Instructions":>" class="<:ifError_img instructions:>error<:or:><:eif:>"><:old instructions:></textarea>
     </div>
-  </fieldset><:if Cfg shop shipping:>
+  </fieldset><:if And [ifShipping] [ifPhysical]:>
   <fieldset class="delivery">
     <legend>Delivery</legend>
     <div class="input shipping_name<:ifError_img shipping_name:> error<:or:><:eif:>">
@@ -127,7 +127,7 @@
     <div class="checkbox need_delivery<:ifError_img need_delivery:> error<:or:><:eif:>">
       <label><input type="checkbox" name="need_delivery" <:ifNeedDelivery:> checked="checked"<:or:><:eif:> onchange="this.form.checkupdate.click()" /> Shipping details different to billing</label>
     </div>
-  </fieldset><:or Cfg:><:eif Cfg:>
+  </fieldset><:or And:><:eif And:>
   <:if NeedDelivery:>
   <h2>Shipping Details</h2>
   <fieldset class="name">
