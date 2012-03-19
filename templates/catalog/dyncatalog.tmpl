@@ -6,7 +6,8 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:if Dynamic:><:switch:><:case Dynallprods:><:include include/sortallkids.tmpl:>
+</div><:or Or:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
+<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:><:if Dynamic:><:switch:><:case Dynallprods:><:include include/sortallkids.tmpl:>
 <form id="add_multiple_form_<:article id:>" action="<:target shop:>" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <table class="items">
@@ -63,8 +64,7 @@
   </ul>
 </div><:or Dynstepparents:><:eif Dynstepparents:><:eif Or:><:or Dynamic:>
 <!-- STATIC CONTENT -->
-<p>This template requires dynamic mode</p><:eif Dynamic:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
-<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
+<p>This template requires dynamic mode</p><:eif Dynamic:>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>
