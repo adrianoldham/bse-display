@@ -1,0 +1,453 @@
+/* @group layout */
+
+#wrapper {
+    background-color: @wrapper-background-color;
+    -webkit-box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
+    -moz-box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
+    box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
+}
+
+#container {
+    width: 960px;
+    margin: 0 auto;
+    text-align: left;
+    background-color: @container-background-color;
+}
+
+#content {
+    margin: 0 10px;
+}
+
+#header {
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    -webkit-box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
+    -moz-box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
+    box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
+    background-color: @header-background-color;
+    overflow: hidden;
+    line-height: 1.25;
+}
+
+#nav {
+    margin: 0 auto;
+    padding: 0;
+    width: 960px;
+}
+
+#columns {
+    zoom: 1; /* for ie7 */
+    margin: 0;
+    padding: 6.5em 0 1.75em 0;
+    position: relative;
+}
+
+#main {
+    float: right;
+    width: 700px;
+}
+
+div.sidebar {
+    float: left;
+    width: 220px;
+    margin-right: 20px;
+}
+
+body.home #main,
+body.catalog #main {
+    width: 940px;
+}
+
+body.has-sidebar #main {
+    width: 480px;
+}
+
+div.grid {
+    margin-right: -20px;
+    zoom: 1; /* for ie7 */
+}
+
+#feature {
+	margin-right: -20px;	
+	padding-bottom: 1.75em;
+	overflow: hidden; /* encapsulate contained floats */
+}
+
+#footer {
+    float: right;
+    width: 1;
+    line-height: 3.5em;
+    margin: 0 10px -3.5em 10px;
+    padding: 0;
+    position: relative;
+}
+
+/* @end */
+
+/* @group header */
+
+#header p {
+    margin: 0 auto;
+    padding: 0;
+    width: 940px;
+    height: 120px;
+    display: block;
+    position: relative;
+    display: none;
+
+	a {
+	    float: left;
+	    width: 220px;
+	    height: 100%;
+	    display: block;
+	    text-indent: -9999em;
+	    overflow: hidden;
+	    margin: 0;
+	    padding: 0;
+	    background: transparent url(/images/interface/logo.png) no-repeat 50% 50%;
+	}
+
+}
+
+/* @end */
+
+/* @group nav */
+
+#nav ul {
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    list-style: none;
+
+	li {
+	    float: left;
+	    margin: 0;
+	    padding: 0;
+	    text-shadow: 0 -0.083em 0 rgba(0,0,0,0.35);
+	    border-right: 0.083em dotted #666;
+	    border-left: 0.083em dotted #666;
+	    margin-left: -0.083em;
+	    position: relative;
+
+	    a {
+		    float: left;
+		    display: block;
+		    margin: 0;
+		    padding: 1.5em 1.75em;
+		    color: @reverse !important;
+		    text-decoration: none !important;
+		    line-height: 1;
+		
+		    &:hover {
+			    background-image: none;
+			}
+		}
+
+		a:hover,
+		&.focus a,
+		&.hilite a {
+    		background-color: @primary;
+		}
+
+		&.focus.platform a {
+		    background-color: #666;
+		}
+
+		span {
+		    position: absolute;
+		    min-width: 1em;
+		    min-height: 1em;
+		    top: 1em;
+		    right: 0.75em;
+		    -webkit-border-radius: 1em;
+		    -moz-border-radius: 1em;
+		    border-radius: 1em;
+		    background-color: @primary;
+		    text-align: center;
+		    padding: 0.35em;
+		    font-size: 0.75em;
+		}
+
+		abbr {
+			color: #666;
+		}
+
+		&:hover span,
+		&.focus span,
+		&.hilite span {
+		    background-color: #333;
+		}
+	}
+}
+
+/* @end */
+
+/* @group menu */
+
+ul.menu {
+    border-top: 0.083em solid lighten(@neutral, 20%);
+    font-size: 1.111em;
+}
+
+ul.menu,
+ul.menu li,
+ul.menu li ul {
+    float: left;
+    width: 220px;
+    margin: 0 20px 2em 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+}
+
+ul.menu li {
+    border-bottom: 0.083em solid lighten(@neutral, 20%);
+    position: relative;
+    margin: 0;
+
+	a,
+	span {
+	    display: block;
+	    margin: 0;
+	    padding: 0.75em 0.5em;
+	    color: #222;
+	    text-decoration: none;
+	}
+
+	&.focus {
+		a,
+		span {
+		    color: @primary;
+	    }
+	}
+	
+	ul {
+	    width: 100%;
+	    margin: 0;
+	    padding: 0;
+	
+	    li {
+		    border: none;
+
+			a {
+			    padding: 0.25em 0.5em 0.25em 1.25em;
+			    color: #666;
+			    font-size: 0.9em;
+			}
+
+		    &.current a {
+			    background: none;
+			    background: transparent url(/bse-display/images/widgets/checkmark.png) no-repeat 0 0.5em;
+			    text-decoration: none;
+			    color: @primary;
+			}
+		}
+
+	}
+	
+	div.widget {
+	    background: transparent url(/bse-display/images/widgets/arrow-right.gif) no-repeat 100% 50%;
+	    position: absolute;
+	    left: 0;
+	    top: 0.95em;
+	    width: 11px;
+	    height: 12px;
+	    text-indent: -9999em;
+	    cursor: pointer;
+	    top: 0;
+	    width: 100%;
+	    height: 3em;
+	
+	    &.expanded {
+		    background-image: none;
+		}
+	}
+}
+
+/*
+ul.menu li.hilite div.widget {
+    background-image: url(/bse-display/images/widgets/arrow-right-focus.gif);
+}
+
+ul.menu li div.widget.expanded {
+    background-image: url(/bse-display/images/widgets/arrow-down.gif);
+}
+
+ul.menu li.hilite div.widget.expanded {
+    background-image: url(/bse-display/images/widgets/arrow-down-focus.gif);
+}
+*/
+
+/* @group feature menu */
+
+#feature.menu {
+    overflow: hidden; /* enclose floats */
+    width: 100%;
+    margin: 0 -10px;
+    padding: 0.75em 0;
+    background-color: @neutral;
+
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    -webkit-box-shadow: inset 0 0 0.5em rgba(0,0,0,0.25);
+    -moz-box-shadow: inset 0 0 0.5em rgba(0,0,0,0.25);
+    box-shadow: inset 0 0 0.5em rgba(0,0,0,0.25);
+    text-shadow: 0 -0.083em 0 rgba(0,0,0,0.25);
+
+	ul.menu {
+	    margin: 0;
+	    padding: 0;
+	    width: 960px;
+	    border: none;
+	
+		li {
+		    width: 220px;
+		    margin: 0 10px;
+		    font-size: 0.9em;
+		    color: #666 !important;
+		    border-color: @reverse;
+		    border-color: fade(@reverse, 35%);
+
+			a {
+			    padding: 0.35em 0.5em;
+			    color: @reverse !important;
+			}
+		}
+	}
+	
+	h2 {
+	    margin: 0;
+	    padding: 0.25em 10px 0.25em 10px;
+	    color: @reverse !important;
+	    background-color: @secondary;
+	    display: none;
+	}
+}
+
+/* @end */
+
+/* @end */
+
+/* @group footer */
+
+#footer ul {
+    color: @reverse;
+    float: left;
+    margin: 0;
+    padding: 0;
+
+	li {
+	    list-style: none;
+	    float: left;
+	    text-align: center;
+	    padding: 0 0 0 1.5em;
+	    text-shadow: 0 -0.083em 0 fade(@body-color, 30%);
+	
+	 	a {
+		    color: @reverse;
+		    font-weight: bold;
+		    text-decoration: none;
+		
+		    &:hover {
+				color: #ccc !important;
+			}
+		}
+		
+		&.credit a {
+		    color: @reverse;
+		}
+		
+		&.credit span {
+		    color: @reverse;
+		    padding: 0.25em;
+		    border: 0.083em solid @reverse;
+		}
+
+	}
+
+}
+
+/* @end */
+
+/* @group crumbs */
+
+ul#crumbs {
+    /*float: left;*/
+    overflow: hidden; /* enclose floats */
+    clear: both;
+    margin: 0 0 0 240px;
+    padding: 0;
+    width: 700px;
+    border: 0.083em solid;
+    border-color: lighten(@neutral, 20%);
+
+    -webkit-border-radius: 0.25em;
+    -moz-border-radius: 0.25em;
+    border-radius: 0.25em;
+
+	li {
+	    font-size: 0.9em;
+	    line-height: 1;
+	    list-style: none;
+	    margin: 0;
+	    padding: 0.5em;
+	    float: left;
+	    color: #888;
+	
+		a {
+		    color: lighten(@body-color, 15%);
+		    text-decoration: none;
+		}
+	
+		&:after {
+		    content: " > ";
+		    font-weight: bold;
+		    color: @neutral;
+		}
+
+		&.focus:after {
+		    content: "" !important;
+		}
+	
+		&.focus span {
+		    color: @body-color;
+		}
+	}
+}
+
+/* @end */
+
+/* @group feature */
+
+div.tile {
+	float: left;
+	width: 280px;
+	margin-right: 18px; /* not 10px because of border */
+	padding: 1em 10px 0;
+	border: 0.083em solid lighten(@neutral, 20%);
+	border-bottom-color: lighten(@neutral, 10%);
+
+	-webkit-border-radius: 0.5em;
+	-moz-border-radius: 0.5em;
+	border-radius: 0.5em;
+
+	background: lighten(@neutral, 30%);
+	background: -webkit-gradient(linear, left top, left bottom, from(@reverse), to(lighten(@neutral, 30%))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, @reverse, lighten(@neutral, 30%)); /* Chrome10+,Safari5.1+ */
+	background: -moz-linear-gradient(top, @reverse, lighten(@neutral, 30%)); /* FF3.6+ */
+	background: -ms-linear-gradient(top, @reverse, lighten(@neutral, 30%)); /* IE10+ */
+	background: -o-linear-gradient(top, @reverse, lighten(@neutral, 30%)); /* Opera11.10+ */
+	background: linear-gradient(top, @reverse, lighten(@neutral, 30%)); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@reverse, endColorstr=lighten(@neutral, 30%)); /* IE7+ */
+}
+
+/* @end */
