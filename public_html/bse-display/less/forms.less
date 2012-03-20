@@ -1,0 +1,173 @@
+/* @group forms */
+
+/* @group fields */
+
+select,
+textarea,
+input[type=text],
+input[type=password],
+input[type=file],
+input[type=tel],
+input[type=url],
+input[type=email],
+input[type=search],
+input[type=number],
+input[type=date] {
+    font-family: @input-font-family;
+    font-size: 1em;
+    line-height: 1.25; /* Cannot modify FF3.6 doesn't allow override for buttons */
+	color: @input-color;
+    margin: 0;
+    padding: 0.25em;
+    background-color: @input-background-color;
+    vertical-align: baseline;
+
+    border: 0.083em solid;
+    border-color: @input-border-color;
+
+    -webkit-box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.1);
+    box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.1);
+
+    -webkit-border-radius: 0.25em;
+    -moz-border-radius: 0.25em;
+    border-radius: 0.25em;
+
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+
+    -webkit-background-origin: padding-box;
+    -moz-background-origin: padding-box;
+    background-origin: padding-box;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input[type=radio],
+input[type=checkbox] {
+    vertical-align: baseline;
+}
+
+textarea {
+    overflow: auto; /* hides ie scrollbar when not overflowing */
+}
+
+*:focus {
+    border-color: @input-focus-border-color !important;
+
+    -webkit-box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.2), 0 0 0.5em @input-focus-shadow-color !important;
+    -moz-box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.2), 0 0 0.5em @input-focus-shadow-color !important;
+    box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.2), 0 0 0.5em @input-focus-shadow-color !important;
+}
+
+*:focus.error {
+    border-color: @error-focus-border-color !important;
+
+    -webkit-box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.2), 0 0 0.5em @error-focus-shadow-color !important;
+    -moz-box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.2), 0 0 0.5em @error-focus-shadow-color !important;
+    box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.2), 0 0 0.5em @error-focus-shadow-color !important;
+}
+
+input.clean,
+textarea.clean,
+select.clean {
+    color: @input-clean-color;
+}
+
+input.error,
+textarea.error,
+select.error,
+.error > select {
+    color: @error-color !important;
+    border-color: @error-border-color !important;
+    background-color: @error-background-color !important;
+    /*background: @error url(/bse-display/images/icons/error.png) no-repeat 99% 0.083em !important; only useful when not displaying labels */
+    -moz-background-size: 1.5em;
+    background-size: 1.5em;
+}
+
+select.error,
+.error select {
+    background-image: none;
+}
+
+form.error input[type=submit],
+form.error button[type=submit] {
+    padding-left: 2em !important;
+    background: #333 url(/bse-display/images/icons/error.png) no-repeat 0.25em 45%;
+    -moz-background-size: 1.5em;
+    background-size: 1.5em;
+    filter: none; /* clear IE button gradient filter */
+}
+
+span.required {
+    color: @required-color;
+}
+
+/* @end */
+
+/* @group fieldset */
+
+fieldset {
+    color: @fieldset-color;
+}
+
+form > fieldset > legend {
+    font-family: @legend-font-family;
+    font-weight: bold;
+    font-size: 1.25em;
+    color: @legend-color;
+}
+
+fieldset > div {
+    margin-bottom: 0.5em;
+    clear: right;
+}
+
+fieldset > div label {
+    display: block;
+    margin-bottom: 0.25em;
+}
+
+label img {
+    margin: -0.35em 0.25em 0;
+    vertical-align: middle;
+}
+
+fieldset th label,
+fieldset td label {
+    font-weight: bold;
+    padding: 0 0.25em;
+}
+
+fieldset small {
+    display: block;
+    margin-top: 0.5em;
+}
+
+/* @end */
+
+/* @group buttons */
+
+form p,
+form p.buttons {
+    clear: both;
+}
+
+form p.buttons {
+    /*text-align: right;*/
+    white-space: nowrap;
+}
+
+form p.buttons input,
+form p.buttons button,
+form p.buttons .button {
+	float: right;
+    margin-left: 0.5em;
+}
+
+/* @end */
+
+/* @end */

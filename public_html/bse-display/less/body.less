@@ -1,0 +1,199 @@
+/* @group body */
+
+/*
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+*/
+
+html {
+    font-size: 100%;
+    background-color: @html-background-color;
+}
+
+body {
+    font-family: @body-font-family;
+    font-size: @body-font-size;
+    line-height: @body-line-height;
+    text-align: @body-text-align;
+    color: @body-color;
+    background-color: @body-background-color;
+}
+
+a:link,
+a:visited {
+    color: @anchor-color;
+    text-decoration: underline;
+}
+
+a:hover,
+a:active {
+    color: @anchor-hover-color !important;
+    text-decoration: underline !important;
+}
+
+pre,
+tt,
+kbd,
+code,
+samp {
+    font-family: Monaco, "Courier New", Courier, mono;
+    padding: 0.5em;
+    border: 0.083em dotted lighten(@neutral, 20%);
+    display: block;
+}
+
+acronym,
+abbr,
+dfn {
+    font-style: normal;
+}
+
+acronym[title],
+abbr[title],
+dfn[title] {
+    border-bottom: 0.083em dotted lighten(@neutral, 20%);
+    cursor: help;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: @heading-font-family;
+    color: @heading-color;
+    margin: 2em 0 0.25em 0;
+    line-height: 1.25;
+    clear: left;
+    position: relative;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1em;
+}
+
+h1 + h2 {
+    margin-top: 0;
+}
+
+h1:first-child {
+    color: @title-color;
+}
+
+h1:first-child,
+h2:first-child {
+    margin-top: -0.2em;
+}
+
+table {
+    clear: both;
+    margin-bottom: 1em;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    font-size: 1em;
+}
+
+ul {
+    padding-left: 1.75em;
+    list-style: disc;
+}
+
+ol {
+    padding-left: 2em;
+    list-style: decimal-leading-zero;
+}
+
+p,
+ul,
+ol,
+blockquote,
+address {
+    margin-bottom: 1em;
+    font-style: normal;
+}
+
+small,
+.small {
+    font-size: 0.9em;
+    color: @summary-color;
+}
+
+.summary,
+.description {
+    color: @summary-color;
+}
+
+address.left,
+address.right {
+    display: block;
+    width: 220px;
+    margin: 0.5em 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.hidden {
+    /* used to hide accessibility items */
+    position: absolute !important;
+    left: -9999em !important;
+    top: -9999em !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    clear: none !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+.left {
+    float: left !important;
+}
+
+.right {
+    float: right !important;
+}
+
+.truncate {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+blockquote.standfirst {
+    clear: both;
+    margin: 0 0 2.5em 0;
+    padding: 1em 0 0 0;
+    border: 0.083em solid;
+    border-color: @tertiary;
+    border-width: 0.083em 0;
+    font-weight: bold;
+    color: @tertiary;
+    font-size: 1.083em;
+}
+
+/* @end */
