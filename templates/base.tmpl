@@ -29,12 +29,11 @@
               <:endswitch:></li><:iterator end allkids_of2:>
             </ul>
           <:endswitch:></li><:iterator end allkids_of:>
-          <li class="search<:ifMatch [article title] Search:> hilite<:or:><:eif:>"><a href="<:target search:>" accesskey="4">Search</a></li>
         </ul>
         <ul class="utilities group right"><:if Dynamic:><:if Dyncarttotalcost:>
-          <li class="cart group"><a href="<:target shop:>"><!--<abbr><:cfg shop currency_code "AUD":></abbr> <:cfg shop currency "$":><:number money [dyncarttotalcost]:>//-->Shopping <:cfg shop cart_name cart:> <span><:dyncarttotalunits:></span></a></li><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
-          <li class="user group"><a href="<:target user:><:ifUser:><:or:>?r=<:url top |u:><:eif:>"><:ifUser:><:user name1:><:or:>Login<:eif:></a></li><:or Dynamic:><:eif Dynamic:>
-          <li class="search"><a href="<:target search:>">Search</a></li>
+          <li class="cart group<:ifEq [section id] "-3" :> hilite<:or:><:eif:>"><a href="<:target shop:>"><!--<abbr><:cfg shop currency_code "AUD":></abbr> <:cfg shop currency "$":><:number money [dyncarttotalcost]:>//-->Shopping <:cfg shop cart_name cart:> <span><:dyncarttotalunits:></span></a></li><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
+          <li class="user group<:ifEq [section id] "-5":> hilite<:or:><:eif:>"><a href="<:target user:><:ifUser:><:or:>?r=<:url top |u:><:eif:>"><:ifUser:><:user name1:><:or:>Login<:eif:></a></li><:or Dynamic:><:eif Dynamic:>
+          <li class="search<:ifEq [section id] "-4":> hilite<:or:><:eif:>"><a href="<:target search:>" accesskey="4">Search</a></li>
         </ul>
       </div>
     </div>
@@ -73,7 +72,7 @@
     <div id="footer">
       <ul class="left"><:iterator begin allkids_of -1 filter: [menu] == 3 && [listed] != 2 :>
         <li><a href="<:url ofallkid:>" class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:or:><:eif:><:ifAncestor ofallkid:> hilite<:or:><:eif:><:ifFirstOfallkid:> first<:or:><:eif:><:ifLastOfallkid:> last<:or:><:eif:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator end allkids_of:>
-        <li><a href="<:target search:>" class="search <:ifMatch [article title] Search:>hilite<:or:><:eif:>" accesskey="4">Search</a></li>
+        <li><a href="<:target search:>" class="search<:ifEq [section id] "-4":> hilite<:or:><:eif:>" accesskey="4">Search</a></li>
       </ul>
       <ul class="right">
         <li class="sitename"><span><:cfg site name |h:></span> &copy;<:today "%Y":></li>
