@@ -1,7 +1,7 @@
 //  Attach dependant JS scripts
 
-document.write('<script type="text/javascript" src="/js/bse-display/admin.js"></script>');
-document.write('<script type="text/javascript" src="/js/bse-display/search.js"></script>');
+document.write('<script type="text/javascript" src="/bse-display/js/admin.js"></script>');
+document.write('<script type="text/javascript" src="/bse-display/js/search.js"></script>');
 
 /*
 document.write('<script type="text/javascript" src="/js/bse-display/shop.js"></script>');
