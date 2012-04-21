@@ -2,7 +2,9 @@
 <div class="article search">
 <h1 class="pagetitle"><:param title |h:></h1>
 <form id="search_form" method="post" action="<:script:>">
-  <input type="hidden" name="admin" value="<:admin_search:>" />
+  <:- if Admin_search:>
+  <input type="hidden" name="admin" value="1" />
+  <:- or Admin_search:><:eif Admin_search:>
   <fieldset>
     <legend>Search</legend>
     <div class="input">
