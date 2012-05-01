@@ -15,7 +15,8 @@
   <tbody><:if Count:><:iterator begin items:>
     <tr id="item_<:item id:>"> 
       <td class="item">
-        <a href="<:item link:>" class="title"><:item title:></a> <:ifOptions:><span><:options:></span><:or:><:eif:><:if Cfg tryandbyte aufreight:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
+        <a href="<:item link:>" class="title"><:item title:></a><:ifOptions:>
+        <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
         <div class="description"><:item description:></div><:or And:><:eif And:>
       </td>
       <td class="quantity"><:if Match [item generator] "Seminar":>
@@ -52,5 +53,4 @@
 <input type="hidden" name="facsimile" id="facsimile" value="<:user facsimile:>" />
 <input type="hidden" name="delivMobile" id="mobile" value="<:user mobile:>" />
 <input type="hidden" name="emailAddress" id="emailAddress" value="<:user email:>" /><:eif Total:><:or Count:><:eif Count:>
-</form><:if Cfg tryandbyte aufreight:><:ifFreeShippingCart:>
-<p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:or Cfg:><:eif Cfg:>
+</form>

@@ -140,7 +140,8 @@
   <tbody><:iterator begin items:>
     <tr>
       <td class="item">
-        <a href="<:product link:>" class="title"><:item title:></a> <:ifOptions:><span><:options:></span><:or:><:eif:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
+        <a href="<:product link:>" class="title"><:item title:></a><:ifOptions:>
+        <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
         <div class="description"><:item description:></div><:or And:><:eif And:>
       </td>
       <td class="quantity"><:item units:> &times;</td>
@@ -158,9 +159,7 @@
   <:case default:>
   <:endswitch:>
   <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [order total]:></p>
-</div><:if Cfg tryandbyte aufreight:><:if Overseas:>
-<p><b>We will contact you with a quote for shipping cost</b></p><:or Overseas:><:ifFreeShippingCart:>
-<p><b>This order qualifies for free shipping within Australia</b></p><:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:>
+</div>
 
 <div class="group">
 <table class="vertical left">

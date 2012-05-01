@@ -33,8 +33,7 @@
 </form><:or Product:>
 <p class="alert">Sorry! This product is currently not available for sale</p><:eif Product:>
 <:endswitch:><:switch:><:case Or [ifEq [product retailPrice] 0] [ifMatch [product flags] "i"]:>
-<:include interest/register.tmpl:><:endswitch:><:if Cfg tryandbyte aufreight:><:ifFreeShipping:>
-<p class="alert">This product qualifies for free shipping if purchased before <:date product customDate1:></p><:or:><:eif:><:or Cfg:><:eif Cfg:><:if Or [article body] [ifImages]:>
+<:include interest/register.tmpl:><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
 </div><:or Or:><:eif Or:><:if Or [ifStepparents] [ifStepkids]:> 
