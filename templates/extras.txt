@@ -8,5 +8,6 @@
 apache/401.tmpl 401.shtml
 apache/404.tmpl 404.shtml
 apache/403.tmpl 403.shtml
+apache/406.tmpl 406.shtml
 apache/500.tmpl 500.shtml
 #google/sitemap.tmpl sitemap.xml
