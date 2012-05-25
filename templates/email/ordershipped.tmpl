@@ -32,8 +32,9 @@ Shipping     : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOr
                <:order delivOrganization:><:or:><:eif:>
                <:order delivStreet:><:ifOrder delivStreet2:>
                <:order delivStreet2:><:or:><:eif:>
-               <:order delivSuburb:> <:order delivPostCode:> <:order delivState:>
-               <:order delivCountry:>
+               <:order delivSuburb:> <:order delivPostCode:> <:order delivState:><:ifCfgsection "country selector":>
+               <:cfg "country selector" [order delivCountry]:><:or:>
+               <:order delivCountry:><:eif:>
 Telephone    : <:order telephone:><:ifOrder delivMobile:>
 Facsimile    : <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
 Mobile       : <:order delivMobile:><:or:><:eif:><:ifOrder emailAddress:>

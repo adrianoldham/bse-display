@@ -17,8 +17,9 @@ Billing      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrgan
                <:order billOrganization:><:or:><:eif:>
                <:order billStreet:><:ifOrder billStreet2:>
                <:order billStreet2:><:or:><:eif:>
-               <:order billSuburb:> <:order billPostCode:> <:order billState:>
-               <:order billCountry:><:ifOrder billTelephone:>
+               <:order billSuburb:> <:order billPostCode:> <:order billState:><:ifCfgsection "country selector":>
+               <:cfg "country selector" [order billCountry]:><:or:>
+               <:order billCountry:><:eif:><:ifOrder billTelephone:>
 Telephone    : <:order billTelephone:><:or:><:eif:><:ifOrder billFacsimile:>
 Facsimile    : <:order billFacsimile:><:or:><:eif:><:ifOrder billMobile:>
 Mobile       : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
@@ -29,8 +30,9 @@ Shipping     : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOr
                <:order delivOrganization:><:or:><:eif:>
                <:order delivStreet:><:ifOrder delivStreet2:>
                <:order delivStreet2:><:or:><:eif:>
-               <:order delivSuburb:> <:order delivPostCode:> <:order delivState:>
-               <:order delivCountry:><:ifOrder telephone:>
+               <:order delivSuburb:> <:order delivPostCode:> <:order delivState:><:ifCfgsection "country selector":>
+               <:cfg "country selector" [order delivCountry]:><:or:>
+               <:order delivCountry:><:eif:><:ifOrder telephone:>
 Telephone    : <:order telephone:><:or:><:eif:><:ifOrder facsimile:>
 Facsimile    : <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
 Mobile       : <:order delivMobile:><:or:><:eif:><:ifOrder emailAddress:>
