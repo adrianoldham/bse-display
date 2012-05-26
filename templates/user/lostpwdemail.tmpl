@@ -12,7 +12,8 @@ sent to the email address of the account owner.
 ACCOUNT ACCESS LINK:
   <:target user:>?userpage=<:user password:>&u=<:user id:>
 
-<:or Cfg:>We have received a request indicating that you’ve lost or forgotten your password.
+<:or Cfg
+:>We have received a request indicating that you’ve lost or forgotten your password.
 
 If you did not make this request, don’t worry, simply ignore this email, a reset 
 link is time limited and only ever sent to the email address of the account owner.
@@ -22,9 +23,9 @@ PASSWORD RESET LINK:
   
 This reset link will remain active for <:cfg "lost password" age_limit 7:> day<:ifArithmetic [cfg "lost password" age_limit 7] > 1:>s<:or:><:eif:>.
 
-<:eif Cfg:><:ifCfg "extra tags" adminEmail:>Any questions should be directed to: <:cfg "extra tags" adminEmail:>
-
-<:or:><:eif:>Regards
+<:eif Cfg
+:>
+Regards
 The team at <:cfg site name:>
 (<:cfg site url:>)
 
