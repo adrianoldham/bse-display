@@ -5,8 +5,7 @@
 <:if Cfg "site users" nopassword:><p>We have received a request to send you a reminder of the link used to 
 access your account details.</p>
 
-<p>If you did not make this request, don’t worry, this reminder email is 
-only ever sent to the <a href="mailto:<:user email:>">email address</a> of the account owner.</p>
+<p>If you did not make this request, don’t worry, this reminder email is only ever sent to the <a href="mailto:<:user email:>">email address</a> of the account owner.</p>
 
 <!--<a href="<:target user:>?userpage=<:user password:>&amp;u=<:user id:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
 
@@ -14,8 +13,7 @@ only ever sent to the <a href="mailto:<:user email:>">email address</a> of the a
 
 <:or Cfg:><p>We have received a request indicating that you’ve lost or forgotten your password.</p>
 
-<p>If you did not make this request, don’t worry, simply ignore this email, a reset link is time limited and only 
-ever sent to the <a href="mailto:<:user email:>">email address</a> of the account owner.</p>
+<p>If you did not make this request, don’t worry, simply ignore this email, a reset link is time limited and only ever sent to the <a href="mailto:<:user email:>">email address</a> of the account owner.</p>
 
 <p>This reset link will remain active for <:cfg "lost password" age_limit 7:> day<:ifArithmetic [cfg "lost password" age_limit 7] > 1:>s<:or:><:eif:>.</p>
 
