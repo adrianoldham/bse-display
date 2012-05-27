@@ -59,16 +59,20 @@ Item                                       Code         Qty     Price   Extended
 :>This credit card payment was processed online:
 
              Receipt No.  : <:order ccReceipt:>
+             <:cfg shop display_ccName "Name on Card" |12:> : <:order ccName:><:ifOrder ccPAN:>
+             <:cfg shop display_ccPAN "Card Number" |12:> : **** **** **** <:order ccPAN:><:or:><:eif:><:ifOrder ccType:>
+             <:cfg shop display_ccType "Card Type" |12:> : <:order ccType:><:or:><:eif:>
+             
 <:or Order
 :>Debit this credit card at time of shipping:
 
+             <:cfg shop display_ccName "Name on Card" |12:> : <:order ccName:>
              <:cfg shop display_cardNumber "Card Number" |12:> : <:cardNumber:>
              <:cfg shop display_cardExpiry "Expiry Date" |12:> : <:cardExpiry:>
-             <:cfg shop display_cardVerify "CVV2" |12:> : <:cardVerify:>
+             <:cfg shop display_cardVerify "CVV2" |12:> : <:cardVerify:><:ifOrder ccType:>
+             <:cfg shop display_ccType "Card Type" |12:> : <:order ccType:><:or:><:eif:>
 <:eif Order
-:>             <:cfg shop display_ccName "Name on Card" |12:> : <:order ccName:><:ifOrder ccPAN:>
-             <:cfg shop display_ccPAN "Card Number" |12:> : **** **** **** <:order ccPAN:><:or:><:eif:><:ifOrder ccType:>
-             <:cfg shop display_ccType "Card Type" |12:> : <:order ccType:><:or:><:eif:><:or Eq:><:eif Eq
+:><:or Eq:><:eif Eq
 :><:ifEq [order paymentType] "1" 
 :>The customer will pay by cheque.<:or:><:eif
 :><:ifEq [order paymentType] "2" 
