@@ -17,7 +17,9 @@ Purchase No. : <:order purchase_order:><:or:><:eif:>
 
 --------------------------------------------------------------------------------
 
-Billing      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
+BILLING DETAILS:
+
+Address      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
                <:order billOrganization:><:or:><:eif:>
                <:order billStreet:><:ifOrder billStreet2:>
                <:order billStreet2:><:or:><:eif:>
@@ -30,7 +32,9 @@ Mobile       : <:order billMobile:><:or:><:eif:><:ifOrder billEmail:>
 Email        : <:order billEmail:><:or:><:eif:>
 <:if Order delivStreet:>
 
-Shipping     : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
+SHIPPING DETAILS:
+
+Address      : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
                <:order delivOrganization:><:or:><:eif:>
                <:order delivStreet:><:ifOrder delivStreet2:>
                <:order delivStreet2:><:or:><:eif:>
