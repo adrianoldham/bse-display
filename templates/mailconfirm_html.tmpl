@@ -22,7 +22,13 @@
     </tr><:or:><:eif:><:ifOrder freight_tracking:>
     <tr>
       <th>Tracking Code:</th>
-      <td><:order freight_tracking |h:></td>
+      <td>
+        <:- if Cfg "shipping tracking urls" [order shipping_name]:>
+        <a href="<:cfg "shipping tracking urls" [order shipping_name] |h:><:order freight_tracking |h:>"><:order freight_tracking |h:></a>
+        <:- or Cfg:>
+        <:order freight_tracking |h:>
+        <:- eif Cfg:>
+      </td>
     </tr><:or:><:eif:><:ifOrder shipping_method:>
     <tr>
       <th>Shipping Method:</th>
