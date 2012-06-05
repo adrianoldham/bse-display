@@ -81,4 +81,5 @@
 </fieldset>
 <p><span class="required">* Required.</span> <:formcfg required_text "Please provide information for all marked fields.":></p>
 <p class="buttons"><input type="submit" name="a_send" value="<:formcfg submit "Submit Form":>" class="submit" /></p>
-</form>
+</form><:ifFormcfg summary:>
+<:bodytext formcfg summary:><:or:><:eif:>
