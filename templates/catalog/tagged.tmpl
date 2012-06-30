@@ -53,10 +53,10 @@
       </a>
       <div class="detail">
         <h2><a href="<:url dynallprod:>"><:dynallprod title:></a></h2><:ifTagIn "New" [dynallprod tags]:>
-        <span class="new">New</span><:or:><:eif:><:ifPrice dynallprod:>
-        <span class="price"><:cfg shop currency "$":><:number money [price dynallprod]:></span><:or:><:eif:>
-        <span class="buttons"><:if DynAnyProductOptions dynallprod:><:or DynAnyProductOptions:>
-          <a href="<:dyntarget shop add id [dynallprod id]:>&amp;r=<:url dynarticle |u:><:cond [ifMatch [url dynarticle] "\?"] %26 %3F:>tags=<:lcgi tags |u:>%26p=<:dynallprods_page:>" class="round button add">Add to cart</a><:eif DynAnyProductOptions:>
+        <span class="new">New</span><:or:><:eif:>
+        <span class="price"><:ifPrice dynallprod:><:cfg shop currency "$":><:number money [price dynallprod]:><:or:>NA<:eif:></span>
+        <span class="buttons"><:ifPrice dynallprod:>
+          <a href="<:dyntarget shop add id [dynallprod id]:>&amp;r=<:url dynarticle |U:><:cond [ifMatch [url dynarticle] "\?"] %26 %3F:>tags=<:lcgi tags |U:>%26p=<:dynallprods_page:>" class="round button add">Add to cart</a><:or:><:eif:>
           <a href="<:url dynallprod:>" class="round button view">View details</a>
         </span>
       </div><:include admin/adminmenu/dynallprod_mini.tmpl:>
