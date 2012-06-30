@@ -62,8 +62,8 @@
       </div><:include admin/adminmenu/dynallprod_mini.tmpl:>
     </div><:iterator end dynallprods:>
   </div>
-</form><:case default:>
-<p class="alert">No matches</p><:endswitch:><:or Dynamic:>
+</form><:case Dynallprod_count tags: "":>
+<p class="alert">No matches</p><:case default:><:endswitch:><:or Dynamic:>
 <!-- STATIC CONTENT -->
 <p>This template requires dynamic mode</p><:eif Dynamic:>
 </div>
