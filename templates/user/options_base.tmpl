@@ -47,7 +47,11 @@
       </label>
     </div>
     <:iterator end subscriptions:>
-    <small>Confirmation will be sent to your email address.</small>
+    <small><:switch:><:case User confirmed:>
+      Confirmation has been completed.<:case User confirmSecret:>
+      Confirmation has been requested, but not completed.<:case default:>
+      Confirmation will be sent to your email address.<:endswitch:>
+    </small>
   </fieldset>
 <:or Subscriptions:><:eif Subscriptions:>
 
