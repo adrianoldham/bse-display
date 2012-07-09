@@ -1,0 +1,5 @@
+<:wrap user/pubbase.tmpl title=>"Sorry! Too soon to try again" nomessage=>"1" :>
+<p>A confirmation email has already been sent to <b><:user email:></b>. To prevent system abuse, a confirmation email will not be sent to the same email address more than once within 48 hours.</p>
+<p>Please check your email, you may have already received the confirmation email. If you can’t find it, you may try again later.</p>
+<p>If you just selected some extra newsletters, all of your subscriptions will become active when you confirm your email address.</p>
+<p><a href="<:script:>?userpage=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>">User account manager</a></p>

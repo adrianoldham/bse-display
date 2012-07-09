@@ -1,0 +1,4 @@
+<:wrap user/pubbase.tmpl title=>"Sorry! Too many confirmation attempts" nomessage=>"1" :>
+<p>The maximum number of confirmation emails have already been sent to <b><:user email:></b>. To prevent system abuse, no more than three confirmation emails will be sent to the same email address.</p>
+<p>If you have been blocked from subscribing to this site by this policy you will need to try with a different email address.</p>
+<p><a href="<:script:>?userpage=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>">User account manager</a></p>
