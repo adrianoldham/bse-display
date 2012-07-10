@@ -42,9 +42,18 @@
     <legend>Newsletter</legend>
     <:iterator begin subscriptions:>
     <div class="checkbox">
-      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:>
-        (<a href="<:target user subinfo id [subscription id] :>" target="_blank">info</a>)
-      </label>
+      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:><:switch:><:case Match [cgi subinfo] [subscription id]:>
+        (<a href="<:target user show_opts:>">hide info</a>)<:case default:>
+        (<a href="<:target user show_opts subinfo [subscription id] :>">info</a>)<:endswitch:>
+      </label><:switch:><:case Match [cgi subinfo] [subscription id]:>
+      <div class="subinfo">
+        <b>Description</b>
+        <p><:replace [replace [subscription description] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
+        <b>Frequency</b>
+        <p><:subscription frequency:></p><:ifMatch [subscription lastSent] "^0000":><:or:>
+        <b>Last Published</b>
+        <p><:date subscription lastSent:></p><:eif:>
+      </div><:endswitch:>
     </div>
     <:iterator end subscriptions:>
     <small><:switch:><:case User confirmed:>
