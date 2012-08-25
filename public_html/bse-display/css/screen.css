@@ -1780,19 +1780,21 @@ form.product {
     clear: left;
 }
 
+.siteuser fieldset.subscribe,
 .siteuser fieldset.name,
 .siteuser fieldset.address,
-.siteuser fieldset.message  {
-    clear: left;
+.siteuser fieldset.message {
+    clear: both;
 }
 
-.siteuser fieldset.newsletter,
+.siteuser fieldset.profile,
 .siteuser fieldset.company,
 .siteuser fieldset.contact,
 .siteuser fieldset.images,
 .siteuser fieldset.notification,
 .siteuser fieldset.delivery {
     float: right;
+    clear: right;
 }
 
 .siteuser fieldset div.state,

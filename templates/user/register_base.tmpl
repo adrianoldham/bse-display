@@ -34,21 +34,6 @@
 
 <:if Cfg "site users" info_on_register 1:>
 
-<:if Subscriptions:>
-  <fieldset class="newsletter">
-    <input type="hidden" name="checkedsubs" value="1" />
-    <legend>Newsletter</legend>
-    <:iterator begin subscriptions:>
-    <div class="checkbox">
-      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:>
-        (<a href="<:target user subinfo id [subscription id] :>" target="_blank">info</a>)
-      </label>
-    </div>
-    <:iterator end subscriptions:>
-    <p class="small">Confirmation will be sent to your email address.</p>
-  </fieldset>
-<:or Subscriptions:><:eif Subscriptions:>
-
   <fieldset class="name">
     <legend>Name</legend>
     <div class="input name1<:ifError_img name1:> error<:or:><:eif:>">
@@ -118,6 +103,32 @@
       <input type="text" name="mobile" id="mobile" size="20" value="<:old mobile:>" title="<:cfg "site users" display_mobile "Mobile":>" class="<:ifRequired mobile:>required<:or:><:eif:><:ifError_img mobile:> error<:or:><:eif:>" />
     </div>
   </fieldset>
+
+<:if Subscriptions:>
+  <fieldset class="subscribe">
+    <input type="hidden" name="checkedsubs" value="1" />
+    <legend>Subscribe</legend>
+    <:iterator begin subscriptions:>
+    <div class="checkbox">
+      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:><:switch:><:case Match [cgi subinfo] [subscription id]:>
+        (<a href="<:target user show_register:>">hide info</a>)<:case default:>
+        (<a href="<:target user show_register subinfo [subscription id] :>">info</a>)<:endswitch:>
+      </label><:switch:><:case Match [cgi subinfo] [subscription id]:>
+      <div class="subinfo">
+        <b>Description</b>
+        <p><:replace [replace [subscription description] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
+        <b>Frequency</b>
+        <p><:subscription frequency:></p><:ifMatch [subscription lastSent] "^0000":><:or:>
+        <b>Last Published</b>
+        <p><:date subscription lastSent:></p><:eif:>
+      </div><:endswitch:>
+    </div>
+    <:iterator end subscriptions:>
+    <small>
+      Confirmation will be sent to your email address.
+    </small>
+  </fieldset>
+<:or Subscriptions:><:eif Subscriptions:>
 
 <:or Cfg:><:eif Cfg:>
 <:include include/custom/user_register_custom.tmpl optional:>

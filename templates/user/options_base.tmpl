@@ -1,6 +1,6 @@
 <:wrap user/userbase.tmpl subtitle=>"Account details" userpage=>"account" :>
 <h2><:param subtitle |h:></h2>
-<form action="<:target user:>" method="post" class="siteuser"><:if Cfg "site users" nopassword:>
+<form action="<:target user:>" method="post" enctype="multipart/form-data" class="siteuser"><:if Cfg "site users" nopassword:>
 <input type="hidden" name="u" value="<:user id:>" />
 <input type="hidden" name="p" value="<:user password:>" />
 <input type="hidden" name="r" value="<:dyntarget user show_opts [user password] u [user id] message "User account details saved successfully":>" /><:or Cfg:><:if Cgi r:>
@@ -35,48 +35,31 @@
     </div>
     <:or Cfg:><:eif Cfg:>
   </fieldset>
-
-<:if Subscriptions:>
-  <fieldset class="newsletter">
-    <input type="hidden" name="saveSubscriptions" value="1" />
-    <legend>Newsletter</legend>
-    <:iterator begin subscriptions:>
-    <div class="checkbox">
-      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:><:switch:><:case Match [cgi subinfo] [subscription id]:>
-        (<a href="<:target user show_opts:>">hide info</a>)<:case default:>
-        (<a href="<:target user show_opts subinfo [subscription id] :>">info</a>)<:endswitch:>
-      </label><:switch:><:case Match [cgi subinfo] [subscription id]:>
-      <div class="subinfo">
-        <b>Description</b>
-        <p><:replace [replace [subscription description] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
-        <b>Frequency</b>
-        <p><:subscription frequency:></p><:ifMatch [subscription lastSent] "^0000":><:or:>
-        <b>Last Published</b>
-        <p><:date subscription lastSent:></p><:eif:>
-      </div><:endswitch:>
-    </div>
-    <:iterator end subscriptions:>
-    <small><:switch:><:case User confirmed:>
-      Confirmation has been completed.<:case User confirmSecret:>
-      Confirmation has been requested, but not completed.<:case default:>
-      Confirmation will be sent to your email address.<:endswitch:>
-    </small>
-  </fieldset>
-<:or Subscriptions:><:eif Subscriptions:>
-
-<:if Cfg "notify files" active:>
-  <fieldset class="notification">
-    <input type="hidden" name="save_file_subs" value="1" />
-    <legend>File Notification</legend>
-    <:iterator begin filecats:>
-    <div class="checkbox">
-      <label><input type="checkbox" name="file_subscriptions" value="<:filecat id:>"<:ifFilecat subscribed:> checked="checked"<:or:><:eif:> /> <:filecat name:></label>
-    </div>
-    <:iterator end filecats:>
-    <small>Receive email notification when file downloads are added to your account in the selected categories.</small>
-  </fieldset>
-<:or Cfg:><:eif Cfg:>
 <:eif Partial_logon:>
+
+  <fieldset class="profile">
+    <legend>Profile</legend>
+    <div class="input affiliate_name<:ifError_img affiliate_name:> error<:or:><:eif:>">
+      <label for="affiliate_name"><:error_img affiliate_name:> <:cfg "site users" display_affiliate_name "Screen Name":>:<:ifRequired affiliate_name:> <span class="required">*</span><:or:><:eif:></label>
+      <input type="text" name="affiliate_name" id="affiliate_name" size="40" value="<:old affiliate_name user affiliate_name:>" title="<:cfg "site users" display_affiliate_name "Screen Name":>" class="required<:ifError_img affiliate_name:> error<:or:><:eif:>" />
+    </div>
+    <:if Imagetemplates:>
+    <:iterator begin imagetemplates:>
+    <:if Siteuser_image [imagetemplate id]:>
+    <div class="image">
+      <label><:imagetemplate description:>: (<a href="<:dyntarget user saveopts id [user id] [concatenate image_ [imagetemplate id] _delete] 1 r [dyntarget user show_opts message "Image deleted successfully"] :>" onclick="return window.confirm('Are you sure you want to delete this image?')">Delete</a>)</label>
+      <img src="<:siteuser_image [imagetemplate id] url:>" width="<:siteuser_image [imagetemplate id] width:>" height="<:siteuser_image [imagetemplate id] height:>" alt="<:siteuser_image [imagetemplate id] alt:>" />
+    </div>
+    <:or Siteuser_image:>
+    <div class="file image_<:imagetemplate id:>_file">
+      <label for="image_<:imagetemplate id:>_file"><:imagetemplate description:>:</label>
+      <input type="file" name="image_<:imagetemplate id:>_file" id="image_<:imagetemplate id:>_file" size="40" title="<:imagetemplate description:>" />
+      <input type="hidden" name="image_<:imagetemplate id:>_alt" value="<:imagetemplate description:>" />
+    </div>
+    <:eif Siteuser_image:>
+    <:iterator end imagetemplates:>
+    <:or Imagetemplates:><:eif Imagetemplates:>
+  </fieldset>
 
   <fieldset class="name">
     <legend>Name</legend>
@@ -158,6 +141,48 @@
       <label><input type="checkbox" name="textOnlyMail" value="1"<:ifOld textOnlyMail user textOnlyMail:> checked="checked"<:or:><:eif:> /> Plain text email (only)</label>
     </div>
   </fieldset>
+  
+<:if Subscriptions:>
+  <fieldset class="subscribe">
+    <input type="hidden" name="saveSubscriptions" value="1" />
+    <legend>Subscribe</legend>
+    <:iterator begin subscriptions:>
+    <div class="checkbox">
+      <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:><:switch:><:case Match [cgi subinfo] [subscription id]:>
+        (<a href="<:target user show_opts:>">hide info</a>)<:case default:>
+        (<a href="<:target user show_opts subinfo [subscription id] :>">info</a>)<:endswitch:>
+      </label><:switch:><:case Match [cgi subinfo] [subscription id]:>
+      <div class="subinfo">
+        <b>Description</b>
+        <p><:replace [replace [subscription description] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
+        <b>Frequency</b>
+        <p><:subscription frequency:></p><:ifMatch [subscription lastSent] "^0000":><:or:>
+        <b>Last Published</b>
+        <p><:date subscription lastSent:></p><:eif:>
+      </div><:endswitch:>
+    </div>
+    <:iterator end subscriptions:>
+    <small><:switch:><:case User confirmed:>
+      Confirmation has been completed.<:case User confirmSecret:>
+      Confirmation has been requested, but not completed.<:case default:>
+      Confirmation will be sent to your email address.<:endswitch:>
+    </small>
+  </fieldset>
+<:or Subscriptions:><:eif Subscriptions:>
+
+<:if Cfg "notify files" active:>
+  <fieldset class="notification">
+    <input type="hidden" name="save_file_subs" value="1" />
+    <legend>Upload Notification</legend>
+    <:iterator begin filecats:>
+    <div class="checkbox">
+      <label><input type="checkbox" name="file_subscriptions" value="<:filecat id:>"<:ifFilecat subscribed:> checked="checked"<:or:><:eif:> /> <:filecat name:></label>
+    </div>
+    <:iterator end filecats:>
+    <small>Receive email notification when file downloads are added to your account in the selected categories.</small>
+  </fieldset>
+<:or Cfg:><:eif Cfg:>
+
 <:include include/custom/user_options_custom.tmpl optional:>
   <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>
   <p class="buttons"><input type="submit" name="saveopts" value="Save changes" accesskey="s" title="AccessKey = s" /></p>
