@@ -21,7 +21,7 @@ input[type=reset] {
     font-weight: bold;
     line-height: 1.25; /* Cannot modify because FF3.6 doesn't allow override when used on a button element */
     text-align: center;
-    text-decoration: none;
+    text-decoration: none !important;
     text-shadow: 0 0.083em 0 rgba(255,255,255,0.75);
 
     -webkit-border-radius: 0.25em;
@@ -49,7 +49,7 @@ input[type=reset] {
 button:hover,
 input[type=submit]:hover,
 input[type=button]:hover {
-    color: @button-hover-color;
+    color: @button-hover-color !important;
     background: @button-hover-background-color; /* Old browsers */
     background: -webkit-gradient(linear, left top, left bottom, from(@button-hover-gradient-from), to(@button-hover-gradient-to)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* Chrome10+,Safari5.1+ */
@@ -65,7 +65,7 @@ input[type=button]:hover {
 button:active,
 input[type=submit]:active,
 input[type=button]:active {
-    color: @button-active-color;
+    color: @button-active-color !important;
     background: @button-active-background-color; /* Old browsers */
     background: -webkit-gradient(linear, left top, left bottom, from(@button-active-gradient-from), to(@button-active-gradient-to)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* Chrome10+,Safari5.1+ */
