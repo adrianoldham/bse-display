@@ -31,7 +31,7 @@
     -moz-box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
     box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
     background-color: @header-background-color;
-    overflow: hidden;
+    //overflow: hidden; // disabled to allow dropdown menus escape
     line-height: 1.25;
 }
 
@@ -118,14 +118,15 @@ div.grid {
 
 /* @group nav */
 
-#nav ul {
+#nav > ul {
     float: left;
     margin: 0;
     padding: 0;
     font-weight: bold;
     list-style: none;
+    overflow: visible !important;
 
-    li {
+    & > li {
         float: left;
         margin: 0;
         padding: 0;
@@ -136,10 +137,11 @@ div.grid {
         position: relative;
 
         a {
-            float: left;
+            //float: left;
             display: block;
             margin: 0;
             padding: 1.5em 1.75em;
+            position: relative;  // for position of the count badge
             color: @reverse !important;
             text-decoration: none !important;
             line-height: 1;
@@ -185,6 +187,84 @@ div.grid {
         }
     }
 }
+
+/* @group mechanics */
+
+#nav ul {
+    
+    li {
+        list-style: none;
+
+        ul { // setup dropdown
+        	position: absolute;
+            margin: 0;
+            padding: 0;
+            width: 20em;
+        	top: 4em; /* depth of first level menu */
+            left: -9999em;
+        	z-index: 1000001;
+        	background-color: #666;
+        }
+
+        &:hover {
+
+            & > ul { // make dropdown visible
+                left: 0;
+            }
+        }
+        
+        li {
+        	width: 100%;
+            
+            ul {
+                top: -0.083em; /* allow for LI border-top */
+                margin-left: 20em;          
+            }
+        }
+    }
+}
+
+/* @end */
+
+/* @group mechanics */
+
+ul.flyout {
+
+    & > li {
+
+        & > ul { // setup flyout
+            position: absolute;
+            margin: 0;
+            margin-left: 20em !important;
+            padding: 0;
+            width: 20em;
+            left: -9999em;
+            z-index: 1000001;
+            background-color: #fff;
+            top: -0.083em; /* allow for LI border-top */
+            box-shadow: 0.25em 0.25em 1em rgba(0,0,0,0.15);
+        }
+        
+        &:hover {
+
+            & > ul { // make flyout visible
+                left: 0;
+            }
+        }
+        
+        li {
+            
+            &.active {
+
+                & > a {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+/* @end */
 
 /* @end */
 
