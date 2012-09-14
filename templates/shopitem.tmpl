@@ -19,11 +19,24 @@
       <label for="qty<:article id:>">Quantity:</label>
       <input type="text" name="quantity" id="qty<:article id:>" size="2" value="1" class="required" />
     </div>
-  </fieldset><:switch:><:case Or [product product_code] [product leadTime]:>
+  </fieldset><:switch:><:case Or [product product_code] [product leadTime] [article.tag_objects]:>
   <ul class="meta"><:ifProduct product_code:>
     <li><span>Product Code:</span> <:product product_code:></li><:or:><:eif:><:ifProduct leadTime:> 
-    <li><span>Usually ships in:</span> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></li><:or:><:eif:>
-  </ul><:case default:><:endswitch:>
+    <li><span>Usually ships in:</span> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></li><:or:><:eif:><:case default:><:endswitch:>
+    <:-.if [article.tag_objects]:>
+    <:.set tags = [ article.tag_objects ] :>
+    <:-.set tagcats = bse.categorize_tags(tags) -:>
+    <:-.for tagcat in tagcats:>
+    <li>
+      <span><:= tagcat.name |html :>:</span>
+      <:-.for tag in tagcat.tags:>
+      <a href="<:= bse.url(article.parent):><:= bse.url(article.parent) =~ /\?/ ? "&" : "?" |html :>tags=<:= tag.name |uri :>"><:= tag.val |html :></a>
+      <:-.if !loop.is_last:>, <:.end:>
+      <:-.end for:>
+    </li>
+    <:-.end for:>
+  </ul>
+  <:-.end:>
   <p class="buttons"><:switch:><:case Embedded:><:case Dynamic:><:if InWishlist:>
     <a href="<:target nuser wishlistdel product_id [article id] r [url article] :>" title="Remove from my wishlist" class="wishlist remove">Remove from my wishlist</a><:or InWishlist:>
     <a href="<:target nuser wishlistadd product_id [article id] r [url article] :>" title="Add to my wishlist" class="wishlist add">Add to my wishlist</a><:eif InWishlist:><:endswitch:>
