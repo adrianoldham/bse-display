@@ -33,41 +33,22 @@
     <:case Match [field htmltype] "^textarea$":>
     <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>"<:ifField readonly:> readonly="readonly" <:or:><:eif:><:ifField placeholder:>placeholder="<:field placeholder:>" <:or:><:eif:><:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
     
-    <:case Match [field htmltype] "^select$":><:if Field values_group_sql:>
+    <:case Match [field htmltype] "^(select|multiselect)$":><:if Field values_group_sql:>
     <:values_select:><:or Field:>
-    <select name="<:field name:>" id="<:field name:>" <:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
+    <select name="<:field name:>" id="<:field name:>"<:ifMatch [field htmltype] "^multiselect$":> size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple" <:or:><:eif:><:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
       <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:or:><:eif:>><:value name:></option>
       <:iterator end values:>
     </select><:eif Field:>
     
-    <:case Match [field htmltype] "^multiselect$":>
-    <select name="<:field name:>" id="<:field name:>" size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple" <:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>"  title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
-      <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:or:><:eif:>><:value name:></option>
-      <:iterator end values:>
-    </select>
-    
-    <:case Match [field htmltype] "^radio$":>
+    <:case Match [field htmltype] "^(radio|checkbox)$":>
     <fieldset id="<:field name:>"><:ifField hidelabel:><:or:>
       <legend><:field description:></legend><:eif:>
-      <:iterator begin values:><label for="<:field name:>_<:value id:>"><input type="radio" name="<:field name:>" value="<:value id:>" id="<:field name:>_<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <span class="radio"><:value name:></span></label><:iterator separator values:>
+      <:iterator begin values:><label for="<:field name:>_<:value id:>"><input type="<:field htmltype:>" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <span class="<:field htmltype:>"><:value name:></span></label><:iterator separator values:>
       <:iterator end values:>
     </fieldset>
     
-    <:case Match [field htmltype] "^checkbox$":>
-    <fieldset id="<:field name:>"><:ifField hidelabel:><:or:>
-      <legend><:field description:></legend><:eif:>
-      <:iterator begin values:><label for="<:field name:>_<:value id:>"><input type="checkbox" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <span class="checkbox"><:value name:></span></label><:iterator separator values:>
-      <:iterator end values:>
-    </fieldset>
-    
-    <:case Match [field htmltype] "^file$":>
-    <input type="file" name="<:field name:>" id="<:field name:>" value="" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:> <:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
-
-    <:case Match [field htmltype] "^password$":>
-    <input type="password" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:> <:ifField placeholder:>placeholder="<:field placeholder:>" <:or:><:eif:><:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
-        
     <:case default:>
-    <input type="text" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:> <:ifField placeholder:>placeholder="<:field placeholder:>" <:or:><:eif:><:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
+    <input type="<:ifField htmltype:><:field htmltype:><:or:>text<:eif:>" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:> <:ifField placeholder:>placeholder="<:field placeholder:>" <:or:><:eif:><:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
     <:endswitch:>
     
     <:if Field notes:>
