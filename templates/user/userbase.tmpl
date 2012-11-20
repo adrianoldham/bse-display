@@ -1,4 +1,4 @@
-<:wrap base.tmpl title=>[cfg "site users" userbase_title "Account Manager"] :>
+<:wrap base.tmpl title=>[cond [param title] [param title |h] [cfg "site users" userbase_title "Account Manager"]] :>
 <div class="article user <:param userpage:>">
 <h1 class="pagetitle"><:param title |h:></h1><:switch:><:case Param nomessage:><:case Message:>
 <p id="message" class="error"><:message:></p><:case default:><:endswitch:>
