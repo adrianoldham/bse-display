@@ -2,4 +2,15 @@
 <div class="article">
 <h1 class="pagetitle"><:param title |h:></h1>
 <p id="message" class="error"><:error:></p>
+<div class="body">
+<p>The request you attempted had some problems, we apologise for the inconvenience.  You may like to browse elsewhere on the site, here are some useful places to start:</p>
+<ul><:iterator begin inlines [cfg "error settings" articles "1 6"]:>
+<li><a href="<:url inline:>"><:switch:><:case Inline titleAlias:><:lc [inline titleAlias]:><:case default:><:lc [inline title]:><:endswitch:></a></li><:iterator end inlines:>
+<li><a href="<:target search:>">search</a></li>
+</ul>
+<:- ifReferer:>
+<div class="note">
+<p>Referrer: <:referer:></p>
+</div>
+<:- eif:>
 </div>
