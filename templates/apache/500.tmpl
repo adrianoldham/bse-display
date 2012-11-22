@@ -1,6 +1,6 @@
 <:wrap apache/errorbase.tmpl title=>"Oops! Server error" :>
 <div id="article_error" class="article">
-<h1 id="title_error" class="pagetitle"><:param title:> <!--#echo var='REDIRECT_STATUS' --></h1>
+<h1 id="title_error" class="pagetitle"><:param title |h:> <!--#echo var='REDIRECT_STATUS' --></h1>
 <div id="body_error" class="body">
 <p>The request you attempted had a critical problem resulting in a server error, we apologise for the inconvenience.  Assuming anything works right now, you may like to browse elsewhere on the site, here are some useful places to start:</p>
 <ul><:iterator begin inlines [cfg "error settings" articles "1 6"]:>
@@ -8,7 +8,7 @@
 <li><a href="<:target search:>">search</a></li>
 </ul>
 <div class="note">
-<p>It seems you have arrived at this page due to a server error, you can help us resolve problems by notifying our <a href="mailto:<!--#echo var='SERVER_ADMIN' -->?subject=<:param title:> [<!--#echo var='REDIRECT_STATUS' -->] on <!--#echo var='SERVER_NAME' -->&amp;body=Error time: <!--#echo var='DATE_LOCAL' --> and Requested address: <!--#echo var='REQUEST_URI' -->">webmaster</a>, please include the address of the request and what actions you were performing at the time of the error.</p>
+<p>It seems you have arrived at this page due to a server error, you can help us resolve problems by notifying our <a href="mailto:<!--#echo var='SERVER_ADMIN' -->?subject=<:param title |h:> [<!--#echo var='REDIRECT_STATUS' -->] on <!--#echo var='SERVER_NAME' -->&amp;body=Error time: <!--#echo var='DATE_LOCAL' --> and Requested address: <!--#echo var='REQUEST_URI' -->">webmaster</a>, please include the address of the request and what actions you were performing at the time of the error.</p>
 <p>Request: <!--#echo var="REQUEST_URI" --></p>
 <!--#if expr="$HTTP_REFERER != ''" -->
 <p>Referrer: <!--#echo var="HTTP_REFERER" --></p>

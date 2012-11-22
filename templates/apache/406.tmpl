@@ -1,6 +1,6 @@
 <:wrap apache/errorbase.tmpl title=>"Sorry! Not acceptable" :>
 <div id="article_error" class="article">
-<h1 id="title_error" class="pagetitle"><:param title:> <!--#echo var='REDIRECT_STATUS' --></h1>
+<h1 id="title_error" class="pagetitle"><:param title |h:> <!--#echo var='REDIRECT_STATUS' --></h1>
 <div id="body_error" class="body">
 <p>The request you attempted failed to pass the server security policy, we apologise for the inconvenience.  You may like to browse elsewhere on the site, here are some useful places to start:</p>
 <ul><:iterator begin inlines [cfg "error settings" articles "1 6"]:>
@@ -9,11 +9,11 @@
 </ul>
 <div class="note">
 <!--#if expr="$HTTP_REFERER != ''" -->
-<p>It seems you have arrived at this page by following a <a href="<!--#echo var='HTTP_REFERER' -->">link from another page</a>, you can help us assess and improve our security policies by notifying our <a href="mailto:<!--#echo var='SERVER_ADMIN' -->?subject=<:param title:> [<!--#echo var='REDIRECT_STATUS' -->] on <!--#echo var='SERVER_NAME' -->&amp;body=Requested address: <!--#echo var='REQUEST_URI' --> and Referring address: <!--#echo var='HTTP_REFERER' -->">webmaster</a>, please include the address and the address of the referring page.</p>
+<p>It seems you have arrived at this page by following a <a href="<!--#echo var='HTTP_REFERER' -->">link from another page</a>, you can help us assess and improve our security policies by notifying our <a href="mailto:<!--#echo var='SERVER_ADMIN' -->?subject=<:param title |h:> [<!--#echo var='REDIRECT_STATUS' -->] on <!--#echo var='SERVER_NAME' -->&amp;body=Requested address: <!--#echo var='REQUEST_URI' --> and Referring address: <!--#echo var='HTTP_REFERER' -->">webmaster</a>, please include the address and the address of the referring page.</p>
 <p>Request: <!--#echo var="REQUEST_URI" --></p>
 <p>Referrer: <!--#echo var="HTTP_REFERER" --></p>
 <!--#else -->
-<p>You can help us assess and improve our security policies by notifying our <a href="mailto:<!--#echo var='SERVER_ADMIN' -->?subject=<:param title:> [<!--#echo var='REDIRECT_STATUS' -->] on <!--#echo var='SERVER_NAME' -->&amp;body=Requested address: <!--#echo var='REQUEST_URI' -->">webmaster</a>, please include the address of the request and what actions you were performing at the time of the error.</p>
+<p>You can help us assess and improve our security policies by notifying our <a href="mailto:<!--#echo var='SERVER_ADMIN' -->?subject=<:param title |h:> [<!--#echo var='REDIRECT_STATUS' -->] on <!--#echo var='SERVER_NAME' -->&amp;body=Requested address: <!--#echo var='REQUEST_URI' -->">webmaster</a>, please include the address of the request and what actions you were performing at the time of the error.</p>
 <p>Request: <!--#echo var="REQUEST_URI" --></p>
 <!--#endif -->
 </div>
