@@ -93,7 +93,7 @@ Item                                       Code         Qty     Price   Extended
 
              Name      : <:cfg shop accountname:>
              BSB       : <:cfg shop bsb:><:ifCfg shop swiftcode:>
-             SWIFT     : <:cfg shop swiftcode |h:><:or:><:eif:>
+             SWIFT     : <:cfg shop swiftcode:><:or:><:eif:>
              Account   : <:cfg shop accountno:>
              Reference : <:order id |%06d:><:or:><:eif
 :><:if Cfg tryandbyte aufreight:><:if Order customInt1:>
