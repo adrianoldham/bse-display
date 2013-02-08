@@ -1,6 +1,6 @@
 <:wrap user/userbase.tmpl subtitle=>"Account details" userpage=>"account" :>
 <h2><:param subtitle |h:></h2>
-<form action="<:target user:>" method="post" enctype="multipart/form-data" class="siteuser"><:if Cfg "site users" nopassword:>
+<form action="<:target user |h:>" method="post" enctype="multipart/form-data" class="siteuser"><:if Cfg "site users" nopassword:>
 <input type="hidden" name="u" value="<:user id:>" />
 <input type="hidden" name="p" value="<:user password:>" />
 <input type="hidden" name="r" value="<:dyntarget user show_opts [user password] u [user id] message "User account details saved successfully":>" /><:or Cfg:><:if Cgi r:>
@@ -149,8 +149,8 @@
     <:iterator begin subscriptions:>
     <div class="checkbox">
       <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:><:switch:><:case Match [cgi subinfo] [subscription id]:>
-        (<a href="<:target user show_opts:>">hide info</a>)<:case default:>
-        (<a href="<:target user show_opts subinfo [subscription id] :>">info</a>)<:endswitch:>
+        (<a href="<:target user show_opts |h:>">hide info</a>)<:case default:>
+        (<a href="<:target user show_opts subinfo [subscription id] |h:>">info</a>)<:endswitch:>
       </label><:switch:><:case Match [cgi subinfo] [subscription id]:>
       <div class="subinfo">
         <b>Description</b>

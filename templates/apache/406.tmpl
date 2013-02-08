@@ -5,7 +5,7 @@
 <p>The request you attempted failed to pass the server security policy, we apologise for the inconvenience.  You may like to browse elsewhere on the site, here are some useful places to start:</p>
 <ul><:iterator begin inlines [cfg "error settings" articles "1 6"]:>
 <li><a href="<:url inline:>"><:switch:><:case Inline titleAlias:><:lc [inline titleAlias]:><:case default:><:lc [inline title]:><:endswitch:></a></li><:iterator end inlines:>
-<li><a href="<:target search:>">search</a></li>
+<li><a href="<:target search |h:>">search</a></li>
 </ul>
 <div class="note">
 <!--#if expr="$HTTP_REFERER != ''" -->

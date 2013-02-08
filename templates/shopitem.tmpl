@@ -4,7 +4,7 @@
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:switch:><:case Product retailPrice:><:if Product listed:>
-<form id="add_form_<:article id:>" action="<:target shop:>" method="post" class="product">
+<form id="add_form_<:article id:>" action="<:target shop |h:>" method="post" class="product">
   <input type="hidden" name="id" value="<:product id:>" />
   <input type="hidden" name="r" value="<:cfg shop add_refresh [url top] :>" />
   <fieldset class="group">
@@ -38,8 +38,8 @@
   </ul>
   <:-.end:>
   <p class="buttons"><:switch:><:case Embedded:><:case Dynamic:><:if InWishlist:>
-    <a href="<:target nuser wishlistdel product_id [article id] r [url article] :>" title="Remove from my wishlist" class="wishlist remove">Remove from my wishlist</a><:or InWishlist:>
-    <a href="<:target nuser wishlistadd product_id [article id] r [url article] :>" title="Add to my wishlist" class="wishlist add">Add to my wishlist</a><:eif InWishlist:><:endswitch:>
+    <a href="<:target nuser wishlistdel product_id [article id] r [url article] |h:>" title="Remove from my wishlist" class="wishlist remove">Remove from my wishlist</a><:or InWishlist:>
+    <a href="<:target nuser wishlistadd product_id [article id] r [url article] |h:>" title="Add to my wishlist" class="wishlist add">Add to my wishlist</a><:eif InWishlist:><:endswitch:>
     <input type="submit" name="add" id="add<:article id:>" value="Add to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" />
     <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" />
   </p>

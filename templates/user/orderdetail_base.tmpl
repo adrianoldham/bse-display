@@ -1,6 +1,6 @@
 <:wrap user/userbase.tmpl title=>"Order Details" subtitle=>"Order receipt" userpage=>"orders" :>
 <h2><:param subtitle |h:></h2>
-<p><a href="<:target user userpage _t orders:>">Back to order history</a></p>
+<p><a href="<:target user userpage _t orders |h:>">Back to order history</a></p>
 
 <div class="group">
 <table class="vertical left">
@@ -244,7 +244,7 @@
 
 <:if Orderfiles:>
 <h2>Download files</h2>
-<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:target user userpage _t files:>">file downloads</a> section of your account.</p>
+<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:target user userpage _t files |h:>">file downloads</a> section of your account.</p>
 <table class="items files">
   <caption>Files available</caption>
   <thead>

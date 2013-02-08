@@ -238,7 +238,7 @@
 
 <:if Orderfiles:>
 <h3>Download files</h3>
-<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:target user userpage _t files:>">file downloads</a> section of your account.</p>
+<p>Your purchase includes file downloads, for your convenience they are available below. You can download your files later from the <a href="<:target user userpage _t files |h:>">file downloads</a> section of your account.</p>
 
 <table class="items files group">
   <caption>Files available</caption>
@@ -262,8 +262,8 @@
 <:or Orderfiles:><:eif Orderfiles:>
 
 <:ifOrder userId:>
-<p>This order is available in your <a href="<:target user:>">account manager</a>, you can review more details in your <a href="<:target user userpage _t orders:>">order history</a>.</p>
-<p class="bse-buttons"><a href="<:target user orderdetail id [order id]:>" class="bse-button">Order status</a></p><:or:>
+<p>This order is available in your <a href="<:target user |h:>">account manager</a>, you can review more details in your <a href="<:target user userpage _t orders |h:>">order history</a>.</p>
+<p class="bse-buttons"><a href="<:target user orderdetail id [order id] |h:>" class="bse-button">Order status</a></p><:or:>
 
 <p>You can review details of this order and track its status online.</p>
-<p class="bse-buttons"><a href="<:target user oda id [order randomId]:>" class="bse-button">Order status</a></p><:eif:>
+<p class="bse-buttons"><a href="<:target user oda id [order randomId] |h:>" class="bse-button">Order status</a></p><:eif:>

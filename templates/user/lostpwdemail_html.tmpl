@@ -7,9 +7,9 @@ access your account details.</p>
 
 <p>If you did not make this request, don’t worry, this reminder email is only ever sent to the <a href="mailto:<:user email:>">email address</a> of the account owner.</p>
 
-<!--<a href="<:target user:>?userpage=<:user password:>&amp;u=<:user id:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
+<!--<a href="<:target user |h:>?userpage=<:user password:>&amp;u=<:user id:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
 
-<p class="bse-buttons"><a href="<:target user:>?userpage=<:user password:>&amp;u=<:user id:>" class="bse-button">Login now</a></p>
+<p class="bse-buttons"><a href="<:target user |h:>?userpage=<:user password:>&amp;u=<:user id:>" class="bse-button">Login now</a></p>
 
 <:or Cfg:><p>We have received a request indicating that you’ve lost or forgotten your password.</p>
 
@@ -17,8 +17,8 @@ access your account details.</p>
 
 <p>This reset link will remain active for <:cfg "lost password" age_limit 7:> day<:ifArithmetic [cfg "lost password" age_limit 7] > 1:>s<:or:><:eif:>.</p>
 
-<!--<a href="<:target user:>/lost/<:user lost_id:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Reset password</td></tr></table></a>//-->
+<!--<a href="<:target user |h:>/lost/<:user lost_id:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Reset password</td></tr></table></a>//-->
 
-<p class="bse-buttons"><a href="<:target user lost id [user lost_id]:>" class="bse-button">Reset password</a></p><:eif Cfg:>
+<p class="bse-buttons"><a href="<:target user lost id [user lost_id] |h:>" class="bse-button">Reset password</a></p><:eif Cfg:>
 
 <p><small>Requested from this IP: <:host:></small></p>

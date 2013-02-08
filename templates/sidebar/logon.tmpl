@@ -4,8 +4,8 @@
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:>
-  <p><a href="<:target user:>"><:user name1:> <:user name2:> - (<:user userId:>)</a></p><:or User:>
-  <form id="quicklogon_form" action="<:target user:>" method="post">
+  <p><a href="<:target user |h:>"><:user name1:> <:user name2:> - (<:user userId:>)</a></p><:or User:>
+  <form id="quicklogon_form" action="<:target user |h:>" method="post">
     <input type="hidden" name="r" value="<:url top:>" />
     <fieldset class="logon">
       <legend><:article title:></legend>

@@ -43,7 +43,7 @@
     <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:lcgi tags |U:>/<:dynunused_tag name |U:>&amp;pp=<:dynallprods_perpage:>"><:dynunused_tag val:></a> (<:dynunused_tag count:>)
   </li><:iterator end dynunused_tags:><:or:><:eif:><:iterator end dynunused_tagcats:>
 </ul><:or Dynunused_tagcats:><:eif Dynunused_tagcats:><:switch:><:case dynallprod_count tags:[lcgi tags |z] paged:pp=20 :>
-<form method="post" action="<:target shop:>">
+<form method="post" action="<:target shop |h:>">
   <input type="hidden" name="r" value="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:lcgi tags |U:>&amp;pp=<:dynallprods_perpage:>" />
   <div id="products_<:article id:>" class="grid"><:iterator begin dynallprods tags:[lcgi tags |z] paged:pp=20 :>
     <div class="product">

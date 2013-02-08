@@ -1,6 +1,6 @@
 <:if Match [script] "shop":><:ifMsg:><p class="error"><:msg:></p><:or:>
 <:eif:><:or Match:><:eif Match:><:if Dyncart:><div class="article">
-  <form action="<:target shop:>" method="post">
+  <form action="<:target shop |h:>" method="post">
   <table class="cart">
     <caption>Shopping Cart <span>(Contains <:dyncarttotalunits:> item<:if Eq [dyncarttotalunits] "1":><:or Eq:>s<:eif Eq:>)</span></caption>
     <thead>

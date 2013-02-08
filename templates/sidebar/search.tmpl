@@ -1,6 +1,6 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
-<form id="quicksearch_form" action="<:target search:>" method="post">
+<form id="quicksearch_form" action="<:target search |h:>" method="post">
   <fieldset>
     <legend><:article title:></legend>
     <div class="input">

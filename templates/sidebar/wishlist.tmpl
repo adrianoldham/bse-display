@@ -16,7 +16,7 @@
       </tr><:iterator end wishlist:>
     </tbody>
   </table>
-  <form action="<:target user:>" method="post">
+  <form action="<:target user |h:>" method="post">
     <p class="buttons">
       <input type="hidden" name="_t" value="wishlist" />
       <input type="submit" name="wishlistview" value="View wishlist" accesskey="w" title="AccessKey = w" />

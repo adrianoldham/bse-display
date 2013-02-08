@@ -1,7 +1,7 @@
 <:wrap user/userbase.tmpl subtitle=>"Wishlist" userpage=>"wishlist" :>
 <h2><:param subtitle |h:></h2>
 <p>Copy and paste <a href="<:dyntarget user wishlist user [user userId]:>">this link</a> to give others access to your wishlist.</p>
-<form id="add_multiple_form_1" action="<:target shop:>" method="post">
+<form id="add_multiple_form_1" action="<:target shop |h:>" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <table class="items wishlist">
   <caption>Wishlist items</caption><:if Wishlist:>

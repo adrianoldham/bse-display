@@ -8,7 +8,7 @@
 <:body:>
 </div><:or Or:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:><:if Dynamic:><:switch:><:case Embedded:><:case Dynallprods:><:include include/sortallkids.tmpl:>
-<form id="add_multiple_form_<:article id:>" action="<:target shop:>" method="post">
+<form id="add_multiple_form_<:article id:>" action="<:target shop |h:>" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <table class="items">
   <caption>Select Items</caption>
