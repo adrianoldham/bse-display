@@ -31,7 +31,7 @@
     <:bodytext field bodytext:>
 
     <:case Match [field htmltype] "^textarea$":>
-    <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>"<:ifField readonly:> readonly="readonly" <:eif:><:ifField placeholder:>placeholder="<:field placeholder:>" <:eif:><:ifField required:>required="required" <:eif:>class="<:ifField required:>required<:eif:><:ifError_img [field name]:> error<:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
+    <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>" <:ifField readonly:>readonly="readonly" <:eif:><:ifField placeholder:>placeholder="<:field placeholder:>" <:eif:><:ifField required:>required="required" <:eif:>class="<:ifField required:>required<:eif:><:ifError_img [field name]:> error<:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
 
     <:case Match [field htmltype] "^(select|multiselect)$":><:if Field values_group_sql:>
     <:values_select:><:or Field:>
