@@ -39,7 +39,7 @@
   <dc:language><:cfg rss language "en":></dc:language>
   <dc:creator><:cfg rss creator:></dc:creator>
   <dc:date><:replace [today "%FT%T%z"] "(\d\d)$" ":$1":></dc:date>
-  
+
   <items>
     <rdf:Seq><:iterator begin allkids_of [cfg rss sections 1]:>
       <rdf:li rdf:resource="<:ifMatch [ofallkid link] "://":><:or:><:cfg site url:><:eif:><:ofallkid link:>" /><:iterator end allkids_of:>

@@ -90,7 +90,7 @@
         <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old billCountry] [uc [dyncfgentry key]]] [ifEq [old billCountry] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
-      <input type="text" name="billCountry" id="billCountry" size="20" value="<:old billCountry:>" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img billCountry:> error<:eif:>" /><:eif Cfgsection:> 
+      <input type="text" name="billCountry" id="billCountry" size="20" value="<:old billCountry:>" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img billCountry:> error<:eif:>" /><:eif Cfgsection:>
     </div>
   </fieldset>
   <fieldset class="contact">
@@ -178,7 +178,7 @@
         <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old delivCountry] [uc [dyncfgentry key]]] [ifEq [old delivCountry] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
-      <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry:>" title="<:cfg "site users" display_delivCountry "Country":>" class="required<:ifError_img delivCountry:> error<:eif:>" /><:eif Cfgsection:> 
+      <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry:>" title="<:cfg "site users" display_delivCountry "Country":>" class="required<:ifError_img delivCountry:> error<:eif:>" /><:eif Cfgsection:>
     </div>
   </fieldset>
   <fieldset class="contact">

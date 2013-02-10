@@ -3,10 +3,10 @@
 Hi <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
 
 <:if Cfg "site users" nopassword
-:>We have received a request to send you a reminder of the link used to access 
+:>We have received a request to send you a reminder of the link used to access
 your account details.
 
-If you did not make this request, don’t worry, this reminder email is only ever 
+If you did not make this request, don’t worry, this reminder email is only ever
 sent to the email address of the account owner.
 
 ACCOUNT ACCESS LINK:
@@ -15,12 +15,12 @@ ACCOUNT ACCESS LINK:
 <:or Cfg
 :>We have received a request indicating that you’ve lost or forgotten your password.
 
-If you did not make this request, don’t worry, simply ignore this email, a reset 
+If you did not make this request, don’t worry, simply ignore this email, a reset
 link is time limited and only ever sent to the email address of the account owner.
 
 PASSWORD RESET LINK:
   <:target user lost id [user lost_id] |U:>
-  
+
 This reset link will remain active for <:cfg "lost password" age_limit 7:> day<:ifArithmetic [cfg "lost password" age_limit 7] > 1:>s<:eif:>.
 
 <:eif Cfg

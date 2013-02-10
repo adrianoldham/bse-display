@@ -25,7 +25,7 @@
     </tr><:iterator end orders:>
   </tbody><:or Orders:>
   <tbody>
-    <tr> 
+    <tr>
       <td colspan="4" class="noitems">You haven’t purchased anything</td>
     </tr>
   </tbody><:eif Orders:>
@@ -38,7 +38,7 @@
 <table class="items">
   <caption>Order <:order id |%06d:> items</caption>
   <thead>
-    <tr> 
+    <tr>
       <th class="item">Item</th>
       <th class="code">Code</th>
       <th class="quantity">Qty</th>
@@ -47,7 +47,7 @@
     </tr>
   </thead>
   <tbody><:iterator begin items:>
-    <tr> 
+    <tr>
       <td class="item"><:ifEq [item productId] -1:>
         <:item title:><:or:>
         <a href="<:url product:>"><:item title:></a><:eif:> <:ifOptions:><span><:options:></span><:eif:><:if And [item description] [cfg shop product_description 1]:>

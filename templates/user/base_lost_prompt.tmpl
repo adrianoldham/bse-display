@@ -1,6 +1,6 @@
 <:wrap user/pubbase.tmpl title=>"Change Password" userpage=>"lostprompt" :>
 <:include include/usermessage.tmpl:>
-<form action="<:target user |h:>" method="post" class="siteuser"><:if User:> 
+<form action="<:target user |h:>" method="post" class="siteuser"><:if User:>
   <p class="alert">You are already logged in as <a href="<:target user |h:>"><:user userId:></a>, if this is not you, please <a href="<:target user logoff |h:>">logout now</a>.</p><:eif User:><:if Cgi r:>
   <input type="hidden" name="r" value="<:cgi r:>" /><:eif Cgi:>
   <input type="hidden" name="id" value="<:lostid:>" />

@@ -21,7 +21,7 @@
       </li><:iterator end matchfiles:>
     </ul><:eif Matchfiles:>
   </dd><:iterator end results:>
-</dl> 
+</dl>
 <ul class="pagination">
   <li><span>Result pages:</span>
     <ul><:iterator begin pages:>
@@ -32,9 +32,9 @@
     </ul>
   </li>
 </ul>
-<:or Results:> 
+<:or Results:>
 <p>No documents were found that matched your search terms.</p>
-<:eif Results:><:or Search:> 
+<:eif Results:><:or Search:>
 <:eif Search:><:if Results:><:or Results:>
 <div class="body">
   <p>By default results are returned if any one of your keywords is found in the document.</p>

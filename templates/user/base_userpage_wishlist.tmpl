@@ -6,14 +6,14 @@
 <table class="items wishlist">
   <caption>Wishlist items</caption><:if Wishlist:>
   <thead>
-    <tr> 
+    <tr>
       <th class="item">Item</th>
       <th class="price">Price</th>
       <th class="action">Action</th>
     </tr>
   </thead>
   <tbody><:iterator begin wishlist:>
-    <tr id="item_<:wishlistentry id:>"> 
+    <tr id="item_<:wishlistentry id:>">
       <td class="item">
         <a href="<:url wishlistentry:>"><:wishlistentry title:></a><:if And [wishlistentry description] [cfg shop product_description 1]:>
         <div class="description"><:wishlistentry description:></div><:eif And:>
@@ -29,7 +29,7 @@
       </td>
     </tr><:iterator end wishlist:>
   </tbody><:or Wishlist:>
-    <tr> 
+    <tr>
       <td colspan="4" class="noitems">Your wishlist is empty</td>
     </tr><:eif Wishlist:>
 </table>

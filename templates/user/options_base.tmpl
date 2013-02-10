@@ -114,7 +114,7 @@
         <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old country user country] [uc [dyncfgentry key]]] [ifEq [old country user country] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
-      <input type="text" name="country" id="country" size="40" value="<:old country user country:>" title="<:cfg "site users" display_country "Country":>" class="<:ifRequired country:>required<:eif:><:ifError_img country:> error<:eif:>" /><:eif Cfgsection:> 
+      <input type="text" name="country" id="country" size="40" value="<:old country user country:>" title="<:cfg "site users" display_country "Country":>" class="<:ifRequired country:>required<:eif:><:ifError_img country:> error<:eif:>" /><:eif Cfgsection:>
     </div>
   </fieldset>
 
@@ -137,11 +137,11 @@
       <input type="text" name="email" id="email" size="40" value="<:old email user email:>" title="<:cfg "site users" display_email "Email Address":>" class="required<:ifError_img email:> error<:eif:>" />
     </div>
     <div class="checkbox textOnlyMail<:ifError_img textOnlyMail:> error<:eif:>">
-      <input type="hidden" name="saveTextOnlyMail" value="1" /> 
+      <input type="hidden" name="saveTextOnlyMail" value="1" />
       <label><input type="checkbox" name="textOnlyMail" value="1"<:ifOld textOnlyMail user textOnlyMail:> checked="checked"<:eif:> /> Plain text email (only)</label>
     </div>
   </fieldset>
-  
+
 <:if Subscriptions:>
   <fieldset class="subscribe">
     <legend>Subscribe</legend>

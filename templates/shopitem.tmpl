@@ -21,7 +21,7 @@
     </div>
   </fieldset><:switch:><:case Or [product product_code] [product leadTime] [article.tag_objects]:>
   <ul class="meta"><:ifProduct product_code:>
-    <li><span>Product Code:</span> <:product product_code:></li><:eif:><:ifProduct leadTime:> 
+    <li><span>Product Code:</span> <:product product_code:></li><:eif:><:ifProduct leadTime:>
     <li><span>Usually ships in:</span> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></li><:eif:><:case default:><:endswitch:>
     <:-.if [article.tag_objects]:>
     <:.set tags = [ article.tag_objects ] :>
@@ -49,7 +49,7 @@
 <:include interest/register.tmpl:><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:eif Or:><:if Or [ifStepparents] [ifStepkids]:> 
+</div><:eif Or:><:if Or [ifStepparents] [ifStepkids]:>
 <div class="relatedsections">
   <p><strong>Related categories:</strong></p>
   <ul><:iterator begin stepparents:>

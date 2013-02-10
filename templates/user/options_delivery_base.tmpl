@@ -57,7 +57,7 @@
         <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old delivCountry user delivCountry] [uc [dyncfgentry key]]] [ifEq [old delivCountry user delivCountry] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
-      <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry user delivCountry:>" title="<:cfg "site users" display_country "Country":>" class="<:ifError_img delivCountry:>error<:eif:>" /><:eif Cfgsection:> 
+      <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry user delivCountry:>" title="<:cfg "site users" display_country "Country":>" class="<:ifError_img delivCountry:>error<:eif:>" /><:eif Cfgsection:>
     </div>
   </fieldset>
 

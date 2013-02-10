@@ -97,7 +97,7 @@
       <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType1" value="1" <:checkedPayment Cheque:> />
       <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="1" /><:eif MultPaymentTypes:> <label for="paymentType1">Cheque</label></dt>
       <dd>
-        <p>Please send a cheque to:</p> 
+        <p>Please send a cheque to:</p>
         <address>
           <b><:cfg shop address1 |h:></b><br />
           <:cfg shop address2 |h:><br />

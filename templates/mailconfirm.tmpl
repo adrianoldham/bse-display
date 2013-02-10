@@ -51,7 +51,7 @@ Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
 <:iterator begin items:><:item title |40:>   <:item product_code |12:> <:item units |%3d:> <:item price |m9:> <:extended price |m10:><:ifOptions:>
    <:options:><:eif:>
-<:iterator end items 
+<:iterator end items
 :>--------------------------------------------------------------------------------
 <:if Cfg shop shipping
 :>                                                             Freight: <:switch:><:case Order shipping_cost:><:order shipping_cost |m10:><:case Match [order shipping_name] ^contact$
@@ -104,7 +104,7 @@ This order qualifies for free shipping within Australia.<:eif:><:eif Order:><:ei
 
 <:with begin wrap 80:>Instructions: <:order instructions:><:with end wrap:><:eif:><:ifOrder userId:>
 
-This order is available in your account manager, you can track the status of 
+This order is available in your account manager, you can track the status of
 purchases in your order history.
 
 ORDER STATUS LINK:

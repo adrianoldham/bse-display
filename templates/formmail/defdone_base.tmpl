@@ -4,17 +4,17 @@
   <:switch:>
   <!-- Start special case fields //-->
   <:case Match [field htmltype] "^hidden$":>
-  <:case Match [field htmltype] "^h[123]$" |x:><:switch:><:case Eq [field_number] "1":><:case default:></table><:endswitch:> 
-  <<:field htmltype:> class="<:field class:>"><:field description:></<:field htmltype:>>  
+  <:case Match [field htmltype] "^h[123]$" |x:><:switch:><:case Eq [field_number] "1":><:case default:></table><:endswitch:>
+  <<:field htmltype:> class="<:field class:>"><:field description:></<:field htmltype:>>
   <:case Match [field htmltype] "^fieldset$":><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><:case Eq [field_number] "1":><:case default:></table><:endswitch:>
   <table class="<:field name:> <:field class:>">
-    <caption><:field description:></caption>  
+    <caption><:field description:></caption>
   <:case default:><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><table><:case Match [previous_field htmltype] "^fieldset$":><:case Eq [field_number] "1":><table><:case default:><:endswitch:>
   <tr>
     <th><:field description:></th>
     <td>
     <:switch:>
-    <!-- Start standard fields //-->    
+    <!-- Start standard fields //-->
     <:case Match [field htmltype] "^textarea$":><p><:dynreplace [dynreplace [field value] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
     <:case Match [field htmltype] "^password$":>********
     <:case Field values:><:iterator begin values:><!--<:value id:>: --><:value name:><:iterator separator values:><br />
