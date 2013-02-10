@@ -1,6 +1,6 @@
 <:wrap email/base.tmpl classes=>"bse-formmail" :>
 <h2><:formcfg title |h:></h2>
-<p>Your online form has been submitted<:if User:> by <:user userId |h:> (<a href="mailto:<:user email |h:>"><:user email |h:></a>)<:or User:><:eif User:>.</p>
+<p>Your online form has been submitted<:if User:> by <:user userId |h:> (<a href="mailto:<:user email |h:>"><:user email |h:></a>)<:eif User:>.</p>
 <:iterator begin fields:>
   <:switch:>
   <!-- Start special case fields //-->

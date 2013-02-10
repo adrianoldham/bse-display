@@ -1,5 +1,5 @@
 <:if Match [script] "shop":><:ifMsg:><p class="error"><:msg:></p><:or:>
-<:eif:><:or Match:><:eif Match:><:if Dyncart:><div class="article">
+<:eif:><:eif Match:><:if Dyncart:><div class="article">
   <form action="<:target shop |h:>" method="post">
   <table class="cart">
     <caption>Shopping Cart <span>(Contains <:dyncarttotalunits:> item<:if Eq [dyncarttotalunits] "1":><:or Eq:>s<:eif Eq:>)</span></caption>
@@ -23,5 +23,5 @@
       <input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
       <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" />
     </p>
-  </form><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
-</div><:or Dyncart:><:eif Dyncart:>
+  </form><:eif Dyncarttotalcost:>
+</div><:eif Dyncart:>

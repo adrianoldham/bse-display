@@ -17,13 +17,13 @@
       <td class="item">
         <a href="<:item link:>" class="title"><:item title:></a><:ifOptions:>
         <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="description"><:item description:></div><:or And:><:eif And:>
+        <div class="description"><:item description:></div><:eif And:>
       </td>
       <td class="quantity"><:if Match [item generator] "Seminar":>
         <input type="hidden" name="quantity_<:index:>" value="<:item units:>" /><:ifTotal:><:item units:><:or:><:eif:><:or Match:>
         <input type="text" name="quantity_<:index:>" size="2" value="<:item units:>" /><:eif Match:> &times;
       </td>
-      <td class="price"><:if Item price:><:cfg shop currency "$":><:number money [item price]:><:or Item:><:eif Item:></td>
+      <td class="price"><:if Item price:><:cfg shop currency "$":><:number money [item price]:><:eif Item:></td>
       <td class="extended"><:cfg shop currency "$":><:number money [arithmetic [item units] * [item price]]:></td>
       <td class="action"><input type="image" name="delete_<:index:>" id="delete_<:index:>" src="/bse-display/images/buttons/delete.gif" title="Remove this item" /></td>
     </tr><:iterator end items:><:or Count:>
@@ -34,7 +34,7 @@
 </table><:if Count:><:if Total:>
 <div class="totals">
   <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Sub total:</label> <:cfg shop currency "$":><:number money [total]:></p>
-</div><:or Total:><:eif Total:>
+</div><:eif Total:>
 <p class="buttons">
   <:if Total:><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
   <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" /><:ifCfg shop emptycart:>
@@ -52,5 +52,5 @@
 <input type="hidden" name="telephone" id="telephone" value="<:user telephone:>" />
 <input type="hidden" name="facsimile" id="facsimile" value="<:user facsimile:>" />
 <input type="hidden" name="delivMobile" id="mobile" value="<:user mobile:>" />
-<input type="hidden" name="emailAddress" id="emailAddress" value="<:user email:>" /><:eif Total:><:or Count:><:eif Count:>
+<input type="hidden" name="emailAddress" id="emailAddress" value="<:user email:>" /><:eif Total:><:eif Count:>
 </form>

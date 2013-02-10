@@ -33,7 +33,7 @@
       <label for="confirmemail"><:error_img confirmemail:> <:cfg "site users" display_confirmemail "Confirm Email":>:</label>
       <input type="text" name="confirmemail" id="confirmemail" size="40" value="<:old confirmemail:>" title="<:cfg "site users" display_confirmemail "Confirm Email":>" class="<:ifError_img confirmemail:>error<:or:><:eif:>" />
     </div>
-    <:or Cfg:><:eif Cfg:>
+    <:eif Cfg:>
   </fieldset>
 <:eif Partial_logon:>
 
@@ -58,7 +58,7 @@
     </div>
     <:eif Siteuser_image:>
     <:iterator end imagetemplates:>
-    <:or Imagetemplates:><:eif Imagetemplates:>
+    <:eif Imagetemplates:>
   </fieldset>
 
   <fieldset class="name">
@@ -111,7 +111,7 @@
       <label for="country"><:error_img country:> <:cfg "site users" display_country "Country":>:<:ifRequired country:> <span class="required">*</span><:or:><:eif:></label><:if Cfgsection "country selector":>
       <select name="country" id="country" title="<:cfg "site users" display_country "Country":>" class="<:ifRequired userid:>required<:or:><:eif:><:ifError_img country:> error<:or:><:eif:>">
         <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
-        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old country user country] [uc [dyncfgentry key]]] [ifEq [old country user country] [uc [dyncfgentry value]]]:> selected="selected"<:or Or:><:eif Or:>><:dyncfgentry value:></option>
+        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old country user country] [uc [dyncfgentry key]]] [ifEq [old country user country] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
       <input type="text" name="country" id="country" size="40" value="<:old country user country:>" title="<:cfg "site users" display_country "Country":>" class="<:ifRequired country:>required<:or:><:eif:><:ifError_img country:> error<:or:><:eif:>" /><:eif Cfgsection:> 
@@ -168,7 +168,7 @@
       Confirmation will be sent to your email address.<:endswitch:>
     </small>
   </fieldset>
-<:or Subscriptions:><:eif Subscriptions:>
+<:eif Subscriptions:>
 
 <:if Cfg "notify files" active:>
   <fieldset class="notification">
@@ -181,7 +181,7 @@
     <:iterator end filecats:>
     <small>Receive email notification when file downloads are added to your account in the selected categories.</small>
   </fieldset>
-<:or Cfg:><:eif Cfg:>
+<:eif Cfg:>
 
 <:include include/custom/user_options_custom.tmpl optional:>
   <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>

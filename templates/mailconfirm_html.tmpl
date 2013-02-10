@@ -151,7 +151,7 @@
 
 <div class="totals">
   <:if Order shipping_cost:>
-  <p class="freight"><span>(<:order shipping_method |h:>) </span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p><:or Order:><:eif Order:>
+  <p class="freight"><span>(<:order shipping_method |h:>) </span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p><:eif Order:>
   <p class="total"><abbr><:cfg shop currency_code "AUD":> </abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [order total]:></p>
 </div>
 
@@ -196,7 +196,7 @@
     </tr><:or:><:eif:>
   </tbody>
 </table>
-<:or Order:><:eif Order:>
+<:eif Order:>
 <:if Order delivStreet:>
 <table class="vertical right">
   <caption>Shipping details</caption>
@@ -233,7 +233,7 @@
     </tr><:or:><:eif:>
   </tbody>
 </table>
-<:or Order:><:eif Order:>
+<:eif Order:>
 </div>
 
 <:if Orderfiles:>
@@ -259,7 +259,7 @@
     <:iterator end orderfiles:>
   </tbody>
 </table>
-<:or Orderfiles:><:eif Orderfiles:>
+<:eif Orderfiles:>
 
 <:ifOrder userId:>
 <p>This order is available in your <a href="<:target user |h:>">account manager</a>, you can review more details in your <a href="<:target user userpage _t orders |h:>">order history</a>.</p>

@@ -1,7 +1,7 @@
 <:uc [cfg site name]:> - <:uc [formcfg subject]:>
 <:if User:>
 Submitted by: <:user userId:> (<:user email:>)
-<:or User:><:eif User:><:iterator begin fields:><:if Field value:><:switch:>
+<:eif User:><:iterator begin fields:><:if Field value:><:switch:>
 <:case Match [field htmltype] "^h[123]$" |x:>
 ================================================================================
 <:uc [field description]:>
@@ -14,8 +14,8 @@ Submitted by: <:user userId:> (<:user email:>)
     <:value id:>: <:value name:><:iterator end values:>
 <:case default:>
 <:field description:>:
-    <:field value:><:if Match [field htmltype] "^file$":> (attached file)<:or Match:><:eif Match:>
-<:endswitch:><:or Field:><:eif Field:><:iterator end fields:>
+    <:field value:><:if Match [field htmltype] "^file$":> (attached file)<:eif Match:>
+<:endswitch:><:eif Field:><:iterator end fields:>
 
 
 Regards

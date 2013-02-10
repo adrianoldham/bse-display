@@ -2,7 +2,7 @@
 <:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
 <p class="alert">
   This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:target user userpage |h:>">account manager</a>.
-</p><:or User:><:eif User:><:eif Cfg:>
+</p><:eif User:><:eif Cfg:>
 
 <h2><:param subtitle |h:></h2>
 
@@ -148,7 +148,7 @@
       <td class="item">
         <a href="<:product link:>" class="title"><:item title:></a><:ifOptions:>
         <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="description"><:item description:></div><:or And:><:eif And:>
+        <div class="description"><:item description:></div><:eif And:>
       </td>
       <td class="quantity"><:item units:> &times;</td>
       <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
@@ -159,7 +159,7 @@
 <div class="totals">
   <:switch:>
   <:case Shipping_cost:>
-  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:or Delivery_in:><:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
+  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
   <:case Match [order shipping_name] ^contact$:>
   <p class="freight"><span>(<:shipping_method:>)</span> <label>Freight:</label> TBA</p>
   <:case default:>
@@ -266,4 +266,4 @@
     <:iterator end orderpaidfiles:>
   </tbody>
 </table>
-<:or Orderpaidfiles:><:eif Orderpaidfiles:>
+<:eif Orderpaidfiles:>

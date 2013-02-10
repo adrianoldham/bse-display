@@ -13,7 +13,7 @@
     <tr id="item_<:uwishlistentry id:>"> 
       <td class="item">
         <a href="<:url uwishlistentry:>"><:uwishlistentry title:></a><:if And [uwishlistentry description] [cfg shop product_description 1]:>
-        <div class="description"><:uwishlistentry description:></div><:or And:><:eif And:>
+        <div class="description"><:uwishlistentry description:></div><:eif And:>
       </td>
       <td class="price"><:if Price uwishlistentry:><:cfg shop currency "$":><:number money [price uwishlistentry]:><:or Price:>NA<:eif Price:></td>
       <td class="action">

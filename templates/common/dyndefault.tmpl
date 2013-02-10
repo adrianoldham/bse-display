@@ -6,13 +6,13 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:if Dynamic:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Dynstepparents:>
+</div><:eif Or:><:if Dynamic:><:if Or [ifEmbedded] [cfg basic hide_stepparent_list]:><:or Or:><:if Dynstepparents:>
 <div class="relatedsections">
   <p><strong>Related sections:</strong></p>
   <ul><:iterator begin dynstepparents:>
     <li><a href="<:url dynstepparent:>"><:dynstepparent title:></a></li><:iterator end dynstepparents:>
   </ul>
-</div><:or Dynstepparents:><:eif Dynstepparents:><:eif Or:><:switch:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "l"]:>
+</div><:eif Dynstepparents:><:eif Or:><:switch:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "l"]:>
 <:case Dynallkids_of dynarticle filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin dynallkids_of dynarticle filter: [flags] !~ /s/ :>
@@ -28,8 +28,8 @@
   <ul><:iterator begin stepparents:>
     <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator end stepparents:>
   </ul>
-</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:eif Dynamic:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
-<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:><:switch:><:case And [ifAllkids_of article filter: [flags] !~ /s/ ] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
+</div><:eif Stepparents:><:eif Or:><:eif Dynamic:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
+<:include include/files.tmpl:><:eif Or:><:eif Files:><:switch:><:case And [ifAllkids_of article filter: [flags] !~ /s/ ] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
 <:move_ofallkid:><:embed ofallkid:><:iterator end allkids_of:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "l"]:><:case Allkids_of article filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
@@ -42,6 +42,6 @@
   </ul>
 </div><:endswitch:>
 </div><:if And [ifDynamic] [ifMatch [article flags] "a"]:>
-<:dynreport article_comments include/custom/article_comments [dynarticle id]:><:or And:><:eif And:>
+<:dynreport article_comments include/custom/article_comments [dynarticle id]:><:eif And:>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>

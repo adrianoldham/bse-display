@@ -2,7 +2,7 @@
 <:include include/usermessage.tmpl:>
 <form name="register_form" method="post" action="<:target user |h:>" class="siteuser"><:ifCgi r:>
   <input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:><:if User:>
-  <p class="alert">You are already logged on as <a href="<:target user |h:>"><:user userId:></a>, if this is not you, please <a href="<:target user logoff |h:>">logout now</a>.</p><:or User:><:eif User:>
+  <p class="alert">You are already logged on as <a href="<:target user |h:>"><:user userId:></a>, if this is not you, please <a href="<:target user logoff |h:>">logout now</a>.</p><:eif User:>
 
   <fieldset class="account">
     <legend>Account</legend>
@@ -29,7 +29,7 @@
       <label for="confirmemail"><:error_img confirmemail:> <:cfg "site users" display_confirmemail "Confirm Email":>: <span class="required">*</span></label>
       <input type="text" name="confirmemail" id="confirmemail" size="40" value="<:old confirmemail:>" title="<:cfg "site users" display_confirmemail "Confirm Email":>" class="required<:ifError_img confirmemail:> error<:or:><:eif:>" />
     </div>
-    <:or Cfg:><:eif Cfg:>
+    <:eif Cfg:>
   </fieldset>
 
 <:if Cfg "site users" info_on_register 1:>
@@ -82,7 +82,7 @@
       <label for="country"><:error_img country:> <:cfg "site users" display_country "Country":>:<:ifRequired country:> <span class="required">*</span><:or:><:eif:></label><:if Cfgsection "country selector":>
       <select name="country" id="country" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="<:ifRequired userid:>required<:or:><:eif:><:ifError_img country:> error<:or:><:eif:>">
         <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
-        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old country] [uc [dyncfgentry key]]] [ifEq [old country] [uc [dyncfgentry value]]]:> selected="selected"<:or Or:><:eif Or:>><:dyncfgentry value:></option>
+        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old country] [uc [dyncfgentry key]]] [ifEq [old country] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
       <input type="text" name="country" id="country" size="40" value="<:old country:>" title="<:cfg "site users" display_country "Country":>" class="<:ifRequired country:>required<:or:><:eif:><:ifError_img country:> error<:or:><:eif:>" /><:eif Cfgsection:> 
@@ -128,9 +128,9 @@
       Confirmation will be sent to your email address.
     </small>
   </fieldset>
-<:or Subscriptions:><:eif Subscriptions:>
+<:eif Subscriptions:>
 
-<:or Cfg:><:eif Cfg:>
+<:eif Cfg:>
 <:include include/custom/user_register_custom.tmpl optional:>
 
 <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>

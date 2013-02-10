@@ -57,7 +57,7 @@
       <th>Receipt No.:</th>
       <td><:order ccReceipt:></td>
     </tr>
-    <:or Order:><:eif Order:><tr>
+    <:eif Order:><tr>
       <th><:cfg shop display_ccName "Name on Card":>:</th>
       <td><:order ccName:></td>
     </tr><:ifOrder ccPAN:>
@@ -139,7 +139,7 @@
       <td class="item"><:ifEq [item productId] -1:>
         <:item title:><:or:>
         <a href="<:product link:>"><:item title:></a><:eif:> <:ifOptions:><span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="description"><:item description:></div><:or And:><:eif And:></td>
+        <div class="description"><:item description:></div><:eif And:></td>
       <td class="code"><:item product_code:></td>
       <td class="quantity"><:item units:> &times;</td>
       <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
@@ -200,7 +200,7 @@
     </tr><:or:><:eif:>
   </tbody>
 </table>
-<:or Order:><:eif Order:>
+<:eif Order:>
 <:if Order delivStreet:>
 <table class="vertical right">
   <caption>Shipping details</caption>
@@ -237,7 +237,7 @@
     </tr><:or:><:eif:>
   </tbody>
 </table>
-<:or Order:><:eif Order:>
+<:eif Order:>
 </div>
 
 <:if Orderfiles:>
@@ -260,4 +260,4 @@
     </tr><:iterator end orderfiles:>
   </tbody>
 </table>
-<:or Orderfiles:><:eif Orderfiles:>
+<:eif Orderfiles:>

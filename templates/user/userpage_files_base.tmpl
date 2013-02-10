@@ -18,7 +18,7 @@
       </tr><:iterator separator userfiles:>
       <:iterator end userfiles:>
     </tbody>
-  </table><:or Userfiles:><:eif Userfiles:>
+  </table><:eif Userfiles:>
   <:if Paidfiles:>
   <h2>Purchased files</h2>
   <table class="items files">
@@ -37,4 +37,4 @@
         <td class="size"><:kb paidfile sizeInBytes:>b</td>
       </tr><:iterator end paidfiles:>
     </tbody>
-  </table><:or Paidfiles:><:eif Paidfiles:>
+  </table><:eif Paidfiles:>

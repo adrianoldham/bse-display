@@ -14,7 +14,7 @@
       <td class="item">
         <a href="<:item link:>" class="title"><:item title:></a><:ifOptions:>
         <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="description"><:item description:></div><:or And:><:eif And:>
+        <div class="description"><:item description:></div><:eif And:>
       </td>
       <td class="quantity"><:item units:> &times;</td>
       <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
@@ -25,7 +25,7 @@
 <div class="totals">
   <:switch:>
   <:case Shipping_cost:>
-  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:or Delivery_in:><:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
+  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
   <:case Match [order shipping_name] ^contact$:>
   <p class="freight"><span>(<:shipping_method:>)</span> <label>Freight:</label> TBA</p>
   <:case default:>
@@ -35,7 +35,7 @@
 <p class="alert">
   This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:target user userpage |h:>">account manager</a>.
 </p><:or User:>
-<p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop order] :>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop order] :>">Logon</a> before you continue with this purchase.
+<p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop order] :>">Signup</a> or <:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop order] :>">Logon</a> before you continue with this purchase.
 </p><:eif User:><:eif Cfg:>
 <form action="<:target shop |h:>" method="post" name="checkoutpay">
 <:ifOrder id:><input type="hidden" name="order_id" value="<:order id:>" /><:or:><:eif:>
@@ -69,7 +69,7 @@
                 <option value="" selected="selected">Select card type</option>
                 <:if Cfgsection "payment ccType":>
                 <:iterator begin dyncfgsection "payment ccType" sort=key:>
-                <option value="<:dyncfgentry value:>"<:if Eq [old ccType] [dyncfgentry value]:> selected="selected"<:or Eq:><:eif Eq:>><:dyncfgentry value:></option>
+                <option value="<:dyncfgentry value:>"<:if Eq [old ccType] [dyncfgentry value]:> selected="selected"<:eif Eq:>><:dyncfgentry value:></option>
                 <:iterator end dyncfgsection:>
                 <:or Cfgsection:>
                 <option value="Visa"<:ifEq [cgi ccType] "Visa":> selected="selected"<:or:><:eif:>>Visa</option>
@@ -81,7 +81,7 @@
         </table>
       </dd>
     </dl>
-    <:or Payments:><:eif Payments:>
+    <:eif Payments:>
     <:if Payments PayPal:>
     <dl class="paymentType4">
       <dt class="paypal"><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType4" value="4" <:checkedPayment PayPal:> />
@@ -91,7 +91,7 @@
         <p class="small">Your order will be processed when payment receipt is confirmed.</p>
       </dd>
     </dl>
-    <:or Payments:><:eif Payments:>
+    <:eif Payments:>
     <:if Payments Cheque:>
     <dl class="paymentType1">
       <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType1" value="1" <:checkedPayment Cheque:> />
@@ -107,7 +107,7 @@
         <p class="small">Your order will be processed when cheque has cleared.</p>
       </dd>
     </dl>
-    <:or Payments:><:eif Payments:>
+    <:eif Payments:>
     <:if Payments DirectDeposit:>
     <dl class="paymentType10">
       <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType10" value="10" <:checkedPayment DirectDeposit:> />
@@ -140,18 +140,18 @@
         <p class="small">Your order will be processed when payment transfer is confirmed.</p>
       </dd>
     </dl>
-    <:or Payments:><:eif Payments:>
+    <:eif Payments:>
     <:if Payments CallMe:>
     <dl class="paymentType2">
       <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="<:paymentTypeId CallMe:>" <:checkedPayment CallMe:> />
       <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="<:paymentTypeId CallMe:>" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact Me</label></dt>
       <dd><p>We will contact you to make arrangements for payment.</p></dd>
     </dl>
-    <:or Payments:><:eif Payments:>
-    <:if HaveSaleFiles:><:or HaveSaleFiles:><:eif HaveSaleFiles:>
+    <:eif Payments:>
+    <:if HaveSaleFiles:><:eif HaveSaleFiles:>
     <:include include/custom/payment_type_checkout.tmpl optional:><:include include/payment_type_checkout.tmpl optional:>
   </fieldset><:if MultPaymentTypes:>
-  <p>Please select your preferred payment method</p><:or MultPaymentTypes:><:eif MultPaymentTypes:>
+  <p>Please select your preferred payment method</p><:eif MultPaymentTypes:>
   <p class="buttons">
     <input type="submit" value="Purchase now" name="payment" accesskey="p" title="AccessKey = p" />
     <input type="submit" value="Go back" name="checkout" accesskey="b" title="AccessKey = b" />

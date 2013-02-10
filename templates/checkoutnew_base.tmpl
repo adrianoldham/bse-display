@@ -14,7 +14,7 @@
       <td class="item">
         <a href="<:item link:>" class="title"><:item title:></a><:ifOptions:>
         <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="description"><:item description:></div><:or And:><:eif And:>
+        <div class="description"><:item description:></div><:eif And:>
       </td>
       <td class="quantity"><:item units:> &times;</td>
       <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
@@ -25,7 +25,7 @@
 <div class="totals">
   <:switch:>
   <:case Shipping_cost:>
-  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:or Delivery_in:><:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
+  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
   <:case Match [shipping_name] ^contact$:>
   <p class="freight"><span>(<:shipping_method:>)</span> <label>Freight:</label> TBA</p>
   <:case default:>
@@ -35,7 +35,7 @@
 <p class="alert">
   This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:target user userpage |h:>">account manager</a>.
 </p><:or User:>
-<p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop checkout need_delivery [old need_delivery]] :>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop checkout need_delivery [old need_delivery]] :>">Logon</a> before you continue with this purchase.
+<p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop checkout need_delivery [old need_delivery]] :>">Signup</a> or <:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop checkout need_delivery [old need_delivery]] :>">Logon</a> before you continue with this purchase.
 </p><:eif User:><:eif Cfg:>
 <form action="<:target shop |h:>" method="post" class="siteuser">
   <h2>Billing Details</h2>
@@ -87,7 +87,7 @@
       <label for="billCountry"><:error_img billCountry:><:cfg "site users" display_country "Country":>: <span class="required">*</span></label><:if Cfgsection "country selector":>
       <select name="billCountry" id="billCountry" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img billCountry:> error<:or:><:eif:>">
         <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
-        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old billCountry] [uc [dyncfgentry key]]] [ifEq [old billCountry] [uc [dyncfgentry value]]]:> selected="selected"<:or Or:><:eif Or:>><:dyncfgentry value:></option>
+        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old billCountry] [uc [dyncfgentry key]]] [ifEq [old billCountry] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
       <input type="text" name="billCountry" id="billCountry" size="20" value="<:old billCountry:>" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img billCountry:> error<:or:><:eif:>" /><:eif Cfgsection:> 
@@ -128,7 +128,7 @@
     <div class="checkbox need_delivery<:ifError_img need_delivery:> error<:or:><:eif:>">
       <label><input type="checkbox" name="need_delivery" <:ifNeedDelivery:> checked="checked"<:or:><:eif:> onchange="this.form.checkupdate.click()" /> Shipping details different to billing</label>
     </div>
-  </fieldset><:or And:><:eif And:>
+  </fieldset><:eif And:>
   <:if NeedDelivery:>
   <h2>Shipping Details</h2>
   <fieldset class="name">
@@ -175,7 +175,7 @@
       <label for="delivCountry"><:error_img delivCountry:><:cfg "site users" display_country "Country":>: <span class="required">*</span></label><:if Cfgsection "country selector":>
       <select name="delivCountry" id="delivCountry" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img delivCountry:> error<:or:><:eif:>">
         <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
-        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old delivCountry] [uc [dyncfgentry key]]] [ifEq [old delivCountry] [uc [dyncfgentry value]]]:> selected="selected"<:or Or:><:eif Or:>><:dyncfgentry value:></option>
+        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old delivCountry] [uc [dyncfgentry key]]] [ifEq [old delivCountry] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
       <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry:>" title="<:cfg "site users" display_delivCountry "Country":>" class="required<:ifError_img delivCountry:> error<:or:><:eif:>" /><:eif Cfgsection:> 
@@ -200,7 +200,7 @@
       <input type="text" name="emailAddress" id="emailAddress" size="40" value="<:old emailAddress:>" title="<:cfg "site users" display_email "Email Address":>" class="<:ifError_img emailAddress:> error<:or:><:eif:>" />
     </div>
   </fieldset>
-  <:or NeedDelivery:><:eif NeedDelivery:>
+  <:eif NeedDelivery:>
   <:if Cfg affiliate enabled:>
   <h2>Affiliate Details</h2>
   <fieldset class="referrer">
@@ -212,7 +212,7 @@
       <input type="text" name="affiliate_code" id="affiliate_code" size="20" value="<:old affiliate_code:>" title="<:cfg "site users" display_affiliate_code "Referrer Id":>" class="<:ifError_img affiliate_code:>error<:or:><:eif:>" /><:eif Affiliate_code:>
     </div>
   </fieldset>
-  <:or Cfg:><:eif Cfg:>
+  <:eif Cfg:>
   <:include include/custom/checkout_custom.tmpl optional:><:include include/checkout_custom.tmpl optional:>
   <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>
   <p class="buttons">

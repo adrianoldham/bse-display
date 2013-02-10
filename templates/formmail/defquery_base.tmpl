@@ -12,18 +12,18 @@
   <:case Match [field htmltype] "^h[123]$" |x:><:switch:><:case Eq [field_number] "1":><:case default:></fieldset><:endswitch:> 
   <<:field htmltype:> class="<:field class:>"><:field description:></<:field htmltype:>>
   <input type="hidden" name="<:field name:>" value="<:field description:>" /><:if Field intro:>
-  <:bodytext field intro:><:or Field:><:eif Field:>
+  <:bodytext field intro:><:eif Field:>
 
   <:case Match [field htmltype] "^fieldset$":><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><:case Eq [field_number] "1":><:case default:></fieldset><:endswitch:>
   <fieldset class="group <:field name:> <:field class:>">
     <legend><:field description:></legend>
     <input type="hidden" name="<:field name:>" value="<:field description:>" /><:if Field intro:>
-    <:bodytext field intro:><:or Field:><:eif Field:>  
+    <:bodytext field intro:><:eif Field:>  
   
   <:case default:><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><fieldset><:case Match [previous_field htmltype] "^fieldset$":><:case Eq [field_number] "1":><fieldset><:case default:><:endswitch:>
   <div class="<:ifFirstField:>first <:or:><:eif:><:ifLastField:>last <:or:><:eif:><:switch:><:case Field htmltype:><:field htmltype:><:case default:>input<:endswitch:><:ifField required:> required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:><:ifField class:> <:field class:><:or:><:eif:> <:field name:>"><:switch:><:case Match [field htmltype] "^(checkbox|radio)$" |x:><:case Field hidelabel:><:case default:>
     <label for="<:field name:>"><:error_img [field name]:> <:field description:>:<:ifField required:> <span class="required">*</span><:or:><:eif:></label><:endswitch:><:if Field intro:>
-    <:bodytext field intro:><:or Field:><:eif Field:>
+    <:bodytext field intro:><:eif Field:>
 
     <:switch:>
     <!-- Start standard fields //-->
@@ -52,13 +52,13 @@
     <:endswitch:>
     
     <:if Field notes:>
-    <small><:field notes:></small><:or Field:><:eif Field:>
+    <small><:field notes:></small><:eif Field:>
   </div>
   <:endswitch:>
 <:iterator end fields:>
   <:if Recaptcha:>
   <label><:formcfg recaptcha_description "Anti-spam verification":>:</label>
-  <:recaptcha:><:or Recaptcha:><:eif Recaptcha:>
+  <:recaptcha:><:eif Recaptcha:>
 </fieldset>
 <p><span class="required">* Required.</span> <:formcfg required_text "Please provide information for all marked fields.":></p>
 <p class="buttons"><input type="submit" name="a_send" value="<:formcfg submit "Submit Form":>" class="submit" /></p>

@@ -8,10 +8,10 @@
 <ul class="meta"><:if Or [cfg custom user_auth] [cfg "site users" nopassword]:><:or Or:>
   <li><span>Last logged in:</span> <:date user previousLogon:></li><:eif Or:>
   <li><span>Registered since:</span> <:date user whenRegistered:></li><:if Userfiles:>
-  <li>You have <:userfile_count:> user file<:ifEq [userfile_count] 1:><:or:>s<:eif:></li><:or Userfiles:><:eif Userfiles:><:if Paidfiles:>
-  <li>You have <:paidfile_count:> purchased file<:ifEq [paidfile_count] 1:><:or:>s<:eif:></li><:or Paidfiles:><:eif Paidfiles:><:if Orders:>
-  <li>You have <:order_count:> order<:ifEq [order_count] 1:><:or:>s<:eif:></li><:or Orders:><:eif Orders:><:if Wishlist:>
-  <li>You have <:wishlistentry_count:> wishlist item<:ifEq [wishlistentry_count] 1:><:or:>s<:eif:></li><:or Wishlist:><:eif Wishlist:><:if Subscriptions:>
-  <li>You have <:subscription_count:> subscription<:ifEq [subscription_count] 1:><:or:>s<:eif:></li><:or Subscriptions:><:eif Subscriptions:>
+  <li>You have <:userfile_count:> user file<:ifEq [userfile_count] 1:><:or:>s<:eif:></li><:eif Userfiles:><:if Paidfiles:>
+  <li>You have <:paidfile_count:> purchased file<:ifEq [paidfile_count] 1:><:or:>s<:eif:></li><:eif Paidfiles:><:if Orders:>
+  <li>You have <:order_count:> order<:ifEq [order_count] 1:><:or:>s<:eif:></li><:eif Orders:><:if Wishlist:>
+  <li>You have <:wishlistentry_count:> wishlist item<:ifEq [wishlistentry_count] 1:><:or:>s<:eif:></li><:eif Wishlist:><:if Subscriptions:>
+  <li>You have <:subscription_count:> subscription<:ifEq [subscription_count] 1:><:or:>s<:eif:></li><:eif Subscriptions:>
 </ul>
 <:include include/custom/userpage_custom.tmpl optional:><:include include/userpage_custom.tmpl optional:>

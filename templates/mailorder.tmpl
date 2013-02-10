@@ -42,7 +42,7 @@ Telephone    : <:order telephone:><:or:><:eif:><:ifOrder facsimile:>
 Facsimile    : <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
 Mobile       : <:order delivMobile:><:or:><:eif:><:ifOrder emailAddress:>
 Email        : <:order emailAddress:><:or:><:eif:>
-<:or Order:><:eif Order:>
+<:eif Order:>
 
 Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
@@ -92,9 +92,9 @@ Item                                       Code         Qty     Price   Extended
 
 Please contact the customer to quote the shipping costs.<:or Order:><:ifFreeShippingCart:>
 
-This order qualifies for free shipping within Australia.<:or:><:eif:><:eif Order:><:or Cfg:><:eif Cfg:><:if Order instructions:>
+This order qualifies for free shipping within Australia.<:or:><:eif:><:eif Order:><:eif Cfg:><:if Order instructions:>
 
-<:with begin wrap 80:>Instructions: <:order instructions:><:with end wrap:><:or Order:><:eif Order:>
+<:with begin wrap 80:>Instructions: <:order instructions:><:with end wrap:><:eif Order:>
 
 --------------------------------------------------------------------------------
 

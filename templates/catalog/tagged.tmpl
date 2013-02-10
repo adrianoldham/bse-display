@@ -6,7 +6,7 @@
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:if Dynamic:><:iterator begin dynallprods tags:[lcgi tags |z] paged:pp=20 :><:iterator end dynallprods:><:if Eq [dynallprods_pagecount] 1:><:or Eq:>
+</div><:eif Or:><:if Dynamic:><:iterator begin dynallprods tags:[lcgi tags |z] paged:pp=20 :><:iterator end dynallprods:><:if Eq [dynallprods_pagecount] 1:><:or Eq:>
 <ul class="pagination">
   <li><span>Pages: (<:dynallprods_pagecount:>)</span>
     <ul>
@@ -30,7 +30,7 @@
   <li>
     <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:deltag [dyntag name] [lcgi tags] |U:>&amp;pp=<:dynallprods_perpage:>" class="remove"><:dyntag val:> <b>&times;</b></a>
   </li><:iterator end dyntags:>
-</ul><:or Lcgi:><:eif Lcgi:><:if Dynunused_tagcats dynallprods tags:[lcgi tags |z] |z:>
+</ul><:eif Lcgi:><:if Dynunused_tagcats dynallprods tags:[lcgi tags |z] |z:>
 <p class="clear">Refine search (<:dynallprod_totalcount:> products found):</p>
 <ul class="meta unused categories"><:iterator begin dynunused_tagcats dynallprods onlyone tags:[lcgi tags |z]:><:ifDynunused_tagcat nocat:><:or:>
   <li>
@@ -42,7 +42,7 @@
   <li>
     <a href="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:lcgi tags |U:>/<:dynunused_tag name |U:>&amp;pp=<:dynallprods_perpage:>"><:dynunused_tag val:></a> (<:dynunused_tag count:>)
   </li><:iterator end dynunused_tags:><:or:><:eif:><:iterator end dynunused_tagcats:>
-</ul><:or Dynunused_tagcats:><:eif Dynunused_tagcats:><:switch:><:case dynallprod_count tags:[lcgi tags |z] paged:pp=20 :>
+</ul><:eif Dynunused_tagcats:><:switch:><:case dynallprod_count tags:[lcgi tags |z] paged:pp=20 :>
 <form method="post" action="<:target shop |h:>">
   <input type="hidden" name="r" value="<:url dynarticle:><:cond [ifMatch [url dynarticle] "\\?"] &amp; ? :>p=<:dynallprods_page:>&amp;tags=<:lcgi tags |U:>&amp;pp=<:dynallprods_perpage:>" />
   <div id="products_<:article id:>" class="grid"><:iterator begin dynallprods tags:[lcgi tags |z] paged:pp=20 :>

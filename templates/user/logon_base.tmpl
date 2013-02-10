@@ -1,8 +1,8 @@
 <:wrap user/pubbase.tmpl title=>"Account Login" userpage=>"login" :>
 <:include include/usermessage.tmpl:>
 <form action="<:target user |h:>" method="post" class="siteuser"><:if User:> 
-  <p class="alert">You are already logged in as <a href="<:target user |h:>"><:user userId:></a>, if this is not you, please <a href="<:target user logoff |h:>">logout now</a>.</p><:or User:><:eif User:><:if Cgi r:>
-  <input type="hidden" name="r" value="<:cgi r:>" /><:or Cgi:><:eif Cgi:>
+  <p class="alert">You are already logged in as <a href="<:target user |h:>"><:user userId:></a>, if this is not you, please <a href="<:target user logoff |h:>">logout now</a>.</p><:eif User:><:if Cgi r:>
+  <input type="hidden" name="r" value="<:cgi r:>" /><:eif Cgi:>
   <fieldset class="logon">
     <legend>Account</legend>
     <div class="input userid<:ifError_img userid:> error<:or:><:eif:>">
@@ -18,5 +18,5 @@
 </form>
 <p class="group">
   <span class="left"><a href="<:target user show_lost_password |h:>">Lost your password?</a></span><:if Cfg "site users" user_register:>
-  <span class="right"><a href="<:dyntarget user show_register r [cgi r] :>">Need an account?</a></span><:or Cfg:><:eif Cfg:>
+  <span class="right"><a href="<:dyntarget user show_register r [cgi r] :>">Need an account?</a></span><:eif Cfg:>
 </p>

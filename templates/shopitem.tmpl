@@ -14,7 +14,7 @@
       <label for="<:option id:>"><:option desc:>:</label>
       <:option popup:>
     </div>
-    <:iterator end options:><:or Options:><:eif Options:>
+    <:iterator end options:><:eif Options:>
     <div class="input quantity">
       <label for="qty<:article id:>">Quantity:</label>
       <input type="text" name="quantity" id="qty<:article id:>" size="2" value="1" class="required" />
@@ -49,15 +49,15 @@
 <:include interest/register.tmpl:><:endswitch:><:if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:or Or:><:eif Or:><:if Or [ifStepparents] [ifStepkids]:> 
+</div><:eif Or:><:if Or [ifStepparents] [ifStepkids]:> 
 <div class="relatedsections">
   <p><strong>Related categories:</strong></p>
   <ul><:iterator begin stepparents:>
     <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator separator stepparents:><:iterator end stepparents:><:iterator begin stepkids:>
     <li><a href="<:url stepkid:>"><:stepkid title:></a></li><:iterator separator stepkids:><:iterator end stepkids:>
   </ul>
-</div><:or Or:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
-<:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
+</div><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
+<:include include/files.tmpl:><:eif Or:><:eif Files:>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>

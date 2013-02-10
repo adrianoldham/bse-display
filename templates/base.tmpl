@@ -31,8 +31,8 @@
           <:endswitch:></li><:iterator end allkids_of:>
         </ul>
         <ul class="utilities group right"><:if Dynamic:><:if Dyncarttotalcost:>
-          <li class="cart group<:ifEq [section id] "-3" :> hilite<:or:><:eif:>"><a href="<:target shop |h:>"><!--<abbr><:cfg shop currency_code "AUD":></abbr> <:cfg shop currency "$":><:number money [dyncarttotalcost]:>//-->Shopping <:cfg shop cart_name cart:> <span><:dyncarttotalunits:></span></a></li><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
-          <li class="user group<:ifEq [section id] "-5":> hilite<:or:><:eif:>"><a href="<:target user |h:><:ifUser:><:or:>?r=<:url top |u:><:eif:>"><:ifUser:><:user name1:><:or:>Login<:eif:></a></li><:or Dynamic:><:eif Dynamic:>
+          <li class="cart group<:ifEq [section id] "-3" :> hilite<:or:><:eif:>"><a href="<:target shop |h:>"><!--<abbr><:cfg shop currency_code "AUD":></abbr> <:cfg shop currency "$":><:number money [dyncarttotalcost]:>//-->Shopping <:cfg shop cart_name cart:> <span><:dyncarttotalunits:></span></a></li><:eif Dyncarttotalcost:>
+          <li class="user group<:ifEq [section id] "-5":> hilite<:or:><:eif:>"><a href="<:target user |h:><:ifUser:><:or:>?r=<:url top |u:><:eif:>"><:ifUser:><:user name1:><:or:>Login<:eif:></a></li><:eif Dynamic:>
           <li class="search<:ifEq [section id] "-4":> hilite<:or:><:eif:>"><a href="<:target search |h:>" accesskey="4">Search</a></li>
         </ul>
       </div>
@@ -47,7 +47,7 @@
                 <:endswitch:></li><:iterator end allkids_of2:>
               </ul>
             <:endswitch:></li><:iterator end allkids_of:>
-          </ul><:or Allkids_of:><:eif Allkids_of:><:switch:><:case Imagen imgleft:>
+          </ul><:eif Allkids_of:><:switch:><:case Imagen imgleft:>
           <p class="imgleft"><:imagen imgleft:></p><:case Gimage imgleft:>
           <p class="imgleft"><:gimage imgleft:></p><:endswitch:>
         </div><:endswitch:><:switch:><:case Param no_sidebar:><:case Param no_sidebar_right:><:case Or [cfg sidebar right] [param sidebar_right]:>
@@ -67,7 +67,7 @@
           <h2><:inline title:></h2>
           <:bodytext inline body:>
         </div><:iterator end inlines:>
-      </div><:or Inlines:><:eif Inlines:>
+      </div><:eif Inlines:>
     </div>
     <div id="footer">
       <ul class="left"><:iterator begin allkids_of -1 filter: [menu] == 3 && [listed] != 2 :>
@@ -91,6 +91,6 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-</script><:or Cfg:><:eif Cfg:>
+</script><:eif Cfg:>
 </body>
 </html>

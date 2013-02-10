@@ -7,10 +7,10 @@
     <ul class="meta data">
       <li><span>Score:</span> <:result score:>%</li>
       <li><span>Last modified:</span> <:date result lastModified:></li><:if Keywords:>
-      <li><span>Keywords:</span> <:keywords:></li><:or Keywords:><:eif Keywords:><:if Author:>
-      <li><span>Author:</span> <:author:></li><:or Author:><:eif Author:><:if PageTitle:>
-      <li><span>Page title:</span> <:pageTitle:></li><:or PageTitle:><:eif PageTitle:><:if Product_code:>
-      <li><span>Product code:</span> <:product_code:></li><:or Product_code:><:eif Product_code:>
+      <li><span>Keywords:</span> <:keywords:></li><:eif Keywords:><:if Author:>
+      <li><span>Author:</span> <:author:></li><:eif Author:><:if PageTitle:>
+      <li><span>Page title:</span> <:pageTitle:></li><:eif PageTitle:><:if Product_code:>
+      <li><span>Product code:</span> <:product_code:></li><:eif Product_code:>
     </ul><:if Matchfiles:>
     <ul class="meta files"><:iterator begin matchfiles:>
       <li<:ifMatchfile notes_matched:> class="has-info"<:or:><:eif:>>
@@ -19,7 +19,7 @@
         <a href="<:target user download_file file [matchfile id] r [articleurl] |h:>" title="Size: <:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB"><:ifMatchfile description:><:matchfile description:><:or:><:matchfile displayName:><:eif:></a><:endswitch:><:ifMatchfile notes_matched:>
         <div><p><:matchfile notes_excerpt:></p></div><:or:><:eif:>
       </li><:iterator end matchfiles:>
-    </ul><:or Matchfiles:><:eif Matchfiles:>
+    </ul><:eif Matchfiles:>
   </dd><:iterator end results:>
 </dl> 
 <ul class="pagination">

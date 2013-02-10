@@ -54,7 +54,7 @@
       <label for="delivCountry"><:error_img delivCountry:> <:cfg "site users" display_country "Country":>:</label><:if Cfgsection "country selector":>
       <select name="delivCountry" id="delivCountry" title="<:cfg "site users" display_country "Country":>" class="<:ifError_img delivCountry:>error<:or:><:eif:>">
         <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
-        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old delivCountry user delivCountry] [uc [dyncfgentry key]]] [ifEq [old delivCountry user delivCountry] [uc [dyncfgentry value]]]:> selected="selected"<:or Or:><:eif Or:>><:dyncfgentry value:></option>
+        <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old delivCountry user delivCountry] [uc [dyncfgentry key]]] [ifEq [old delivCountry user delivCountry] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
       <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry user delivCountry:>" title="<:cfg "site users" display_country "Country":>" class="<:ifError_img delivCountry:>error<:or:><:eif:>" /><:eif Cfgsection:> 
