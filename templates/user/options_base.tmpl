@@ -5,7 +5,7 @@
 <input type="hidden" name="p" value="<:user password:>" />
 <input type="hidden" name="r" value="<:dyntarget user show_opts [user password] u [user id] message "User account details saved successfully":>" /><:or Cfg:><:if Cgi r:>
 <input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:>
-<input type="hidden" name="r" value="<:target user show_opts message "User account details saved successfully":>" /><:eif Cgi:><:eif Cfg:>
+<input type="hidden" name="r" value="<:target user show_opts message "User account details saved successfully" |h:>" /><:eif Cgi:><:eif Cfg:>
 
 <:if Partial_logon:><:or Partial_logon:>
   <fieldset class="account">

@@ -2,7 +2,7 @@
 <h2><:param subtitle |h:></h2>
 <form action="<:target user |h:>" method="post" class="siteuser"><:if Cgi r:>
 <input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:>
-<input type="hidden" name="r" value="<:target user show_opts _t delivery message "User shipping details saved successfully":>" /><:eif Cgi:>
+<input type="hidden" name="r" value="<:target user show_opts _t delivery message "User shipping details saved successfully" |h:>" /><:eif Cgi:>
 <input type="hidden" name="_t" value="delivery" />
   <fieldset class="name">
     <legend>Name</legend>
