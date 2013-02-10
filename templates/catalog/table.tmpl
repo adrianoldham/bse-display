@@ -22,7 +22,7 @@
     <tr><:iterator begin allprods:><:if Arithmetic [allprod_index] && [allprod_index] % [cfg "product table" cols 3] == 0:>
     </tr>
     <tr><:eif Arithmetic:>
-      <td<:ifArithmetic [allprod_number] && [allprod_number] % [cfg "product table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:include admin/adminmenu/allprod_mini.tmpl:>
+      <td<:ifArithmetic [allprod_number] && [allprod_number] % [cfg "product table" cols 3] == 0:> class="row_end"<:eif:>><:include admin/adminmenu/allprod_mini.tmpl:>
         <a href="<:url allprod:>" class="thumbnail"><:switch:><:case Allprod thumbImage:><:thumbnail allprod:><:case Cfg "thumb geometries" product_table:><:sthumbimage allprod product_table thumbnail,1:><:endswitch:></a>
         <a href="<:url allprod:>" class="title"><:allprod title:></a><:if And [allprod description] [cfg shop product_description 1]:>
         <p class="summary"><:allprod description:></p><:eif And:>
@@ -32,7 +32,7 @@
         </div>
       </td><:iterator end allprods:><:if Arithmetic [allprod_count] % [cfg "product table" cols 3]:><:if Cfg "product table" colspan:>
       <td class="row_end" colspan="<:arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "product table" cols 3] - ( [allprod_count] % [cfg "product table" cols 3] )]:>
-      <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:or:><:eif:>>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:eif Arithmetic:>
+      <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:eif:>>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:eif Arithmetic:>
     </tr>
   </table>
 </div>
@@ -42,7 +42,7 @@
     <tr><:iterator begin allcats:><:if Arithmetic [allcat_index] && [allcat_index] % [cfg "catalog table" cols 3] == 0:>
     </tr>
     <tr><:eif Arithmetic:>
-      <td<:ifArithmetic [allcat_number] && [allcat_number] % [cfg "catalog table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:include admin/adminmenu/allcat_mini.tmpl:>
+      <td<:ifArithmetic [allcat_number] && [allcat_number] % [cfg "catalog table" cols 3] == 0:> class="row_end"<:eif:>><:include admin/adminmenu/allcat_mini.tmpl:>
         <a href="<:url allcat:>" class="thumbnail"><:switch:><:case Allcat thumbImage:><:thumbnail allcat:><:case Cfg "thumb geometries" catalog_table:><:sthumbimage allcat catalog_table thumbnail,1:><:endswitch:></a>
         <a href="<:url allcat:>" class="title"><:allcat title:></a><:switch:><:case Cfg basic hide_child_summary:><:case Allcat summary:>
         <p class="summary"><:allcat summary:></p><:case Allcat summaryLength:>

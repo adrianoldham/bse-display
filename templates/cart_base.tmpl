@@ -11,16 +11,16 @@
       <th class="extended">Extended</th>
       <th class="action">Action</th>
     </tr>
-  </thead><:or:><:eif:>
+  </thead><:eif:>
   <tbody><:if Count:><:iterator begin items:>
     <tr id="item_<:item id:>"> 
       <td class="item">
         <a href="<:item link:>" class="title"><:item title:></a><:ifOptions:>
-        <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
+        <span><:options:></span><:eif:><:if And [item description] [cfg shop product_description 1]:>
         <div class="description"><:item description:></div><:eif And:>
       </td>
       <td class="quantity"><:if Match [item generator] "Seminar":>
-        <input type="hidden" name="quantity_<:index:>" value="<:item units:>" /><:ifTotal:><:item units:><:or:><:eif:><:or Match:>
+        <input type="hidden" name="quantity_<:index:>" value="<:item units:>" /><:ifTotal:><:item units:><:eif:><:or Match:>
         <input type="text" name="quantity_<:index:>" size="2" value="<:item units:>" /><:eif Match:> &times;
       </td>
       <td class="price"><:if Item price:><:cfg shop currency "$":><:number money [item price]:><:eif Item:></td>
@@ -38,7 +38,7 @@
 <p class="buttons">
   <:if Total:><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
   <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" /><:ifCfg shop emptycart:>
-  <input type="submit" name="a_emptycart" value="Empty cart" accesskey="e" title="AccessKey = e" /><:or:><:eif:><:or Total:>
+  <input type="submit" name="a_emptycart" value="Empty cart" accesskey="e" title="AccessKey = e" /><:eif:><:or Total:>
   <input type="submit" name="a_order" value="Checkout now" accesskey="c" title="AccessKey = c" /><:eif Total:>
 </p><:if Total:><:or Total:>
 <input type="hidden" name="delivFirstName" id="delivFirstName" value="<:user name1:>" /> 

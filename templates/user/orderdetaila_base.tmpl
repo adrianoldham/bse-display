@@ -15,11 +15,11 @@
     <tr>
       <th>Order Status:</th>
       <td><:dyncatmsg [order stage_description_id]:></td>
-    </tr><:or:><:eif:><:ifOrder purchase_order:>
+    </tr><:eif:><:ifOrder purchase_order:>
     <tr>
       <th>Purchase Order:</th>
       <td><:order purchase_order:></td>
-    </tr><:or:><:eif:><:ifOrder freight_tracking:>
+    </tr><:eif:><:ifOrder freight_tracking:>
     <tr>
       <th>Tracking Code:</th>
       <td>
@@ -29,19 +29,19 @@
         <:order freight_tracking:>
         <:- eif Cfg:>
       </td>
-    </tr><:or:><:eif:><:ifOrder shipping_method:>
+    </tr><:eif:><:ifOrder shipping_method:>
     <tr>
       <th>Shipping Method:</th>
       <td><:order shipping_method:></td>
-    </tr><:or:><:eif:><:ifOrder userId:>
+    </tr><:eif:><:ifOrder userId:>
     <tr>
       <th><:cfg "site user" display_userid "Username":>:</th>
       <td><:order userId:></td>
-    </tr><:or:><:eif:><:ifOrder affiliate_code:>
+    </tr><:eif:><:ifOrder affiliate_code:>
     <tr>
       <th><:cfg shop display_affiliate_code "Referrer":>:</th>
       <td><:order affiliate_code:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
   </tbody>
 </table>
 
@@ -64,7 +64,7 @@
     <tr>
       <th><:cfg shop display_ccPAN "Card Number":>:</th>
       <td>**** **** **** <:order ccPAN:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <tr>
       <th><:cfg shop display_cardType "Card Type":>:</th>
       <td><:order ccType:></td>
@@ -138,7 +138,7 @@
     <tr>
       <td class="item"><:ifEq [item productId] -1:>
         <:item title:><:or:>
-        <a href="<:product link:>"><:item title:></a><:eif:> <:ifOptions:><span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
+        <a href="<:product link:>"><:item title:></a><:eif:> <:ifOptions:><span><:options:></span><:eif:><:if And [item description] [cfg shop product_description 1]:>
         <div class="description"><:item description:></div><:eif And:></td>
       <td class="code"><:item product_code:></td>
       <td class="quantity"><:item units:> &times;</td>
@@ -171,9 +171,9 @@
     <tr>
       <th>Address:</th>
       <td><:ifOrder billOrganization:>
-        <:order billOrganization:><br /><:or:><:eif:>
+        <:order billOrganization:><br /><:eif:>
         <:order billStreet:><br /><:ifOrder billStreet2:>
-        <:order billStreet2:><br /><:or:><:eif:>
+        <:order billStreet2:><br /><:eif:>
         <:order billSuburb:> <:order billState:> <:order billPostCode:><br /><:ifCfgsection "country selector":>
         <:cfg "country selector" [order billCountry]:><:or:><:order billCountry:><:eif:>
       </td>
@@ -181,15 +181,15 @@
     <:ifOrder billTelephone:><tr>
       <th><:cfg "site users" display_telephone "Telephone":>:</th>
       <td><:order billTelephone:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <:ifOrder billFacsimile:><tr>
       <th><:cfg "site users" display_facsimile "Facsimile":>:</th>
       <td><:order billFacsimile:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <:ifOrder billMobile:><tr>
       <th><:cfg "site users" display_mobile "Mobile":>:</th>
       <td><:order billMobile:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <tr>
       <th><:cfg "site users" display_email "Email Address":>:</th>
       <td><:order billEmail:></td>
@@ -197,7 +197,7 @@
     <:ifOrder instructions:><tr>
       <th>Instructions:</th>
       <td><:order instructions:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
   </tbody>
 </table>
 <:eif Order:>
@@ -212,9 +212,9 @@
     <tr>
       <th>Address:</th>
       <td><:ifOrder delivOrganization:>
-        <:order delivOrganization:><br /><:or:><:eif:>
+        <:order delivOrganization:><br /><:eif:>
         <:order delivStreet:><br /><:ifOrder delivStreet2:>
-        <:order delivStreet2:><br /><:or:><:eif:>
+        <:order delivStreet2:><br /><:eif:>
         <:order delivSuburb:> <:order delivState:> <:order delivPostCode:><br /><:ifCfgsection "country selector":>
         <:cfg "country selector" [order delivCountry]:><:or:><:order delivCountry:><:eif:>
       </td>
@@ -222,19 +222,19 @@
     <:ifOrder telephone:><tr>
       <th><:cfg "site users" display_telephone "Telephone":>:</th>
       <td><:order telephone:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <:ifOrder facsimile:><tr>
       <th><:cfg "site users" display_facsimile "Facsimile":>:</th>
       <td><:order facsimile:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <:ifOrder delivMobile:><tr>
       <th><:cfg "site users" display_mobile "Mobile":>:</th>
       <td><:order delivMobile:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <:ifOrder emailAddress:><tr>
       <th><:cfg "site users" display_email "Email Address":>:</th>
       <td><:order emailAddress:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
   </tbody>
 </table>
 <:eif Order:>

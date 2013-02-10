@@ -20,14 +20,14 @@
     <tr><:iterator begin allkids_of article filter: [flags] !~ /s/ :><:if Arithmetic [ofallkid_index] && [ofallkid_index] % [cfg "article table" cols 3] == 0:>
     </tr>
     <tr><:eif Arithmetic:>
-      <td<:ifArithmetic [ofallkid_number] && [ofallkid_number] % [cfg "article table" cols 3] == 0:> class="row_end"<:or:><:eif:>><:include admin/adminmenu/ofallkid_mini.tmpl:>
+      <td<:ifArithmetic [ofallkid_number] && [ofallkid_number] % [cfg "article table" cols 3] == 0:> class="row_end"<:eif:>><:include admin/adminmenu/ofallkid_mini.tmpl:>
         <a href="<:url ofallkid:>" class="thumbnail"><:switch:><:case Ofallkid thumbImage:><:thumbnail ofallkid:><:case default:><:sthumbimage ofallkid article_table thumbnail,1:><:endswitch:></a>
         <a href="<:url ofallkid:>" class="title"><:ofallkid title:></a><:switch:><:case Cfg basic hide_child_summary:><:case Ofallkid summary:>
         <p class="summary"><:ofallkid summary:></p><:case Ofallkid summaryLength:>
         <p class="summary"><:summary ofallkid:></p><:endswitch:>
       </td><:iterator end allkids_of:><:if Arithmetic [ofallkid_count] % [cfg "article table" cols 3]:><:if Cfg "article table" colspan:>
       <td class="row_end" colspan="<:arithmetic [cfg "article table" cols 3] - ( [ofallkid_count] % [cfg "article table" cols 3] ):>">&nbsp;</td><:or Cfg:><:iterator begin strepeats [arithmetic [cfg "article table" cols 3] - ( [ofallkid_count] % [cfg "article table" cols 3] )]:>
-      <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:or:><:eif:>>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:eif Arithmetic:>
+      <td<:ifEq [strepeat_count] [strepeat_number]:> class="row_end"<:eif:>>&nbsp;</td><:iterator end strepeats:><:eif Cfg:><:eif Arithmetic:>
     </tr>
   </table>
 </div><:endswitch:>

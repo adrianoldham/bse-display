@@ -1,7 +1,7 @@
 <:wrap user/pubbase.tmpl title=>"Public Profile" nomessage=>"1" :>
 <p><:ifSiteuser affiliate_name:><:siteuser affiliate_name:><:or:><:siteuser userId:><:eif:>’s affiliate homepage</p>
 <:ifSiteuser_image photo:>
-<p><img src="<:siteuser_image photo url:>" width="<:siteuser_image photo width:>" height="<:siteuser_image photo height:>" alt="<:siteuser_image photo alt:>" /></p><:or:><:eif:>
+<p><img src="<:siteuser_image photo url:>" width="<:siteuser_image photo width:>" height="<:siteuser_image photo height:>" alt="<:siteuser_image photo alt:>" /></p><:eif:>
       
 <:ifCfg affiliate remote_affiliate:>
 <p><a href="<:cfg affiliate remote_affiliate:><:target affiliate set id [siteuser userId] |h:>">Make a purchase in our store</a></p><:or:>

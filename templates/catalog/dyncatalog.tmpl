@@ -50,8 +50,8 @@
 </form><:endswitch:><:switch:><:case Or [cfg base hide_child_list] [ifMatch [catalog flags] "l"]:><:case Dynallcats:><:include include/sortallkids.tmpl:>
 <div class="children">
   <ul><:iterator begin dynallcats:>
-    <li<:ifDynallcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynallcat thumbImage:>
-      <a href="<:url dynallcat:>" class="thumbnail"><:thumbnail dynallcat:></a><:or:><:eif:>
+    <li<:ifDynallcat thumbImage:> class="thumbnail"<:eif:>><:ifDynallcat thumbImage:>
+      <a href="<:url dynallcat:>" class="thumbnail"><:thumbnail dynallcat:></a><:eif:>
       <a href="<:url dynallcat:>" class="title"><:dynallcat title:></a><:include admin/adminmenu/dynallcat_mini.tmpl:><:switch:><:case Dynallcat summary:>
       <p class="summary"><:dynallcat summary:></p><:endswitch:>
     </li><:iterator end dynallcats:>

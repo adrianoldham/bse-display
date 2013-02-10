@@ -13,7 +13,7 @@
     <tr>
       <td class="item">
         <a href="<:item link:>" class="title"><:item title:></a><:ifOptions:>
-        <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
+        <span><:options:></span><:eif:><:if And [item description] [cfg shop product_description 1]:>
         <div class="description"><:item description:></div><:eif And:>
       </td>
       <td class="quantity"><:item units:> &times;</td>
@@ -38,7 +38,7 @@
 <p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop order] :>">Signup</a> or <:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop order] :>">Logon</a> before you continue with this purchase.
 </p><:eif User:><:eif Cfg:>
 <form action="<:target shop |h:>" method="post" name="checkoutpay">
-<:ifOrder id:><input type="hidden" name="order_id" value="<:order id:>" /><:or:><:eif:>
+<:ifOrder id:><input type="hidden" name="order_id" value="<:order id:>" /><:eif:>
   <h2>Payment Details</h2>
   <fieldset>
     <:if Payments CC:>
@@ -50,30 +50,30 @@
           <caption>Account Details</caption>
           <tr>
             <th><label for="ccName"><:cfg shop display_ccName "Name on Card":>:<:error_img ccName:></label></th>
-            <td><input type="text" name="ccName" id="ccName" size="40" value="<:old ccName:>" class="<:ifError_img ccName:>error<:or:><:eif:>" /></td>
+            <td><input type="text" name="ccName" id="ccName" size="40" value="<:old ccName:>" class="<:ifError_img ccName:>error<:eif:>" /></td>
           </tr>
           <tr>
             <th><label for="cardNumber"><:cfg shop display_cardNumber "Card Number":>:<:error_img cardNumber:></label></th>
-            <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" class="<:ifError_img cardNumber:>error<:or:><:eif:>" />
-              <label for="cardVerify"><:cfg shop display_cardVerify "CVV":>:<:error_img cardVerify:></label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" class="<:ifError_img cardVerify:>error<:or:><:eif:>" /> <:help cvv2 CVV:>
+            <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" class="<:ifError_img cardNumber:>error<:eif:>" />
+              <label for="cardVerify"><:cfg shop display_cardVerify "CVV":>:<:error_img cardVerify:></label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" class="<:ifError_img cardVerify:>error<:eif:>" /> <:help cvv2 CVV:>
             </td>
           </tr>
           <tr>
             <th><label for="cardExpiry"><:cfg shop display_cardExpiry "Expiry Date":>:<:error_img cardExpiry:></label></th>
-            <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" class="<:ifError_img cardExpiry:>error<:or:><:eif:>" /> <span class="small">(MM/YY)</span></td>
+            <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" class="<:ifError_img cardExpiry:>error<:eif:>" /> <span class="small">(MM/YY)</span></td>
           </tr>
           <tr>
             <th><label for="ccType"><:cfg shop display_ccType "Card Type":>:<:error_img ccType:></label></th>
             <td>
-              <select name="ccType" id="ccType" class="<:ifError_img ccType:>error<:or:><:eif:>">
+              <select name="ccType" id="ccType" class="<:ifError_img ccType:>error<:eif:>">
                 <option value="" selected="selected">Select card type</option>
                 <:if Cfgsection "payment ccType":>
                 <:iterator begin dyncfgsection "payment ccType" sort=key:>
                 <option value="<:dyncfgentry value:>"<:if Eq [old ccType] [dyncfgentry value]:> selected="selected"<:eif Eq:>><:dyncfgentry value:></option>
                 <:iterator end dyncfgsection:>
                 <:or Cfgsection:>
-                <option value="Visa"<:ifEq [cgi ccType] "Visa":> selected="selected"<:or:><:eif:>>Visa</option>
-                <option value="Mastercard"<:ifEq [cgi ccType] "Mastercard":> selected="selected"<:or:><:eif:>>Mastercard</option>
+                <option value="Visa"<:ifEq [cgi ccType] "Visa":> selected="selected"<:eif:>>Visa</option>
+                <option value="Mastercard"<:ifEq [cgi ccType] "Mastercard":> selected="selected"<:eif:>>Mastercard</option>
                 <:eif Cfgsection:>
               </select>
             </td>
@@ -127,7 +127,7 @@
           <tr>
             <th>SWIFT Code:</th>
             <td><:cfg shop swiftcode |h:></td>
-          </tr><:or:><:eif:>
+          </tr><:eif:>
           <tr>
             <th>Account:</th>
             <td><:cfg shop accountno |h:></td>

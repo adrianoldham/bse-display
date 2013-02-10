@@ -9,7 +9,7 @@
 </div><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "l"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:eif Files:>
 <ul class="sitemap"><:iterator begin children_of -1:>
-  <li class="i<:ofchild level:><:ifFirstOfchild:> first<:or:><:eif:><:ifLastOfchild:> last<:or:><:eif:><:ifAllkids_of ofchild filter: [flags] !~ /s/ :> parent<:or:><:eif:>"><:switch:><:case Ofchild link:>
+  <li class="i<:ofchild level:><:ifFirstOfchild:> first<:eif:><:ifLastOfchild:> last<:eif:><:ifAllkids_of ofchild filter: [flags] !~ /s/ :> parent<:eif:>"><:switch:><:case Ofchild link:>
     <a href="<:url ofchild:>"><:ifOfchild titleAlias:><:ofchild titleAlias:><:or:><:ofchild title:><:eif:></a><:case default:>
     <span><:ifOfchild titleAlias:><:ofchild titleAlias:><:or:><:ofchild title:><:eif:></span><:endswitch:><:if Allkids_of ofchild filter: [flags] !~ /s/ :>
     <ul><:iterator begin allkids_of ofchild filter: [flags] !~ /s/ :>

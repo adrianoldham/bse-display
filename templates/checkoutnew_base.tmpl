@@ -13,7 +13,7 @@
     <tr>
       <td class="item">
         <a href="<:item link:>" class="title"><:item title:></a><:ifOptions:>
-        <span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
+        <span><:options:></span><:eif:><:if And [item description] [cfg shop product_description 1]:>
         <div class="description"><:item description:></div><:eif And:>
       </td>
       <td class="quantity"><:item units:> &times;</td>
@@ -41,163 +41,163 @@
   <h2>Billing Details</h2>
   <fieldset class="name">
     <legend>Name</legend>
-    <div class="input name1<:ifError_img billFirstName:> error<:or:><:eif:>">
+    <div class="input name1<:ifError_img billFirstName:> error<:eif:>">
       <label for="billFirstName"><:error_img billFirstName:><:cfg "site users" display_name1 "First Name":>: <span class="required">*</span></label>
-      <input type="text" name="billFirstName" id="billFirstName" size="40" value="<:old billFirstName:>" title="<:cfg "site users" display_name1 "First Name":>" class="required<:ifError_img billFirstName:> error<:or:><:eif:>" />
+      <input type="text" name="billFirstName" id="billFirstName" size="40" value="<:old billFirstName:>" title="<:cfg "site users" display_name1 "First Name":>" class="required<:ifError_img billFirstName:> error<:eif:>" />
     </div>
-    <div class="input name2<:ifError_img billLastName:> error<:or:><:eif:>">
+    <div class="input name2<:ifError_img billLastName:> error<:eif:>">
       <label for="billLastName"><:error_img billLastName:><:cfg "site users" display_name2 "Last Name":>: <span class="required">*</span></label>
-      <input type="text" name="billLastName" id="billLastName" size="40" value="<:old billLastName:>" title="<:cfg "site users" display_name2 "Last Name":>" class="required<:ifError_img billLastName:> error<:or:><:eif:>" />
+      <input type="text" name="billLastName" id="billLastName" size="40" value="<:old billLastName:>" title="<:cfg "site users" display_name2 "Last Name":>" class="required<:ifError_img billLastName:> error<:eif:>" />
     </div>
   </fieldset>
   <fieldset class="company">
     <legend>Company</legend>
-    <div class="input organization<:ifError_img billOrganization:> error<:or:><:eif:>">
+    <div class="input organization<:ifError_img billOrganization:> error<:eif:>">
       <label for="billOrganization"><:error_img billOrganization:><:cfg "site users" display_organization "Organisation Name":>:</label>
-      <input type="text" name="billOrganization" id="billOrganization" size="40" value="<:old billOrganization:>" title="<:cfg "site users" display_organization "Organisation Name":>" class="<:ifError_img billOrganization:>error<:or:><:eif:>" />
+      <input type="text" name="billOrganization" id="billOrganization" size="40" value="<:old billOrganization:>" title="<:cfg "site users" display_organization "Organisation Name":>" class="<:ifError_img billOrganization:>error<:eif:>" />
     </div>
-    <div class="input purchase_order<:ifError_img purchase_order:> error<:or:><:eif:>">
+    <div class="input purchase_order<:ifError_img purchase_order:> error<:eif:>">
       <label for="purchase_order"><:error_img purchase_order:><:cfg "site users" display_purchase_order "Purchase Order":>:</label>
-      <input type="text" name="purchase_order" id="purchase_order" size="40" value="<:old purchase_order:>" title="<:cfg "site users" display_purchase_order "Purchase Order":>" class="<:ifError_img purchase_order:>error<:or:><:eif:>" />
+      <input type="text" name="purchase_order" id="purchase_order" size="40" value="<:old purchase_order:>" title="<:cfg "site users" display_purchase_order "Purchase Order":>" class="<:ifError_img purchase_order:>error<:eif:>" />
     </div>
   </fieldset>
   <fieldset class="address">
     <legend>Address</legend>
-    <div class="input address<:ifError_img billStreet:> error<:or:><:eif:>">
+    <div class="input address<:ifError_img billStreet:> error<:eif:>">
       <label for="billStreet"><:error_img billStreet:><:cfg "site users" display_address "Address":>: <span class="required">*</span></label>
-      <input type="text" name="billStreet" id="billStreet" size="40" value="<:old billStreet:>" title="<:cfg "site users" display_address "Address":>" class="required <:ifError_img billStreet:> error<:or:><:eif:>" />
+      <input type="text" name="billStreet" id="billStreet" size="40" value="<:old billStreet:>" title="<:cfg "site users" display_address "Address":>" class="required <:ifError_img billStreet:> error<:eif:>" />
     </div>
-    <div class="input address2<:ifError_img billStreet2:> error<:or:><:eif:>">
+    <div class="input address2<:ifError_img billStreet2:> error<:eif:>">
       <label for="billStreet2"><:error_img billStreet2:><:cfg "site users" display_address2 "Address 2":>:</label>
-      <input type="text" name="billStreet2" id="billStreet2" size="40" value="<:old billStreet2:>" title="<:cfg "site users" display_address2 "Address 2":>" class="<:ifError_img billStreet2:>error<:or:><:eif:>" />
+      <input type="text" name="billStreet2" id="billStreet2" size="40" value="<:old billStreet2:>" title="<:cfg "site users" display_address2 "Address 2":>" class="<:ifError_img billStreet2:>error<:eif:>" />
     </div>
-    <div class="input city<:ifError_img billSuburb:> error<:or:><:eif:>">
+    <div class="input city<:ifError_img billSuburb:> error<:eif:>">
       <label for="billSuburb"><:error_img billSuburb:><:cfg "site users" display_city "Suburb":>: <span class="required">*</span></label>
-      <input type="text" name="billSuburb" id="billSuburb" size="40" value="<:old billSuburb:>" title="<:cfg "site users" display_city "Suburb":>" class="required<:ifError_img billSuburb:> error<:or:><:eif:>" />
+      <input type="text" name="billSuburb" id="billSuburb" size="40" value="<:old billSuburb:>" title="<:cfg "site users" display_city "Suburb":>" class="required<:ifError_img billSuburb:> error<:eif:>" />
     </div>
-    <div class="input state<:ifError_img billState:> error<:or:><:eif:>">
+    <div class="input state<:ifError_img billState:> error<:eif:>">
       <label for="billState"><:error_img billState:><:cfg "site users" display_state "State":>:</label>
-      <input type="text" name="billState" id="billState" size="10" value="<:old billState:>" title="<:cfg "site users" display_state "State":>" class="<:ifError_img billState:>error<:or:><:eif:>" />
+      <input type="text" name="billState" id="billState" size="10" value="<:old billState:>" title="<:cfg "site users" display_state "State":>" class="<:ifError_img billState:>error<:eif:>" />
     </div>
-    <div class="input postcode<:ifError_img billPostCode:> error<:or:><:eif:>">
+    <div class="input postcode<:ifError_img billPostCode:> error<:eif:>">
       <label for="billPostCode"><:error_img billPostCode:><:cfg "site users" display_postcode "Postcode":>: <span class="required">*</span></label>
-      <input type="text" name="billPostCode" id="billPostCode" size="10" value="<:old billPostCode:>" title="<:cfg "site users" display_postcode "Postcode":>" class="required<:ifError_img billPostCode:> error<:or:><:eif:>" />
+      <input type="text" name="billPostCode" id="billPostCode" size="10" value="<:old billPostCode:>" title="<:cfg "site users" display_postcode "Postcode":>" class="required<:ifError_img billPostCode:> error<:eif:>" />
     </div>
-    <div class="input country<:ifError_img billCountry:> error<:or:><:eif:>">
+    <div class="input country<:ifError_img billCountry:> error<:eif:>">
       <label for="billCountry"><:error_img billCountry:><:cfg "site users" display_country "Country":>: <span class="required">*</span></label><:if Cfgsection "country selector":>
-      <select name="billCountry" id="billCountry" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img billCountry:> error<:or:><:eif:>">
+      <select name="billCountry" id="billCountry" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img billCountry:> error<:eif:>">
         <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
         <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old billCountry] [uc [dyncfgentry key]]] [ifEq [old billCountry] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
-      <input type="text" name="billCountry" id="billCountry" size="20" value="<:old billCountry:>" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img billCountry:> error<:or:><:eif:>" /><:eif Cfgsection:> 
+      <input type="text" name="billCountry" id="billCountry" size="20" value="<:old billCountry:>" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img billCountry:> error<:eif:>" /><:eif Cfgsection:> 
     </div>
   </fieldset>
   <fieldset class="contact">
     <legend>Contact</legend>
-    <div class="input telephone<:ifError_img billTelephone:> error<:or:><:eif:>">
+    <div class="input telephone<:ifError_img billTelephone:> error<:eif:>">
       <label for="billTelephone"><:error_img billTelephone:><:cfg "site users" display_telephone "Telephone":>: <span class="required">*</span></label>
-      <input type="text" name="billTelephone" id="billTelephone" size="20" value="<:old billTelephone:>" title="<:cfg "site users" display_telephone "Telephone":>" class="required<:ifError_img billTelephone:> error<:or:><:eif:>" />
+      <input type="text" name="billTelephone" id="billTelephone" size="20" value="<:old billTelephone:>" title="<:cfg "site users" display_telephone "Telephone":>" class="required<:ifError_img billTelephone:> error<:eif:>" />
     </div>
-    <div class="input facsimile<:ifError_img billFacsimile:> error<:or:><:eif:>">
+    <div class="input facsimile<:ifError_img billFacsimile:> error<:eif:>">
       <label for="billFacsimile"><:error_img billFacsimile:><:cfg "site users" display_facsimile "Facsimile":>:</label>
-      <input type="text" name="billFacsimile" id="billFacsimile" size="20" value="<:old billFacsimile:>" title="<:cfg "site users" display_facsimile "Facsimile":>" class="<:ifError_img billFacsimile:>error<:or:><:eif:>" />
+      <input type="text" name="billFacsimile" id="billFacsimile" size="20" value="<:old billFacsimile:>" title="<:cfg "site users" display_facsimile "Facsimile":>" class="<:ifError_img billFacsimile:>error<:eif:>" />
     </div>
-    <div class="input mobile<:ifError_img billMobile:> error<:or:><:eif:>">
+    <div class="input mobile<:ifError_img billMobile:> error<:eif:>">
       <label for="billMobile"><:error_img billMobile:><:cfg "site users" display_mobile "Mobile":>:</label>
-      <input type="text" name="billMobile" id="billMobile" size="20" value="<:old billMobile:>" title="<:cfg "site users" display_mobile "Mobile":>" class="<:ifError_img billMobile:>error<:or:><:eif:>" />
+      <input type="text" name="billMobile" id="billMobile" size="20" value="<:old billMobile:>" title="<:cfg "site users" display_mobile "Mobile":>" class="<:ifError_img billMobile:>error<:eif:>" />
     </div>
-    <div class="input email<:ifError_img billEmail:> error<:or:><:eif:>">
+    <div class="input email<:ifError_img billEmail:> error<:eif:>">
       <label for="billEmail"><:error_img billEmail:><:cfg "site users" display_email "Email Address":>: <span class="required">*</span></label>
-      <input type="text" name="billEmail" id="billEmail" size="40" value="<:old billEmail:>" title="<:cfg "site users" display_email "Email Address":>" class="required<:ifError_img billEmail:> error<:or:><:eif:>" />
+      <input type="text" name="billEmail" id="billEmail" size="40" value="<:old billEmail:>" title="<:cfg "site users" display_email "Email Address":>" class="required<:ifError_img billEmail:> error<:eif:>" />
     </div>
   </fieldset>
   <fieldset class="message">
     <legend>Message</legend>
-    <div class="input instructions<:ifError_img instructions:> error<:or:><:eif:>">
+    <div class="input instructions<:ifError_img instructions:> error<:eif:>">
       <label for="instructions"><:error_img instructions:><:cfg "site users" display_instructions "Instructions":>:</label>
-      <textarea name="instructions" id="instructions" cols="40" rows="5" title="<:cfg "site users" display_instructions "Instructions":>" class="<:ifError_img instructions:>error<:or:><:eif:>"><:old instructions:></textarea>
+      <textarea name="instructions" id="instructions" cols="40" rows="5" title="<:cfg "site users" display_instructions "Instructions":>" class="<:ifError_img instructions:>error<:eif:>"><:old instructions:></textarea>
     </div>
   </fieldset><:if And [ifShipping] [ifPhysical]:>
   <fieldset class="delivery">
     <legend>Delivery</legend>
-    <div class="input shipping_name<:ifError_img shipping_name:> error<:or:><:eif:>">
+    <div class="input shipping_name<:ifError_img shipping_name:> error<:eif:>">
       <label for="shipping_name"><:error_img shipping_name:><:cfg "site users" display_shipping_name "Shipping Method":>: <span class="required">*</span></label>
       <:shipping_select:>
     </div>
-    <div class="checkbox need_delivery<:ifError_img need_delivery:> error<:or:><:eif:>">
-      <label><input type="checkbox" name="need_delivery" <:ifNeedDelivery:> checked="checked"<:or:><:eif:> onchange="this.form.checkupdate.click()" /> Shipping details different to billing</label>
+    <div class="checkbox need_delivery<:ifError_img need_delivery:> error<:eif:>">
+      <label><input type="checkbox" name="need_delivery" <:ifNeedDelivery:> checked="checked"<:eif:> onchange="this.form.checkupdate.click()" /> Shipping details different to billing</label>
     </div>
   </fieldset><:eif And:>
   <:if NeedDelivery:>
   <h2>Shipping Details</h2>
   <fieldset class="name">
     <legend>Name</legend>
-    <div class="input name1<:ifError_img delivFirstName:> error<:or:><:eif:>">
+    <div class="input name1<:ifError_img delivFirstName:> error<:eif:>">
       <label for="delivFirstName"><:error_img delivFirstName:><:cfg "site users" display_name1 "First Name":>: <span class="required">*</span></label>
-      <input type="text" name="delivFirstName" id="delivFirstName" size="40" value="<:old delivFirstName:>" title="<:cfg "site users" display_name1 "First Name":>" class="required<:ifError_img delivFirstName:> error<:or:><:eif:>" />
+      <input type="text" name="delivFirstName" id="delivFirstName" size="40" value="<:old delivFirstName:>" title="<:cfg "site users" display_name1 "First Name":>" class="required<:ifError_img delivFirstName:> error<:eif:>" />
     </div>
-    <div class="input name2<:ifError_img delivLastName:> error<:or:><:eif:>">
+    <div class="input name2<:ifError_img delivLastName:> error<:eif:>">
       <label for="delivLastName"><:error_img delivLastName:><:cfg "site users" display_name2 "Last Name":>: <span class="required">*</span></label>
-      <input type="text" name="delivLastName" id="delivLastName" size="40" value="<:old delivLastName:>" title="<:cfg "site users" display_name2 "Last Name":>" class="required<:ifError_img delivLastName:> error<:or:><:eif:>" />
+      <input type="text" name="delivLastName" id="delivLastName" size="40" value="<:old delivLastName:>" title="<:cfg "site users" display_name2 "Last Name":>" class="required<:ifError_img delivLastName:> error<:eif:>" />
     </div>
   </fieldset>
   <fieldset class="company">
     <legend>Company</legend>
-    <div class="input organization<:ifError_img delivOrganization:> error<:or:><:eif:>">
+    <div class="input organization<:ifError_img delivOrganization:> error<:eif:>">
       <label for="delivOrganization"><:error_img delivOrganization:><:cfg "site users" display_organization "Organisation Name":>:</label>
-      <input type="text" name="delivOrganization" id="delivOrganization" size="40" value="<:old delivOrganization:>" title="<:cfg "site users" display_organization "Organisation Name":>" class="<:ifError_img delivOrganization:>error<:or:><:eif:>" />
+      <input type="text" name="delivOrganization" id="delivOrganization" size="40" value="<:old delivOrganization:>" title="<:cfg "site users" display_organization "Organisation Name":>" class="<:ifError_img delivOrganization:>error<:eif:>" />
     </div>
   </fieldset>
   <fieldset class="address">
     <legend>Address</legend>
-    <div class="input street<:ifError_img delivStreet:> error<:or:><:eif:>">
+    <div class="input street<:ifError_img delivStreet:> error<:eif:>">
       <label for="delivStreet"><:error_img delivStreet:><:cfg "site users" display_street "Address":>: <span class="required">*</span></label>
-      <input type="text" name="delivStreet" id="delivStreet" size="40" value="<:old delivStreet:>" title="<:cfg "site users" display_street "Address":>" class="required<:ifError_img delivStreet:> error<:or:><:eif:>" />
+      <input type="text" name="delivStreet" id="delivStreet" size="40" value="<:old delivStreet:>" title="<:cfg "site users" display_street "Address":>" class="required<:ifError_img delivStreet:> error<:eif:>" />
     </div>
-    <div class="input street2<:ifError_img delivStreet2:> error<:or:><:eif:>">
+    <div class="input street2<:ifError_img delivStreet2:> error<:eif:>">
       <label for="delivStreet2"><:error_img delivStreet2:><:cfg "site users" display_street2 "Address 2":>:</label>
-      <input type="text" name="delivStreet2" id="delivStreet2" size="40" value="<:old delivStreet2:>" title="<:cfg "site users" display_street2 "Address 2":>" class="<:ifError_img delivStreet2:>error<:or:><:eif:>" />
+      <input type="text" name="delivStreet2" id="delivStreet2" size="40" value="<:old delivStreet2:>" title="<:cfg "site users" display_street2 "Address 2":>" class="<:ifError_img delivStreet2:>error<:eif:>" />
     </div>
-    <div class="input suburb<:ifError_img delivSuburb:> error<:or:><:eif:>">
+    <div class="input suburb<:ifError_img delivSuburb:> error<:eif:>">
       <label for="delivSuburb"><:error_img delivSuburb:><:cfg "site users" display_suburb "Suburb":>: <span class="required">*</span></label>
-      <input type="text" name="delivSuburb" id="delivSuburb" size="40" value="<:old delivSuburb:>" title="<:cfg "site users" display_suburb "Suburb":>" class="required<:ifError_img delivSuburb:> error<:or:><:eif:>" />
+      <input type="text" name="delivSuburb" id="delivSuburb" size="40" value="<:old delivSuburb:>" title="<:cfg "site users" display_suburb "Suburb":>" class="required<:ifError_img delivSuburb:> error<:eif:>" />
     </div>
-    <div class="input state<:ifError_img delivState:> error<:or:><:eif:>">
+    <div class="input state<:ifError_img delivState:> error<:eif:>">
       <label for="delivState"><:error_img delivState:><:cfg "site users" display_state "State":>:</label>
-      <input type="text" name="delivState" id="delivState" size="10" value="<:old delivState:>" title="<:cfg "site users" display_state "State":>" class="<:ifError_img delivState:>error<:or:><:eif:>" />
+      <input type="text" name="delivState" id="delivState" size="10" value="<:old delivState:>" title="<:cfg "site users" display_state "State":>" class="<:ifError_img delivState:>error<:eif:>" />
     </div>
-    <div class="input postcode<:ifError_img delivPostCode:> error<:or:><:eif:>">
+    <div class="input postcode<:ifError_img delivPostCode:> error<:eif:>">
       <label for="delivPostCode"><:error_img delivPostCode:><:cfg "site users" display_postcode "Postcode":>: <span class="required">*</span></label>
-      <input type="text" name="delivPostCode" id="delivPostCode" size="10" value="<:old delivPostCode:>" title="<:cfg "site users" display_postcode "Postcode":>" class="required<:ifError_img delivPostCode:> error<:or:><:eif:>" />
+      <input type="text" name="delivPostCode" id="delivPostCode" size="10" value="<:old delivPostCode:>" title="<:cfg "site users" display_postcode "Postcode":>" class="required<:ifError_img delivPostCode:> error<:eif:>" />
     </div>
-    <div class="input country<:ifError_img delivCountry:> error<:or:><:eif:>">
+    <div class="input country<:ifError_img delivCountry:> error<:eif:>">
       <label for="delivCountry"><:error_img delivCountry:><:cfg "site users" display_country "Country":>: <span class="required">*</span></label><:if Cfgsection "country selector":>
-      <select name="delivCountry" id="delivCountry" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img delivCountry:> error<:or:><:eif:>">
+      <select name="delivCountry" id="delivCountry" onchange="this.form.checkupdate.click();" title="<:cfg "site users" display_country "Country":>" class="required<:ifError_img delivCountry:> error<:eif:>">
         <option value="">Please select a country</option><:iterator begin dyncfgsection "country selector" sort=value:>
         <option value="<:uc [dyncfgentry key]:>"<:if Or [ifEq [old delivCountry] [uc [dyncfgentry key]]] [ifEq [old delivCountry] [uc [dyncfgentry value]]]:> selected="selected"<:eif Or:>><:dyncfgentry value:></option>
         <:iterator end dyncfgsection:>
       </select><:or Cfgsection:>
-      <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry:>" title="<:cfg "site users" display_delivCountry "Country":>" class="required<:ifError_img delivCountry:> error<:or:><:eif:>" /><:eif Cfgsection:> 
+      <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry:>" title="<:cfg "site users" display_delivCountry "Country":>" class="required<:ifError_img delivCountry:> error<:eif:>" /><:eif Cfgsection:> 
     </div>
   </fieldset>
   <fieldset class="contact">
     <legend>Contact</legend>
-    <div class="input telephone<:ifError_img telephone:> error<:or:><:eif:>">
+    <div class="input telephone<:ifError_img telephone:> error<:eif:>">
       <label for="telephone"><:error_img telephone:><:cfg "site users" display_telephone "Telephone":>:</label>
-      <input type="text" name="telephone" id="telephone" size="20" value="<:old telephone:>" title="<:cfg "site users" display_telephone "Telephone":>" class="<:ifError_img telephone:> error<:or:><:eif:>" />
+      <input type="text" name="telephone" id="telephone" size="20" value="<:old telephone:>" title="<:cfg "site users" display_telephone "Telephone":>" class="<:ifError_img telephone:> error<:eif:>" />
     </div>
-    <div class="input facsimile<:ifError_img facsimile:> error<:or:><:eif:>">
+    <div class="input facsimile<:ifError_img facsimile:> error<:eif:>">
       <label for="facsimile"><:error_img facsimile:><:cfg "site users" display_facsimile "Facsimile":>:</label>
-      <input type="text" name="facsimile" id="facsimile" size="20" value="<:old facsimile:>" title="<:cfg "site users" display_facsimile "Facsimile":>" class="<:ifError_img facsimile:>error<:or:><:eif:>" />
+      <input type="text" name="facsimile" id="facsimile" size="20" value="<:old facsimile:>" title="<:cfg "site users" display_facsimile "Facsimile":>" class="<:ifError_img facsimile:>error<:eif:>" />
     </div>
-    <div class="input mobile<:ifError_img delivMobile:> error<:or:><:eif:>">
+    <div class="input mobile<:ifError_img delivMobile:> error<:eif:>">
       <label for="delivMobile"><:error_img delivMobile:><:cfg "site users" display_mobile "Mobile":>:</label>
-      <input type="text" name="delivMobile" id="delivMobile" size="20" value="<:old delivMobile:>" title="<:cfg "site users" display_mobile "Mobile":>" class="<:ifError_img delivMobile:>error<:or:><:eif:>" />
+      <input type="text" name="delivMobile" id="delivMobile" size="20" value="<:old delivMobile:>" title="<:cfg "site users" display_mobile "Mobile":>" class="<:ifError_img delivMobile:>error<:eif:>" />
     </div>
-    <div class="input email<:ifError_img emailAddress:> error<:or:><:eif:>">
+    <div class="input email<:ifError_img emailAddress:> error<:eif:>">
       <label for="emailAddress"><:error_img emailAddress:><:cfg "site users" display_email "Email Address":>:</label>
-      <input type="text" name="emailAddress" id="emailAddress" size="40" value="<:old emailAddress:>" title="<:cfg "site users" display_email "Email Address":>" class="<:ifError_img emailAddress:> error<:or:><:eif:>" />
+      <input type="text" name="emailAddress" id="emailAddress" size="40" value="<:old emailAddress:>" title="<:cfg "site users" display_email "Email Address":>" class="<:ifError_img emailAddress:> error<:eif:>" />
     </div>
   </fieldset>
   <:eif NeedDelivery:>
@@ -205,11 +205,11 @@
   <h2>Affiliate Details</h2>
   <fieldset class="referrer">
     <legend>Referrer</legend>
-    <div class="input affiliate_code<:ifError_img affiliate_code:> error<:or:><:eif:>">
+    <div class="input affiliate_code<:ifError_img affiliate_code:> error<:eif:>">
       <label for="affiliate_code"><:error_img affiliate_code:><:cfg "site users" display_affiliate_code "Referrer Code":>:</label><:if Affiliate_code:>
       <a href="<:target affiliate |h:>?lo=<:affiliate_code:>"><:affiliate_code:></a>
       <input type="hidden" name="affiliate_code" value="<:affiliate_code:>" /><:or Affiliate_code:>
-      <input type="text" name="affiliate_code" id="affiliate_code" size="20" value="<:old affiliate_code:>" title="<:cfg "site users" display_affiliate_code "Referrer Id":>" class="<:ifError_img affiliate_code:>error<:or:><:eif:>" /><:eif Affiliate_code:>
+      <input type="text" name="affiliate_code" id="affiliate_code" size="20" value="<:old affiliate_code:>" title="<:cfg "site users" display_affiliate_code "Referrer Id":>" class="<:ifError_img affiliate_code:>error<:eif:>" /><:eif Affiliate_code:>
     </div>
   </fieldset>
   <:eif Cfg:>

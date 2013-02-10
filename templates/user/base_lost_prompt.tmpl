@@ -6,13 +6,13 @@
   <input type="hidden" name="id" value="<:lostid:>" />
   <fieldset class="password">
     <legend>Password</legend>
-    <div class="input password<:ifError_img password:> error<:or:><:eif:>">
+    <div class="input password<:ifError_img password:> error<:eif:>">
       <label for="password"><:error_img password:> <:cfg "site users" display_new_password "New Password":>: <span class="required">*</span></label>
-      <input type="password" name="password" id="password" size="40" value="<:old password:>" title="<:cfg "site users" display_new_password "New Password":>" class="required<:ifError_img password:> error<:or:><:eif:>" />
+      <input type="password" name="password" id="password" size="40" value="<:old password:>" title="<:cfg "site users" display_new_password "New Password":>" class="required<:ifError_img password:> error<:eif:>" />
     </div>
-    <div class="input confirm<:ifError_img confirm:> error<:or:><:eif:>">
+    <div class="input confirm<:ifError_img confirm:> error<:eif:>">
       <label for="confirm"><:error_img confirm:> <:cfg "site users" display_confirm_password "Confirm Password":>: <span class="required">*</span></label>
-      <input type="password" name="confirm" id="confirm" size="40" value="<:old confirm:>" title="<:cfg "site users" display_confirm_password "Confirm Password":>" class="required<:ifError_img confirm:> error<:or:><:eif:>" />
+      <input type="password" name="confirm" id="confirm" size="40" value="<:old confirm:>" title="<:cfg "site users" display_confirm_password "Confirm Password":>" class="required<:ifError_img confirm:> error<:eif:>" />
       <small>
         Please enter a memorable <:lc [cfg "site users" display_new_password "New Password"]:> and once again to confirm that it’s correct.
       </small>

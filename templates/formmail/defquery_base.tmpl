@@ -1,9 +1,9 @@
 <:wrap formmail/formbase.tmpl:><:ifFormcfg body:>
-<:bodytext formcfg body:><:or:><:eif:>
-<form action="<:script:>" method="post"<:ifFormHasFileFields:> enctype="multipart/form-data"<:or:><:eif:> class="<:id:> <:formcfg class:>">
+<:bodytext formcfg body:><:eif:>
+<form action="<:script:>" method="post"<:ifFormHasFileFields:> enctype="multipart/form-data"<:eif:> class="<:id:> <:formcfg class:>">
   <input type="hidden" name="form" value="<:id:>" /><:ifCgi r:>
-  <input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:><:ifFormcfg spam_check_field:>
-  <input type="hidden" name="<:formcfg spam_check_field:>" value="" /><:or:><:eif:>
+  <input type="hidden" name="r" value="<:cgi r:>" /><:eif:><:ifFormcfg spam_check_field:>
+  <input type="hidden" name="<:formcfg spam_check_field:>" value="" /><:eif:>
 <:iterator begin fields:>
   <:switch:>
   <!-- Start special case fields //-->
@@ -21,8 +21,8 @@
     <:bodytext field intro:><:eif Field:>  
   
   <:case default:><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><fieldset><:case Match [previous_field htmltype] "^fieldset$":><:case Eq [field_number] "1":><fieldset><:case default:><:endswitch:>
-  <div class="<:ifFirstField:>first <:or:><:eif:><:ifLastField:>last <:or:><:eif:><:switch:><:case Field htmltype:><:field htmltype:><:case default:>input<:endswitch:><:ifField required:> required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:><:ifField class:> <:field class:><:or:><:eif:> <:field name:>"><:switch:><:case Match [field htmltype] "^(checkbox|radio)$" |x:><:case Field hidelabel:><:case default:>
-    <label for="<:field name:>"><:error_img [field name]:> <:field description:>:<:ifField required:> <span class="required">*</span><:or:><:eif:></label><:endswitch:><:if Field intro:>
+  <div class="<:ifFirstField:>first <:eif:><:ifLastField:>last <:eif:><:switch:><:case Field htmltype:><:field htmltype:><:case default:>input<:endswitch:><:ifField required:> required<:eif:><:ifError_img [field name]:> error<:eif:><:ifField class:> <:field class:><:eif:> <:field name:>"><:switch:><:case Match [field htmltype] "^(checkbox|radio)$" |x:><:case Field hidelabel:><:case default:>
+    <label for="<:field name:>"><:error_img [field name]:> <:field description:>:<:ifField required:> <span class="required">*</span><:eif:></label><:endswitch:><:if Field intro:>
     <:bodytext field intro:><:eif Field:>
 
     <:switch:>
@@ -31,24 +31,24 @@
     <:bodytext field bodytext:>
     
     <:case Match [field htmltype] "^textarea$":>
-    <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>"<:ifField readonly:> readonly="readonly" <:or:><:eif:><:ifField placeholder:>placeholder="<:field placeholder:>" <:or:><:eif:><:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
+    <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>"<:ifField readonly:> readonly="readonly" <:eif:><:ifField placeholder:>placeholder="<:field placeholder:>" <:eif:><:ifField required:>required="required" <:eif:>class="<:ifField required:>required<:eif:><:ifError_img [field name]:> error<:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
     
     <:case Match [field htmltype] "^(select|multiselect)$":><:if Field values_group_sql:>
     <:values_select:><:or Field:>
-    <select name="<:field name:>" id="<:field name:>"<:ifMatch [field htmltype] "^multiselect$":> size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple" <:or:><:eif:><:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
-      <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:or:><:eif:>><:value name:></option>
+    <select name="<:field name:>" id="<:field name:>"<:ifMatch [field htmltype] "^multiselect$":> size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple" <:eif:><:ifField required:>required="required" <:eif:>class="<:ifField required:>required<:eif:><:ifError_img [field name]:> error<:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
+      <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:eif:>><:value name:></option>
       <:iterator end values:>
     </select><:eif Field:>
     
     <:case Match [field htmltype] "^(radio|checkbox)$":>
     <fieldset id="<:field name:>"><:ifField hidelabel:><:or:>
       <legend><:field description:></legend><:eif:>
-      <:iterator begin values:><label for="<:field name:>_<:value id:>"><input type="<:field htmltype:>" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:or:><:eif:> /> <span class="<:field htmltype:>"><:value name:></span></label><:iterator separator values:>
+      <:iterator begin values:><label for="<:field name:>_<:value id:>"><input type="<:field htmltype:>" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:eif:> /> <span class="<:field htmltype:>"><:value name:></span></label><:iterator separator values:>
       <:iterator end values:>
     </fieldset>
     
     <:case default:>
-    <input type="<:ifField htmltype:><:field htmltype:><:or:>text<:eif:>" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:or:><:eif:><:ifField readonly:>readonly="readonly" <:or:><:eif:> <:ifField placeholder:>placeholder="<:field placeholder:>" <:or:><:eif:><:ifField required:>required="required" <:or:><:eif:>class="<:ifField required:>required<:or:><:eif:><:ifError_img [field name]:> error<:or:><:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
+    <input type="<:ifField htmltype:><:field htmltype:><:or:>text<:eif:>" name="<:field name:>" id="<:field name:>" value="<:old [field name] field default:>" size="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" <:ifField maxlength:>maxlength="<:field maxlength:>" <:eif:><:ifField readonly:>readonly="readonly" <:eif:> <:ifField placeholder:>placeholder="<:field placeholder:>" <:eif:><:ifField required:>required="required" <:eif:>class="<:ifField required:>required<:eif:><:ifError_img [field name]:> error<:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>" />
     <:endswitch:>
     
     <:if Field notes:>
@@ -63,4 +63,4 @@
 <p><span class="required">* Required.</span> <:formcfg required_text "Please provide information for all marked fields.":></p>
 <p class="buttons"><input type="submit" name="a_send" value="<:formcfg submit "Submit Form":>" class="submit" /></p>
 </form><:ifFormcfg summary:>
-<:bodytext formcfg summary:><:or:><:eif:>
+<:bodytext formcfg summary:><:eif:>

@@ -1,10 +1,10 @@
 <!-- START FILES ID: <:article id:> -->
 <ul class="meta files"><:iterator begin files:>
-  <li<:ifFile notes:> class="has-info"<:or:><:eif:>>
+  <li<:ifFile notes:> class="has-info"<:eif:>>
     <span>File <:add [file_index] 1:>:</span><:switch:><:case File forSale:>
     <:ifFile description:><:file description:><:or:><:file displayName:><:eif:><:case default:>
     <a href="<:target user download_file file [file id] r [url top] |h:>" title="Size: <:arithmetic d1:( [file sizeInBytes] / 1024):>KB"><:ifFile description:><:file description:><:or:><:file displayName:><:eif:></a><:endswitch:><:ifFile notes:>
-    <div><p><:replace [replace [nobodytext file notes] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p><!--:bodytext file notes://--></div><:or:><:eif:>
+    <div><p><:replace [replace [nobodytext file notes] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p><!--:bodytext file notes://--></div><:eif:>
   </li><:iterator end files:>
 </ul>
 <!-- END FILES ID: <:article id:> -->

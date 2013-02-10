@@ -59,8 +59,8 @@
 <:moveallcat:><:embed allcat:><:iterator end allcats:><:case Or [cfg base hide_child_list] [ifMatch [catalog flags] "l"]:><:case Allcats:><:include include/sortallkids.tmpl:>
 <div class="children">
   <ul><:iterator begin allcats:>
-    <li<:ifAllcat thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllcat thumbImage:>
-      <a href="<:url allcat:>" class="thumbnail"><:thumbnail allcat:></a><:or:><:eif:>
+    <li<:ifAllcat thumbImage:> class="thumbnail"<:eif:>><:ifAllcat thumbImage:>
+      <a href="<:url allcat:>" class="thumbnail"><:thumbnail allcat:></a><:eif:>
       <a href="<:url allcat:>" class="title"><:allcat title:></a><:include admin/adminmenu/allcat_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Allcat summary:>
       <p class="summary"><:allcat summary:></p><:case Allcat summaryLength:>
       <p class="summary"><:summary allcat [allcat summaryLength]:></p><:endswitch:>

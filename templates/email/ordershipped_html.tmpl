@@ -19,7 +19,7 @@
     <tr>
       <th>Purchase Order:</th>
       <td><:order purchase_order |h:></td>
-    </tr><:or:><:eif:><:ifOrder freight_tracking:>
+    </tr><:eif:><:ifOrder freight_tracking:>
     <tr>
       <th>Tracking Code:</th>
       <td>
@@ -29,11 +29,11 @@
         <:order freight_tracking |h:>
         <:- eif Cfg:>
       </td>
-    </tr><:or:><:eif:><:ifOrder shipping_method:>
+    </tr><:eif:><:ifOrder shipping_method:>
     <tr>
       <th>Shipping Method:</th>
       <td><:order shipping_method |h:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
   </tbody>
 </table>
 </div>
@@ -51,7 +51,7 @@
   </thead>
   <tbody><:iterator begin items:>
     <tr>
-      <td class="item"><:item title |h:><:ifOptions:> <span><:options |h:></span><:or:><:eif:></td>
+      <td class="item"><:item title |h:><:ifOptions:> <span><:options |h:></span><:eif:></td>
       <td class="code"><:item product_code |h:></td>
       <td class="quantity"><:item units:> &times;</td>
       <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
@@ -77,9 +77,9 @@
     <tr>
       <th>Address:</th>
       <td><:ifOrder delivOrganization:>
-        <:order delivOrganization |h:><br /><:or:><:eif:>
+        <:order delivOrganization |h:><br /><:eif:>
         <:order delivStreet |h:><br /><:ifOrder delivStreet2:>
-        <:order delivStreet2 |h:><br /><:or:><:eif:>
+        <:order delivStreet2 |h:><br /><:eif:>
         <:order delivSuburb |h:> <:order delivState |h:> <:order delivPostCode |h:><br /><:ifCfgsection "country selector":>
         <:cfg "country selector" [order delivCountry] |h:><:or:><:order delivCountry:><:eif:>
       </td>
@@ -91,11 +91,11 @@
     <:ifOrder facsimile:><tr>
       <th><:cfg "site users" display_facsimile "Facsimile" |h:>:</th>
       <td><:order facsimile |h:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <:ifOrder delivMobile:><tr>
       <th><:cfg "site users" display_mobile "Mobile" |h:>:</th>
       <td><:order delivMobile |h:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
     <:ifOrder emailAddress:><:or:><tr>
       <th><:cfg "site users" display_email "Email Address" |h:>:</th>
       <td><:order emailAddress |h:></td>
@@ -103,7 +103,7 @@
     <:ifOrder instructions:><tr>
       <th>Instructions:</th>
       <td><:order instructions |h:></td>
-    </tr><:or:><:eif:>
+    </tr><:eif:>
   </tbody>
 </table>
 </div>

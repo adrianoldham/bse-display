@@ -1,8 +1,8 @@
 <:wrap user/userbase.tmpl subtitle=>"Account summary" userpage=>"home" :>
 <h2><:param subtitle |h:></h2>
 <p>
-  This is your account manager. Here you can <:ifCfg subscriptions enabled:>manage your newsletter subscriptions,<:or:><:eif:><:ifCfg shop enabled:> 
-  view your entire purchase history, monitor the current status of an on-line order, manage your wishlist items and<:or:><:eif:>
+  This is your account manager. Here you can <:ifCfg subscriptions enabled:>manage your newsletter subscriptions,<:eif:><:ifCfg shop enabled:> 
+  view your entire purchase history, monitor the current status of an on-line order, manage your wishlist items and<:eif:>
   maintain personal details, like email and mailing addresses<:ifCfg "site users" nopassword:><:or:> or simply change your password<:eif:>.
 </p>
 <ul class="meta"><:if Or [cfg custom user_auth] [cfg "site users" nopassword]:><:or Or:>

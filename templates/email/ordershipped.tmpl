@@ -8,15 +8,15 @@ ORDER DETAILS:
 
 Order No.       : <:order id |%06d:>
 Order Date      : <:date order orderDate:><:ifOrder purchase_order:>
-Purchase No.    : <:order purchase_order:><:or:><:eif:><:ifOrder freight_tracking:>
-Tracking Code   : <:order freight_tracking:><:or:><:eif:>
+Purchase No.    : <:order purchase_order:><:eif:><:ifOrder freight_tracking:>
+Tracking Code   : <:order freight_tracking:><:eif:>
 Shipping Method : <:order shipping_method:>
 
 
 Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
 <:iterator begin items:><:item title |40:>   <:item product_code |12:> <:item units |%3d:> <:item price |m9:> <:extended price |m10:><:ifOptions:>
-   <:options:><:or:><:eif:>
+   <:options:><:eif:>
 <:iterator end items 
 :>--------------------------------------------------------------------------------
 <:if Cfg shop shipping
@@ -29,18 +29,18 @@ Item                                       Code         Qty     Price   Extended
 SHIPPING DETAILS:
 
 Address      : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
-               <:order delivOrganization:><:or:><:eif:>
+               <:order delivOrganization:><:eif:>
                <:order delivStreet:><:ifOrder delivStreet2:>
-               <:order delivStreet2:><:or:><:eif:>
+               <:order delivStreet2:><:eif:>
                <:order delivSuburb:> <:order delivPostCode:> <:order delivState:><:ifCfgsection "country selector":>
                <:cfg "country selector" [order delivCountry]:><:or:>
                <:order delivCountry:><:eif:>
 Telephone    : <:order telephone:><:ifOrder delivMobile:>
-Facsimile    : <:order facsimile:><:or:><:eif:><:ifOrder delivMobile:>
-Mobile       : <:order delivMobile:><:or:><:eif:><:ifOrder emailAddress:>
-Email        : <:order emailAddress:><:or:><:eif:><:ifOrder instructions:>
+Facsimile    : <:order facsimile:><:eif:><:ifOrder delivMobile:>
+Mobile       : <:order delivMobile:><:eif:><:ifOrder emailAddress:>
+Email        : <:order emailAddress:><:eif:><:ifOrder instructions:>
 
-<:with begin wrap 80:>Instructions : <:order instructions:><:with end wrap:><:or:><:eif:><:ifOrder userId:>
+<:with begin wrap 80:>Instructions : <:order instructions:><:with end wrap:><:eif:><:ifOrder userId:>
 
 This order is available in your account manager, you can review more details 
 in your order history.

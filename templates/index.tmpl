@@ -14,8 +14,8 @@
 <:move_ofallkid:><:embed ofallkid:><:iterator end allkids_of:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "l"]:><:case Allkids_of article filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
-    <li<:ifOfallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifOfallkid thumbImage:>
-      <a href="<:url ofallkid:>" class="thumbnail"><:thumbnail ofallkid:></a><:or:><:eif:>
+    <li<:ifOfallkid thumbImage:> class="thumbnail"<:eif:>><:ifOfallkid thumbImage:>
+      <a href="<:url ofallkid:>" class="thumbnail"><:thumbnail ofallkid:></a><:eif:>
       <a href="<:url ofallkid:>" class="title"><:ofallkid title:></a><:include admin/adminmenu/ofallkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Ofallkid summary:>
       <p class="summary"><:ofallkid summary:></p><:case Ofallkid summaryLength:>
       <p class="summary"><:summary ofallkid:></p><:endswitch:>

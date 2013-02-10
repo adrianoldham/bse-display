@@ -21,7 +21,7 @@ link is time limited and only ever sent to the email address of the account owne
 PASSWORD RESET LINK:
   <:target user lost id [user lost_id] |U:>
   
-This reset link will remain active for <:cfg "lost password" age_limit 7:> day<:ifArithmetic [cfg "lost password" age_limit 7] > 1:>s<:or:><:eif:>.
+This reset link will remain active for <:cfg "lost password" age_limit 7:> day<:ifArithmetic [cfg "lost password" age_limit 7] > 1:>s<:eif:>.
 
 <:eif Cfg
 :>

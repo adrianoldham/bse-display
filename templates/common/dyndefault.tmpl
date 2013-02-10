@@ -16,8 +16,8 @@
 <:case Dynallkids_of dynarticle filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin dynallkids_of dynarticle filter: [flags] !~ /s/ :>
-    <li<:ifDynofallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifDynofallkid thumbImage:>
-      <a href="<:url dynofallkid:>" class="thumbnail"><:thumbnail dynofallkid:></a><:or:><:eif:>
+    <li<:ifDynofallkid thumbImage:> class="thumbnail"<:eif:>><:ifDynofallkid thumbImage:>
+      <a href="<:url dynofallkid:>" class="thumbnail"><:thumbnail dynofallkid:></a><:eif:>
       <a href="<:url dynofallkid:>" class="title"><:dynofallkid title:></a><:include admin/adminmenu/dynofallkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Dynofallkid summary:>
       <p class="summary"><:dynofallkid summary:></p><:endswitch:>
     </li><:iterator end dynallkids_of:>
@@ -33,8 +33,8 @@
 <:move_ofallkid:><:embed ofallkid:><:iterator end allkids_of:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "l"]:><:case Allkids_of article filter: [flags] !~ /s/ :><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids_of article filter: [flags] !~ /s/ :>
-    <li<:ifOfallkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifOfallkid thumbImage:>
-      <a href="<:url ofallkid:>" class="thumbnail"><:thumbnail ofallkid:></a><:or:><:eif:>
+    <li<:ifOfallkid thumbImage:> class="thumbnail"<:eif:>><:ifOfallkid thumbImage:>
+      <a href="<:url ofallkid:>" class="thumbnail"><:thumbnail ofallkid:></a><:eif:>
       <a href="<:url ofallkid:>" class="title"><:ofallkid title:></a><:include admin/adminmenu/ofallkid_mini.tmpl:><:switch:><:case Cfg basic hide_child_summary:><:case Ofallkid summary:>
       <p class="summary"><:ofallkid summary:></p><:case Ofallkid summaryLength:><!-- summary tag is not currently supported in dynamic iterators -->
       <p class="summary"><:summary ofallkid:></p><:endswitch:>
