@@ -144,8 +144,8 @@
   
 <:if Subscriptions:>
   <fieldset class="subscribe">
-    <input type="hidden" name="saveSubscriptions" value="1" />
     <legend>Subscribe</legend>
+    <input type="hidden" name="saveSubscriptions" value="1" />
     <:iterator begin subscriptions:>
     <div class="checkbox">
       <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:or:><:eif:> /> <:subscription name:><:switch:><:case Match [cgi subinfo] [subscription id]:>
@@ -172,8 +172,8 @@
 
 <:if Cfg "notify files" active:>
   <fieldset class="notification">
-    <input type="hidden" name="save_file_subs" value="1" />
     <legend>Upload Notification</legend>
+    <input type="hidden" name="save_file_subs" value="1" />
     <:iterator begin filecats:>
     <div class="checkbox">
       <label><input type="checkbox" name="file_subscriptions" value="<:filecat id:>"<:ifFilecat subscribed:> checked="checked"<:or:><:eif:> /> <:filecat name:></label>
