@@ -1,68 +1,131 @@
-<:wrap base.tmpl:><:embed start:>
+<:- wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> -->
 <div id="article_<:article id:>" class="article product">
 <:- if Embedded:>
-<:admin article_mini:>
+<:- admin article_mini:>
 <:- or Embedded:>
-<:admin:>
-<:- eif Embedded:><:switch:><:case Match [article flags] "t":>
-<h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
-<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
-<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:switch:><:case Product retailPrice:><:if Product listed:>
+<:- admin:>
+<:- eif Embedded:>
+<:- switch:>
+<:- case !Dynamic -:>
+<:- case Embedded -:>
+<:- case Message:>
+<p id="message" class="error"><:message:></p>
+<:- endswitch:>
+<:include include/gallery.tmpl optional:>
+<:- switch:>
+<:- case Match [article flags] "t":>
+<h1 id="title_<:article id:>" class="hidden"><:article title:></h1>
+<:- case Embedded:>
+<h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2>
+<:- case default:>
+<h1 id="title_<:article id:>" class="pagetitle"><:title:></h1>
+<:- endswitch:>
+<:- switch:>
+<:- case Product retailPrice:>
+<:- if Product listed:>
 <form id="add_form_<:article id:>" action="<:target shop |h:>" method="post" class="product">
   <input type="hidden" name="id" value="<:product id:>" />
   <input type="hidden" name="r" value="<:cfg shop add_refresh [url top] :>" />
   <fieldset class="group">
-    <legend><:cfg shop currency "$":><:if Dynamic:><:number money [price dynarticle]:> <abbr><:cfg shop currency_code "AUD":></abbr><:ifPrice dynarticle discountpc:> <em><:price dynarticle discountpc:>% Off</em><:eif:><:or Dynamic:><:number money [product retailPrice]:> <abbr><:cfg shop currency_code "AUD":></abbr><:eif Dynamic:></legend><:if Options:>
-    <:iterator begin options:>
+    <legend>
+      <:- cfg shop currency "$":>
+      <:- if Dynamic:>
+      <:- number money [price dynarticle]:> <abbr><:cfg shop currency_code "AUD":></abbr>
+      <:- ifPrice dynarticle discountpc:>
+      <em><:price dynarticle discountpc:>% Off</em>
+      <:- eif:>
+      <:- or Dynamic:>
+      <:- number money [product retailPrice]:> <abbr><:cfg shop currency_code "AUD":></abbr>
+      <:- eif Dynamic:>
+    </legend>
+    <:- if Options:>
+    <:- iterator begin options:>
     <div class="input <:option id:>">
       <label for="<:option id:>"><:option desc:>:</label>
       <:option popup:>
     </div>
-    <:iterator end options:><:eif Options:>
+    <:- iterator end options:>
+    <:- eif Options:>
     <div class="input quantity">
       <label for="qty<:article id:>">Quantity:</label>
       <input type="text" name="quantity" id="qty<:article id:>" size="2" value="1" class="required" />
     </div>
-  </fieldset><:switch:><:case Or [product product_code] [product leadTime] [article.tag_objects]:>
-  <ul class="meta"><:ifProduct product_code:>
-    <li><span>Product Code:</span> <:product product_code:></li><:eif:><:ifProduct leadTime:>
-    <li><span>Usually ships in:</span> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></li><:eif:><:case default:><:endswitch:>
-    <:-.if [article.tag_objects]:>
-    <:.set tags = [ article.tag_objects ] :>
-    <:-.set tagcats = bse.categorize_tags(tags) -:>
-    <:-.for tagcat in tagcats:>
+  </fieldset>
+  <:- switch:>
+  <:- case Or [product product_code] [product leadTime] [article.tag_objects]:>
+  <ul class="meta">
+    <:- ifProduct product_code:>
+    <li><span>Product Code:</span> <:product product_code:></li>
+    <:- eif:>
+    <:- ifProduct leadTime:> 
+    <li><span>Usually ships in:</span> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></li>
+    <:- eif:>
+    <:- endswitch:>
+    <:- .if article.is_dynamic:>
+    <:- .if [article.tag_objects]:>
+    <:- .set tags = [ article.tag_objects ] :>
+    <:- .set tagcats = bse.categorize_tags(tags) :>
+    <:- .for tagcat in tagcats:>
     <li>
+      <:- .if tagcat.name :>
       <span><:= tagcat.name |html :>:</span>
-      <:-.for tag in tagcat.tags:>
+      <:- .end:>
+      <:- .for tag in tagcat.tags:>
+      <!--<a href="<:url parent:><:cond [ifMatch [url parent] "\\?"] &amp; ? :>tags=<:= tag.name |uri :>"><:= tag.val |html :></a>-->
       <a href="<:= bse.url(article.parent):><:= bse.url(article.parent) =~ /\?/ ? "&" : "?" |html :>tags=<:= tag.name |uri :>"><:= tag.val |html :></a>
-      <:-.if !loop.is_last:>, <:.end:>
-      <:-.end for:>
+      <:- .if !loop.is_last:>, <:.end:>
+      <:- .end for:>
     </li>
-    <:-.end for:>
+    <:- .end for:>
   </ul>
-  <:-.end:>
-  <p class="buttons"><:switch:><:case Embedded:><:case Dynamic:><:if InWishlist:>
-    <a href="<:target nuser wishlistdel product_id [article id] r [url article] |h:>" title="Remove from my wishlist" class="wishlist remove">Remove from my wishlist</a><:or InWishlist:>
-    <a href="<:target nuser wishlistadd product_id [article id] r [url article] |h:>" title="Add to my wishlist" class="wishlist add">Add to my wishlist</a><:eif InWishlist:><:endswitch:>
+  <:- .end:>
+  <p class="buttons">
+    <:- switch:>
+    <:- case Embedded -:>
+    <:- case Dynamic:>
+    <:- if InWishlist:>
+    <a href="<:target nuser wishlistdel product_id [article id] r [url article] :>" title="Remove from my wishlist" class="wishlist remove">Remove from wishlist</a>
+    <:or InWishlist:>
+    <a href="<:target nuser wishlistadd product_id [article id] r [url article] :>" title="Add to my wishlist" class="wishlist add">Add to wishlist</a>
+    <:- eif InWishlist:>
+    <:- endswitch:>
     <input type="submit" name="add" id="add<:article id:>" value="Add to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" />
-    <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" />
+    <a href="<:target shop cart:>" accesskey="v" title="AccessKey = v" class="button">View <:cfg shop cart_name cart:></a>
+    <!--<input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" />-->
   </p>
-</form><:or Product:>
-<p class="alert">Sorry! This product is currently not available for sale</p><:eif Product:>
-<:endswitch:><:switch:><:case Or [ifEq [product retailPrice] 0] [ifMatch [product flags] "i"]:>
-<:include interest/register.tmpl:><:endswitch:><:if Or [article body] [ifImages]:>
+</form>
+<:- or Product:>
+<p class="alert">Sorry! This product is currently not available for sale</p>
+<:- eif Product:>
+<:- endswitch:>
+<:- switch:>
+<:- case Or [ifEq [product retailPrice] 0] [ifMatch [product flags] "i"]:>
+<:include interest/register.tmpl:>
+<:- endswitch:>
+<:- if Or [article body] [ifImages]:>
 <div id="body_<:article id:>" class="body">
 <:body:>
-</div><:eif Or:><:if Or [ifStepparents] [ifStepkids]:>
+</div>
+<:- eif Or:>
+<:- if Or [ifStepparents] [ifStepkids]:> 
 <div class="relatedsections">
   <p><strong>Related categories:</strong></p>
-  <ul><:iterator begin stepparents:>
-    <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator separator stepparents:><:iterator end stepparents:><:iterator begin stepkids:>
-    <li><a href="<:url stepkid:>"><:stepkid title:></a></li><:iterator separator stepkids:><:iterator end stepkids:>
+  <ul>
+    <:- iterator begin stepparents:>
+    <li><a href="<:url stepparent:>"><:stepparent title:></a></li>
+    <:- iterator end stepparents:>
+    <:- iterator begin stepkids:>
+    <li><a href="<:url stepkid:>"><:stepkid title:></a></li>
+    <:- iterator end stepkids:>
   </ul>
-</div><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
-<:include include/files.tmpl:><:eif Or:><:eif Files:>
+</div>
+<:- eif Or:>
+<:- if Files:>
+<:- if !Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:>
+<:include include/files.tmpl:>
+<:- eif Or:>
+<:- eif Files:>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
 <:embed end:>
