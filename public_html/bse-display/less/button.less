@@ -42,40 +42,34 @@ input[type=reset] {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@button-gradient-from, endColorstr=@button-gradient-to); /* IE7+ */
     border: 0.083em solid;
     border-color: @button-border-color;
-}
 
-.button:hover,
-button:hover,
-input[type=submit]:hover,
-input[type=button]:hover {
-    color: @button-hover-color !important;
-    background: @button-hover-background-color; /* Old browsers */
-    background: -webkit-gradient(linear, left top, left bottom, from(@button-hover-gradient-from), to(@button-hover-gradient-to)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* Chrome10+,Safari5.1+ */
-    background: -moz-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* FF3.6+ */
-    background: -ms-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* IE10+ */
-    background: -o-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* Opera11.10+ */
-    background: linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@button-hover-gradient-from, endColorstr=@button-hover-gradient-to); /* IE7+ */
-    border-color: @button-hover-border-color;
-}
-
-.button:active,
-button:active,
-input[type=submit]:active,
-input[type=button]:active {
-    color: @button-active-color !important;
-    background: @button-active-background-color; /* Old browsers */
-    background: -webkit-gradient(linear, left top, left bottom, from(@button-active-gradient-from), to(@button-active-gradient-to)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* Chrome10+,Safari5.1+ */
-    background: -moz-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* FF3.6+ */
-    background: -ms-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* IE10+ */
-    background: -o-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* Opera11.10.10+ */
-    background: linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@button-active-gradient-from, endColorstr=@button-active-gradient-to); /* IE7+ */
-    border-color: @button-active-border-color;
-    position: relative;
-    top: 0.083em;
+    &:hover {
+        color: @button-hover-color !important;
+        background: @button-hover-background-color; /* Old browsers */
+        background: -webkit-gradient(linear, left top, left bottom, from(@button-hover-gradient-from), to(@button-hover-gradient-to)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* Chrome10+,Safari5.1+ */
+        background: -moz-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* FF3.6+ */
+        background: -ms-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* IE10+ */
+        background: -o-linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* Opera11.10+ */
+        background: linear-gradient(top, @button-hover-gradient-from, @button-hover-gradient-to); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@button-hover-gradient-from, endColorstr=@button-hover-gradient-to); /* IE7+ */
+        border-color: @button-hover-border-color;
+    }
+    
+    &:active {
+        color: @button-active-color !important;
+        background: @button-active-background-color; /* Old browsers */
+        background: -webkit-gradient(linear, left top, left bottom, from(@button-active-gradient-from), to(@button-active-gradient-to)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* Chrome10+,Safari5.1+ */
+        background: -moz-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* FF3.6+ */
+        background: -ms-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* IE10+ */
+        background: -o-linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* Opera11.10.10+ */
+        background: linear-gradient(top, @button-active-gradient-from, @button-active-gradient-to); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@button-active-gradient-from, endColorstr=@button-active-gradient-to); /* IE7+ */
+        border-color: @button-active-border-color;
+        position: relative;
+        top: 0.083em;
+    }
 }
 
 /* @end */
