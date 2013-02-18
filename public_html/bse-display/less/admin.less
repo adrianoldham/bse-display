@@ -4,9 +4,10 @@
 
     &.bse-admin-buttons,
     &.bse-admin-buttons-mini {
-        display: inline-block;
-        margin-bottom: 0;
+        display: block;
         overflow: hidden;
+        clear: both;
+        white-space: nowrap;
         
         * {
             float: left;
@@ -16,6 +17,15 @@
             margin-top: 0;
         }
     }
+    
+    &.bse-admin-buttons-mini {
+        margin-bottom: 0.25em;
+    }
+}
+
+li .bse-admin-buttons-mini {
+    float: right !important;
+    margin-bottom: 0 !important;
 }
 
 /* @end */
