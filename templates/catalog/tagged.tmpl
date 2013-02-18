@@ -1,6 +1,6 @@
-<:wrap base.tmpl classes=>"catalog", no_sidebar=>"1" :><:embed start:><:if Embedded:><:admin article_mini:>
-<p>This template uses dynamic “tags” and cannot be embedded</p><:or Embedded:><:admin:><:eif Embedded:><:embed end:>
-<div id="article_<:article id:>" class="article shop catalog"><:switch:><:case Match [article flags] "t":>
+<:wrap base.tmpl classes=>"catalog", no_sidebar=>"1" :><:embed start:><:admin article_mini:>
+<p>This template uses dynamic “tags” and cannot be embedded</p><:eif Embedded:><:embed end:>
+<div id="article_<:article id:>" class="article shop catalog"><:admin:><:switch:><:case Match [article flags] "t":>
 <h1 id="title_<:article id:>" class="hidden"><:article title:></h1><:case Embedded:>
 <h2 id="title_<:article id:>" class="embedtitle"><:article title:></h2><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Or [article body] [ifImages]:>
