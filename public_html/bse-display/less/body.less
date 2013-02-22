@@ -9,6 +9,26 @@
 }
 */
 
+/* @group colors */
+
+.primary-color {
+	color: @primary;
+}
+
+.secondary-color {
+	color: @secondary;
+}
+
+.tertiary-color {
+	color: @tertiary;
+}
+
+.complimentary-color {
+	color: @complimentary;
+}
+
+/* @end */
+
 html {
     font-size: 100%;
     background-color: @html-background-color;
@@ -150,41 +170,6 @@ address.right {
     display: block;
     width: 220px;
     margin: 0.5em 0;
-}
-
-.clear {
-    clear: both;
-}
-
-.hidden {
-    /* used to hide accessibility items */
-    position: absolute !important;
-    left: -9999em !important;
-    top: -9999em !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    clear: none !important;
-    height: 0 !important;
-    width: 0 !important;
-}
-
-.left {
-    float: left !important;
-}
-
-.right {
-    float: right !important;
-}
-
-.truncate {
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
 }
 
 blockquote.standfirst {

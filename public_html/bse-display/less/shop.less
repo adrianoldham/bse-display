@@ -1,0 +1,174 @@
+/* @group shop */
+
+/* @group payments */
+
+.shop dl {
+    border: 0.083em solid;
+    border-color: @payments-border-color;
+    background-color: @payments-background-color;
+    padding: @payments-padding;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    -webkit-box-shadow: inset 0 0 0.5em @payments-shadow-color;
+    -moz-box-shadow: inset 0 0 0.5em @payments-shadow-color;
+    box-shadow: inset 0 0 0.5em @payments-shadow-color;
+}
+
+.shop dt {
+	font-weight: bold;
+	color: @payments-title-color;
+	margin-bottom: 1em;
+}
+
+.shop dd {
+   margin-left: 4em;
+}
+
+.shop dd table caption {
+    display: none;
+}
+
+.shop dd table th,
+.shop dd table td {
+    padding: 0 0.5em;
+}
+
+.shop dd table th {
+    text-align: right;
+    border-right: 0.25em solid;
+    border-color: @payments-table-border-color;
+    white-space: nowrap;
+    padding-left: 0;
+    color: @payments-table-head-color;
+    font-size: 0.9em;
+}
+
+.shop dd table td label {
+    white-space: nowrap;
+    color: @payments-table-head-color;
+    font-size: 0.9em;
+}
+
+.shop dd table td input,
+.shop dd table td img {
+    margin-bottom: 0.25em;
+    vertical-align: middle;
+}
+
+/* @end */
+
+/* @group totals */
+
+.totals {
+    border-bottom: 0.166em solid;
+    border-color: @totals-border-color;
+    text-align: right;
+    margin-bottom: 3em;
+    padding: 0 0.5em 1em 0.5em;
+}
+
+.totals p {
+    margin: 0;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.totals p.freight {
+    margin-bottom: 0.75em;
+    font-size: 1.1em;
+}
+
+.totals p.total {
+    font-size: 1.75em;
+    color: @totals-total-color;
+}
+
+.totals label {
+    color: @totals-label-color;
+}
+
+.totals span,
+.totals abbr {
+    font-weight: normal;
+    color: @totals-abbr-color;
+}
+
+/* @end */
+
+/* @group vertical table */
+
+table.vertical.left,
+table.vertical.right {
+    clear: none;
+    width: 49%;
+}
+
+table.vertical caption {
+    font-weight: bold;
+    text-align: left;
+    padding: 0.5em 0;
+    color: @table-vertical-caption-color;
+}
+
+table.vertical th,
+table.vertical td {
+    padding: 0.25em 1em;
+}
+
+table.vertical th {
+    font-size: 0.9em;
+    padding-right: 1em;
+    text-align: right;
+    border-right: 0.25em solid;
+    border-color: @table-vertical-border-color;
+    color: @table-vertical-head-color;
+    width: 35%;
+}
+
+table.vertical td {
+    padding-left: 1em;
+	color: @table-vertical-color;
+}
+
+.paid,
+.unpaid {
+    float: left;
+    margin-right: 0.5em;
+    margin-top: -0.083em;
+    padding: 0.083em 0.5em;
+    background-color: #c03;
+    color: @reverse !important;
+    text-shadow: none;
+    -webkit-border-radius: 0.35em;
+    -moz-border-radius: 0.35em;
+    border-radius: 0.35em;
+}
+
+.paid {
+    background-color: green;
+}
+
+td .paid,
+td .unpaid {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-indent: -9999em;
+    overflow: hidden;
+    line-height: 1;
+    width: 1em;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+}
+
+/* @end */
+
+/* @end */

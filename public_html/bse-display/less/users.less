@@ -1,0 +1,181 @@
+/* @group users */
+
+/* @group tabs */
+
+.user ul.tabs,
+.user ul.tabs li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 0.083em solid;
+    border-color: @tabs-border-color;
+}
+
+.user ul.tabs {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.user ul.tabs li {
+    float: left;
+    margin-left: 0.5em;
+    margin-bottom: -0.083em;
+}
+
+.user ul.tabs li.focus {
+    border-bottom-color: @reverse;
+}
+
+.user ul.tabs li a {
+    float: left; /* required for ie7 */
+    display: block;
+    padding: 0.5em;
+    color: @tabs-color !important;
+    font-weight: bold;
+    text-decoration: none !important;
+    text-shadow: 0 -0.083em 0 rgba(0,0,0,0.25);
+
+    -webkit-border-radius: 0.5em 0.5em 0 0;
+    -moz-border-radius: 0.5em 0.5em 0 0;
+    border-radius: 0.5em 0.5em 0 0;
+
+    background-color: @tabs-background-color;
+
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, rgba(0,0,0,0)), color-stop(1, rgba(0,0,0,0.15)));
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 100%);
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 100%);
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 100%);
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 100%);
+    background-image: linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 100%);
+}
+
+.user ul.tabs li a:hover {
+    background-color: @tabs-hover-background-color;
+}
+
+.user ul.tabs li.focus a {
+    color: @tabs-focus-color !important;
+    text-shadow: none;
+    background: transparent !important;
+    border: 0.083em solid;
+    border-color: @tabs-border-color;
+    border-bottom: none;
+    margin-bottom: -0.083em;
+}
+
+.user ul.tabs + *,
+.alert + * {
+    margin-top: 0;
+}
+
+/* @end */
+
+form.siteuser,
+form.product {
+    margin-bottom: 1em;
+    padding: @form-padding;
+    border: 0.083em solid;
+    border-color: @form-border-color;
+    background-color: @form-background-color;
+    overflow: hidden; /* enclose floats */
+
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    -webkit-box-shadow: inset 0 0 0.5em @form-shadow-color;
+    -moz-box-shadow: inset 0 0 0.5em @form-shadow-color;
+    box-shadow: inset 0 0 0.5em @form-shadow-color;
+}
+
+.siteuser > fieldset {
+    float: left;
+    width: 49%;
+    margin-bottom: 1em;
+    padding: 0.5em 0;
+}
+
+.siteuser fieldset input[type=text],
+.siteuser fieldset input[type=password],
+.siteuser fieldset input[type=file],
+.siteuser fieldset input[type=tel],
+.siteuser fieldset input[type=url],
+.siteuser fieldset input[type=email],
+.siteuser fieldset input[type=search],
+.siteuser fieldset input[type=number],
+.siteuser fieldset input[type=date],
+.siteuser fieldset select,
+.siteuser fieldset textarea {
+    width: 100%;
+    *width: 97.8%; /* required for ie7 */
+    /*float: left;  because some odd margins persist */
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.siteuser fieldset select {
+    width: 100%;
+}
+
+.siteuser fieldset label {
+	color: @label-color;
+    /*display: none; hide when using tooltips */
+}
+
+.siteuser fieldset .checkbox label,
+.siteuser fieldset .radio label,
+.siteuser fieldset .file label,
+.siteuser fieldset span.notes,
+.payment fieldset label {
+    display: block;
+    float: none;
+    clear: left;
+}
+
+.siteuser fieldset.subscribe,
+.siteuser fieldset.name,
+.siteuser fieldset.address,
+.siteuser fieldset.message {
+    clear: both;
+}
+
+.siteuser fieldset.profile,
+.siteuser fieldset.company,
+.siteuser fieldset.contact,
+.siteuser fieldset.images,
+.siteuser fieldset.notification,
+.siteuser fieldset.delivery {
+    float: right;
+    clear: right;
+}
+
+.siteuser fieldset div.state,
+.siteuser fieldset div.postcode {
+    float: left;
+    width: 48.5%;
+}
+
+.siteuser fieldset div.state,
+.siteuser fieldset div.postcode {
+    float: left;
+    width: 48.5%;
+}
+
+.siteuser fieldset div.postcode {
+    float: right;
+}
+
+.siteuser fieldset .state input,
+.siteuser fieldset .postcode input {
+    *width: 95%; /* required for ie7 */
+}
+
+/* default fmail form override */
+.siteuser fieldset.message.right {
+	clear: none;
+}
+
+/* @end */

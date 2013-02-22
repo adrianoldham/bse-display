@@ -1,0 +1,210 @@
+/* @group catalog */
+
+.catalog table.items .col1 {
+    width: 95%;
+}
+
+/* @group grid */
+
+div.catalog ul.meta,
+div.article ul.meta {
+    overflow: hidden;
+}
+
+div.catalog div.grid {
+    clear: both;
+    margin-top: 1em;
+    margin-right: -20px;
+}
+
+div.grid div.product {
+    float: left;
+    position: relative;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 220px;
+    /*min-height: 220px;*/
+    background-color: rgba(0,0,0,0.15);
+
+    -webkit-box-shadow: 0 0 0.75em rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 0 0.75em rgba(0,0,0,0.15);
+    -ms-box-shadow: 0 0 0.75em rgba(0,0,0,0.15);
+    box-shadow: 0 0 0.75em rgba(0,0,0,0.15);
+}
+
+div.grid div.x6 {
+    width: 460px;
+}
+
+div.grid div.x5 {
+    width: 400px;
+}
+
+div.grid div.x4 {
+    width: 300px;
+}
+
+div.product a.thumbnail {
+    display: block;
+    width: 100%;
+}
+
+div.product.x6 a.thumbnail {
+    height: 460px;
+}
+
+div.product.x5 a.thumbnail {
+    height: 400px;
+}
+
+div.product.x4 a.thumbnail {
+    height: 300px;
+}
+
+div.grid div.product div.detail {
+    clear: left;
+    color: @reverse;
+    padding: 0.75em 1em;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, rgba(0,0,0,0)), color-stop(1, rgba(0,0,0,0.5)));
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+    background-image: linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+
+    background-color: #444;
+    background-color: rgba(0,0,0,0.7);
+    overflow: hidden; /* encapsulate contained floats */
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+div.grid div.product div.detail span.price {
+    font-size: 1.85em !important;
+    line-height: 1.08;
+    font-weight: bold;
+    float: left;
+}
+
+div.grid div.product div.detail h2 {
+    font-size: 1em !important;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: @reverse;
+    border-bottom: 0.083em dotted rgba(255,255,255,0.6);
+    margin: 0;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.25em;
+}
+
+div.grid div.product div.detail h2 a {
+    color: @reverse;
+    text-decoration: none !important;
+}
+
+div.grid div.product a.thumbnail,
+div.grid div.product a.thumbnail img {
+    float: left;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-height: 220px;
+    text-decoration: none !important;
+    color: @reverse;
+    position: relative;
+    overflow: hidden; /* for discount ribbon clipping */
+}
+
+a.thumbnail em.discount {
+    color: @reverse;
+    position: absolute;
+    top: -9999em;
+    left: -9999em;
+    z-index: 1;
+    background-color: @primary;
+    padding: 2.5em 3em 0.25em;
+    text-align: center;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+a.thumbnail:hover em.discount {
+    top: -0.75em;
+    left: -3.25em;
+}
+
+span.buttons {
+    float: right;
+}
+
+span.new {
+    position: absolute;
+    top: 200px;
+    left: -0.5em;
+    background-color: @primary;
+    padding: 0.25em 0.75em;
+    -webkit-box-shadow: 0.15em 0.15em 0.25em rgba(0,0,0,0.5);
+    -moz-box-shadow: 0.15em 0.15em 0.25em rgba(0,0,0,0.5);
+    -ms-box-shadow: 0.15em 0.15em 0.25em rgba(0,0,0,0.5);
+    box-shadow: 0.15em 0.15em 0.25em rgba(0,0,0,0.5);
+}
+
+a.round.button {
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+    display: block;
+    text-indent: -9999em;
+    width: 1.85em;
+    height: 1.85em;
+    float: left;
+    margin-left: 0.5em;
+    padding: 0;
+    border: 0;
+    background: @catalog-button-color;
+    background-position: 50% 50%;
+    border: 0.083em solid rgba(255,255,255,0.25);
+    filter: none;
+}
+
+a.round.button:hover,
+a.round.button:active {
+    background-color: @catalog-button-hover-color;
+}
+
+a.round.view {
+    background-image: url(/bse-display/images/widgets/next-white.gif) !important;
+}
+
+a.round.add {
+    background-image: url(/bse-display/images/widgets/add-white.gif) !important;
+}
+
+.grid span.arrows {
+    position: absolute;
+    top: 0.25em;
+    right: 0.25em;
+}
+
+body.home div.detail {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+body.home div.x6 div.detail {
+    top: 0;
+    bottom: auto;
+}
+
+/* @end */

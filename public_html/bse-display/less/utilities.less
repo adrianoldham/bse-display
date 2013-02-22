@@ -1,0 +1,56 @@
+/* @group utilities */
+
+.group:after,
+div.article:after,
+div.body:after,
+div.grid:after,
+ul.tabs:after,
+p.buttons:after,
+#wrapper:after,
+#columns:after,
+#content:after,
+#main:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.hidden {
+    position: absolute !important;
+    left: -9999em !important;
+    top: -9999em !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    clear: none !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+.left {
+    float: left !important;
+}
+
+.right {
+    float: right !important;
+}
+
+.truncate {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+/* @end */
+

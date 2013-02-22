@@ -1,0 +1,52 @@
+/* @group pagination */
+
+.pagination {
+    clear: both;
+    margin-top: 3em !important;
+}
+
+h1 + .pagination {
+    margin-top: 0 !important;
+}
+
+.pagination,
+.pagination ul {
+    margin: 0 -0.5em 0 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.pagination li {
+    list-style: none;
+    float: left;
+}
+
+.pagination > li > span {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 0.25em;
+    color: @pagination-color;
+}
+
+.pagination ul a,
+.pagination ul span {
+    display: block;
+    min-width: 1.5em;
+    margin: 0 0.5em 0.5em 0;
+    text-align: center;
+    text-decoration: none !important;
+    color: @pagination-color;
+
+    border: 0.083em solid @pagination-border-color;
+    -webkit-border-radius: 0.25em;
+    -moz-border-radius: 0.25em;
+    border-radius: 0.25em;
+}
+
+.pagination ul a:hover,
+.pagination ul span {
+    color: @pagination-hover-color !important;
+    background-color: @pagination-background-color;
+}
+
+/* @end */

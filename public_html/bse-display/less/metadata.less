@@ -1,0 +1,80 @@
+/* @group metadata */
+
+.meta {
+    margin-right: -0.5em;
+    padding: 0;
+    font-size: 0.9em;
+    color: @meta-color;
+}
+
+.meta li,
+.meta li div {
+    float: left;
+    list-style: none;
+    margin: 0 0.5em 0.5em 0;
+    padding: 0 0.75em;
+    background-color: @meta-background-color;
+
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
+}
+
+.meta li span {
+    font-weight: bold;
+}
+
+.meta li.has-info:hover,
+.meta li.has-info:hover a {
+    color: @meta-hover-color !important;
+    background-color: @meta-hover-background-color;
+}
+
+.meta li.has-info {
+    padding-right: 1.8em;
+    background-image: url(/bse-display/images/widgets/more-info.png);
+    background-repeat: no-repeat;
+    background-position: 100% 50%;
+    -moz-background-size: 1.5em;
+    background-size: 1.5em;
+}
+
+.meta li.has-info:hover {
+    background-image: url(/bse-display/images/widgets/more-info-white.png);
+}
+
+.meta li a,
+.meta li div {
+    color: @meta-color !important;
+}
+
+.meta li div {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0.5em 0 0 0;
+    *margin-top: 1.75em; /* for ie7 */
+    padding: 0.5em 0.75em;
+    background-color: @meta-background-color;
+
+    border: 0.112em solid;
+    border-color: @meta-border-color;
+
+    -webkit-box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.25);
+    box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.25);
+}
+
+.meta li:hover div,
+.meta li div:hover,
+.meta li:hover div:hover {
+    display: block;
+    z-index: 1;
+}
+
+.meta li div *:last-child {
+    margin-bottom: 0;
+}
+
+/* @end */

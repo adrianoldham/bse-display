@@ -1,0 +1,32 @@
+/* @group error */
+
+p.error,
+p.alert,
+p.note,
+div.note {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    background-color: @alert-background-color;
+    border: 0.083em solid;
+    border-color: @alert-border-color;
+    color: @alert-color;
+    clear: both;
+
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+}
+
+div.note *:last-child {
+	margin-bottom: 0;
+}
+
+p.error {
+    font-weight: bold;
+    background: @error-background-color url(/bse-display/images/icons/error.png) no-repeat 99% 0.5em;
+    -moz-background-size: 1.5em;
+    background-size: 1.5em;
+    border-color: @error-border-color;
+}
+
+/* @end */

@@ -1,0 +1,82 @@
+/* @group product */
+
+form.product,
+.product form.siteuser {
+    float: right;
+    width: 200px;
+    clear: right;
+    margin-left: 20px;
+}
+
+form.product {
+    overflow: visible !important;
+}
+
+form.product legend {
+	font-family: @product-form-legend-font-family;
+    display: block;
+    position: relative;
+    width: 100%;
+    color: @product-form-legend-color;
+}
+
+form.product legend abbr {
+    color: @product-form-abbr-color;
+}
+
+form.product legend em {
+    position: absolute;
+    right: -1.5em;
+    top: -0.25em;
+    background-color: @product-form-em-background-color;
+    color: @product-form-em-color;
+    padding: 0.25em 0.5em;
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    transform: rotate(5deg);
+}
+
+.product form.siteuser fieldset {
+    margin: 0;
+    width: 100% !important;
+}
+
+form.product input[type=submit] {
+    font-size: 0.9em;
+    border-width: 0.112em;
+    text-shadow: 0 0.112em 0 fade(@reverse, 75%);
+}
+
+form.product ul.meta,
+form.product ul.meta li {
+    float: none;
+    margin-right: 0;
+}
+
+a.wishlist {
+    display: inline-block;
+    zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+    *display: inline;
+    text-align: left;
+    text-indent: -9999em;
+    overflow: hidden;
+    width: 2.5em;
+    line-height: 1.25;
+    padding: 0.5em 0;
+    background: transparent no-repeat 50% 50%;
+
+    -moz-background-size: 2.5em;
+    background-size: 2.5em;
+}
+
+a.wishlist.add {
+    background-image: url(/bse-display/images/widgets/wishlist.png);
+}
+
+a.wishlist.remove {
+    background-image: url(/bse-display/images/widgets/wishlist-checked.png);
+}
+
+/* @end */

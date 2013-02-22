@@ -1,0 +1,46 @@
+/* @group article */
+
+div.article {
+    margin: 0 0 1.75em 0;
+    clear: both;
+    position: relative;
+}
+
+div.body div.article:last-child {
+    margin-bottom: 0;
+}
+
+div.article div.article:last-child {
+	margin-bottom: 0.75em;
+}
+
+div.article div.article {
+    padding: 0.75em 0.75em 0 0.75em;
+    border: 0.083em solid @form-border-color;
+    background-color: @form-background-color;
+
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    -webkit-box-shadow: inset 0 0 0.5em @form-shadow-color;
+    -moz-box-shadow: inset 0 0 0.5em @form-shadow-color;
+    box-shadow: inset 0 0 0.5em @form-shadow-color;
+}
+
+div.article h1:first-child,
+div.article h2:first-child,
+div.body *:first-child {
+    margin-top: -0.2em;
+}
+
+/* @group sidebar */
+
+div.sidebar div.article {
+    color: lighten(@body-color, 20%);
+    font-size: 0.9em;
+}
+
+/* @end */
+
+/* @end */

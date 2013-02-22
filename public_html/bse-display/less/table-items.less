@@ -1,0 +1,167 @@
+/* @group items */
+
+table.items caption {
+    font-weight: bold;
+    text-align: left;
+    padding: 0.5em 0;
+    color: @table-items-caption-color;
+}
+
+table.items {
+    border: solid @table-items-border-color;
+    border-width: 0.083em 0;
+    width: 100%;
+    clear: both;
+    vertical-align: top;
+}
+
+table.items thead th {
+    border-bottom: 0.166em solid @table-items-border-color;
+}
+
+table.items th {
+    padding: 0.5em;
+    font-size: 0.9em;
+    color: @table-items-head-color;
+}
+
+table.items td {
+	color: @table-items-color;
+    vertical-align: top;
+    border-bottom: 0.083em solid @table-items-border-color;
+    padding: 0.75em 0.5em;
+
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, @table-items-row-gradient-from), color-stop(0.5, @table-items-row-gradient-to));
+    background-image: -webkit-linear-gradient(top, @table-items-row-gradient-from 0, @table-items-row-gradient-to 50%);
+    background-image: -moz-linear-gradient(top, @table-items-row-gradient-from 0, @table-items-row-gradient-to 50%);
+    background-image: -ms-linear-gradient(top, @table-items-row-gradient-from 0, @table-items-row-gradient-to 50%);
+    background-image: -o-linear-gradient(top, @table-items-row-gradient-from 0, @table-items-row-gradient-to 50%);
+    background-image: linear-gradient(top, @table-items-row-gradient-from 0, @table-items-row-gradient-to 50%);
+    //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26b4aa8c', endColorstr='#00b4aa8c'); /* IE7+ */
+}
+
+table.items td.noitems {
+    text-align: center;
+}
+
+table.items td.thumbnail img {
+    float: left; /* required by ie */
+    border: none;
+}
+
+table.items td.thumbnail a {
+    float: left;
+}
+
+table.items th.item,
+table.items td.item {
+    text-align: left;
+}
+
+table.items td.item a {
+    background: transparent url(/bse-display/images/widgets/checkmark.png) no-repeat 0 50%;
+    padding-left: 1.25em;
+}
+
+table.items td.item span {
+    color: #666;
+}
+
+table.items th + th,
+table.items td + td {
+    width: 10%;
+}
+
+table.items .code,
+table.items .quantity,
+table.items .price,
+table.items .extended,
+table.items .action {
+    text-align: right;
+    white-space: nowrap;
+}
+
+table.items td.price {
+    color: @table-items-accent-color;
+}
+
+table.items td.price,
+table.items td.extended {
+    font-weight: bold;
+}
+
+table.items .action {
+    width: 1%;
+}
+
+table.items th.action {
+    text-align: left;
+    text-indent: -9999em;
+}
+
+table.items td.action .arrows {
+    position: absolute;
+    display: none;
+    right: -2em;
+    padding-left: 1.25em;
+}
+
+table.items tr:hover .arrows,
+table.items td.action .arrows a,
+table.items td.action .arrows img {
+    display: block;
+    line-height: 1;
+}
+
+/* @end */
+
+/* @group files */
+
+table.files .date,
+table.files .size {
+    white-space: nowrap;
+    text-align: right;
+}
+
+table.files td.size {
+    font-weight: bold;
+    color: @table-items-accent-color;
+}
+
+/* @end */
+
+/* @group orders */
+
+table.orders th,
+table.orders td {
+    width: 25% !important;
+}
+
+table.orders .total {
+    text-align: right;
+}
+
+table.orders .payment {
+    text-align: center;
+}
+
+table.orders td.number,
+table.orders td.total {
+    font-weight: bold;
+}
+
+/* @end */
+
+/* @group subscriptions */
+
+table.subscriptions .date {
+    white-space: nowrap;
+    width: 20%;
+}
+
+table.subscriptions td.expires {
+    font-weight: bold;
+    color: @table-items-accent-color;
+}
+
+/* @end */
