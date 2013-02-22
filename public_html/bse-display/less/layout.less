@@ -7,15 +7,17 @@
     box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
 }
 
-#container {
+.container {
     width: 960px;
     margin: 0 auto;
     text-align: left;
-    background-color: @container-background-color;
+    text-align: left;
+    position: relative;
 }
 
-#content {
-    margin: 0 10px;
+.container > * {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #header {
@@ -31,7 +33,6 @@
     -moz-box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
     box-shadow: rgba(0,0,0,0.25) 0 0.25em 1.5em;
     background-color: @header-background-color;
-    //overflow: hidden; // disabled to allow dropdown menus escape
     line-height: 1.25;
 }
 
@@ -41,11 +42,9 @@
     width: 960px;
 }
 
-#columns {
+#content {
     zoom: 1; /* for ie7 */
-    margin: 0;
-    padding: 6.5em 0 1.75em 0;
-    position: relative;
+    padding-top: 6.5em;
 }
 
 #main {
@@ -56,7 +55,6 @@
 div.sidebar {
     float: left;
     width: 220px;
-    margin-right: 20px;
 }
 
 body.home #main,
@@ -73,17 +71,9 @@ div.grid {
     zoom: 1; /* for ie7 */
 }
 
-#feature {
-    margin-right: -20px;    
-    padding-bottom: 1.75em;
-    overflow: hidden; /* encapsulate contained floats */
-}
-
 #footer {
-    float: right;
-    width: 1;
     line-height: 3.5em;
-    margin: 0 10px -3.5em 10px;
+    margin-bottom: -3.5em;
     padding: 0;
     position: relative;
 }
@@ -180,9 +170,9 @@ div.grid {
             color: #666;
         }
 
-        &:hover > span,
-        &.focus > span,
-        &.hilite > span {
+        &:hover span,
+        &.focus span,
+        &.hilite span {
             background-color: #333;
         }
     }
@@ -275,7 +265,7 @@ ul.menu li,
 ul.menu li ul {
     float: left;
     width: 220px;
-    margin: 0 20px 2em 0;
+    margin: 0 0 2em 0;
     padding: 0;
     list-style: none;
     overflow: hidden;
@@ -432,7 +422,7 @@ ul.menu li.hilite div.widget.expanded {
         list-style: none;
         float: left;
         text-align: center;
-        padding: 0 0 0 1.5em;
+        padding: 0 0.75em;
         text-shadow: 0 -0.083em 0 fade(@body-color, 30%);
     
          a {
@@ -468,7 +458,7 @@ ul#crumbs {
     /*float: left;*/
     overflow: hidden; /* enclose floats */
     clear: both;
-    margin: 0 0 0 240px;
+    margin: 1.75em 0 1.75em 250px;
     padding: 0;
     width: 700px;
     border: 0.083em solid;
@@ -519,7 +509,9 @@ ul#crumbs {
 div.tile {
     float: left;
     width: 280px;
-    margin-right: 18px; /* not 10px because of border */
+    margin-left: 9px; /* not 10px because of border */
+    margin-right: 9px;
+    margin-bottom: 18px;
     padding: 1em 10px 0;
     border: 0.083em solid lighten(@neutral, 20%);
     border-bottom-color: lighten(@neutral, 10%);

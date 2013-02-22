@@ -1,17 +1,13 @@
 /* @group article */
 
 div.article {
-    margin: 0 0 1.75em 0;
+    margin-bottom: 1.75em;
     clear: both;
     position: relative;
 }
 
-div.body div.article:last-child {
-    margin-bottom: 0;
-}
-
-div.article div.article:last-child {
-	margin-bottom: 0.75em;
+div.article + div.article {
+    margin-top: 1.75em;
 }
 
 div.article div.article {
@@ -28,10 +24,14 @@ div.article div.article {
     box-shadow: inset 0 0 0.5em @form-shadow-color;
 }
 
+div.article div.article div.article {
+    margin-bottom: 0.75em;
+}
+
 div.article h1:first-child,
 div.article h2:first-child,
 div.body *:first-child {
-    margin-top: -0.2em;
+    margin-top: 0;
 }
 
 /* @group sidebar */

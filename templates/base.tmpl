@@ -1,34 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title><:switch:><:case Eq [param title] "FORMTITLE":><:formcfg title:><:case Param title:><:param title |h:><:case article pageTitle:><:article pageTitle:><:case default:><:article title:><:endswitch:> - <:cfg site name |h:></title>
-<meta charset="<:cfg html charset utf-8:>" />
-<meta name="robots" content="<:cfg site robots all:>" /><:ifArticle author:>
-<meta name="author" content="<:article author:>" /><:eif:><:ifArticle metaKeywords:>
-<meta name="keywords" content="<:article metaKeywords:>" /><:eif:><:ifArticle metaDescription:>
-<meta name="description" content="<:article metaDescription:>" /><:eif:>
-<meta name="VTC.generated" content="<:replace [date "%FT%T%z" article lastModified] "(\d\d)$" ":$1":>" />
-<meta name="VTC.generator" content="BSE codebase <:release:>" />
-<meta name="VTC.release" content="<:include include/release.tmpl:>" /><:ifOr [article linkAlias] [ifEq [article id] 1]:>
-<link rel="canonical" href="<:replace [url article] ^(?=/) [cfg site url]:>" /><:eif:><:ifCfg rss enabled:>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" /><:eif:>
-<link rel="stylesheet" type="text/css" media="screen" title="screen" href="/bse-display/css/screen.css" />
-<link rel="stylesheet" type="text/css" media="print" href="/bse-display/css/print.css" /><:ajax includes:>
+  <title>
+    <:- switch:>
+    <:- case Eq [param title] "FORMTITLE":><:formcfg title:>
+    <:- case Param title:><:param title |h:>
+    <:- case article pageTitle:><:article pageTitle:>
+    <:- case default:><:article title:>
+    <:- endswitch:> - <:cfg site name |h:>
+  </title>
+  <meta charset="<:cfg html charset utf-8:>" />
+  <meta name="robots" content="<:cfg site robots all:>" />
+  <:- ifArticle author:>
+  <meta name="author" content="<:article author:>" />
+  <:- eif:>
+  <:- ifArticle metaKeywords:>
+  <meta name="keywords" content="<:article metaKeywords:>" />
+  <:- eif:>
+  <:- ifArticle metaDescription:>
+  <meta name="description" content="<:article metaDescription:>" />
+  <:- eif:>
+  <:- ifOr [article linkAlias] [ifEq [article id] 1]:>
+  <link rel="canonical" href="<:replace [url article] ^(?=/) [cfg site url]:>" />
+  <:- eif:>
+  <:- ifCfg rss enabled:>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" />
+  <:- eif:>
+  <link rel="stylesheet" type="text/css" media="screen" title="screen" href="/bse-display/css/screen.css" />
+  <:- ajax includes:>
+  <!--<script type="text/javascript" src="/js/lib/prototype.js"></script>
+  <script type="text/javascript" src="/js/lib/scriptaculous.js?load=effects"></script>
+  <script type="text/javascript" src="/js/init.js"></script>//-->
 </head>
 <body class="s<:section id:> p<:article parentid:> a<:article id:> l<:article level:> <:param classes:>">
-<p class="hidden"><a href="#main" accesskey="s">Skip to main content</a></p>
+<p class="hidden"><a href="#content" accesskey="s">Skip to main content</a></p>
 <div id="wrapper">
-  <div id="container">
-    <div id="header">
-      <p><:iterator begin inlines 1:><a href="<:url inline:>" title="<:inline title:>" accesskey="<:inline_number:>">Return to home page</a><:iterator end inlines:></p>
+  <div id="header">
+    <div class="container">
+      <p class="logo">
+        <:- iterator begin inlines 1 -:>
+        <a href="<:url inline:>" title="<:inline title:>" accesskey="<:inline_number:>">Return to home page</a>
+        <:- iterator end inlines -:>
+      </p>
+      <!--
+      <ul class="_menu utilities right">
+        <:- if Dynamic:>
+        <:- if Dyncarttotalcost:>
+        <li class="cart group<:ifEq [section id] "-3" :> hilite<:eif:>"><a href="<:target shop:>"><span><:dyncarttotalunits:></span> item<:ifArithmetic [dyncarttotalunits] > 1:>s<:eif:> in <:cfg shop cart_name cart:>, <:cfg shop currency "$":><:number money [dyncarttotalcost]:> <abbr><:cfg shop currency_code "AUD":></abbr></a></li>
+        <:- eif Dyncarttotalcost:>
+        <:- if User:>
+        <li class="user group<:ifEq [section id] "-5":> hilite<:eif:>"><a href="<:target user:>">Hello <:user name1:></a></li>
+        <:- or User:>
+        <li class="user group<:ifEq [section id] "-5":> hilite<:eif:>"><a href="<:target user show_logon:>?r=<:url top |u:>">Login</a></li>
+        <li class="user group<:ifEq [section id] "-5":> hilite<:eif:>"><a href="<:target user show_register:>?r=<:url top |u:>">Sign up</a></li>
+        <:- eif User:>
+        <:- eif Dynamic:>
+      </ul>
+      <form action="<:target search:>" method="post" class="quick search">
+        <label for="search_qq">Keywords:</label>
+        <input type="text" name="q" id="search_qq" value="" placeholder="What are you looking for?" />
+        <input type="button" name="search" value="Search" class="button" />
+      </form>
+      -->
       <div id="nav">
-        <ul class="lev1"><:iterator begin allkids_of -1 filter: [menu] == 0 && [listed] != 2 :>
-          <li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:eif:><:ifAncestor ofallkid:> hilite<:eif:><:ifFirstOfallkid:> first<:eif:><:ifLastOfallkid:> last<:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:eif:>"><:switch:><:case Ofallkid link:><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a><:case default:><span><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 1:><:case And [ifAllkids_of2 ofallkid filter: [listed] != 2 ]:>
-            <ul class="lev2"><:iterator begin allkids_of2 ofallkid filter: [listed] != 2 :>
-              <li class="i2 e<:ofallkid2_number:><:ifEq [article id] [ofallkid2 id]:> focus<:eif:><:ifAncestor ofallkid2:> hilite<:eif:><:ifFirstOfallkid2:> first<:eif:><:ifLastOfallkid2:> last<:eif:><:ifAllkids_of3 ofallkid2 filter: [listed] != 2 :> parent<:eif:>"><:switch:><:case Ofallkid2 link:><a href="<:url ofallkid2:>"><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></a><:case default:><span><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 2:><:case And [ifAllkids_of3 ofallkid2 filter: [listed] != 2 ]:>
-              <:endswitch:></li><:iterator end allkids_of2:>
+        <ul class="lev1">
+          <:- iterator begin allkids_of -1 filter: [menu] == 0 && [listed] != 2 :>
+          <li class="<:ifEq [article id] [ofallkid id]:> focus<:eif:><:ifAncestor ofallkid:> hilite<:eif:><:ifFirstOfallkid:> first<:eif:><:ifLastOfallkid:> last<:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:eif:>">
+            <:- switch:>
+            <:- case Ofallkid link:>
+            <a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a>
+            <:- case default:>
+            <span><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></span>
+            <:- endswitch:>
+            <:- switch:>
+            <:- case Eq [cfg menu levels] 1 -:>
+            <:- case And [ifAllkids_of2 ofallkid filter: [listed] != 2 ]:>
+            <ul class="lev2">
+              <:- iterator begin allkids_of2 ofallkid filter: [listed] != 2 :>
+              <li class="<:ifEq [article id] [ofallkid2 id]:> focus<:eif:><:ifAncestor ofallkid2:> hilite<:eif:><:ifFirstOfallkid2:> first<:eif:><:ifLastOfallkid2:> last<:eif:><:ifAllkids_of3 ofallkid2 filter: [listed] != 2 :> parent<:eif:>">
+                <:- switch:>
+                <:- case Ofallkid2 link:>
+                <a href="<:url ofallkid2:>"><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></a>
+                <:- case default:>
+                <span><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></span>
+                <:- endswitch:>
+                <:- switch:>
+                <:- case Eq [cfg menu levels] 2 -:>
+                <:- case And [ifAllkids_of3 ofallkid2 filter: [listed] != 2 ]:>
+                <:- endswitch:>
+              </li>
+              <:- iterator end allkids_of2:>
             </ul>
-          <:endswitch:></li><:iterator end allkids_of:>
+            <:- endswitch:>
+          </li>
+          <:- iterator end allkids_of:>
         </ul>
         <ul class="utilities group right"><:if Dynamic:><:if Dyncarttotalcost:>
           <li class="cart group<:ifEq [section id] "-3" :> hilite<:eif:>"><a href="<:target shop |h:>"><!--<abbr><:cfg shop currency_code "AUD":></abbr> <:cfg shop currency "$":><:number money [dyncarttotalcost]:>//-->Shopping <:cfg shop cart_name cart:> <span><:dyncarttotalunits:></span></a></li><:eif Dyncarttotalcost:>
@@ -37,60 +102,127 @@
         </ul>
       </div>
     </div>
-    <div id="content">
-      <div id="columns"><:switch:><:case Param no_sidebar:><:case Param no_sidebar_left:><:case Or [cfg sidebar left] [param sidebar_left] [ifAllkids_of [article id] filter: [flags] =~ /s/ ]:>
-        <div class="sidebar left"><:if Allkids_of section filter: [menu] == 0 && [listed] != 2 :>
-          <ul class="menu lev1"><:iterator begin allkids_of section filter: [menu] == 0 && [listed] != 2 :>
-            <li class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:eif:><:ifAncestor ofallkid:> hilite<:eif:><:ifFirstOfallkid:> first<:eif:><:ifLastOfallkid:> last<:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:eif:>"><:switch:><:case Ofallkid link:><a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a><:case default:><span><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 1:><:case And [ifAllkids_of2 ofallkid filter: [listed] != 2 ]:>
-              <ul class="lev2"><:iterator begin allkids_of2 ofallkid filter: [listed] != 2 :>
-                <li class="i2 e<:ofallkid2_number:><:ifEq [article id] [ofallkid2 id]:> focus<:eif:><:ifAncestor ofallkid2:> hilite<:eif:><:ifFirstOfallkid2:> first<:eif:><:ifLastOfallkid2:> last<:eif:><:ifAllkids_of3 ofallkid2 filter: [listed] != 2 :> parent<:eif:>"><:switch:><:case Ofallkid2 link:><a href="<:url ofallkid2:>"><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></a><:case default:><span><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></span><:endswitch:><:switch:><:case Eq [cfg menu levels] 2:><:case And [ifAllkids_of3 ofallkid2 filter: [listed] != 2 ]:>
-                <:endswitch:></li><:iterator end allkids_of2:>
-              </ul>
-            <:endswitch:></li><:iterator end allkids_of:>
-          </ul><:eif Allkids_of:><:switch:><:case Imagen imgleft:>
-          <p class="imgleft"><:imagen imgleft:></p><:case Gimage imgleft:>
-          <p class="imgleft"><:gimage imgleft:></p><:endswitch:>
-        </div><:endswitch:><:switch:><:case Param no_sidebar:><:case Param no_sidebar_right:><:case Or [cfg sidebar right] [param sidebar_right]:>
-        <div class="sidebar right">
-          <:embed 4:><:switch:><:case Allkids_of [article id] filter: [flags] =~ /s/ :><:iterator begin allkids_of [article id] filter: [flags] =~ /s/ :><:move_ofallkid:>
-          <:embed ofallkid:><:iterator end allkids_of:><:case default:><:endswitch:><:switch:><:case Imagen imgright:>
-          <p class="imgright"><:imagen imgright:></p><:case Gimage imgright:>
-          <p class="imgright"><:gimage imgright:></p><:endswitch:>
-        </div><:endswitch:>
-        <div id="main">
-          <:wrap here:>
-        </div>
-        <:include include/crumbs.tmpl:>
-      </div><:if Inlines [cfg articles feature]:>
-      <div id="feature"><:iterator begin inlines [cfg articles feature]:>
-        <div class="tile"><:include admin/adminmenu/inline_mini.tmpl:>
-          <h2><:inline title:></h2>
-          <:bodytext inline body:>
-        </div><:iterator end inlines:>
-      </div><:eif Inlines:>
+  </div>
+  <div id="content">
+    <div class="container">
+      <:- switch:>
+      <:- case Param no_sidebar -:>
+      <:- case Param no_sidebar_left -:>
+      <:- case Or [cfg sidebar left] [param sidebar_left] [ifAllkids_of [article id] filter: [flags] =~ /s/ ]:>
+      <div class="sidebar left">
+        <:- if Allkids_of section filter: [menu] == 0 && [listed] != 2 :>
+        <ul class="menu lev1">
+          <:- iterator begin allkids_of section filter: [menu] == 0 && [listed] != 2 :>
+          <li class="<:ifEq [article id] [ofallkid id]:>focus<:eif:><:ifAncestor ofallkid:> hilite<:eif:><:ifFirstOfallkid:> first<:eif:><:ifLastOfallkid:> last<:eif:><:ifAllkids_of2 ofallkid filter: [listed] != 2 :> parent<:eif:>">
+            <:- switch:>
+            <:- case Ofallkid link:>
+            <a href="<:url ofallkid:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a>
+            <:- case default:>
+            <span><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></span>
+            <:- endswitch:>
+            <:- switch:>
+            <:- case Eq [cfg menu levels] 1 -:>
+            <:- case And [ifAllkids_of2 ofallkid filter: [listed] != 2 ]:>
+            <ul class="lev2">
+              <:- iterator begin allkids_of2 ofallkid filter: [listed] != 2 :>
+              <li class="<:ifEq [article id] [ofallkid2 id]:>focus<:eif:><:ifAncestor ofallkid2:> hilite<:eif:><:ifFirstOfallkid2:> first<:eif:><:ifLastOfallkid2:> last<:eif:><:ifAllkids_of3 ofallkid2 filter: [listed] != 2 :> parent<:eif:>">
+                <:- switch:>
+                <:- case Ofallkid2 link:>
+                <a href="<:url ofallkid2:>"><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></a>
+                <:- case default:>
+                <span><:ifOfallkid2 titleAlias:><:ofallkid2 titleAlias:><:or:><:ofallkid2 title:><:eif:></span>
+                <:- endswitch:>
+                <:- switch:>
+                <:- case Eq [cfg menu levels] 2 -:>
+                <:- case And [ifAllkids_of3 ofallkid2 filter: [listed] != 2 ]:>
+                <:- endswitch:>
+              </li>
+              <:- iterator end allkids_of2:>
+            </ul>
+          <:- endswitch:>
+          </li>
+          <:- iterator end allkids_of:>
+        </ul>
+        <:- eif Allkids_of:>
+        <:- switch:>
+        <:- case Imagen imgleft:>
+        <p class="imgleft"><:imagen imgleft:></p>
+        <:- case Gimage imgleft:>
+        <p class="imgleft"><:gimage imgleft:></p>
+        <:- endswitch -:>
+        <:embed 4:>
+      </div>
+      <:- endswitch:>
+      <:- switch:>
+      <:- case Param no_sidebar -:>
+      <:- case Param no_sidebar_right -:>
+      <:- case Or [cfg sidebar right] [param sidebar_right]:>
+      <div class="sidebar right">
+        <:- switch:>
+        <:- case Allkids_of [article id] filter: [flags] =~ /s/ :>
+        <:- iterator begin allkids_of [article id] filter: [flags] =~ /s/ :>
+        <:move_ofallkid:>
+        <:embed ofallkid:>
+        <:- iterator end allkids_of:>
+        <:- case default -:>
+        <:- endswitch:>
+        <:- switch:>
+        <:- case Imagen imgright:>
+        <p class="imgright"><:imagen imgright:></p>
+        <:- case Gimage imgright:>
+        <p class="imgright"><:gimage imgright:></p>
+        <:- endswitch:>
+      </div>
+      <:- endswitch:>
+      <div id="main">
+        <:- wrap here:>
+      </div>
+      <:- include include/crumbs.tmpl:>
     </div>
-    <div id="footer">
-      <ul class="left"><:iterator begin allkids_of -1 filter: [menu] == 3 && [listed] != 2 :>
-        <li><a href="<:url ofallkid:>" class="i1 e<:ofallkid_number:><:ifEq [article id] [ofallkid id]:> focus<:eif:><:ifAncestor ofallkid:> hilite<:eif:><:ifFirstOfallkid:> first<:eif:><:ifLastOfallkid:> last<:eif:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li><:iterator end allkids_of:>
-        <li><a href="<:target search |h:>" class="search<:ifEq [section id] "-4":> hilite<:eif:>" accesskey="4">Search</a></li>
+  </div>
+  <:- if Inlines [cfg articles feature]:>
+  <div id="feature">
+    <div class="container">
+      <:- iterator begin inlines [cfg articles feature]:>
+      <div class="tile">
+        <:- include admin/adminmenu/inline_mini.tmpl:>
+        <h2><:inline title:></h2>
+        <:bodytext inline body:>
+      </div>
+      <:- iterator end inlines:>
+    </div>
+    <:- eif Inlines:>
+  </div>
+  <div id="footer">
+    <div class="container">
+      <ul class="_menu left">
+        <:- iterator begin allkids_of -1 filter: [menu] == 3 && [listed] != 2 :>
+        <li><a href="<:url ofallkid:>" class="<:ifEq [article id] [ofallkid id]:>focus<:eif:><:ifAncestor ofallkid:> hilite<:eif:><:ifFirstOfallkid:> first<:eif:><:ifLastOfallkid:> last<:eif:>"><:ifOfallkid titleAlias:><:ofallkid titleAlias:><:or:><:ofallkid title:><:eif:></a></li>
+        <:- iterator end allkids_of:>
+        <li><a href="<:target search:>" class="search<:ifEq [section id] "-4":> hilite<:eif:>" accesskey="4">Search</a></li>
       </ul>
-      <ul class="right">
-        <li class="sitename"><span><:cfg site name |h:></span> &copy;<:today "%Y":></li>
-        <li class="credit"><span>Site by <a href="http://www.visualthought.com.au/" title="Design, templates and coding by visual thought communication">vtc</a></span></li>
+      <ul class="_menu right">
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li class="sitename"><a href="<:cfg site url |h:>"><:cfg site name |h:> <span>&copy;<:today "%Y":></span></a></li>
+        <li class="credit"><a href="http://www.visualthought.com.au/" title="Design, templates and coding by visual thought communication">Site by <span>vtc</span></a></li>
       </ul>
     </div>
   </div>
-</div><:if Cfg google tracking_code:>
+</div>
+<:- if Cfg "google analytics" _setAccount:>
 <script type="text/javascript">
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', '<:cfg google tracking_code:>']);
-    _gaq.push(['_trackPageview']);
+    <:- iterator begin cfgsection "google analytics":>
+    _gaq.push(['<:cfgentry key:>'<:switch:><:case Match [cfgentry value] "true":>, true<:case Cfgentry value:>, '<:cfgentry value:>'<:endswitch:>]);
+    <:- iterator end cfgsection:>
 
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-</script><:eif Cfg:>
+</script>
+<:- eif Cfg:>
 </body>
 </html>
