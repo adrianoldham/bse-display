@@ -38,13 +38,21 @@
 <p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop order] :>">Signup</a> or <:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop order] :>">Logon</a> before you continue with this purchase.
 </p><:eif User:><:eif Cfg:>
 <form action="<:target shop |h:>" method="post" name="checkoutpay">
-<:ifOrder id:><input type="hidden" name="order_id" value="<:order id:>" /><:eif:>
+<:- ifOrder id:>
+<input type="hidden" name="order_id" value="<:order id:>" />
+<:- eif:>
   <h2>Payment Details</h2>
   <fieldset>
-    <:if Payments CC:>
+    <:- if Payments CC:>
     <dl class="paymentType0">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType0" value="0" <:checkedPayment CC:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="0" /><:eif MultPaymentTypes:> <label for="paymentType0">Credit Card</label></dt>
+      <dt>
+        <:- if MultPaymentTypes:>
+        <input type="radio" name="paymentType" id="paymentType0" value="0" <:checkedPayment CC:> />
+        <:- or MultPaymentTypes:>
+        <input type="hidden" name="paymentType" value="0" />
+        <:- eif MultPaymentTypes:>
+        <label for="paymentType0">Credit Card</label>
+      </dt>
       <dd>
         <table>
           <caption>Account Details</caption>
@@ -81,37 +89,33 @@
         </table>
       </dd>
     </dl>
-    <:eif Payments:>
-    <:if Payments PayPal:>
+    <:- eif Payments:>
+    <:- if Payments PayPal:>
     <dl class="paymentType4">
-      <dt class="paypal"><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType4" value="4" <:checkedPayment PayPal:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="4" /><:eif MultPaymentTypes:> <label for="paymentType4">PayPal</label></dt>
+      <dt class="paypal">
+        <:- if MultPaymentTypes:>
+        <input type="radio" name="paymentType" id="paymentType4" value="4" <:checkedPayment PayPal:> />
+        <:- or MultPaymentTypes:>
+        <input type="hidden" name="paymentType" value="4" />
+        <:- eif MultPaymentTypes:>
+        <label for="paymentType4">PayPal</label>
+      </dt>
       <dd>
         <p>You will be redirected to the PayPal checkout page, there you can pay using your PayPal account balance, credit card or your linked bank account.</p>
         <p class="small">Your order will be processed when payment receipt is confirmed.</p>
       </dd>
     </dl>
-    <:eif Payments:>
-    <:if Payments Cheque:>
-    <dl class="paymentType1">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType1" value="1" <:checkedPayment Cheque:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="1" /><:eif MultPaymentTypes:> <label for="paymentType1">Cheque</label></dt>
-      <dd>
-        <p>Please send a cheque to:</p>
-        <address>
-          <b><:cfg shop address1 |h:></b><br />
-          <:cfg shop address2 |h:><br />
-          <:cfg shop address3 |h:><br />
-          <:cfg shop address4 |h:>
-        </address>
-        <p class="small">Your order will be processed when cheque has cleared.</p>
-      </dd>
-    </dl>
-    <:eif Payments:>
-    <:if Payments DirectDeposit:>
+    <:- eif Payments:>
+    <:- if Payments DirectDeposit:>
     <dl class="paymentType10">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType10" value="10" <:checkedPayment DirectDeposit:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="10" /><:eif MultPaymentTypes:> <label for="paymentType10">Deposit</label></dt>
+      <dt>
+        <:- if MultPaymentTypes:>
+        <input type="radio" name="paymentType" id="paymentType10" value="10" <:checkedPayment DirectDeposit:> />
+        <:- or MultPaymentTypes:>
+        <input type="hidden" name="paymentType" value="10" />
+        <:- eif MultPaymentTypes:>
+        <label for="paymentType10">EFT</label>
+      </dt>
       <dd>
         <p>Please transfer the funds to:</p>
         <table>
@@ -140,18 +144,83 @@
         <p class="small">Your order will be processed when payment transfer is confirmed.</p>
       </dd>
     </dl>
-    <:eif Payments:>
-    <:if Payments CallMe:>
-    <dl class="paymentType2">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="<:paymentTypeId CallMe:>" <:checkedPayment CallMe:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="<:paymentTypeId CallMe:>" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact Me</label></dt>
-      <dd><p>We will contact you to make arrangements for payment.</p></dd>
+    <:- eif Payments:>
+    <:- if Payments Cheque:>
+    <dl class="paymentType1">
+      <dt>
+        <:- if MultPaymentTypes:>
+        <input type="radio" name="paymentType" id="paymentType1" value="1" <:checkedPayment Cheque:> />
+        <:- or MultPaymentTypes:>
+        <input type="hidden" name="paymentType" value="1" />
+        <:- eif MultPaymentTypes:>
+        <label for="paymentType1">Cheque</label>
+      </dt>
+      <dd>
+        <p>Please send a cheque to:</p>
+        <address>
+          <b><:cfg shop address1 |h:></b><br />
+          <:cfg shop address2 |h:><br />
+          <:cfg shop address3 |h:><br />
+          <:cfg shop address4 |h:>
+        </address>
+        <p class="small">Your order will be processed when cheque has cleared.</p>
+      </dd>
     </dl>
-    <:eif Payments:>
-    <:if HaveSaleFiles:><:eif HaveSaleFiles:>
+    <:- eif Payments:>
+    <:- if Payments CallMe:>
+    <dl class="paymentType2">
+      <dt>
+        <:- if MultPaymentTypes:>
+        <input type="radio" name="paymentType" id="paymentType2" value="<:paymentTypeId CallMe:>" <:checkedPayment CallMe:> />
+        <:- or MultPaymentTypes:>
+        <input type="hidden" name="paymentType" value="<:paymentTypeId CallMe:>" />
+        <:- eif MultPaymentTypes:>
+        <label for="paymentType2">Contact</label>
+      </dt>
+      <dd>
+        <p>We will contact you to make arrangements for payment.</p>
+        <p class="small">Your order will be processed when payment is received.</p>
+      </dd>
+    </dl>
+    <:- eif Payments:>
+    <:- if Payments Invoice:>
+    <dl class="paymentType11">
+      <dt>
+        <:- if MultPaymentTypes:>
+        <input type=radio name="paymentType" id="paymentType11" value="11" <:checkedPayment Invoice:> />
+        <:- or MultPaymentTypes:>
+        <input type="hidden" name="paymentType" value="11" />
+        <:- eif MultPaymentTypes:>
+        <label for="paymentType11">Invoice</label>
+      </dt>
+      <dd>
+        <p>We will send you an invoice for payment.</p>
+        <p class="small">Your order will be processed when payment is received.</p>
+      </dd>
+    </dl>
+    <:- eif Payments:>
+    <:- if Payments Account:>
+    <dl class="paymentType12">
+      <dt>
+        <:- if MultPaymentTypes:>
+        <input type="radio" name="paymentType" id="paymentType12" value="12" <:checkedPayment Account:> />
+        <:- or MultPaymentTypes:>
+        <input type="hidden" name="paymentType" value="12" />
+        <:- eif MultPaymentTypes:>
+        <label for="paymentType12">Account</label>
+      </dt>
+      <dd>
+        <p>We will add this order to your account.</p>
+      </dd>
+    </dl>
+    <:- eif Payments:>
     <:include include/custom/payment_type_checkout.tmpl optional:><:include include/payment_type_checkout.tmpl optional:>
-  </fieldset><:if MultPaymentTypes:>
-  <p>Please select your preferred payment method</p><:eif MultPaymentTypes:>
+    <:- if HaveSaleFiles:>
+    <:- eif HaveSaleFiles:>
+  </fieldset>
+  <:- if MultPaymentTypes:>
+  <p>Please select your preferred payment method</p>
+  <:- eif MultPaymentTypes:>
   <p class="buttons">
     <input type="submit" value="Purchase now" name="payment" accesskey="p" title="AccessKey = p" />
     <input type="submit" value="Go back" name="checkout" accesskey="b" title="AccessKey = b" />

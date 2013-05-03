@@ -87,7 +87,12 @@ Item                                       Code         Qty     Price   Extended
 :>Payment was processed through PayPal:
 
              Transaction No.: <:order paypal_tran_id:><:or:><:eif
-:><:ifEq [order paymentType] "10":>The customer will pay by electronic funds transfer.<:or:><:eif
+:><:ifEq [order paymentType] "10"
+:>The customer will pay by electronic funds transfer.<:or:><:eif
+:><:ifEq [order paymentType] "11"
+:>Please send and invoice to the customer for payment.<:or:><:eif
+:><:ifEq [order paymentType] "12"
+:>Please add this order to the customer account.<:or:><:eif
 :><:if Cfg tryandbyte aufreight:><:if Order customInt1:>
 
 Please contact the customer to quote the shipping costs.<:or Order:><:ifFreeShippingCart:>

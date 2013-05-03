@@ -96,6 +96,10 @@ Item                                       Code         Qty     Price   Extended
              SWIFT     : <:cfg shop swiftcode:><:eif:>
              Account   : <:cfg shop accountno:>
              Reference : <:order id |%06d:><:or:><:eif
+:><:ifEq [order paymentType] "11"
+:>We will send you an invoice for payment.<:or:><:eif
+:><:ifEq [order paymentType] "12"
+:>We will add this order to your account.<:or:><:eif
 :><:if Cfg tryandbyte aufreight:><:if Order customInt1:>
 
 We will contact you to quote the shipping costs.<:or Order:><:ifFreeShippingCart:>

@@ -92,6 +92,16 @@
         <:cfg shop address4 |h:>
       </td>
     </tr>
+      <:case Eq [order paymentType] "2":>
+      <td><b>Contact</b></td>
+    </tr>
+      <:case Eq [order paymentType] "4":>
+      <td><b>PayPal</b></td>
+    </tr>
+    <tr>
+      <th>Transaction Id:</th>
+      <td><:order paypal_tran_id:></td>
+    </tr>
       <:case Eq [order paymentType] "10":>
       <td><b>EFT</b></td>
     </tr>
@@ -115,16 +125,13 @@
       <th>Reference:</th>
       <td><:order id |%06d:></td>
     </tr>
-      <:case Eq [order paymentType] "2":>
-      <td><b>Contact</b></td>
+      <:case Eq [order paymentType] "11":>
+      <td><b>Invoice</b></td>
     </tr>
-      <:case Eq [order paymentType] "4":>
-      <td><b>PayPal</b></td>
+      <:case Eq [order paymentType] "12":>
+      <td><b>Account</b></td>
     </tr>
-    <tr>
-      <th>Transaction Id:</th>
-      <td><:order paypal_tran_id:></td>
-    </tr>
+<:include include/order_payment_type.tmpl optional:>
       <:case default:>
       <td><b>None</b></td>
     </tr>
