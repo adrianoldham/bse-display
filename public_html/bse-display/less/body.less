@@ -109,6 +109,10 @@ h4 {
     font-size: 1em;
 }
 
+h1.pagetitle,
+h2.embedtitle,
+h1:first-child,
+h2:first-child,
 h1 + h2,
 h2 + h3,
 h3 + h4 {
@@ -116,78 +120,80 @@ h3 + h4 {
 }
 
 h1,
+h1.pagetitle,
 h1:first-child {
     color: @title-color;
 }
 
-h1:first-child,
-h2:first-child {
-    margin-top: -0.2em;
-}
+article,
+section,
+.article {
+    p,
+    ul,
+    ol,
+    blockquote,
+    address,
+    table {
+        margin-bottom: 1em;
+        font-style: normal;
+    }
 
-table {
-    clear: both;
-    margin-bottom: 1em;
-    border-collapse: collapse;
-}
+    table {
+        clear: both;
+    }
+    
+    th,
+    td {
+        font-size: 1em;
+    }
 
-th,
-td {
-    font-size: 1em;
-}
-
-ul {
-    padding-left: 1.75em;
-    list-style: disc;
-}
-
-ol {
-    padding-left: 2em;
-    list-style: decimal-leading-zero;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-p,
-ul,
-ol,
-blockquote,
-address {
-    margin-bottom: 1em;
-    font-style: normal;
-}
-
-small,
-.small {
-    font-size: 0.9em;
-    color: @summary-color;
-}
-
-.summary,
-.description {
-    color: @summary-color;
-}
-
-address.left,
-address.right {
-    display: block;
-    width: 220px;
-    margin: 0.5em 0;
-}
-
-blockquote.standfirst {
-    clear: both;
-    margin: 0 0 2.5em 0;
-    padding: 1em 0 0 0;
-    border: 0.083em solid;
-    border-color: @tertiary;
-    border-width: 0.083em 0;
-    font-weight: bold;
-    color: @tertiary;
-    font-size: 1.083em;
+    .body {
+        
+        ul {
+            padding-left: 1.75em;
+            list-style: disc;
+        }
+        
+        ol {
+            padding-left: 2em;
+            list-style: decimal-leading-zero;
+        }
+        
+        li {
+            position: relative;
+	        margin-bottom: 0.25em;
+        }
+    }
+    
+    small,
+    .small {
+        font-size: 0.9em;
+        color: @summary-color;
+    }
+    
+    .summary,
+    .description {
+        color: @summary-color;
+    }
+    
+    address.left,
+    address.right {
+        display: block;
+        width: 220px;
+        margin: 0.5em 0;
+    }
+    
+    blockquote.standfirst {
+        clear: both;
+        margin: 0 0 2.5em 0;
+        padding: 1em 0 0 0;
+        border: 0.083em solid;
+        border-color: @tertiary;
+        border-width: 0.083em 0;
+        font-weight: bold;
+        color: @tertiary;
+        font-size: 1.083em;
+    }
 }
 
 /* @end */
