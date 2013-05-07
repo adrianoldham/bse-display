@@ -54,7 +54,11 @@ textarea {
     overflow: auto; /* hides ie scrollbar when not overflowing */
 }
 
-*:focus {
+input:focus,
+textarea:focus,
+select:focus,
+button:focus,
+.button:focus {
     border-color: @input-focus-border-color !important;
 
     -webkit-box-shadow: inset 0 0.15em 0.25em rgba(0,0,0,0.2), 0 0 0.5em @input-focus-shadow-color !important;
