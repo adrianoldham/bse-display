@@ -33,14 +33,14 @@
     <:case Match [field htmltype] "^textarea$":>
     <textarea name="<:field name:>" id="<:field name:>" cols="<:ifField width:><:field width:><:or:><:formcfg default_width 40:><:eif:>" rows="<:ifField height:><:field height:><:or:>5<:eif:>" <:ifField readonly:>readonly="readonly" <:eif:><:ifField placeholder:>placeholder="<:field placeholder:>" <:eif:><:ifField required:>required="required" <:eif:>class="<:ifField required:>required<:eif:><:ifError_img [field name]:> error<:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>"><:old [field name] field default:></textarea>
 
-    <:case Match [field htmltype] "^(select|multiselect)$":><:if Field values_group_sql:>
+    <:case Match [field htmltype] "^(select|multiselect)$" |x:><:if Field values_group_sql:>
     <:values_select:><:or Field:>
     <select name="<:field name:>" id="<:field name:>"<:ifMatch [field htmltype] "^multiselect$":> size="<:ifField height:><:field height:><:or:>5<:eif:>" multiple="multiple" <:eif:><:ifField required:>required="required" <:eif:>class="<:ifField required:>required<:eif:><:ifError_img [field name]:> error<:eif:>" title="<:ifField help:><:field help:><:or:><:field description:><:eif:>">
       <:iterator begin values:><option value="<:value id:>"<:ifValueSet:> selected="selected"<:eif:>><:value name:></option>
       <:iterator end values:>
     </select><:eif Field:>
 
-    <:case Match [field htmltype] "^(radio|checkbox)$":>
+    <:case Match [field htmltype] "^(radio|checkbox)$" |x:>
     <fieldset id="<:field name:>"><:ifField hidelabel:><:or:>
       <legend><:field description:></legend><:eif:>
       <:iterator begin values:><label for="<:field name:>_<:value id:>"><input type="<:field htmltype:>" name="<:field name:>" id="<:field name:>_<:value id:>" value="<:value id:>"<:ifValueSet:> checked="checked"<:eif:> /> <span class="<:field htmltype:>"><:value name:></span></label><:iterator separator values:>
