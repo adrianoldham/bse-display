@@ -226,3 +226,39 @@
     <input type="submit" value="Go back" name="checkout" accesskey="b" title="AccessKey = b" />
   </p>
 </form>
+<:- if MultPaymentTypes:>
+<script type="text/javascript">
+(function() {
+    if (document.addEventListener) {
+        var radios = document.querySelectorAll("dl input[type=radio]");
+
+        function hideallbut(radio) {
+            for (var i = 0; i < radios.length; ++i) {
+                var aradio = radios[i];
+                // find the dl
+                // this would be: dl = aradio.up("DL") in prototype
+                var dl = aradio;
+                while (dl.tagName != "DL") {
+                    dl = dl.parentNode;
+                }
+                var dd = dl.querySelector("dd");
+                if (aradio === radio) {
+                    dd.style.display = "";
+                } else {
+                    dd.style.display = "none";
+                }
+            }
+        }
+        for (var i = 0; i < radios.length; ++i) {
+            var radio = radios[i];
+            if (radio.checked) {
+                hideallbut(radio);
+            }
+            radio.addEventListener("click", function(ev) {
+                hideallbut(this);
+            });
+        }
+    }
+})();
+</script>
+<:- eif MultPaymentTypes:>
