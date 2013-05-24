@@ -80,6 +80,7 @@
       <input type="text" name="delivEmail" id="delivEmail" size="40" value="<:old delivEmail user delivEmail:>" title="<:cfg "site users" display_email "Email Address":>" class="<:ifError_img delivEmail:>error<:eif:>" />
     </div>
   </fieldset>
+<:include include/user_options_delivery_custom.tmpl optional:>
 <:include include/custom/user_options_delivery_custom.tmpl optional:>
   <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>
   <p class="buttons"><input type="submit" name="saveopts" value="Save changes" accesskey="s" title="AccessKey = s" /></p>
