@@ -11,6 +11,8 @@
   <dd><span><:cfg "site users" display_userid "Username":>:</span> <:user userId:></dd>
 </dl>
 
+<:- include include/email_register_html_custom.tmpl optional:>
+
 <!--<a href="<:target user |h:>"><table cellspacing="0" border="0" cellpadding="0" class="bse-button"><tr><td>Login now</td></tr></table></a>//-->
 
 <p class="bse-buttons"><a href="<:target user |h:>" class="bse-button">Login now</a></p>
