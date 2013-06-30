@@ -1,4 +1,6 @@
-<:wrap shopbase.tmpl title=>"Shop Checkout" :>
+<:-.wrap "shopbase.tmpl", "title":"Shop Checkout" :>
+<:-.set cart = request.cart :>
+<:-.set items = [ ordercart.items ] :>
 <table class="items">
   <caption>Order items</caption>
   <thead>
@@ -9,20 +11,36 @@
       <th class="extended">Extended</th>
     </tr>
   </thead>
-  <tbody><:iterator begin items:>
+  <tbody>
+	<:-.for item in items :>
+	<:-.set options = item.option_list :>
     <tr>
       <td class="item">
-        <a href="<:item link:>" class="title"><:item title:></a><:ifOptions:>
-        <span><:options:></span><:eif:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="description"><:item description:></div><:eif And:>
+        <a href="<:= item.link :>" class="title"><:= item.title :></a>
+        <:-.if options.size :>
+        <span>(<:.for option in options :><:= loop.index ? ", " : "" :><:= option.desc :>: <:= option.display :><:.end for :>)</span>
+        <:-.end if :>
+        <:-.if item.description and cfg.entry("shop", "product_description", 1 ) :>
+        <div class="description"><:= item.description :></div>
+        <:-.end if :>
       </td>
-      <td class="quantity"><:item units:> &times;</td>
-      <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
-      <td class="extended"><:cfg shop currency "$":><:number money [arithmetic [item units] * [item price]]:></td>
-    </tr><:iterator end items:>
+      <td class="quantity">
+        <:= item.units :> &times;
+      </td>
+      <td class="price">
+        <:-.if item.price -:>
+        <:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", item.price ) :>
+        <:-.end if -:>
+      </td>
+      <td class="extended"><:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", ( item.units * item.price )) :></td>
+    </tr>
+    <:-.end for :>
   </tbody>
 </table>
 <div class="totals">
+  <:-.if is_order ? order.coupon_code ne "" : ordercart.coupon_active :>
+  <p class="discount"><span>(<:= ordercart.coupon_code :> / <:= ordercart.coupon_code_discount_pc:>% Coupon)</span> <label>Discount:</label> &minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", ordercart.product_cost_discount ) :></p>
+  <:-.end if :>
   <:switch:>
   <:case Shipping_cost:>
   <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>

@@ -244,9 +244,16 @@ div.totals p {
 	line-height: 1;
 }
 
-div.totals p.freight {
+div.totals p.freight,
+div.totals p.discount {
 	margin-bottom: 0.75em;
 	font-size: 1.1em;
+}
+
+div.totals p.discount {
+    border-bottom: 1px solid #ddd;
+    margin: 2em -0.5em 1em;
+    padding: 0 0.5em 0.75em;
 }
 
 div.totals p.total {

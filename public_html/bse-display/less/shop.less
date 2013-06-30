@@ -78,9 +78,17 @@
     line-height: 1;
 }
 
-.totals p.freight {
+.totals p.freight,
+.totals p.discount {
     margin-bottom: 0.75em;
     font-size: 1.1em;
+}
+
+.totals p.discount {
+    border-bottom: 0.083em solid;
+    border-color: @totals-border-color;
+    margin: 2em -0.5em 0.75em;
+    padding: 0 0.5em 0.75em;
 }
 
 .totals p.total {

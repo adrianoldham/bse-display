@@ -13,7 +13,8 @@ Order No.    : <:order id |%06d:>
 Order Date   : <:date order orderDate:><:ifOrder userId:>
 Username     : <:order userId:><:eif:><:ifOrder affiliate_code:>
 Referrer     : <:order affiliate_code:><:eif:><:ifOrder purchase_order:>
-Purchase No. : <:order purchase_order:><:eif:>
+Purchase No. : <:order purchase_order:><:eif:><:ifOrder coupon_code:>
+Coupon Code  : <:order coupon_code:> (<:order coupon_code_discount_pc:>%)<:eif:>
 
 --------------------------------------------------------------------------------
 
@@ -53,6 +54,8 @@ Item                                       Code         Qty     Price   Extended
    <:options:><:eif:>
 <:iterator end items
 :>--------------------------------------------------------------------------------
+<:ifOrder coupon_code
+:>                                                            Discount: -<:order product_cost_discount |m9:><:eif:>
 <:if Cfg shop shipping
 :>                                                             Freight: <:switch:><:case Order shipping_cost:><:order shipping_cost |m10:><:case Match [order shipping_name] ^contact$
 :>       TBA<:case default

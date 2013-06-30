@@ -41,6 +41,10 @@
     <tr>
       <th><:cfg shop display_affiliate_code "Referrer":>:</th>
       <td><:order affiliate_code:></td>
+    </tr><:eif:><:ifOrder coupon_code:>
+    <tr>
+      <th><:cfg shop display_coupon_code "Coupon Code":>:</th>
+      <td><:order coupon_code:> (<:order coupon_code_discount_pc:>%)</td>
     </tr><:eif:>
   </tbody>
 </table>
@@ -159,6 +163,9 @@
 </table>
 
 <div class="totals">
+  <:- if Order coupon_code:>
+  <p class="discount"><span>(<:order coupon_code_discount_pc:>% Coupon)</span> <label>Discount:</label> &minus;<:cfg shop currency "$":><:number money [order product_cost_discount]:></p>
+  <:- eif Order:>
   <:switch:>
   <:case Order shipping_cost:>
   <p class="freight"><span>(<:order shipping_method:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p>

@@ -40,6 +40,10 @@ table.items td {
     //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26b4aa8c', endColorstr='#00b4aa8c'); /* IE7+ */
 }
 
+table.items tr.warning {
+    background-color: @table-items-row-warning-background-color;    
+}
+
 table.items td.noitems {
     text-align: center;
 }
@@ -73,6 +77,7 @@ table.items td + td {
 }
 
 table.items .code,
+table.items .coupon,
 table.items .quantity,
 table.items .price,
 table.items .extended,
