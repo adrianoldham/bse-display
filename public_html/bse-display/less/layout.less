@@ -453,58 +453,6 @@ ul.menu li.hilite div.widget.expanded {
 
 /* @end */
 
-/* @group crumbs */
-
-ul#crumbs {
-    /*float: left;*/
-    overflow: hidden; /* enclose floats */
-    clear: both;
-    margin: 1.75em 0 1.75em 250px;
-    padding: 0;
-    width: 700px;
-    border: 0.083em solid;
-    border-color: lighten(@neutral, 20%);
-
-    -webkit-border-radius: 0.25em;
-    -moz-border-radius: 0.25em;
-    border-radius: 0.25em;
-
-    li {
-        font-size: 0.9em;
-        line-height: 1;
-        list-style: none;
-        margin: 0;
-        padding: 0.5em;
-        float: left;
-        color: #888;
-    
-        a {
-            color: lighten(@body-color, 15%);
-            text-decoration: none;
-        }
-    
-        &:after {
-            content: ">";
-            font-weight: bold;
-            color: @neutral;
-            padding-left: 1em;
-        }
-
-        &.focus {
-
-            &:after {
-                content: "" !important;
-            }
-            
-            span {
-                color: @body-color;
-            }
-        }
-    }
-}
-
-/* @end */
-
 /* @group feature */
 
 div.tile {
