@@ -47,11 +47,13 @@
     <tr>
       <th><:cfg shop display_affiliate_code "Referrer":>:</th>
       <td><:order affiliate_code:></td>
-    </tr><:eif:><:ifOrder coupon_code:>
+    </tr><:eif:>
+    <:-.if order.coupon :>
     <tr>
       <th><:cfg shop display_coupon_code "Coupon Code":>:</th>
-      <td><:order coupon_code:> (<:order coupon_code_discount_pc:>%)</td>
-    </tr><:eif:>
+      <td><:= order.coupon_code:> (<:= order.coupon_code_discount_pc :>%)</td>
+    </tr>
+    <:-.end if :>
   </tbody>
 </table>
 
@@ -181,7 +183,7 @@
   </tbody>
 </table>
 <div class="totals">
-  <:-.if order.coupon_code ne "" :>
+  <:-.if order.coupon :>
   <p class="discount"><span>(<:= order.coupon_code_discount_pc:>% Coupon)</span> <label>Discount:</label> &minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", order.product_cost_discount ) :></p>
   <:-.end if :>
   <:switch:>

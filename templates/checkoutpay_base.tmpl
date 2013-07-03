@@ -13,7 +13,7 @@
   </thead>
   <tbody>
 	<:-.for item in items :>
-	<:-.set options = item.option_list :>
+	<:-.set options = [ item.option_list ] :>
     <tr>
       <td class="item">
         <a href="<:= item.link :>" class="title"><:= item.title :></a>
@@ -38,7 +38,7 @@
   </tbody>
 </table>
 <div class="totals">
-  <:-.if is_order ? order.coupon_code ne "" : ordercart.coupon_active :>
+  <:-.if ordercart.coupon_active :>
   <p class="discount"><span>(<:= ordercart.coupon_code :> / <:= ordercart.coupon_code_discount_pc:>% Coupon)</span> <label>Discount:</label> &minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", ordercart.product_cost_discount ) :></p>
   <:-.end if :>
   <:switch:>
