@@ -61,8 +61,12 @@
 </table>
 
 <div class="totals">
-  <:if Order shipping_cost:>
-  <p class="freight"><span>(<:order shipping_method |h:>) </span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p><:eif Order:>
+  <:- if Order coupon_code:>
+  <p class="discount"><span>(<:order coupon_code_discount_pc:>% Coupon) </span> <label>Discount:</label> &minus;<:cfg shop currency "$":><:number money [order product_cost_discount]:></p>
+  <:- eif Order:>
+  <:- if Order shipping_cost:>
+  <p class="freight"><span>(<:order shipping_method |h:>) </span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p>
+  <:- eif Order:>
   <p class="total"><abbr><:cfg shop currency_code "AUD":> </abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [order total]:></p>
 </div>
 

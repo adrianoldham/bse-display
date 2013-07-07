@@ -19,6 +19,8 @@ Item                                       Code         Qty     Price   Extended
    <:options:><:eif:>
 <:iterator end items
 :>--------------------------------------------------------------------------------
+<:ifOrder coupon_code
+:>                                                            Discount: -<:order product_cost_discount |m9:><:eif:>
 <:if Cfg shop shipping
 :>                                                             Freight: <:switch:><:case Order shipping_cost:><:order shipping_cost |m10:><:case Match [order shipping_name] ^contact$
 :>       TBA<:case default
