@@ -42,7 +42,7 @@
         <:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", item.price ) :>
         <:-.end if -:>
       </td>
-      <td class="extended"><:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", ( item.units * item.price )) :></td>
+      <td class="extended"><:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", item.extended("price") ):></td>
     </tr>
     <:-.end for :>
   </tbody>
