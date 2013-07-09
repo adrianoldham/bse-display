@@ -1,6 +1,7 @@
 <:-.wrap "shopbase.tmpl", "title":"Shop Checkout" :>
 <:-.set cart = request.cart :>
 <:-.set items = cart.items :>
+<:-.set user = request.siteuser :>
 <table class="items">
   <caption>Order items</caption>
   <thead>
@@ -51,16 +52,14 @@
   <:-.if cart.coupon_active :>
   <p class="discount"><span>(<:= cart.coupon_code :> / <:= cart.coupon_code_discount_pc:>% Coupon)</span> <label>Discount:</label> &minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", cart.product_cost_discount ) :></p>
   <:-.end if :>
-  <:switch:>
-  <:case Shipping_cost:>
-  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
-  <:case Match [shipping_name] ^contact$:>
+  <:-.if cart.shipping_cost:>
+  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", cart.shipping_cost ):></p>
+  <:-.elsif cart.shipping_name eq "contact" :>
   <p class="freight"><span>(<:shipping_method:>)</span> <label>Freight:</label> TBA</p>
-  <:case default:>
-  <:endswitch:>
-  <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [total]:></p>
+  <:-.end if:>
+  <p class="total"><abbr><:= cfg.entry("shop", "currency_code", "AUD"):></abbr> <label>Total:</label> <:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", cart.total):></p>
 </div>
-<form action="<:target shop |h:>" method="post" class="_siteuser">
+<form action="<:= cfg.user_url("shop"):>" method="post">
 <fieldset>
   <!--<legend>Discount Coupon</legend>-->
   <div class="input coupon<:= !cart.coupon_valid and cart.coupon_code ? ' error' : '' :>">
@@ -79,12 +78,16 @@
     <:-.end if :>
   </div>
 </fieldset>
-<:- if Cfg "site users" nopassword:><:or Cfg:><:if User:>
+<:-.if !cfg.entry("site users", "nopassword"):>
+<:-.if user:>
 <p class="alert">
-  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:target user userpage |h:>">account manager</a>.
-</p><:or User:>
-<p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop checkout need_delivery [old need_delivery]] :>">Signup</a> or <:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop checkout need_delivery [old need_delivery]] :>">Logon</a> before you continue with this purchase.
-</p><:eif User:><:eif Cfg:>
+  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:= cfg.user_url("user", "userpage"):>">account manager</a>.
+</p>
+<:-.else:>
+<p class="alert">To track the status of your purchase you must <:.if cfg.entry("site users", "user_register"):>either <a href="<:= cfg.user_url("user", "show_register", "r", cfg.user_url("shop", "checkout", "need_delivery", old.need_delivery )):>">Signup</a> or <:.end if:><a href="<:= cfg.user_url("user", "show_logon", "r", cfg.user_url("shop", "checkout", "need_delivery", old.need_delivery )):>">Logon</a> before you continue with this purchase.
+</p>
+<:-.end if:>
+<:-.end if:>
 <div class="siteuser">
   <h2>Billing Details</h2>
   <fieldset class="name">
@@ -261,7 +264,8 @@
     </div>
   </fieldset>
   <:eif Cfg:>
-  <:include include/custom/checkout_custom.tmpl optional:><:include include/checkout_custom.tmpl optional:>
+  <:- include include/custom/checkout_custom.tmpl optional:>
+  <:- include include/checkout_custom.tmpl optional:>
   <p><span class="required">* Required.</span> <:cfg "site users" required_text "Please provide information for all marked fields.":></p>
   <p class="buttons">
     <input type="submit" value="Purchase now" name="a_order" accesskey="p" title="AccessKey = p" />

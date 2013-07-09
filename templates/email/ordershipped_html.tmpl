@@ -1,43 +1,46 @@
-<:wrap email/base.tmpl title=>"Order shipped" :>
-
-<p>Hi <:order delivFirstName |h:>,</p>
-
-<p>Your order has been shipped<:ifMatch [order shipping_name] ^contact$:><:or:> via <:order shipping_method |h:><:eif:>.</p>
-
+<:.wrap "email/base.tmpl", "title":"Order shipped" :>
+<p>Hi <:= order.delivFirstName:>,</p>
+<p>Your order has been shipped<:.if order.shipping_name ne "contact":> via <:= order.shipping_method:><:.end if:>.</p>
 <div class="group">
 <table class="vertical left">
   <caption>Order details</caption>
   <tbody>
     <tr>
       <th>Order No.:</th>
-      <td><b><:order id |%06d:></b></td>
+      <td><b><:= order.id.format("%06d"):></b></td>
     </tr>
     <tr>
       <th>Order Date:</th>
-      <td><:date order orderDate:></td>
-    </tr><:ifOrder purchase_order:>
+      <td><:= bse.date("%d-%b-%Y", order.orderDate):></td>
+    </tr>
+    <:-.if order.purchase_order:>
     <tr>
       <th>Purchase Order:</th>
-      <td><:order purchase_order |h:></td>
-    </tr><:eif:><:ifOrder freight_tracking:>
+      <td><:= order.purchase_order:></td>
+    </tr>
+    <:-.end if:>
+    <:-.if order.freight_tracking:>
     <tr>
       <th>Tracking Code:</th>
       <td>
-        <:- if Cfg "shipping tracking urls" [order shipping_name]:>
-        <a href="<:cfg "shipping tracking urls" [order shipping_name] |h:><:order freight_tracking |h:>"><:order freight_tracking |h:></a>
-        <:- or Cfg:>
-        <:order freight_tracking |h:>
-        <:- eif Cfg:>
+        <:-.if cfg.entry("shipping tracking urls", order.shipping_name ):>
+        <a href="<:= cfg.entry("shipping tracking urls", order.shipping_name ) _ order.freight_tracking :>"><:= order.freight_tracking:></a>
+        <:-.else:>
+        <:= order.freight_tracking:>
+        <:-.end if:>
       </td>
-    </tr><:eif:><:ifOrder shipping_method:>
+    </tr>
+    <:-.end if:>
+    <:-.if order.shipping_method:>
     <tr>
       <th>Shipping Method:</th>
-      <td><:order shipping_method |h:></td>
-    </tr><:eif:>
+      <td><:= order.shipping_method:></td>
+    </tr>
+    <:-.end if:>
   </tbody>
 </table>
 </div>
-
+<:-.set items = [ order.items ] :>
 <table class="items">
   <caption>Order items</caption>
   <thead>
@@ -49,72 +52,99 @@
       <th class="extended">Extended</th>
     </tr>
   </thead>
-  <tbody><:iterator begin items:>
+  <tbody>
+	<:-.for item in items :>
+	<:-.set options = [ item.option_list ] :>
     <tr>
-      <td class="item"><:item title |h:><:ifOptions:> <span><:options |h:></span><:eif:></td>
-      <td class="code"><:item product_code |h:></td>
-      <td class="quantity"><:item units:> &times;</td>
-      <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
-      <td class="extended"><:cfg shop currency "$":><:number money [extended price]:></td>
-    </tr><:iterator end items:>
+      <td class="item">
+        <a href="<:= item.product.link :>" class="title"><:= item.title :></a>
+        <:-.if options.size :>
+        <span>(<:.for option in options :><:= loop.index ? ", " : "" :><:= option.name :>: <:= option.display :><:.end for :>)</span>
+        <:-.end if :>
+        <:-.if item.description and cfg.entry("shop", "product_description", 1 ) :>
+        <div class="description"><:= item.description :></div>
+        <:-.end if :>
+      </td>
+      <td class="code"><:= item.product_code :></td>
+      <td class="quantity">
+        <:= item.units :> &times;
+      </td>
+      <td class="price">
+        <:-.if item.price -:>
+        <:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", item.price ) :>
+        <:-.end if -:>
+      </td>
+      <td class="extended"><:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", item.extended("price") ):></td>
+    </tr>
+    <:-.end for :>
   </tbody>
 </table>
-
 <div class="totals">
-  <:- if Order coupon_code:>
-  <p class="discount"><span>(<:order coupon_code_discount_pc:>% Coupon) </span> <label>Discount:</label> &minus;<:cfg shop currency "$":><:number money [order product_cost_discount]:></p>
-  <:- eif Order:>
-  <:- if Order shipping_cost:>
-  <p class="freight"><span>(<:order shipping_method |h:>) </span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p>
-  <:- eif Order:>
-  <p class="total"><abbr><:cfg shop currency_code "AUD":> </abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [order total]:></p>
+  <:-.if order.coupon :>
+  <p class="discount"><span>(<:= order.coupon_code_discount_pc:>% Coupon)</span>&nbsp;<label>Discount:</label>&nbsp;&minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", order.product_cost_discount ) :></p>
+  <:-.end if :>
+  <:-.if order.shipping_cost:>
+  <p class="freight"><span>(<:= order.shipping_method:>)</span>&nbsp;<label>Freight:</label>&nbsp;<:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", order.shipping_cost ):></p>
+  <:-.end if:>
+  <p class="total"><abbr><:= cfg.entry("shop", "currency_code", "AUD"):></abbr>&nbsp;<label>Total:</label>&nbsp;<:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", order.total ):></p>
 </div>
-
 <div class="group">
 <table class="vertical left">
   <caption>Shipping details</caption>
   <tbody>
     <tr>
       <th>Name:</th>
-      <td><b><:order delivFirstName |h:> <:order delivLastName |h:></b></td>
+      <td><b><:= order.delivFirstName:> <:= order.delivLastName:></b></td>
     </tr>
     <tr>
       <th>Address:</th>
-      <td><:ifOrder delivOrganization:>
-        <:order delivOrganization |h:><br /><:eif:>
-        <:order delivStreet |h:><br /><:ifOrder delivStreet2:>
-        <:order delivStreet2 |h:><br /><:eif:>
-        <:order delivSuburb |h:> <:order delivState |h:> <:order delivPostCode |h:><br /><:ifCfgsection "country selector":>
-        <:cfg "country selector" [order delivCountry] |h:><:or:><:order delivCountry:><:eif:>
+      <td>
+        <:-.if order.delivOrganization:>
+        <:= order.delivOrganization:><br />
+        <:-.end if:>
+        <:= order.delivStreet:><br />
+        <:-.if order.delivStreet2:>
+        <:= order.delivStreet2:><br />
+        <:-.end if:>
+        <:= order.delivSuburb:> <:= order.delivState:> <:= order.delivPostCode:><br />
+        <:-.if [cfg.entries("country selector")].size :>
+        <:= cfg.entry("country selector", order.delivCountry ):>
+        <:-.else:>
+        <:= order.delivCountry:>
+        <:-.end if:>
       </td>
     </tr>
+    <:-.if order.telephone:>
     <tr>
-      <th><:cfg "site users" display_telephone "Telephone" |h:>:</th>
-      <td><:order telephone |h:></td>
+      <th><:= cfg.entry("site users", "display_telephone", "Telephone"):>:</th>
+      <td><:= order.telephone:></td>
     </tr>
-    <:ifOrder facsimile:><tr>
-      <th><:cfg "site users" display_facsimile "Facsimile" |h:>:</th>
-      <td><:order facsimile |h:></td>
-    </tr><:eif:>
-    <:ifOrder delivMobile:><tr>
-      <th><:cfg "site users" display_mobile "Mobile" |h:>:</th>
-      <td><:order delivMobile |h:></td>
-    </tr><:eif:>
-    <:ifOrder emailAddress:><:or:><tr>
-      <th><:cfg "site users" display_email "Email Address" |h:>:</th>
-      <td><:order emailAddress |h:></td>
-    </tr><:eif:>
-    <:ifOrder instructions:><tr>
-      <th>Instructions:</th>
-      <td><:order instructions |h:></td>
-    </tr><:eif:>
+    <:-.end if:>
+    <:-.if order.facsimile:>
+    <tr>
+      <th><:= cfg.entry("site users", "display_facsimile", "Facsimile"):>:</th>
+      <td><:= order.facsimile:></td>
+    </tr>
+    <:-.end if:>
+    <:-.if order.delivMobile:>
+    <tr>
+      <th><:= cfg.entry("site users", "display_mobile", "Mobile"):>:</th>
+      <td><:= order.delivMobile:></td>
+    </tr>
+    <:-.end if:>
+    <:-.if order.emailAddress:>
+    <tr>
+      <th><:= cfg.entry("site users", "display_email", "Email Address"):>:</th>
+      <td><:= order.emailAddress:></td>
+    </tr>
+    <:-.end if:>
   </tbody>
 </table>
 </div>
-
-<:ifOrder userId:>
-<p>This order is available in your <a href="<:target user |h:>">account manager</a>, you can review more details in your <a href="<:target user userpage _t orders |h:>">order history</a>.</p>
-<p class="bse-buttons"><a href="<:target user orderdetail id [order id] |h:>" class="bse-button">Order details</a></p><:or:>
-
+<:-.if order.userId:>
+<p>This order is available in your <a href="<:= cfg.user_url("user", "userpage"):>">account manager</a>, you can review more details in your <a href="<:= cfg.user_url("user", "userpage", "_t", "orders"):>">order history</a>.</p>
+<p class="bse-buttons"><a href="<:= cfg.user_url("user", "orderdetail", "id", order.id ):>" class="bse-button">Order details</a></p>
+<:-.else:>
 <p>You can review details of this order and track its status online.</p>
-<p class="bse-buttons"><a href="<:target user oda id [order randomId] |h:>" class="bse-button">Order details</a></p><:eif:>
+<p class="bse-buttons"><a href="<:= cfg.user_url("user", "oda", "id", order.randomId ):>" class="bse-button">Order details</a></p>
+<:-.end if:>

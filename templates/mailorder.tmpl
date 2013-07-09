@@ -1,4 +1,4 @@
-<:uc [cfg site name]:> SHOP ADMINISTRATION.
+<:= cfg.entry("site", "name").upper:> SHOP ADMINISTRATION.
 
 This order is now awaiting processing.
 
@@ -6,103 +6,101 @@ This order is now awaiting processing.
                                   ORDER DETAILS
 --------------------------------------------------------------------------------
 
-Order No.    : <:order id |%06d:>
-Order Date   : <:date order orderDate:><:ifOrder userId:>
-Username     : <:order userId:><:eif:><:ifOrder affiliate_code:>
-Referrer     : <:order affiliate_code:><:eif:><:ifOrder purchase_order:>
-Purchase No. : <:order purchase_order:><:eif:><:ifOrder coupon_code:>
-Coupon Code  : <:order coupon_code:> (<:order coupon_code_discount_pc:>%)<:eif:>
+Order No.    : <:= order.id.format("%06d") |raw:>
+Order Date   : <:= bse.date("%d-%b-%Y", order.orderDate) |raw:><:.if order.userId:>
+Username     : <:= order.userId |raw:><:.end if:><:.if order.affiliate_code:>
+Referrer     : <:= order.affiliate_code |raw:><:.end if:><:.if order.purchase_order:>
+Purchase No. : <:= order.purchase_order |raw:><:.end if:><:.if order.coupon_code:>
+Coupon Code  : <:= order.coupon_code |raw:> (<:= order.coupon_code_discount_pc |raw:>%)<:.end if:>
 
 --------------------------------------------------------------------------------
 
 BILLING DETAILS:
 
-Address      : <:order billFirstName:> <:order billLastName:><:ifOrder billOrganization:>
-               <:order billOrganization:><:eif:>
-               <:order billStreet:><:ifOrder billStreet2:>
-               <:order billStreet2:><:eif:>
-               <:order billSuburb:> <:order billPostCode:> <:order billState:><:ifCfgsection "country selector":>
-               <:cfg "country selector" [order billCountry]:><:or:>
-               <:order billCountry:><:eif:><:ifOrder billTelephone:>
-Telephone    : <:order billTelephone:><:eif:><:ifOrder billFacsimile:>
-Facsimile    : <:order billFacsimile:><:eif:><:ifOrder billMobile:>
-Mobile       : <:order billMobile:><:eif:><:ifOrder billEmail:>
-Email        : <:order billEmail:><:eif:>
-<:if Order delivStreet:>
+Address      : <:= order.billFirstName |raw:> <:= order.billLastName |raw:><:.if order.billOrganization:>
+               <:= order.billOrganization |raw:><:.end if:>
+               <:= order.billStreet |raw:><:.if order.billStreet2:>
+               <:= order.billStreet2 |raw:><:.end if:>
+               <:= order.billSuburb |raw:> <:= order.billPostCode |raw:> <:= order.billState |raw:><:.if cfg.entries("country selector"):>
+               <:= cfg.entry("country selector", order.billCountry) |raw:><:.else:>
+               <:= order.billCountry |raw:><:.end if:><:.if order.billTelephone:>
+Telephone    : <:= order.billTelephone |raw:><:.end if:><:.if order.billFacsimile:>
+Facsimile    : <:= order.billFacsimile |raw:><:.end if:><:.if order.billMobile:>
+Mobile       : <:= order.billMobile |raw:><:.end if:><:.if order.billEmail:>
+Email        : <:= order.billEmail |raw:><:.end if:>
+<:.if order.delivStreet:>
 
 SHIPPING DETAILS:
 
-Address      : <:order delivFirstName:> <:order delivLastName:><:ifOrder delivOrganization:>
-               <:order delivOrganization:><:eif:>
-               <:order delivStreet:><:ifOrder delivStreet2:>
-               <:order delivStreet2:><:eif:>
-               <:order delivSuburb:> <:order delivPostCode:> <:order delivState:><:ifCfgsection "country selector":>
-               <:cfg "country selector" [order delivCountry]:><:or:>
-               <:order delivCountry:><:eif:><:ifOrder telephone:>
-Telephone    : <:order telephone:><:eif:><:ifOrder facsimile:>
-Facsimile    : <:order facsimile:><:eif:><:ifOrder delivMobile:>
-Mobile       : <:order delivMobile:><:eif:><:ifOrder emailAddress:>
-Email        : <:order emailAddress:><:eif:>
-<:eif Order:>
+Address      : <:= order.delivFirstName |raw:> <:= order.delivLastName |raw:><:.if order.delivOrganization:>
+               <:= order.delivOrganization |raw:><:.end if:>
+               <:= order.delivStreet |raw:><:.if order.delivStreet2:>
+               <:= order.delivStreet2 |raw:><:.end if:>
+               <:= order.delivSuburb |raw:> <:= order.delivPostCode |raw:> <:= order.delivState |raw:><:.if cfg.entries("country selector"):>
+               <:= cfg.entry("country selector", order.delivCountry) |raw:><:.else:>
+               <:= order.delivCountry |raw:><:.end if:><:.if order.telephone:>
+Telephone    : <:= order.telephone |raw:><:.end if:><:.if order.facsimile:>
+Facsimile    : <:= order.facsimile |raw:><:.end if:><:.if order.delivMobile:>
+Mobile       : <:= order.delivMobile |raw:><:.end if:><:.if order.emailAddress:>
+Email        : <:= order.emailAddress |raw:><:.end if:>
+<:.end if:>
 
 Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
-<:iterator begin items:><:item title |40:>   <:item product_code |12:> <:item units |%3d:> <:item price |m9:> <:extended price |m10:><:ifOptions:>
-   <:options:><:eif:>
-<:iterator end items
-:>--------------------------------------------------------------------------------
-<:ifOrder coupon_code
-:>                                                            Discount: -<:order product_cost_discount |m9:><:eif:>
-<:if Cfg shop shipping
-:>                                                             Freight: <:switch:><:case Order shipping_cost:><:order shipping_cost |m10:><:case Match [order shipping_name] ^contact$
-:>       TBA<:case default
-:>      None<:endswitch:>
-<:or Cfg:><:eif Cfg
-:>                                                               Total: <:order total |m10:>
-<:ifOrder gst
-:>                                                                 GST: <:order gst |m10:><:or
-:>                                                                 GST: <:arithmetic [order total] - ([order total] / (1 + [cfg shop gst_rate 10] / 100)) |m10:><:eif
+<:.for item in [ order.items ] :>
+<:= item.title.format("%-40s") |raw:>   <:= item.product_code.format("%-12s") |raw:> <:= item.units.format("%3d") |raw:> <:= bse.number("money", item.price).format("%9s") |raw:> <:= bse.number("money", item.extended("price")).format("%10s") |raw:>
+<:-.if item.nice_options :>
+   <:= item.nice_options:>
+<:-.end if:>
+<:.end for:>
+--------------------------------------------------------------------------------
+<:.if order.coupon_code
+:>                                                            Discount: -<:= bse.number("money", order.product_cost_discount).format("%9s") |raw:><:.end if:>
+<:.if cfg.entry("shop", "shipping")
+:>                                                             Freight: <:.if order.shipping_cost:><:= bse.number("money", order.shipping_cost).format("%10s") |raw:><:.elsif order.shipping_name eq "contact"
+:>       TBA<:.else
+:>      None<:.end if:>
+<:.end if
+:>                                                               Total: <:= bse.number("money", order.total).format("%10s") |raw:>
+<:.if order.gst
+:>                                                                 GST: <:= bse.number("money", order.gst).format("%10s") |raw:><:.else
+:>                                                                 GST: <:= bse.number("money", order.total - (order.total / (1 + cfg.entry("shop", "gst_rate", 10) / 100)) ).format("%10s") |raw:><:.end if
 :>
 
-<:if Eq [order paymentType] "0":><:if Order ccOnline
+<:.if order.paymentType == 0:><:.if order.ccOnline
 :>This credit card payment was processed online:
 
-             Receipt No.  : <:order ccReceipt:>
-             <:cfg shop display_ccName "Name on Card" |12:> : <:order ccName:><:ifOrder ccPAN:>
-             <:cfg shop display_ccPAN "Card Number" |12:> : **** **** **** <:order ccPAN:><:eif:><:ifOrder ccType:>
-             <:cfg shop display_ccType "Card Type" |12:> : <:order ccType:><:eif:>
-
-<:or Order
+             Receipt No.  : <:= order.ccReceipt |raw:>
+             <:= cfg.entry("shop", "display_ccName", "Name on Card").format("%-12s") |raw:> : <:= order.ccName |raw:><:.if order.ccPAN:>
+             <:= cfg.entry("shop", "display_ccPAN", "Card Number").format("%-12s") |raw:> : **** **** **** <:= order.ccPAN |raw:><:.end if:><:.if order.ccType:>
+             <:= cfg.entry("shop", "display_ccType", "Card Type").format("%-12s") |raw:> : <:= order.ccType |raw:><:.end if:>
+<:.else
 :>Debit this credit card at time of shipping:
 
-             <:cfg shop display_ccName "Name on Card" |12:> : <:order ccName:>
-             <:cfg shop display_cardNumber "Card Number" |12:> : <:cardNumber:>
-             <:cfg shop display_cardExpiry "Expiry Date" |12:> : <:cardExpiry:>
-             <:cfg shop display_cardVerify "CVV2" |12:> : <:cardVerify:><:ifOrder ccType:>
-             <:cfg shop display_ccType "Card Type" |12:> : <:order ccType:><:eif:>
-<:eif Order
-:><:or Eq:><:eif Eq
-:><:ifEq [order paymentType] "1"
-:>The customer will pay by cheque.<:or:><:eif
-:><:ifEq [order paymentType] "2"
-:>Please contact the customer to make arrangements for payment.<:or:><:eif
-:><:ifEq [order paymentType] "4"
+             <:= cfg.entry("shop", "display_ccName", "Name on Card").format("%-12s") |raw:> : <:= order.ccName |raw:>
+             <:= cfg.entry("shop", "display_cardNumber", "Card Number").format("%-12s") |raw:> : <:= cardNumber |raw:>
+             <:= cfg.entry("shop", "display_cardExpiry", "Expiry Date").format("%-12s") |raw:> : <:= cardExpiry |raw:>
+             <:= cfg.entry("shop", "display_cardVerify", "CVV2").format("%-12s") |raw:> : <:= cardVerify |raw:><:.if order.ccType:>
+             <:= cfg.entry("shop", "display_ccType", "Card Type").format("%-12s") |raw:> : <:= order.ccType |raw:><:.end if:>
+<:.end if
+:><:.end if
+:><:.if order.paymentType == 1
+:>The customer will pay by cheque.<:.end if
+:><:.if order.paymentType == 2
+:>Please contact the customer to make arrangements for payment.<:.end if
+:><:.if order.paymentType == 4
 :>Payment was processed through PayPal:
 
-             Transaction No.: <:order paypal_tran_id:><:or:><:eif
-:><:ifEq [order paymentType] "10"
-:>The customer will pay by electronic funds transfer.<:or:><:eif
-:><:ifEq [order paymentType] "11"
-:>Please send and invoice to the customer for payment.<:or:><:eif
-:><:ifEq [order paymentType] "12"
-:>Please add this order to the customer account.<:or:><:eif
-:><:if Cfg tryandbyte aufreight:><:if Order customInt1:>
+             Transaction No.: <:= order.paypal_tran_id |raw:><:.end if
+:><:.if order.paymentType == 10
+:>The customer will pay by electronic funds transfer.<:.end if
+:><:.if order.paymentType == 11
+:>Please send and invoice to the customer for payment.<:.end if
+:><:.if order.paymentType == 12
+:>Please add this order to the customer account.<:.end if
+:><:.if order.instructions:>
 
-Please contact the customer to quote the shipping costs.<:or Order:><:ifFreeShippingCart:>
-
-This order qualifies for free shipping within Australia.<:eif:><:eif Order:><:eif Cfg:><:if Order instructions:>
-
-<:with begin wrap 80:>Instructions: <:order instructions:><:with end wrap:><:eif Order:>
+<:with begin wrap 80:>Instructions: <:= order.instructions |raw:><:with end wrap:><:.end if:>
 
 --------------------------------------------------------------------------------
 

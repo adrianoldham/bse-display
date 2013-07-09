@@ -1,6 +1,7 @@
 <:-.wrap "shopbase.tmpl", "title":"Shop Checkout" :>
 <:-.set cart = request.cart :>
 <:-.set items = [ ordercart.items ] :>
+<:-.set user = request.siteuser :>
 <table class="items">
   <caption>Order items</caption>
   <thead>
@@ -41,24 +42,27 @@
   <:-.if ordercart.coupon_active :>
   <p class="discount"><span>(<:= ordercart.coupon_code :> / <:= ordercart.coupon_code_discount_pc:>% Coupon)</span> <label>Discount:</label> &minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", ordercart.product_cost_discount ) :></p>
   <:-.end if :>
-  <:switch:>
-  <:case Shipping_cost:>
-  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [shipping_cost]:></p>
-  <:case Match [order shipping_name] ^contact$:>
-  <p class="freight"><span>(<:shipping_method:>)</span> <label>Freight:</label> TBA</p>
-  <:case default:>
-  <:endswitch:>
-  <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [total]:></p>
-</div><:if Cfg "site users" nopassword:><:or Cfg:><:if User:>
+  <:-.if order.shipping_cost:>
+  <p class="freight"><span>(<:= order.shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", order.shipping_cost ):></p>
+  <:-.elsif order.shipping_name eq "contact" :>
+  <p class="freight"><span>(<:= order.shipping_method:>)</span> <label>Freight:</label> TBA</p>
+  <:-.end if:>
+  <p class="total"><abbr><:= cfg.entry("shop", "currency_code", "AUD"):></abbr> <label>Total:</label> <:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", order.total):></p>
+</div>
+<:-.if !cfg.entry("site users", "nopassword"):>
+<:-.if user:>
 <p class="alert">
-  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:target user userpage |h:>">account manager</a>.
-</p><:or User:>
-<p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop order] :>">Signup</a> or <:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop order] :>">Logon</a> before you continue with this purchase.
-</p><:eif User:><:eif Cfg:>
-<form action="<:target shop |h:>" method="post" name="checkoutpay">
-<:- ifOrder id:>
-<input type="hidden" name="order_id" value="<:order id:>" />
-<:- eif:>
+  This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:= cfg.user_url("user", "userpage"):>">account manager</a>.
+</p>
+<:-.else:>
+<p class="alert">To track the status of your purchase you must <:.if cfg.entry("site users", "user_register"):>either <a href="<:= cfg.user_url("user", "show_register", "r", cfg.user_url("shop", "order")):>">Signup</a> or <:.end if:><a href="<:= cfg.user_url("user", "show_logon", "r", cfg.user_url("shop", "order")):>">Logon</a> before you continue with this purchase.
+</p>
+<:-.end if:>
+<:-.end if:>
+<form action="<:= cfg.user_url("shop"):>" method="post" name="checkoutpay">
+<:-.if order.id:>
+<input type="hidden" name="order_id" value="<:= order.id:>" />
+<:-.end if:>
   <h2>Payment Details</h2>
   <fieldset>
     <:- if Payments CC:>
@@ -75,32 +79,34 @@
         <table>
           <caption>Account Details</caption>
           <tr>
-            <th><label for="ccName"><:cfg shop display_ccName "Name on Card":>:<:error_img ccName:></label></th>
+            <th><label for="ccName"><:= cfg.entry("shop", "display_ccName", "Name on Card"):>:<:error_img ccName:></label></th>
             <td><input type="text" name="ccName" id="ccName" size="40" value="<:old ccName:>" class="<:ifError_img ccName:>error<:eif:>" /></td>
           </tr>
           <tr>
-            <th><label for="cardNumber"><:cfg shop display_cardNumber "Card Number":>:<:error_img cardNumber:></label></th>
+            <th><label for="cardNumber"><:= cfg.entry("shop", "display_cardNumber", "Card Number"):>:<:error_img cardNumber:></label></th>
             <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" class="<:ifError_img cardNumber:>error<:eif:>" />
-              <label for="cardVerify"><:cfg shop display_cardVerify "CVV":>:<:error_img cardVerify:></label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" class="<:ifError_img cardVerify:>error<:eif:>" /> <:help cvv2 CVV:>
+              <label for="cardVerify"><:= cfg.entry("shop", "display_cardVerify", "CVV"):>:<:error_img cardVerify:></label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" class="<:ifError_img cardVerify:>error<:eif:>" /> <:help cvv2 CVV:>
             </td>
           </tr>
           <tr>
-            <th><label for="cardExpiry"><:cfg shop display_cardExpiry "Expiry Date":>:<:error_img cardExpiry:></label></th>
+            <th><label for="cardExpiry"><:= cfg.entry("shop", "display_cardExpiry", "Expiry Date"):>:<:error_img cardExpiry:></label></th>
             <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" class="<:ifError_img cardExpiry:>error<:eif:>" /> <span class="small">(MM/YY)</span></td>
           </tr>
           <tr>
-            <th><label for="ccType"><:cfg shop display_ccType "Card Type":>:<:error_img ccType:></label></th>
+            <th><label for="ccType"><:= cfg.entry("shop", "display_ccType", "Card Type"):>:<:error_img ccType:></label></th>
             <td>
               <select name="ccType" id="ccType" class="<:ifError_img ccType:>error<:eif:>">
                 <option value="" selected="selected">Select card type</option>
-                <:if Cfgsection "payment ccType":>
-                <:iterator begin dyncfgsection "payment ccType" sort=key:>
-                <option value="<:dyncfgentry value:>"<:if Eq [old ccType] [dyncfgentry value]:> selected="selected"<:eif Eq:>><:dyncfgentry value:></option>
-                <:iterator end dyncfgsection:>
-                <:or Cfgsection:>
-                <option value="Visa"<:ifEq [cgi ccType] "Visa":> selected="selected"<:eif:>>Visa</option>
-                <option value="Mastercard"<:ifEq [cgi ccType] "Mastercard":> selected="selected"<:eif:>>Mastercard</option>
-                <:eif Cfgsection:>
+                <:-.set ccType = request.cgi.param("ccType"):>
+                <:-.set ccTypes = assert_dynamic and [ cfg.orderCS("payment ccType") ] :>
+                <:-.if ccTypes.size:>
+                <:-.for type in ccTypes :>
+                <option value="<:= type:>"<:.if ccType eq type :> selected="selected"<:.end if:>><:= cfg.entry("payment ccType", type ):></option>
+                <:-.end for:>
+                <:-.else:>
+                <option value="Visa"<:.if ccType eq "Visa":> selected="selected"<:.end if:>>Visa</option>
+                <option value="Mastercard"<:.if ccType eq "Mastercard":> selected="selected"<:.end if:>>Mastercard</option>
+                <:-.end if:>
               </select>
             </td>
           </tr>
@@ -140,19 +146,21 @@
           <caption>Account Details</caption>
           <tr>
             <th>Name:</th>
-            <td><:cfg shop accountname |h:></td>
+            <td><:= cfg.entry("shop", "accountname"):></td>
           </tr>
           <tr>
             <th>BSB:</th>
-            <td><:cfg shop bsb |h:></td>
-          </tr><:ifCfg shop swiftcode:>
+            <td><:= cfg.entry("shop", "bsb"):></td>
+          </tr>
+          <:-.if cfg.entry("shop", "swiftcode"):>
           <tr>
             <th>SWIFT Code:</th>
-            <td><:cfg shop swiftcode |h:></td>
-          </tr><:eif:>
+            <td><:= cfg.entry("shop", "swiftcode"):></td>
+          </tr>
+          <:-.end if:>
           <tr>
             <th>Account:</th>
-            <td><:cfg shop accountno |h:></td>
+            <td><:= cfg.entry("shop", "accountno"):></td>
           </tr>
           <tr>
             <th>Reference:</th>
@@ -176,10 +184,10 @@
       <dd>
         <p>Please send a cheque to:</p>
         <address>
-          <b><:cfg shop address1 |h:></b><br />
-          <:cfg shop address2 |h:><br />
-          <:cfg shop address3 |h:><br />
-          <:cfg shop address4 |h:>
+          <b><:= cfg.entry("shop", "address1"):></b><br />
+          <:= cfg.entry("shop", "address2"):><br />
+          <:= cfg.entry("shop", "address3"):><br />
+          <:= cfg.entry("shop", "address4"):>
         </address>
         <p class="small">Your order will be processed when cheque has cleared.</p>
       </dd>
@@ -232,7 +240,8 @@
       </dd>
     </dl>
     <:- eif Payments:>
-    <:include include/custom/payment_type_checkout.tmpl optional:><:include include/payment_type_checkout.tmpl optional:>
+    <:- include include/custom/payment_type_checkout.tmpl optional:>
+    <:- include include/payment_type_checkout.tmpl optional:>
   </fieldset>
   <:- if MultPaymentTypes:>
   <p>Please select your preferred payment method</p>
