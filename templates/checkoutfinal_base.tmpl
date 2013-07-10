@@ -325,7 +325,7 @@
     <tr>
       <td class="item file"><:.if order.file_available(file):><a href="<:= file.url:>" title="<:= file.description:>"><:= file.displayName:></a><:.else:><:= file.displayName:><:.end if:></td>
       <td class="date"><:= bse.date("%d-%b-%Y", file.whenUploaded) :></td>
-      <td class="size"><:= file.sizeInBytes:>b</td>
+      <td class="size"><:= file.sizeInBytes < 0x8000 ? file.sizeInBytes : (file.sizeInBytes / 1024).format("%.1fk") :>B</td>
     </tr>
     <:-.end for:>
   </tbody>
