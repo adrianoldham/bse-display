@@ -76,9 +76,9 @@
 <:-.end if :>
 <fieldset>
   <!--<legend>Discount Coupon</legend>-->
-  <div class="input coupon<:= !cart.coupon_valid and cart.coupon ? ' error' : '' :>">
+  <div class="input coupon<:= !cart.coupon_valid and cart.coupon_code ? ' error' : '' :>">
     <label for="coupon"><!--:error_img coupon:--><:= cfg.entry("shop", "display_coupon_code", "Coupon Code") :>:</label>
-    <input type="text" name="coupon" id="coupon" size="20" value="<:= cart.coupon_code :>" title="<:= cfg.entry("shop", "display_coupon_code", "Coupon Code") :>" class="<:= !cart.coupon_valid and cart.coupon ? 'error' : '' :>" />
+    <input type="text" name="coupon" id="coupon" size="20" value="<:= cart.coupon_code :>" title="<:= cfg.entry("shop", "display_coupon_code", "Coupon Code") :>" class="<:= !cart.coupon_valid and cart.coupon_code ? 'error' : '' :>" />
     <:-.if cart.coupon_active :>
     Coupon active
     <:-.elsif cart.coupon_valid :>
@@ -87,7 +87,7 @@
     <:-.else :>
     You may need to logon, or this coupon code cannot be used with some items in your cart
     <:-.end if :>
-    <:-.elsif cart.coupon :>
+    <:-.elsif cart.coupon_code :>
     Unknown coupon code
     <:-.end if :>
   </div>
