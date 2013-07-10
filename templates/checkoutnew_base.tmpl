@@ -53,9 +53,9 @@
   <p class="discount"><span>(<:= cart.coupon_code :> / <:= cart.coupon_code_discount_pc:>% Coupon)</span> <label>Discount:</label> &minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", cart.product_cost_discount ) :></p>
   <:-.end if :>
   <:-.if cart.shipping_cost:>
-  <p class="freight"><span>(<:shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", cart.shipping_cost ):></p>
+  <p class="freight"><span>(<:= cart.shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", cart.shipping_cost ):></p>
   <:-.elsif cart.shipping_name eq "contact" :>
-  <p class="freight"><span>(<:shipping_method:>)</span> <label>Freight:</label> TBA</p>
+  <p class="freight"><span>(<:= cart.shipping_method:>)</span> <label>Freight:</label> TBA</p>
   <:-.end if:>
   <p class="total"><abbr><:= cfg.entry("shop", "currency_code", "AUD"):></abbr> <label>Total:</label> <:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", cart.total):></p>
 </div>
