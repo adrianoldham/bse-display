@@ -57,7 +57,7 @@
 	<:-.set options = [ item.option_list ] :>
     <tr>
       <td class="item">
-        <a href="<:= item.product.link :>" class="title"><:= item.title :></a>
+        <a href="<:= bse.abs_url( item.product.link ) :>" class="title"><:= item.title :></a>
         <:-.if options.size :>
         <span>(<:.for option in options :><:= loop.index ? ", " : "" :><:= option.name :>: <:= option.display :><:.end for :>)</span>
         <:-.end if :>
