@@ -203,7 +203,7 @@
   <p class="discount"><span>(<:= order.coupon_code_discount_pc:>% Coupon)</span> <label>Discount:</label> &minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", order.product_cost_discount ) :></p>
   <:-.end if :>
   <:-.if order.shipping_cost:>
-  <p class="freight"><span>(<:= order.shipping_method:><:if Delivery_in:>, delivery in <:delivery_in:> days<:eif Delivery_in:>)</span> <label>Freight:</label> <:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", order.shipping_cost ):></p>
+  <p class="freight"><span>(<:= order.shipping_method:><:.if order.delivery_in.defined:>, delivery in <:= order.delivery_in:> days<:.end if:>)</span> <label>Freight:</label> <:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", order.shipping_cost ):></p>
   <:-.elsif order.shipping_name eq "contact" :>
   <p class="freight"><span>(<:= order.shipping_method:>)</span> <label>Freight:</label> TBA</p>
   <:-.end if:>
