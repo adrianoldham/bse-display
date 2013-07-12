@@ -84,7 +84,7 @@
   This purchase will be added to your order history. You can track the status of your purchases and maintain your account details in your <a href="<:= cfg.user_url("user", "userpage"):>">account manager</a>.
 </p>
 <:-.else:>
-<p class="alert">To track the status of your purchase you must <:.if cfg.entry("site users", "user_register"):>either <a href="<:= cfg.user_url("user", "show_register", "r", cfg.user_url("shop", "checkout", "need_delivery", old.need_delivery )):>">Signup</a> or <:.end if:><a href="<:= cfg.user_url("user", "show_logon", "r", cfg.user_url("shop", "checkout", "need_delivery", old.need_delivery )):>">Logon</a> before you continue with this purchase.
+<p class="alert">To track the status of your purchase you must <:.if cfg.entry("site users", "user_register"):>either <a href="<:= cfg.user_url("user", "show_register", "r", cfg.user_url("shop", "checkout", "need_delivery", need_delivery )):>">Signup</a> or <:.end if:><a href="<:= cfg.user_url("user", "show_logon", "r", cfg.user_url("shop", "checkout", "need_delivery", need_delivery )):>">Logon</a> before you continue with this purchase.
 </p>
 <:-.end if:>
 <:-.end if:>
@@ -177,10 +177,10 @@
       <:shipping_select:>
     </div>
     <div class="checkbox need_delivery<:ifError_img need_delivery:> error<:eif:>">
-      <label><input type="checkbox" name="need_delivery" <:ifNeedDelivery:> checked="checked"<:eif:> onchange="this.form.checkupdate.click()" /> Shipping details different to billing</label>
+      <label><input type="checkbox" name="need_delivery" <:= need_delivery ? ' checked="checked"' : '' | raw :> onchange="this.form.checkupdate.click()" /> Shipping details different to billing</label>
     </div>
   </fieldset><:eif And:>
-  <:if NeedDelivery:>
+  <:-.if need_delivery:>
   <h2>Shipping Details</h2>
   <fieldset class="name">
     <legend>Name</legend>
@@ -251,7 +251,7 @@
       <input type="text" name="emailAddress" id="emailAddress" size="40" value="<:old emailAddress:>" title="<:cfg "site users" display_email "Email Address":>" class="<:ifError_img emailAddress:> error<:eif:>" />
     </div>
   </fieldset>
-  <:eif NeedDelivery:>
+  <:-.end if:>
   <:if Cfg affiliate enabled:>
   <h2>Affiliate Details</h2>
   <fieldset class="referrer">
