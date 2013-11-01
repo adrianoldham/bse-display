@@ -1,2 +1,8 @@
-<:if Admin:><:if Match [ifAllkids] "^[01]$":><:or Match:>
-<p class="bse-admin sortby">Sort by: <a href="<:adminurl reorder:>?stepparent=<:article id:>&amp;sort=title&amp;refreshto=<:adminurl admin:>?id=<:top id:>" title="Sort child list in alphabetical order">title</a> | <a href="<:adminurl reorder:>?stepparent=<:article id:>&amp;sort=id&amp;refreshto=<:adminurl admin:>?id=<:top id:>" title="Sort child list in date creation order">date</a> | <a href="<:adminurl reorder:>?stepparent=<:article id:>&amp;reverse=1&amp;refreshto=<:adminurl admin:>?id=<:top id:>" title="Sort child list in reverse order">reverse</a></p><:eif Match:><:eif Admin:>
+<:-.if bse.admin and article.all_visible_kids > 1 :>
+<:-.set refresh = cfg.admin_url("admin", { "id": top.id }) -:>
+<p class="admin sortby">Sort by: 
+  <a href="<:= cfg.admin_url("reorder", { "stepparent": article.id, "sort": "title", "r": refresh }) :>" title="Sort child list in alphabetical order">title</a> |
+  <a href="<:= cfg.admin_url("reorder", { "stepparent": article.id, "sort": "id", "r": refresh }) :>" title="Sort child list in date creation order">date</a> |
+  <a href="<:= cfg.admin_url("reorder", { "stepparent": article.id, "reverse": 1, "r": refresh }) :>" title="Sort child list in reverse order">reverse</a>
+</p>
+<:-.end if:>
