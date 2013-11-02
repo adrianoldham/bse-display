@@ -1,5 +1,6 @@
-<:-.if bse.admin and article.all_visible_kids > 1 :>
-<:-.set refresh = cfg.admin_url("admin", { "id": top.id }) -:>
+<:-.if bse.admin and article.all_visible_kids > 1 -:>
+<:-.if generator.request.user_can("bse_edit_reorder_children", article) -:>
+<:-.set refresh = cfg.admin_url("admin", { "id": top.id }) :>
 <p class="admin sortby">Sort by: 
   <a href="<:= cfg.admin_url("reorder", { "stepparent": article.id, "sort": "title", "r": refresh }) :>" title="Sort child list in alphabetical order">title</a> |
   <a href="<:= cfg.admin_url("reorder", { "stepparent": article.id, "sort": "id", "r": refresh }) :>" title="Sort child list in date creation order">date</a> |
@@ -7,3 +8,4 @@
   <a href="<:= cfg.admin_url("reorder", { "stepparent": article.id, "reverse": 1, "r": refresh }) :>" title="Sort child list in reverse order">reverse</a>
 </p>
 <:-.end if:>
+<:-.end if -:>
