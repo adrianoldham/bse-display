@@ -1,4 +1,4 @@
-<:= cfg.entry("entity", "name", cfg.entry("site", "name") ).upper:><:.if cfg.entry("entity", "abn"):>
+<:= cfg.entry("entity", "name", cfg.entry("site", "name") ).upper |raw:><:.if cfg.entry("entity", "abn"):>
 ABN: <:= cfg.entry("entity", "abn") |raw:><:.end if:>
 
 Hi <:= order.billFirstName |raw:>,
