@@ -507,19 +507,21 @@ div.bse-footer p, div.bse-footer a {
 </style>
 </head>
 <body>
-<div class="bse-wrapper <:param classes:>">
+<div class="bse-wrapper <:= params.classes:>">
   <div class="bse-content">
     <div class="bse-header">
-      <p class="bse-brand"><:cfg site name |h:></p>
+      <p class="bse-brand"><:= cfg.entry("site", "name"):></p>
     </div>
-    <div class="bse-main"><:ifParam title:>
-      <h1><:param title |h:></h1><:eif:>
-      <:wrap here:>
+    <div class="bse-main">
+      <:-.if params.title:>
+      <h1><:= params.title:></h1>
+      <:-.end if:>
+      <:- wrap here:>
       <p class="bse-signature">Regards,<br />
-      The team at <em><:cfg site name |h:></em></p>
+      The team at <em><:= cfg.entry("site", "name"):></em></p>
     </div>
     <div class="bse-footer">
-      <p>This email was sent to you by <a href="<:cfg site url:>"><:cfg site name |h:></a>.</p>
+      <p>This email was sent to you by <a href="<:cfg site url:>"><:= cfg.entry("site", "name"):></a>.</p>
     </div>
   </div>
 </div>
