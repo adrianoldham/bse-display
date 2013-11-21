@@ -1,5 +1,4 @@
-<:wrap email/base.tmpl classes=>"bse-formmail" :>
-<h2><:formcfg title:></h2><:ifFormcfg done_body:>
+<:wrap email/base.tmpl title=>[formcfg title], classes=>"bse-formmail" :><:ifFormcfg done_body:>
 <:bodytext formcfg done_body:><:eif:>
 <:iterator begin fields:>
   <:switch:>
