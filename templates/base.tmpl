@@ -24,7 +24,7 @@
   <link rel="canonical" href="<:replace [url article] ^(?=/) [cfg site url]:>" />
   <:- eif:>
   <:- ifCfg rss enabled:>
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg site url:>/index.xml" />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="<:cfg rss index_uri "/index.xml":>" />
   <:- eif:>
   <link rel="stylesheet" type="text/css" media="screen" title="screen" href="/bse-display/css/screen.css" />
   <:- ajax includes:>
