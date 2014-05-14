@@ -3,7 +3,6 @@
 <:iterator begin fields:>
   <:switch:>
   <!-- Start special case fields //-->
-  <:case Match [field htmltype] "^hidden$":>
   <:case Match [field htmltype] "^h[123]$" |x:><:switch:><:case Eq [field_number] "1":><:case default:></table><:endswitch:>
   <<:field htmltype:> class="<:field class:>"><:field description |h:></<:field htmltype:>>
   <:case Match [field htmltype] "^fieldset$":><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><:case Eq [field_number] "1":><:case default:></table><:endswitch:>
