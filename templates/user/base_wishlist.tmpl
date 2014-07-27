@@ -1,7 +1,8 @@
 <:wrap user/pubbase.tmpl title=>"Public Wishlist" nomessage=>"1" :>
 <p><:ifWuser name1:><:wuser name1:><:or:><:wuser userId:><:eif:>’s wishlist contains <:uwishlistentry_count:> items</p>
 <table class="items wishlist">
-  <caption>Wishlist items</caption><:if Uwishlist:>
+  <caption>Wishlist items</caption>
+  <:- if Uwishlist:>
   <thead>
     <tr>
       <th class="item">Item</th>
@@ -9,7 +10,8 @@
       <th class="action">Action</th>
     </tr>
   </thead>
-  <tbody><:iterator begin uwishlist:>
+  <tbody>
+    <:- iterator begin uwishlist:>
     <tr id="item_<:uwishlistentry id:>">
       <td class="item">
         <a href="<:url uwishlistentry:>"><:uwishlistentry title:></a><:if And [uwishlistentry description] [cfg shop product_description 1]:>
@@ -17,11 +19,19 @@
       </td>
       <td class="price"><:if Price uwishlistentry:><:cfg shop currency "$":><:number money [price uwishlistentry]:><:or Price:>NA<:eif Price:></td>
       <td class="action">
-        <!--<:ifPrice uwishlistentry:><input type="hidden" id="qty<:uwishlistentry id:>" name="qty<:uwishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:uwishlistentry id:>" id="a_addsingle<:uwishlistentry id:>" src="/bse-display/images/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:eif:>//-->
+        <!--
+        <:- ifPrice uwishlistentry:>
+        <input type="hidden" id="qty<:uwishlistentry id:>" name="qty<:uwishlistentry id:>" value="1" />
+        <input type="image" name="a_addsingle<:uwishlistentry id:>" id="a_addsingle<:uwishlistentry id:>" src="/bse-display/images/buttons/add.gif" title="Add this item" class="widget add shop_addsingle" />
+        <:- eif:>
+        //-->
       </td>
-    </tr><:iterator end uwishlist:>
-  </tbody><:or Uwishlist:>
+    </tr>
+    <:- iterator end uwishlist:>
+  </tbody>
+  <:- or Uwishlist:>
   <tr>
     <td colspan="4" class="noitems"><:ifWuser name1:><:wuser name1:><:or:><:wuser userId:><:eif:>’s wishlist is empty</td>
-  </tr><:eif Uwishlist:>
+  </tr>
+  <:- eif Uwishlist:>
 </table>

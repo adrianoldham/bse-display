@@ -4,7 +4,8 @@
 <form id="add_multiple_form_1" action="<:target shop |h:>" method="post">
 <input type="hidden" name="r" value="<:url top:>" />
 <table class="items wishlist">
-  <caption>Wishlist items</caption><:if Wishlist:>
+  <caption>Wishlist items</caption>
+  <:- if Wishlist:>
   <thead>
     <tr>
       <th class="item">Item</th>
@@ -12,7 +13,8 @@
       <th class="action">Action</th>
     </tr>
   </thead>
-  <tbody><:iterator begin wishlist:>
+  <tbody>
+    <:- iterator begin wishlist:>
     <tr id="item_<:wishlistentry id:>">
       <td class="item">
         <a href="<:url wishlistentry:>"><:wishlistentry title:></a><:if And [wishlistentry description] [cfg shop product_description 1]:>
@@ -21,19 +23,35 @@
       <td class="price"><:ifPrice wishlistentry:><:cfg shop currency "$":><:number money [price wishlistentry]:><:or:>NA<:eif:></td>
       <td class="action">
         <span class="widgets arrows">
-          <:ifFirstWishlistentry:><img src="/images/trans_pixel.gif" width="17" height="13" alt="Disabled" border="0" /><:or:><a href="<:dyntarget nuser wishlistup product_id [wishlistentry id]:>"><img src="/bse-display/images/widgets/move-up.gif" title="Move item up" alt="Move item up" border="0" /></a><:eif:>
-          <:ifLastWishlistentry:><img src="/images/trans_pixel.gif" width="17" height="13" alt="Disabled" border="0" /><:or:><a href="<:dyntarget nuser wishlistdown product_id [wishlistentry id]:>"><img src="/bse-display/images/widgets/move-down.gif" title="Move item down" alt="Move item down" border="0" /></a><:eif:>
+          <:- ifLastWishlistentry:>
+          <img src="/images/trans_pixel.gif" width="16" height="12" alt="Disabled" border="0" class="widget move" />
+          <:- or:>
+          <a href="<:dyntarget nuser wishlistdown product_id [wishlistentry id]:>"><img src="/bse-display/images/widgets/move-down.gif" title="Move item down" alt="Move item down" border="0" class="widget move" /></a>
+          <:- eif:>
+          <:- ifFirstWishlistentry:>
+          <img src="/images/trans_pixel.gif" width="16" height="12" alt="Disabled" border="0" class="widget move" />
+          <:- or:>
+          <a href="<:dyntarget nuser wishlistup product_id [wishlistentry id]:>"><img src="/bse-display/images/widgets/move-up.gif" title="Move item up" alt="Move item up" border="0" class="widget move" /></a>
+          <:- eif:>
         </span>
-        <!--<:ifPrice wishlistentry:><input type="hidden" id="qty<:wishlistentry id:>" name="qty<:wishlistentry id:>" value="1" /><input type="image" name="a_addsingle<:wishlistentry id:>" id="a_addsingle<:wishlistentry id:>" src="/bse-display/images/buttons/add.gif" title="Add this item" class="shop_addsingle" /><:eif:>//-->
-        <a href="<:dyntarget nuser wishlistdel product_id [wishlistentry id]:>"><img src="/bse-display/images/buttons/delete.gif" title="Remove this item" alt="Remove this item" border="0" /></a>
+        <!--
+        <:- ifPrice wishlistentry:>
+        <input type="hidden" id="qty<:wishlistentry id:>" name="qty<:wishlistentry id:>" value="1" />
+        <input type="image" name="a_addsingle<:wishlistentry id:>" id="a_addsingle<:wishlistentry id:>" src="/bse-display/images/buttons/add.gif" title="Add this item" class="shop_addsingle" />
+        <:- eif:>
+        //-->
+        <a href="<:dyntarget nuser wishlistdel product_id [wishlistentry id]:>"><img src="/bse-display/images/buttons/delete.gif" title="Remove this item" alt="Remove this item" border="0" class="widget remove" /></a>
       </td>
-    </tr><:iterator end wishlist:>
-  </tbody><:or Wishlist:>
-    <tr>
-      <td colspan="4" class="noitems">Your wishlist is empty</td>
-    </tr><:eif Wishlist:>
+    </tr>
+    <:- iterator end wishlist:>
+  </tbody>
+  <:- or Wishlist:>
+  <tr>
+    <td colspan="4" class="noitems">Your wishlist is empty</td>
+  </tr>
+  <:- eif Wishlist:>
 </table>
 <!--<p class="buttons">
-  <input type="submit" id="addmultiple1" name="a_addmultiple" value="Add items to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" tabindex="10000" class="shop_addall" />
+  <input type="submit" id="addmultiple1" name="a_addmultiple" value="Add items to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" class="shop_addall" />
 </p>//-->
 </form>
