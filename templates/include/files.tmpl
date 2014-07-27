@@ -1,10 +1,27 @@
+<:-.if !(cfg.entry("basic", "hide_file_list") or article.flags =~ /h/ ):>
 <!-- START FILES ID: <:article id:> -->
-<ul class="meta files"><:iterator begin files:>
-  <li<:ifFile notes:> class="has-info"<:eif:>>
-    <span>File <:add [file_index] 1:>:</span><:switch:><:case File forSale:>
-    <:ifFile description:><:file description:><:or:><:file displayName:><:eif:><:case default:>
-    <a href="<:target user download_file file [file id] r [url top] |h:>" title="Size: <:arithmetic d1:( [file sizeInBytes] / 1024):>KB"><:ifFile description:><:file description:><:or:><:file displayName:><:eif:></a><:endswitch:><:ifFile notes:>
-    <div><p><:replace [replace [nobodytext file notes] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p><!--:bodytext file notes://--></div><:eif:>
-  </li><:iterator end files:>
+<ul class="meta files">
+  <:-.set files = [ article.files ]:>
+  <:-.for file in files :>
+  <li <:-.if file.notes:> class="has-info"<:.end if:>>
+    <span>File <:= loop.count:>:</span>
+    <:-.if file.forSale:>
+    <:= file.description or file.displayName:>
+    <:-.else:>
+    <a href="<:= cfg.user_url("user", "download_file", "file", file.id, "r", url(top)):>" title="Size: <:= (file.sizeInBytes / 1024).format("%.1f"):>KB">
+      <:= file.description or file.displayName:>
+    </a>
+    <:-.end if:>
+    <:-.if file.notes:>
+    <div>
+      <p>
+        <:-# Make sure we implement a way to stript markup like "nobodytext" used to -:>
+        <:-= (file.notes).trim().replace(/\s*\n\s*/, "</p><p>", 1) |raw -:>
+      </p>
+    </div>
+    <:-.end if:>
+  </li>
+  <:-.end for:>
 </ul>
 <!-- END FILES ID: <:article id:> -->
+<:-.end if:>
