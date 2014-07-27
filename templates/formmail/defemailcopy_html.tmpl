@@ -1,28 +1,62 @@
-<:wrap email/base.tmpl title=>[formcfg title], classes=>"bse-formmail" :><:ifFormcfg done_body:>
-<:bodytext formcfg done_body:><:eif:>
-<:iterator begin fields:>
-  <:switch:>
+<:wrap email/base.tmpl title=>[formcfg title], classes=>"bse-formmail" :>
+<:- ifFormcfg done_body:>
+<:bodytext formcfg done_body:>
+<:- eif:>
+
+<:- iterator begin fields:>
+
+<:- switch:>
   <!-- Start special case fields //-->
-  <:case Match [field htmltype] "^hidden$":>
-  <:case Match [field htmltype] "^h[123]$" |x:><:switch:><:case Eq [field_number] "1":><:case default:></table><:endswitch:>
+<:- case Match [field htmltype] "^hidden$":>
+<:- case Match [field htmltype] "^h[123]$" |x:>
+  <:- switch:>
+  <:- case Eq [field_number] "1":>
+  <:- case default:>
+</table>
+  <:- endswitch:>
   <<:field htmltype:> class="<:field class:>"><:field description |h:></<:field htmltype:>>
-  <:case Match [field htmltype] "^fieldset$":><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><:case Eq [field_number] "1":><:case default:></table><:endswitch:>
-  <table class="<:field name:> <:field class:>">
-    <caption><:field description |h:></caption>
-  <:case default:><:switch:><:case Match [previous_field htmltype] "^h[123]$" |x:><table><:case Match [previous_field htmltype] "^fieldset$":><:case Eq [field_number] "1":><table><:case default:><:endswitch:>
+
+<:- case Match [field htmltype] "^fieldset$":>
+  <:- switch:>
+  <:- case Match [previous_field htmltype] "^h[123]$" |x:>
+  <:- case Eq [field_number] "1":>
+  <:- case default:>
+</table>
+  <:- endswitch:>
+<table class="<:field name:> <:field class:>">
+  <caption><:field description |h:></caption>
+
+<:- case default:>
+  <:- switch:>
+  <:- case Match [previous_field htmltype] "^h[123]$" |x:>
+<table>
+  <:- case Match [previous_field htmltype] "^fieldset$":>
+  <:- case Eq [field_number] "1":>
+<table>
+  <:- case default:>
+  <:- endswitch:>
   <tr>
     <th><:field description |h:></th>
     <td>
-    <:switch:>
-    <!-- Start standard fields //-->
-    <:case Match [field htmltype] "^textarea$":><p><:replace [replace [field value |h] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
-    <:case Match [field htmltype] "^file$":><a href="<:field url:>">(attached file)</a>
-    <:case Field values:><:iterator begin values:><!--<:value id:>: --><:value name |h:><:iterator separator values:><br />
-    <:iterator end values:>
-    <:case default:><:field value:>
-    <:endswitch:>
+      <:- switch:>
+      <!-- Start standard fields //-->
+      <:- case Match [field htmltype] "^textarea$":>
+      <p><:replace [replace [field value |h] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
+      <:- case Match [field htmltype] "^file$":>
+      <a href="<:field url:>">(attached file)</a>
+      <:- case Field values:>
+      <:- iterator begin values:>
+      <!--<:value id:>: -->
+      <:value name |h:>
+      <:- iterator separator values:>
+      <br />
+      <:- iterator end values:>
+      <:- case default:>
+      <:field value:>
+      <:- endswitch:>
     </td>
   </tr>
-  <:endswitch:>
-<:iterator end fields:>
+<:- endswitch:>
+
+<:- iterator end fields:>
 </table>

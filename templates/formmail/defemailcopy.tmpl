@@ -1,5 +1,5 @@
 <:uc [cfg site name]:> - <:uc [formcfg subject]:>
-<:iterator begin fields:><:if Field value:><:switch:>
+<:iterator begin fields:><:switch:>
 <:case Match [field htmltype] "^h[123]$" |x:>
 ================================================================================
 <:uc [field description]:>
@@ -13,7 +13,7 @@
 <:case default:>
 <:field description:>:
     <:field value:><:if Match [field htmltype] "^file$":> (attached file)<:eif Match:>
-<:endswitch:><:eif Field:><:iterator end fields:>
+<:endswitch:><:iterator end fields:>
 
 
 Regards
