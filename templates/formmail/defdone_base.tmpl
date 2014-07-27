@@ -39,6 +39,8 @@
     <td>
       <:- switch:>
       <!-- Start standard fields //-->
+      <:- case !Field value:>
+      Nil
       <:- case Match [field htmltype] "^textarea$":>
       <p><:dynreplace [dynreplace [field value] "\A\s+|\s+\z" "" g |x] "\s*\n\s*" "</p><p>" g:></p>
       <:- case Match [field htmltype] "^password$":>

@@ -9,6 +9,9 @@ Submitted by: <:user userId:> (<:user email:>)
 <:case Match [field htmltype] "^fieldset$":><:ifMatch [previous_field htmltype] "^h[123]$" |x:><:or:>
 --------------------------------------------------------------------------------<:eif:>
 <:uc [field description]:>
+<:case !Field value:>
+<:field description:>:
+    Nil
 <:case Field values:>
 <:field description:>:<:iterator begin values:>
     <:value id:>: <:value name:><:iterator end values:>
