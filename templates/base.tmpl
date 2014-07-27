@@ -10,7 +10,7 @@
     <:- endswitch:> - <:cfg site name |h:>
   </title>
   <meta charset="<:cfg html charset utf-8:>" />
-  <meta name="robots" content="<:cfg site robots all:>" />
+  <meta name="robots" content="<:= article.should_index ? cfg.entry("site", "robots", "all") : "noindex":>" />
   <:- ifArticle author:>
   <meta name="author" content="<:article author:>" />
   <:- eif:>
