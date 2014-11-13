@@ -61,7 +61,6 @@
     <:- ifProduct leadTime:> 
     <li><span>Usually ships in:</span> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></li>
     <:- eif:>
-    <:- endswitch:>
     <:- .if article.is_dynamic:>
     <:- .if [article.tag_objects]:>
     <:- .set tags = [ article.tag_objects ] :>
@@ -80,6 +79,7 @@
     <:- .end for:>
   </ul>
   <:- .end:>
+  <:- endswitch:>
   <p class="buttons">
     <:- switch:>
     <:- case Embedded -:>
