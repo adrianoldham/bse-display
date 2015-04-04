@@ -55,7 +55,7 @@
         <:-.end if -:>
       </td>
       <td class="extended"><:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", item.extended("price") ):></td>
-      <td class="action"><input type="image" name="delete_<:= loop.index :>" id="delete_<:= loop.index :>" src="/bse-display/images/buttons/delete.gif" title="Remove this item" /></td>
+      <td class="action"><a href="<:= cfg.user_url("shop", "", "delete_" _ loop.index, 1 ) :>" class="widget remove"><img src="/bse-display/images/buttons/delete.gif" title="Remove this item" alt="Remove" border="0" /></a></td>
     </tr>
     <:-.end for :>
     <:-.else :>
