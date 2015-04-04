@@ -51,7 +51,7 @@ Email        : <:= order.emailAddress |raw:><:.end if:>
 Item                                       Code         Qty     Price   Extended
 --------------------------------------------------------------------------------
 <:.for item in [ order.items ] :>
-<:= item.title.format("%-40s") |raw:>   <:= item.product_code.format("%-12s") |raw:> <:= item.units.format("%3d") |raw:> <:= bse.number("money", item.price).format("%9s") |raw:> <:= bse.number("money", item.extended("price")).format("%10s") |raw:>
+<:= item.title.format("%-.40s") |raw:>   <:= item.product_code.format("%-12s") |raw:> <:= item.units.format("%3d") |raw:> <:= bse.number("money", item.price).format("%9s") |raw:> <:= bse.number("money", item.extended("price")).format("%10s") |raw:>
 <:-.if item.nice_options :>
    <:= item.nice_options:>
 <:-.end if:>
