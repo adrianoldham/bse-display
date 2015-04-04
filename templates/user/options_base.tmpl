@@ -1,16 +1,24 @@
 <:wrap user/userbase.tmpl subtitle=>"Account details" userpage=>"account" :>
 <h2><:param subtitle |h:></h2>
-<form action="<:target user |h:>" method="post" enctype="multipart/form-data" class="siteuser"><:if Cfg "site users" nopassword:>
+<form action="<:target user |h:>" method="post" enctype="multipart/form-data" class="siteuser">
+<:- if Cfg "site users" nopassword:>
 <input type="hidden" name="u" value="<:user id:>" />
 <input type="hidden" name="p" value="<:user password:>" />
-<input type="hidden" name="r" value="<:dyntarget user show_opts [user password] u [user id] message "User account details saved successfully":>" /><:or Cfg:><:if Cgi r:>
-<input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:>
-<input type="hidden" name="r" value="<:target user show_opts message "User account details saved successfully" |h:>" /><:eif Cgi:><:eif Cfg:>
+<input type="hidden" name="r" value="<:dyntarget user show_opts [user password] u [user id] message "User account details saved successfully":>" />
+<:- or Cfg:>
+<:- if Cgi r:>
+<input type="hidden" name="r" value="<:cgi r:>">
+<:- or Cgi:>
+<input type="hidden" name="r" value="<:target user show_opts message "User account details saved successfully" |h:>" />
+<:- eif Cgi:>
+<:- eif Cfg:>
 
-<:if Partial_logon:><:or Partial_logon:>
+<:- if Partial_logon:>
+<:- or Partial_logon:>
   <fieldset class="account">
     <legend>Account</legend>
-    <:if Cfg "site users" nopassword:><:or Cfg:>
+    <:- if Cfg "site users" nopassword:>
+    <:- or Cfg:>
     <div class="input old_password<:ifError_img old_password:> error<:eif:>">
       <label for="old_password"><:error_img old_password:> <:cfg "site users" display_old_password "Old Password":>:</label>
       <input type="password" name="old_password" id="old_password" size="40" value="<:old old_password:>" title="<:cfg "site users" display_old_password "Old Password":>" class="<:ifError_img old_password:>error<:eif:>" />
@@ -23,8 +31,8 @@
       <label for="confirm_password"><:error_img confirm_password:> <:cfg "site users" display_confirm_password "Confirm Password":>:</label>
       <input type="password" name="confirm_password" id="confirm_password" size="40" value="<:old confirm_password:>" title="<:cfg "site users" display_confirm_password "Confirm Password":>" class="<:ifError_img confirm_password:>error<:eif:>" />
     </div>
-    <:eif Cfg:>
-    <:if Cfg "site users" nopassword:>
+    <:- eif Cfg:>
+    <:- if Cfg "site users" nopassword:>
     <div class="input email<:ifError_img email:> error<:eif:>">
       <label for="email"><:error_img email:> <:cfg "site users" display_email "Email Address":>: <span class="required">*</span></label>
       <input type="text" name="email" id="email" size="40" value="<:old email user email:>" title="<:cfg "site users" display_email "Email Address":>" class="required<:ifError_img email:> error<:eif:>" />
@@ -33,9 +41,9 @@
       <label for="confirmemail"><:error_img confirmemail:> <:cfg "site users" display_confirmemail "Confirm Email":>:</label>
       <input type="text" name="confirmemail" id="confirmemail" size="40" value="<:old confirmemail:>" title="<:cfg "site users" display_confirmemail "Confirm Email":>" class="<:ifError_img confirmemail:>error<:eif:>" />
     </div>
-    <:eif Cfg:>
+    <:- eif Cfg:>
   </fieldset>
-<:eif Partial_logon:>
+<:- eif Partial_logon:>
 
   <fieldset class="profile">
     <legend>Profile</legend>
@@ -43,22 +51,22 @@
       <label for="affiliate_name"><:error_img affiliate_name:> <:cfg "site users" display_affiliate_name "Screen Name":>:<:ifRequired affiliate_name:> <span class="required">*</span><:eif:></label>
       <input type="text" name="affiliate_name" id="affiliate_name" size="40" value="<:old affiliate_name user affiliate_name:>" title="<:cfg "site users" display_affiliate_name "Screen Name":>" class="required<:ifError_img affiliate_name:> error<:eif:>" />
     </div>
-    <:if Imagetemplates:>
-    <:iterator begin imagetemplates:>
-    <:if Siteuser_image [imagetemplate id]:>
+    <:- if Imagetemplates:>
+    <:- iterator begin imagetemplates:>
+    <:- if Siteuser_image [imagetemplate id]:>
     <div class="image">
       <label><:imagetemplate description:>: (<a href="<:dyntarget user saveopts id [user id] [concatenate image_ [imagetemplate id] _delete] 1 r [dyntarget user show_opts message "Image deleted successfully"] :>" onclick="return window.confirm('Are you sure you want to delete this image?')">Delete</a>)</label>
       <img src="<:siteuser_image [imagetemplate id] url:>" width="<:siteuser_image [imagetemplate id] width:>" height="<:siteuser_image [imagetemplate id] height:>" alt="<:siteuser_image [imagetemplate id] alt:>" />
     </div>
-    <:or Siteuser_image:>
+    <:- or Siteuser_image:>
     <div class="file image_<:imagetemplate id:>_file">
       <label for="image_<:imagetemplate id:>_file"><:imagetemplate description:>:</label>
       <input type="file" name="image_<:imagetemplate id:>_file" id="image_<:imagetemplate id:>_file" size="40" title="<:imagetemplate description:>" />
       <input type="hidden" name="image_<:imagetemplate id:>_alt" value="<:imagetemplate description:>" />
     </div>
-    <:eif Siteuser_image:>
-    <:iterator end imagetemplates:>
-    <:eif Imagetemplates:>
+    <:- eif Siteuser_image:>
+    <:- iterator end imagetemplates:>
+    <:- eif Imagetemplates:>
   </fieldset>
 
   <fieldset class="name">
@@ -142,11 +150,11 @@
     </div>
   </fieldset>
 
-<:if Subscriptions:>
+<:- if Subscriptions:>
   <fieldset class="subscribe">
     <legend>Subscribe</legend>
     <input type="hidden" name="saveSubscriptions" value="1" />
-    <:iterator begin subscriptions:>
+    <:- iterator begin subscriptions:>
     <div class="checkbox">
       <label><input type="checkbox" name="subscription" value="<:subscription id:>"<:ifSubscribed:> checked="checked"<:eif:> /> <:subscription name:><:switch:><:case Match [cgi subinfo] [subscription id]:>
         (<a href="<:target user show_opts |h:>">hide info</a>)<:case default:>
@@ -161,27 +169,27 @@
         <p><:date subscription lastSent:></p><:eif:>
       </div><:endswitch:>
     </div>
-    <:iterator end subscriptions:>
+    <:- iterator end subscriptions:>
     <small><:switch:><:case User confirmed:>
       Confirmation has been completed.<:case User confirmSecret:>
       Confirmation has been requested, but not completed.<:case default:>
       Confirmation will be sent to your email address.<:endswitch:>
     </small>
   </fieldset>
-<:eif Subscriptions:>
+<:- eif Subscriptions:>
 
-<:if Cfg "notify files" active:>
+<:- if Cfg "notify files" active:>
   <fieldset class="notification">
     <legend>Upload Notification</legend>
     <input type="hidden" name="save_file_subs" value="1" />
-    <:iterator begin filecats:>
+    <:- iterator begin filecats:>
     <div class="checkbox">
       <label><input type="checkbox" name="file_subscriptions" value="<:filecat id:>"<:ifFilecat subscribed:> checked="checked"<:eif:> /> <:filecat name:></label>
     </div>
-    <:iterator end filecats:>
+    <:- iterator end filecats:>
     <small>Receive email notification when file downloads are added to your account in the selected categories.</small>
   </fieldset>
-<:eif Cfg:>
+<:- eif Cfg:>
 
 <:include include/user_options_custom.tmpl optional:>
 <:include include/custom/user_options_custom.tmpl optional:>
