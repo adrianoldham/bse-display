@@ -97,11 +97,21 @@ table.items td.extended {
 
 table.items .action {
     width: 1%;
+    white-space: nowrap;
 }
 
 table.items th.action {
     text-align: left;
     text-indent: -9999em;
+}
+
+table.items .action > * {
+    float: left;
+}
+
+table.items .action img {
+    padding: 3px 0;
+    display: block;
 }
 
 table.items td.action .arrows {
@@ -111,11 +121,8 @@ table.items td.action .arrows {
     padding-left: 1.25em;
 }
 
-table.items tr:hover .arrows,
-table.items td.action .arrows a,
-table.items td.action .arrows img {
+table.items tr:hover .arrows {
     display: block;
-    line-height: 1;
 }
 
 /* @end */
