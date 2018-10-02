@@ -54,8 +54,15 @@ function add_single_handler(id) {
 // add single cart item from shopitem
 
 function add_shopitem_handler(id) {
-  $('add_form_'+id).request({
-    parameters: { r: 'ajaxcart', embed: 'sidebar' },
+  var params = new Hash({
+    id: id,
+    quantity: $('qty'+id).value,
+    a_add: 1,
+    embed: 'sidebar',
+    r: 'ajaxcart'
+    });
+  new Ajax.Request('/cgi-bin/shop.pl', {
+    parameters: Hash.toQueryString(params),
     onComplete: function(transport) { 
       $('cart_sidebar').innerHTML = transport.responseText;
       $('qty'+id).value = '1';
