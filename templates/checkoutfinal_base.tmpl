@@ -70,7 +70,8 @@
   </tbody>
 </table>
 <table class="vertical right">
-  <caption>Payment details <span class="<:= order.paidFor ? "paid" : "unpaid":>"><:= order.paidFor ? "Paid" : "Unpaid":></span></caption>
+  <:-.set payment = order.paidFor ? "Paid" : order.paymentType ? "Unpaid" : "Processing":>
+  <caption>Payment details <span class="<:= payment.lower:>"><:= payment:></span></caption>
   <tbody>
    <tr>
       <th>Payment Method:</th>

@@ -63,7 +63,8 @@
   </tbody>
 </table>
 <table class="vertical right">
-  <caption>Payment details <span class="<:= order.paidFor ? "paid" : "unpaid":>"><:= order.paidFor ? "Paid" : "Unpaid":></span></caption>
+  <:-.set payment = order.paidFor ? "Paid" : order.paymentType ? "Unpaid" : "Processing":>
+  <caption>Payment details <span class="<:= payment.lower:>"><:= payment:></span></caption>
   <tbody>
    <tr>
       <th>Payment Method:</th>
@@ -193,7 +194,11 @@
 </table>
 <div class="totals">
   <:-.if order.coupon :>
-  <p class="discount"><span>(<:= order.coupon_code_discount_pc:>% Coupon)</span>&nbsp;<label>Discount:</label>&nbsp;&minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", order.product_cost_discount ) :></p>
+  <p class="discount">
+    <:-.if order.coupon_code_discount_pc:><span>(<:= order.coupon_code_discount_pc:>% Coupon)</span>&nbsp;
+    <:-.end if:>
+    <label>Discount:</label>&nbsp;&minus;<:= cfg.entry("shop", "currency", "$") :><:= bse.number("money", order.product_cost_discount ) :>
+  </p>
   <:-.end if :>
   <:-.if order.shipping_cost:>
   <p class="freight"><span>(<:= order.shipping_method:>)</span>&nbsp;<label>Freight:</label>&nbsp;<:= cfg.entry("shop", "currency", "$"):><:= bse.number("money", order.shipping_cost ):></p>
