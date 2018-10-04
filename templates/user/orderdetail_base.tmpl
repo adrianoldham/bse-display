@@ -55,12 +55,13 @@
       <td><:= order.affiliate_code:></td>
     </tr>
     <:-.end if:>
-    <:-.if order.coupon :>
+    <:-.if order.coupon:>
     <tr>
       <th><:= cfg.entry("shop", "display_coupon_code", "Coupon Code"):>:</th>
       <td><:= order.coupon_code:> (<:= order.coupon_code_discount_pc :>%)</td>
     </tr>
-    <:-.end if :>
+    <:-.end if:>
+    <:- include include/order_details_info_custom.tmpl optional:>
   </tbody>
 </table>
 <table class="vertical right">
